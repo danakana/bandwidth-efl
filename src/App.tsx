@@ -8,10 +8,11 @@ import { AppGate } from "./app/AppGate";
 
 type View = "landing" | "join" | "login" | "app";
 
-/** Plain-hash routing: #join, #login and #app; anything else is the landing page. */
+/** Plain-hash routing: #join, #login and #app (plus #app/...); anything else is the landing page. */
 function readView(): View {
   const h = window.location.hash.replace("#", "");
-  return h === "join" || h === "login" || h === "app" ? h : "landing";
+  if (h === "app" || h.startsWith("app/")) return "app";
+  return h === "join" || h === "login" ? h : "landing";
 }
 
 function useView() {

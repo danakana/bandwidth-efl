@@ -1,21 +1,27 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../lib/auth";
 import { UNIVERSE_LIST } from "../content/universes";
-import { latestResult, type Attempt, type Submission } from "../lib/placementApi";
+import { latestResult, startBandIndex, type Attempt, type Submission } from "../lib/placementApi";
+import { useAppRoute } from "../lib/route";
 import { AppHeader } from "./AppHeader";
 import { Placement } from "./placement/Placement";
 import { Results } from "./placement/Results";
+import { BandMap } from "./map/BandMap";
+import { BandView } from "./map/BandView";
+import { TreeView } from "./map/TreeView";
 import "./placement/placement.css";
+import "./map/map.css";
 
 const STRIPES = [
   { w: 60, c: "var(--white)" }, { w: 60, c: "var(--band-c1)" }, { w: 120, c: "var(--band-b2)" },
   { w: 160, c: "var(--band-b1)" }, { w: 160, c: "var(--band-a2)" }, { w: 120, c: "var(--band-a1)" },
 ];
 
-/** Student home: placement first, then results. The band map arrives next. */
+/** Student home: placement first; after it, the band map, bands and skill trees. */
 export function StudentHome() {
   const { profile } = useAuth();
   const es = !!profile?.spanish_help;
+  const route = useAppRoute();
   const mine = UNIVERSE_LIST.filter((u) => profile?.universes.includes(u.id));
   const [testing, setTesting] = useState(false);
   const [result, setResult] = useState<{ attempt: Attempt; submissions: Submission[] } | null>(null);
@@ -26,9 +32,26 @@ export function StudentHome() {
     setLoading(false);
   }, []);
   useEffect(() => { void load(); }, [load]);
+  useEffect(() => { window.scrollTo({ top: 0 }); }, [route.band, route.tree]);
 
   if (testing) {
     return <Placement onExit={() => setTesting(false)} onFinished={() => { setTesting(false); setLoading(true); void load(); }} />;
+  }
+
+  const start = result ? startBandIndex(result.attempt, result.submissions) ?? 0 : null;
+
+  // Band and tree pages, once the student has a starting band.
+  if (start !== null && route.band) {
+    return (
+      <div className="shell">
+        <AppHeader />
+        <main id="main" className="page shell-main">
+          {route.tree
+            ? <TreeView band={route.band} tree={route.tree} start={start} />
+            : <BandView band={route.band} start={start} />}
+        </main>
+      </div>
+    );
   }
 
   return (
@@ -56,15 +79,7 @@ export function StudentHome() {
             </>
           )}
         </section>
-        {result && (
-          <section className="home-section">
-            <div className="soon-card">
-              <h2>Your map is next</h2>
-              <p>The band map, skill trees and your first Universe are being built now. Your placement is saved, so you'll start in the right place.</p>
-              {es && <p lang="es" className="es">Tu resultado está guardado. Pronto se abre el mapa.</p>}
-            </div>
-          </section>
-        )}
+        {start !== null && <BandMap start={start} />}
         <section className="home-section">
           <h2>Your Universes</h2>
           <ul className="my-unis">

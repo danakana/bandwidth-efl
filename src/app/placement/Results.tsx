@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { BANDS } from "../../content/bands";
-import type { Attempt, Submission } from "../../lib/placementApi";
+import { startBandIndex, type Attempt, type Submission } from "../../lib/placementApi";
 
 const bandInfo = (id: string | null) => BANDS.find((b) => b.id === id) ?? null;
 
@@ -22,9 +22,8 @@ export function Results({ attempt, submissions, es }: { attempt: Attempt; submis
       : { skill: "Speaking", band: null, note: speaking ? "Your teacher is listening to it" : "Skipped. Do it with your teacher", waiting: !!speaking },
   ];
 
-  // The lowest measured band is where the map starts: it's what the student can do in every skill.
-  const measured = tiles.map((t) => BANDS.findIndex((b) => b.id === t.band)).filter((i) => i >= 0);
-  const start = measured.length ? BANDS[Math.min(...measured)] : null;
+  const si = startBandIndex(attempt, submissions);
+  const start = si === null ? null : BANDS[si];
   const feedback = [writing, speaking].filter((s): s is Submission => !!s?.teacher_feedback);
 
   return (

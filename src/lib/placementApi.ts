@@ -1,6 +1,7 @@
 /** Saving and loading placement attempts and writing/speaking submissions. */
 import { supabase } from "./supabase";
 import type { LogEntry } from "./placementEngine";
+import { BANDS } from "../content/bands";
 
 export const LISTENING_BASE = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/listening/`;
 
@@ -83,3 +84,18 @@ export async function latestResult(): Promise<{ attempt: Attempt; submissions: S
 }
 
 export const countWords = (text: string) => (text.trim().match(/[A-Za-zÀ-ÿ0-9'’-]+/g) ?? []).length;
+
+/**
+ * Where the map starts: the lowest band measured in any skill, so the student
+ * begins where they can do everything. Teacher bands replace pending ones as they arrive.
+ */
+export function startBandIndex(attempt: Attempt, submissions: Submission[]): number | null {
+  const ids = [
+    attempt.reading_band,
+    attempt.listening_band,
+    submissions.find((s) => s.skill === "writing")?.teacher_band ?? null,
+    submissions.find((s) => s.skill === "speaking")?.teacher_band ?? null,
+  ];
+  const idx = ids.map((id) => BANDS.findIndex((b) => b.id === id)).filter((i) => i >= 0);
+  return idx.length ? Math.min(...idx) : null;
+}
