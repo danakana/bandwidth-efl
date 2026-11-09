@@ -5,6 +5,12 @@ import { AppHeader } from "./AppHeader";
 import type { Attempt, Submission } from "../lib/placementApi";
 import { Chip, Review } from "./placement/Review";
 import "./placement/placement.css";
+import "./map/map.css";
+import { useAppRoute } from "../lib/route";
+import { BANDS } from "../content/bands";
+import { BandMap } from "./map/BandMap";
+import { BandView } from "./map/BandView";
+import { TreeView } from "./map/TreeView";
 
 type Student = Pick<Profile, "id" | "username" | "display_name" | "class_id" | "onboarded_at"> & { created_at: string };
 
@@ -20,6 +26,13 @@ export function TeacherHome() {
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [subs, setSubs] = useState<Submission[]>([]);
   const [reviewing, setReviewing] = useState<string | null>(null);
+  const route = useAppRoute();
+  // Teacher preview of the student map, pretending the student starts at this band.
+  const [previewStart, setPreviewStart] = useState(() => {
+    try { return Number(localStorage.getItem("bw-preview-band") ?? 5); } catch { return 5; }
+  });
+  const pickPreview = (i: number) => { setPreviewStart(i); try { localStorage.setItem("bw-preview-band", String(i)); } catch { /* ignore */ } };
+  useEffect(() => { window.scrollTo({ top: 0 }); }, [route.band, route.tree]);
 
   const load = useCallback(async () => {
     const [c, s, a, sub] = await Promise.all([
@@ -73,6 +86,20 @@ export function TeacherHome() {
   };
   const pending = subs.filter((x) => !x.teacher_band && attempts.some((a) => a.id === x.attempt_id && latest(a.student_id)?.id === a.id)).length;
   const reviewStudent = students.find((s) => s.id === reviewing);
+
+  if (route.band) {
+    return (
+      <div className="shell">
+        <AppHeader />
+        <main id="main" className="page shell-main">
+          <p className="preview-banner">Student preview · starting band {BANDS[previewStart].id}</p>
+          {route.tree
+            ? <TreeView band={route.band} tree={route.tree} start={previewStart} />
+            : <BandView band={route.band} start={previewStart} />}
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="shell">
@@ -165,6 +192,17 @@ export function TeacherHome() {
             })}
           </div>
         )}
+
+        <section className="home-section" aria-labelledby="preview-title">
+          <h2 id="preview-title">Preview the student map</h2>
+          <p className="muted">See what a student sees after the placement test. Pick a starting band, then tap any band or skill tree.</p>
+          <div className="mode-switch preview-pick" role="group" aria-label="Starting band for the preview">
+            {BANDS.map((b, i) => (
+              <button key={b.id} type="button" aria-pressed={previewStart === i} onClick={() => pickPreview(i)}>{b.id}</button>
+            ))}
+          </div>
+          <BandMap start={previewStart} />
+        </section>
       </main>
     </div>
   );
