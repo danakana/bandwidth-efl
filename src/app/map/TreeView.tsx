@@ -141,7 +141,7 @@ function SkillPanel({ nodeId, area, title, example, note, locked, p, isStudent, 
       {!practice ? (
         <div className="node-cta">
           <button type="button" className="btn btn-primary" disabled>Practice opens soon</button>
-          <p className="muted">B2 Grammar is open now. Activities for this skill are being written.</p>
+          <p className="muted">Activities for this skill are being written. B2 Grammar and Words are open now.</p>
         </div>
       ) : (
         <>
