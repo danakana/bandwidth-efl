@@ -133,3 +133,4 @@
 .topic-chip[aria-pressed="true"] { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .class-card > .link-btn { justify-self: start; }
 .home-hero > .pill { justify-self: start; }
+.app-signout { white-space: nowrap; }

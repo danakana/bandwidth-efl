@@ -184,3 +184,9 @@
 .preview-pick { flex-wrap: wrap; border-radius: var(--r-md); }
 .preview-pick button { padding: 0 var(--s-3); }
 .home-section .bmap-head { display: none; }
+
+.tree-bar { position: relative; }
+.tree-bar span { position: absolute; left: 0; top: 0; }
+.tree-bar span.is-secure { opacity: 0.4; }
+.open-tag { margin-left: var(--s-2); vertical-align: middle; padding: 0.1rem 0.5rem; border-radius: var(--r-pill); background: var(--good); color: var(--white); font: 800 0.68rem / 1.4 var(--font-display); text-transform: uppercase; letter-spacing: 0.05em; }
+.node-panel-head { display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); }

@@ -6,10 +6,13 @@ import { hrefFor } from "../../lib/route";
 import { useAuth } from "../../lib/auth";
 import { TREES } from "./trees";
 import { statusFor } from "./BandMap";
+import { useProgress } from "../../lib/progress";
+import { practiceFor } from "../../content/practice";
 
 /** One band: what it lets you do, its five skill trees, its Universe topics and its Gate. */
 export function BandView({ band, start }: { band: BandId; start: number }) {
   const { profile } = useAuth();
+  const progress = useProgress();
   const i = BANDS.findIndex((b) => b.id === band);
   const b = BANDS[i];
   const st = statusFor(i, start);
@@ -49,15 +52,22 @@ export function BandView({ band, start }: { band: BandId; start: number }) {
           {TREES.map((t, k) => {
             const nodes = NODES.filter((n) => n.band === band && n.tree === t.id);
             if (!nodes.length) return null;
+            const states = nodes.map((n) => progress?.nodes[n.id]?.state);
+            const mastered = states.filter((x) => x === "mastered").length;
+            const secure = states.filter((x) => x === "secure" || x === "mastered" || x === "review").length;
+            const open = nodes.some((n) => practiceFor(n.id));
             return (
               <motion.li key={t.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 * k }}>
                 <a href={hrefFor(band, t.id)} className="tree-card" style={{ ["--tree" as string]: t.colour }}>
                   <span className="tree-icon" aria-hidden="true">{t.icon}</span>
-                  <span className="tree-name">{t.name}</span>
+                  <span className="tree-name">{t.name}{open && <span className="open-tag">Open</span>}</span>
                   <span className="tree-blurb">{t.blurb}</span>
                   <span className="tree-foot">
-                    <span className="tree-bar" aria-hidden="true"><span style={{ width: "0%" }} /></span>
-                    <span>0 of {nodes.length} mastered</span>
+                    <span className="tree-bar" aria-hidden="true">
+                      <span className="is-secure" style={{ width: `${(secure / nodes.length) * 100}%` }} />
+                      <span style={{ width: `${(mastered / nodes.length) * 100}%` }} />
+                    </span>
+                    <span>{mastered} of {nodes.length} mastered{secure > mastered ? ` · ${secure - mastered} secure` : ""}</span>
                   </span>
                 </a>
               </motion.li>

@@ -4,6 +4,7 @@ import { StudentHome } from "./StudentHome";
 import { Onboarding } from "./Onboarding";
 import { Login } from "../pages/Login";
 import { AppHeader } from "./AppHeader";
+import { ProgressProvider } from "../lib/progress";
 
 /** Decides what a signed-in person sees. */
 export function AppGate() {
@@ -23,5 +24,5 @@ export function AppGate() {
   }
   if (profile.role === "teacher") return <TeacherHome />;
   if (!profile.onboarded_at) return <Onboarding />;
-  return <StudentHome />;
+  return <ProgressProvider><StudentHome /></ProgressProvider>;
 }

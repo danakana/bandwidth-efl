@@ -1,6 +1,8 @@
 /** The six Universes and the topics a student can pick inside each. */
+export type UniverseId = "screens" | "arts" | "words" | "past" | "science" | "futures";
+
 export type Universe = {
-  id: string;
+  id: UniverseId;
   name: string;
   colour: string;
   onColour: string;
