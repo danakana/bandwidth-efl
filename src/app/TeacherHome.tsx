@@ -2,6 +2,9 @@ import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { supabase, type ClassRow, type Profile } from "../lib/supabase";
 import { useAuth } from "../lib/auth";
 import { AppHeader } from "./AppHeader";
+import type { Attempt, Submission } from "../lib/placementApi";
+import { Chip, Review } from "./placement/Review";
+import "./placement/placement.css";
 
 type Student = Pick<Profile, "id" | "username" | "display_name" | "class_id" | "onboarded_at"> & { created_at: string };
 
@@ -14,14 +17,21 @@ export function TeacherHome() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState<string | null>(null);
+  const [attempts, setAttempts] = useState<Attempt[]>([]);
+  const [subs, setSubs] = useState<Submission[]>([]);
+  const [reviewing, setReviewing] = useState<string | null>(null);
 
   const load = useCallback(async () => {
-    const [c, s] = await Promise.all([
+    const [c, s, a, sub] = await Promise.all([
       supabase.from("classes").select("*").order("created_at", { ascending: false }),
       supabase.from("profiles").select("id, username, display_name, class_id, onboarded_at, created_at").eq("role", "student").order("created_at"),
+      supabase.from("placement_attempts").select("*").eq("status", "completed").order("completed_at", { ascending: false }),
+      supabase.from("submissions").select("*").order("created_at", { ascending: false }),
     ]);
     setClasses((c.data as ClassRow[]) ?? []);
     setStudents((s.data as Student[]) ?? []);
+    setAttempts((a.data as Attempt[]) ?? []);
+    setSubs((sub.data as Submission[]) ?? []);
     setLoading(false);
   }, []);
 
@@ -54,6 +64,16 @@ export function TeacherHome() {
     }
   }
 
+  // Newest completed attempt per student, and that attempt's submissions.
+  const latest = (id: string) => attempts.find((a) => a.student_id === id);
+  const subsFor = (id: string) => { const a = latest(id); return a ? subs.filter((x) => x.attempt_id === a.id) : []; };
+  const skillBand = (id: string, skill: "writing" | "speaking") => {
+    const x = subsFor(id).find((s) => s.skill === skill);
+    return x ? (x.teacher_band ?? "review") : null;
+  };
+  const pending = subs.filter((x) => !x.teacher_band && attempts.some((a) => a.id === x.attempt_id && latest(a.student_id)?.id === a.id)).length;
+  const reviewStudent = students.find((s) => s.id === reviewing);
+
   return (
     <div className="shell">
       <AppHeader />
@@ -67,7 +87,18 @@ export function TeacherHome() {
             <button type="submit" className="btn btn-primary">Create class</button>
           </form>
           {error && <p className="form-error" role="alert">{error}</p>}
+          {pending > 0 && <p className="pill" role="status">{pending} {pending === 1 ? "piece" : "pieces"} of writing or speaking to review</p>}
         </section>
+
+        {reviewStudent && (
+          <Review
+            name={reviewStudent.display_name ?? reviewStudent.username ?? "Student"}
+            attempt={latest(reviewStudent.id)}
+            submissions={subsFor(reviewStudent.id)}
+            onClose={() => setReviewing(null)}
+            onSaved={() => void load()}
+          />
+        )}
 
         {loading ? (
           <p className="muted">Loading your classes…</p>
@@ -97,7 +128,7 @@ export function TeacherHome() {
                   {roster.length > 0 ? (
                     <div className="table-wrap">
                       <table className="roster">
-                        <thead><tr><th scope="col">Name</th><th scope="col">Username</th><th scope="col">Joined</th><th scope="col">Setup</th></tr></thead>
+                        <thead><tr><th scope="col">Name</th><th scope="col">Username</th><th scope="col">Joined</th><th scope="col">Setup</th><th scope="col">Reading</th><th scope="col">Listening</th><th scope="col">Writing</th><th scope="col">Speaking</th><th scope="col"><span className="visually-hidden">Actions</span></th></tr></thead>
                         <tbody>
                           {roster.map((s) => (
                             <tr key={s.id}>
@@ -105,6 +136,19 @@ export function TeacherHome() {
                               <td>{s.username}</td>
                               <td>{new Date(s.created_at).toLocaleDateString()}</td>
                               <td>{s.onboarded_at ? <span className="pill pill-good">Done</span> : <span className="pill">Not yet</span>}</td>
+                              <td><Chip band={latest(s.id)?.reading_band} /></td>
+                              <td><Chip band={latest(s.id)?.listening_band} /></td>
+                              {(["writing", "speaking"] as const).map((k) => {
+                                const b = skillBand(s.id, k);
+                                return <td key={k}>{b === "review" ? <span className="pill">To review</span> : <Chip band={b} />}</td>;
+                              })}
+                              <td>
+                                {latest(s.id) && (
+                                  <button type="button" className="link-btn" onClick={() => { setReviewing(s.id); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+                                    {subsFor(s.id).some((x) => !x.teacher_band) ? "Review" : "View"}
+                                  </button>
+                                )}
+                              </td>
                             </tr>
                           ))}
                         </tbody>
