@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { CreateTask } from "../../content/practice/types";
+import type { ProductionTask } from "../../content/assessments/types";
 import { runChecks, wordCount } from "../../lib/answers";
 import { useAuth } from "../../lib/auth";
 import { makeRecogniser } from "./Items";
@@ -11,15 +12,26 @@ type Mode = "write" | "speak";
  * the target structure must appear (regex) and the piece must be long enough.
  * Speaking is transcribed by the browser's own speech recognition.
  */
-export function CreateStep({ task, onSubmit }: { task: CreateTask; onSubmit: (r: { prompt: string; text: string; words: number; audio: Blob | null; ok: boolean }) => Promise<void> }) {
+export type CreateResult = { prompt: string; text: string; words: number; audio: Blob | null; ok: boolean | null };
+
+/**
+ * `only` fixes the mode (used by the Midpoint and Gate). `exam` hides the example answer.
+ * In an exam, a browser that can't transcribe still records; then the length is checked and the teacher listens.
+ */
+export function CreateStep({ task, onSubmit, only, exam = false, submitLabel = "Send it" }: {
+  task: CreateTask | ProductionTask; onSubmit: (r: CreateResult) => Promise<void>; only?: Mode; exam?: boolean; submitLabel?: string;
+}) {
   const { profile } = useAuth();
-  const canSpeak = useMemo(() => makeRecogniser() !== null && "MediaRecorder" in window, []);
+  const canTranscribe = useMemo(() => makeRecogniser() !== null, []);
+  const canRecord = useMemo(() => "MediaRecorder" in window && !!navigator.mediaDevices, []);
+  const canSpeak = canTranscribe && canRecord;
   const options = useMemo(() => {
     const mine = task.prompts.filter((p) => p.universe && profile?.universes.includes(p.universe));
     return [...mine, ...task.prompts.filter((p) => !mine.includes(p))];
   }, [task, profile]);
   const [pi, setPi] = useState(0);
-  const [mode, setMode] = useState<Mode>("write");
+  const [picked, setMode] = useState<Mode>("write");
+  const mode = only ?? picked;
   const [text, setText] = useState("");
   const [ticks, setTicks] = useState<boolean[]>(task.rubric.map(() => false));
   const [busy, setBusy] = useState(false);
@@ -29,8 +41,12 @@ export function CreateStep({ task, onSubmit }: { task: CreateTask; onSubmit: (r:
   const body = mode === "write" ? text : rec.transcript;
   const words = wordCount(body);
   const checks = runChecks(body, task.checks);
-  const ok = words >= task.minWords && checks.every((c) => c.ok);
+  const minSeconds = "seconds" in task && task.seconds ? task.seconds : 0;
+  // Speaking in a browser without transcription: only the length can be checked here.
+  const lengthOnly = mode === "speak" && !canTranscribe;
+  const ok = lengthOnly ? rec.blob !== null && rec.seconds >= minSeconds : words >= task.minWords && checks.every((c) => c.ok);
   const prompt = options[pi];
+  const noMic = mode === "speak" && !canRecord;
 
   return (
     <div className="px-item px-create">
@@ -38,7 +54,7 @@ export function CreateStep({ task, onSubmit }: { task: CreateTask; onSubmit: (r:
       <h2 className="pt-prompt">{prompt.text}</h2>
       {options.length > 1 && <button type="button" className="link-btn px-hint-btn" onClick={() => setPi((pi + 1) % options.length)}>Give me a different topic</button>}
 
-      {canSpeak && (
+      {!only && canSpeak && (
         <div className="mode-switch" role="group" aria-label="Write or speak">
           <button type="button" aria-pressed={mode === "write"} onClick={() => setMode("write")}>Write it</button>
           <button type="button" aria-pressed={mode === "speak"} onClick={() => setMode("speak")}>Say it</button>
@@ -51,18 +67,29 @@ export function CreateStep({ task, onSubmit }: { task: CreateTask; onSubmit: (r:
       ) : (
         <div className="pt-rec">
           {rec.state !== "recording"
-            ? <button type="button" className="pt-rec-btn" onClick={rec.start}><span className="pt-rec-dot" aria-hidden="true" /> {rec.blob ? "Record again" : "Start recording"}</button>
+            ? <button type="button" className="pt-rec-btn" onClick={rec.start} disabled={noMic}><span className="pt-rec-dot" aria-hidden="true" /> {rec.blob ? "Record again" : "Start recording"}</button>
             : <button type="button" className="pt-rec-btn is-live" onClick={rec.stop}><span className="pt-rec-square" aria-hidden="true" /> Stop</button>}
-          {rec.state === "blocked" && <p className="form-error">The microphone is blocked. Allow it in your browser, or write instead.</p>}
+          {rec.state === "blocked" && <p className="form-error">The microphone is blocked. Allow it in your browser{only ? "" : ", or write instead"}.</p>}
+          {rec.state === "recording" && <p className="muted px-small" aria-live="off">Recording · {rec.seconds}s</p>}
           {rec.url && <audio controls src={rec.url} className="pt-rec-audio" />}
           {rec.transcript && <p className="px-transcript"><span className="node-example-label">What the browser heard</span>{rec.transcript}</p>}
         </div>
       )}
 
-      <ul className="px-checks" aria-live="polite">
-        <li className={words >= task.minWords ? "is-ok" : ""}>{words} / {task.minWords} words</li>
-        {checks.map((c) => <li key={c.label} className={c.ok ? "is-ok" : ""}>{c.label}{c.min > 1 ? ` (${Math.min(c.found, c.min)} / ${c.min})` : ""}</li>)}
-      </ul>
+      {noMic && <p className="form-error">This browser can't record audio. Open Bandwidth in Chrome or Edge to do the speaking part.</p>}
+      {lengthOnly ? (
+        <>
+          <p className="muted px-small">This browser can't check your words automatically, so your teacher will listen to your recording.</p>
+          <ul className="px-checks" aria-live="polite">
+            <li className={rec.seconds >= minSeconds ? "is-ok" : ""}>{Math.min(rec.seconds, minSeconds)} / {minSeconds} seconds</li>
+          </ul>
+        </>
+      ) : (
+        <ul className="px-checks" aria-live="polite">
+          <li className={words >= task.minWords ? "is-ok" : ""}>{words} / {task.minWords} words</li>
+          {checks.map((c) => <li key={c.label} className={c.ok ? "is-ok" : ""}>{c.label}{c.min > 1 ? ` (${Math.min(c.found, c.min)} / ${c.min})` : ""}</li>)}
+        </ul>
+      )}
 
       <fieldset className="px-rubric">
         <legend>Check your own work</legend>
@@ -72,14 +99,14 @@ export function CreateStep({ task, onSubmit }: { task: CreateTask; onSubmit: (r:
       </fieldset>
 
       <div className="pt-actions">
-        <button type="button" className="btn btn-primary" disabled={!ok || !ticks.every(Boolean) || busy}
-          onClick={() => { setBusy(true); void onSubmit({ prompt: prompt.text, text: body, words, audio: mode === "speak" ? rec.blob : null, ok }).finally(() => setBusy(false)); }}>
-          {busy ? "Sending…" : "Send it"}
+        <button type="button" className="btn btn-primary" disabled={!ok || !ticks.every(Boolean) || busy || rec.state === "recording"}
+          onClick={() => { setBusy(true); void onSubmit({ prompt: prompt.text, text: body, words, audio: mode === "speak" ? rec.blob : null, ok: lengthOnly ? null : ok }).finally(() => setBusy(false)); }}>
+          {busy ? "Sending…" : submitLabel}
         </button>
-        <button type="button" className="link-btn" onClick={() => setShowModel(!showModel)}>{showModel ? "Hide example" : "Stuck? See an example"}</button>
+        {!exam && <button type="button" className="link-btn" onClick={() => setShowModel(!showModel)}>{showModel ? "Hide example" : "Stuck? See an example"}</button>}
       </div>
-      {!ok && <p className="muted px-small">Send unlocks when every check above is green and you've ticked your self-check.</p>}
-      {showModel && <blockquote className="px-context">{task.model}</blockquote>}
+      {!ok && <p className="muted px-small">{submitLabel} unlocks when every check above is green and you've ticked your self-check.</p>}
+      {!exam && showModel && <blockquote className="px-context">{task.model}</blockquote>}
     </div>
   );
 }
@@ -90,10 +117,15 @@ function useSpeaking() {
   const [blob, setBlob] = useState<Blob | null>(null);
   const [url, setUrl] = useState<string | null>(null);
   const [transcript, setTranscript] = useState("");
+  const [seconds, setSeconds] = useState(0);
   const media = useRef<MediaRecorder | null>(null);
+  const timer = useRef<number | null>(null);
   const recog = useRef<ReturnType<typeof makeRecogniser>>(null);
   const finals = useRef<string[]>([]);
-  useEffect(() => () => { recog.current?.abort(); media.current?.stream.getTracks().forEach((t) => t.stop()); }, []);
+  useEffect(() => () => {
+    recog.current?.abort(); media.current?.stream.getTracks().forEach((t) => t.stop());
+    if (timer.current) window.clearInterval(timer.current);
+  }, []);
   useEffect(() => () => { if (url) URL.revokeObjectURL(url); }, [url]);
 
   async function start() {
@@ -109,7 +141,9 @@ function useSpeaking() {
       setBlob(b); setUrl(URL.createObjectURL(b));
     };
     media.current = m; m.start();
-    finals.current = []; setTranscript("");
+    finals.current = []; setTranscript(""); setSeconds(0);
+    const t0 = Date.now();
+    timer.current = window.setInterval(() => setSeconds(Math.floor((Date.now() - t0) / 1000)), 500);
     const r = makeRecogniser();
     if (r) {
       r.continuous = true; r.interimResults = false;
@@ -129,9 +163,10 @@ function useSpeaking() {
   }
   function stop() {
     media.current?.stop();
+    if (timer.current) { window.clearInterval(timer.current); timer.current = null; }
     const r = recog.current; recog.current = null;
     if (r) { r.onend = null; r.stop(); }
     setState("idle");
   }
-  return { state, blob, url, transcript, start: () => void start(), stop };
+  return { state, blob, url, transcript, seconds, start: () => void start(), stop };
 }

@@ -60,16 +60,18 @@ export function ItemView({ item, onAnswer }: { item: Item; onAnswer: (v: Verdict
 function Choice({ item, onAnswer }: { item: Extract<Item, { kind: "choice" }>; onAnswer: (v: Verdict) => void }) {
   const [pick, setPick] = useState<number | null>(null);
   const [locked, setLocked] = useState(false);
+  // Content is written with the answer first; shuffle so the right answer isn't always A.
+  const order = useMemo(() => shuffle(item.options.map((_, i) => i)), [item]);
   return (
     <div className="px-item">
       {item.audio && <Clip src={item.audio} />}
       {item.context && <blockquote className="px-context">{item.context}</blockquote>}
       <fieldset className="pt-options" disabled={locked}>
         <legend className="pt-stem">{item.prompt}</legend>
-        {item.options.map((o, i) => (
+        {order.map((i, pos) => (
           <label key={i} className={`pt-option${pick === i ? " is-picked" : ""}${locked && i === item.answer ? " is-right" : ""}${locked && pick === i && i !== item.answer ? " is-wrong" : ""}`}>
             <input type="radio" name="opt" checked={pick === i} onChange={() => setPick(i)} />
-            <span className="pt-option-key" aria-hidden="true">{"ABCD"[i]}</span><span>{o}</span>
+            <span className="pt-option-key" aria-hidden="true">{"ABCD"[pos]}</span><span>{item.options[i]}</span>
           </label>
         ))}
       </fieldset>

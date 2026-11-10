@@ -11,6 +11,8 @@ import { BANDS } from "../content/bands";
 import { BandMap } from "./map/BandMap";
 import { BandView } from "./map/BandView";
 import { TreeView } from "./map/TreeView";
+import { GateReviews } from "./assess/GateReviews";
+import type { AssessmentRow } from "../lib/progressApi";
 
 type Student = Pick<Profile, "id" | "username" | "display_name" | "class_id" | "onboarded_at"> & { created_at: string };
 
@@ -26,6 +28,8 @@ export function TeacherHome() {
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [subs, setSubs] = useState<Submission[]>([]);
   const [reviewing, setReviewing] = useState<string | null>(null);
+  const [gates, setGates] = useState<AssessmentRow[]>([]);
+  const [unlocks, setUnlocks] = useState<{ student_id: string; band: string }[]>([]);
   const route = useAppRoute();
   // Teacher preview of the student map, pretending the student starts at this band.
   const [previewStart, setPreviewStart] = useState(() => {
@@ -35,12 +39,16 @@ export function TeacherHome() {
   useEffect(() => { window.scrollTo({ top: 0 }); }, [route.band, route.tree]);
 
   const load = useCallback(async () => {
-    const [c, s, a, sub] = await Promise.all([
+    const [c, s, a, sub, g, u] = await Promise.all([
       supabase.from("classes").select("*").order("created_at", { ascending: false }),
       supabase.from("profiles").select("id, username, display_name, class_id, onboarded_at, created_at").eq("role", "student").order("created_at"),
       supabase.from("placement_attempts").select("*").eq("status", "completed").order("completed_at", { ascending: false }),
       supabase.from("submissions").select("*").order("created_at", { ascending: false }),
+      supabase.from("assessments").select("*").eq("status", "awaiting_teacher").order("created_at"),
+      supabase.from("band_unlocks").select("student_id, band"),
     ]);
+    setGates((g.data as AssessmentRow[]) ?? []);
+    setUnlocks((u.data as { student_id: string; band: string }[]) ?? []);
     setClasses((c.data as ClassRow[]) ?? []);
     setStudents((s.data as Student[]) ?? []);
     setAttempts((a.data as Attempt[]) ?? []);
@@ -115,7 +123,12 @@ export function TeacherHome() {
           </form>
           {error && <p className="form-error" role="alert">{error}</p>}
           {pending > 0 && <p className="pill" role="status">{pending} {pending === 1 ? "piece" : "pieces"} of writing or speaking to review</p>}
+          {gates.length > 0 && <p className="pill" role="status">{gates.length} {gates.length === 1 ? "Gate" : "Gates"} waiting for you to confirm</p>}
         </section>
+
+        <GateReviews items={gates} subs={subs}
+          nameOf={(id) => { const st = students.find((x) => x.id === id); return st?.display_name ?? st?.username ?? "Student"; }}
+          onChanged={() => void load()} />
 
         {reviewStudent && (
           <Review
@@ -155,7 +168,7 @@ export function TeacherHome() {
                   {roster.length > 0 ? (
                     <div className="table-wrap">
                       <table className="roster">
-                        <thead><tr><th scope="col">Name</th><th scope="col">Username</th><th scope="col">Joined</th><th scope="col">Setup</th><th scope="col">Reading</th><th scope="col">Listening</th><th scope="col">Writing</th><th scope="col">Speaking</th><th scope="col"><span className="visually-hidden">Actions</span></th></tr></thead>
+                        <thead><tr><th scope="col">Name</th><th scope="col">Username</th><th scope="col">Joined</th><th scope="col">Setup</th><th scope="col">Gate opened</th><th scope="col">Reading</th><th scope="col">Listening</th><th scope="col">Writing</th><th scope="col">Speaking</th><th scope="col"><span className="visually-hidden">Actions</span></th></tr></thead>
                         <tbody>
                           {roster.map((s) => (
                             <tr key={s.id}>
@@ -163,6 +176,7 @@ export function TeacherHome() {
                               <td>{s.username}</td>
                               <td>{new Date(s.created_at).toLocaleDateString()}</td>
                               <td>{s.onboarded_at ? <span className="pill pill-good">Done</span> : <span className="pill">Not yet</span>}</td>
+                              <td>{(() => { const b = unlocks.filter((x) => x.student_id === s.id).map((x) => x.band).sort((p, q) => BANDS.findIndex((z) => z.id === q) - BANDS.findIndex((z) => z.id === p))[0]; return <Chip band={b} />; })()}</td>
                               <td><Chip band={latest(s.id)?.reading_band} /></td>
                               <td><Chip band={latest(s.id)?.listening_band} /></td>
                               {(["writing", "speaking"] as const).map((k) => {

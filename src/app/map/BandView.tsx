@@ -8,6 +8,8 @@ import { TREES } from "./trees";
 import { statusFor } from "./BandMap";
 import { useProgress } from "../../lib/progress";
 import { practiceFor } from "../../content/practice";
+import { assessmentFor } from "../../content/assessments";
+import { BandChecks } from "../assess/BandChecks";
 
 /** One band: what it lets you do, its five skill trees, its Universe topics and its Gate. */
 export function BandView({ band, start }: { band: BandId; start: number }) {
@@ -99,6 +101,7 @@ export function BandView({ band, start }: { band: BandId; start: number }) {
         </div>
       </section>
 
+      {assessmentFor(band, "gate") && (st === "current" || !progress) ? <BandChecks band={band} next={next?.id} /> : (
       <section className="gate-card" aria-labelledby="gate-title">
         <div className="gate-arch" aria-hidden="true"><span /><span /><span /></div>
         <div>
@@ -111,6 +114,7 @@ export function BandView({ band, start }: { band: BandId; start: number }) {
           <p className="muted">Points and coins never change your band. Only mastery does.</p>
         </div>
       </section>
+      )}
 
       <nav className="band-nav" aria-label="Other bands">
         {prev ? <a href={hrefFor(prev.id)} className="btn btn-ghost btn-sm">← {prev.id}</a> : <span />}

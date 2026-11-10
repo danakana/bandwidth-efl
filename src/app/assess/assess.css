@@ -1,0 +1,80 @@
+/* Midpoint and Gate: same dialog shell as practice, wider for text + questions side by side. */
+.as .pt-main { width: min(100% - 2rem, 1080px); }
+.as .px-intro, .as .px-result, .as .px-create { max-width: 680px; margin-inline: auto; }
+
+.as-parts { display: none; list-style: none; margin: 0; padding: 0; gap: 4px; }
+.as-parts li { padding: 0.35rem 0.7rem; border-radius: var(--r-pill); font: 700 0.75rem / 1 var(--font-body); color: var(--ink-muted); background: var(--line); }
+.as-parts li.is-now { background: var(--ink); color: var(--white); }
+.as-parts li.is-done { background: var(--good-tint); color: var(--good); }
+@media (min-width: 720px) { .as-parts { display: flex; } }
+
+.as-leave {
+  position: sticky; top: 69px; z-index: 6; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-3);
+  padding: var(--s-3) max(16px, 3vw); background: var(--try-tint); border-bottom: 2px solid var(--try);
+}
+.as-leave p { margin: 0; }
+
+.as-emblem { width: 96px; height: 96px; display: grid; place-items: center; border-radius: 28px; background: var(--ink); color: var(--band-b2); box-shadow: 0 6px 0 #0d2440; }
+.as-emblem.is-gate { color: var(--band-a2); }
+.as-emblem.is-pass { background: var(--good); color: var(--white); box-shadow: 0 6px 0 #17501f; }
+.as-result .as-emblem { margin-inline: auto; }
+
+.as-plan, .as-rules, .as-scores { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
+.as-plan li, .as-scores li {
+  display: grid; grid-template-columns: auto 6.5rem 1fr; align-items: center; gap: var(--s-3);
+  padding: var(--s-3) var(--s-4); border-radius: var(--r-md); background: var(--white); border: 2px solid var(--line);
+}
+.as-plan-icon { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: var(--sky-soft); color: var(--ink); }
+.as-plan li span:last-child { color: var(--ink-soft); }
+.as-rules { padding-left: 1.1rem; list-style: disc; line-height: 1.5; }
+
+.as-part { display: grid; gap: var(--s-4); }
+.as-grid { display: grid; gap: var(--s-5); align-items: start; }
+.as-source { display: grid; gap: var(--s-3); }
+.as-source h2 { font-size: var(--step-2); }
+.as-passage {
+  padding: var(--s-5); border-radius: 20px; background: var(--white); border: 2px solid var(--line);
+  font-size: var(--step-0); line-height: 1.7; max-height: 60vh; overflow: auto;
+}
+.as-passage p { margin: 0 0 var(--s-3); max-width: 64ch; }
+.as-passage p:last-child { margin-bottom: 0; }
+.as-passage:focus-visible { box-shadow: var(--focus); outline: none; }
+.as-q { display: grid; gap: var(--s-3); }
+@media (min-width: 960px) {
+  .as-grid { grid-template-columns: 1.15fr 1fr; }
+  .as-source { position: sticky; top: 90px; }
+}
+
+.as-result { text-align: center; }
+.as-result .as-scores { text-align: left; }
+.as-scores li { grid-template-columns: auto 6.5rem 1fr auto; }
+.as-scores li.is-ok { border-color: color-mix(in srgb, var(--good) 45%, var(--line)); }
+.as-scores li:not(.is-ok) { border-color: color-mix(in srgb, var(--try) 55%, var(--line)); }
+.as-bar { position: relative; height: 12px; border-radius: var(--r-pill); background: var(--line); }
+.as-bar span { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: var(--try); }
+.as-scores li.is-ok .as-bar span { background: var(--good); }
+.as-bar i { position: absolute; top: -4px; bottom: -4px; width: 3px; border-radius: 2px; background: var(--ink); }
+.as-verdict { grid-column: 3 / -1; color: var(--ink-soft); font-weight: 700; }
+
+/* Band page: Midpoint and Gate cards. */
+.bchecks { display: grid; gap: var(--s-4); }
+@media (min-width: 820px) { .bchecks { grid-template-columns: 1fr 1fr; } }
+.bcheck {
+  display: grid; gap: var(--s-3); align-content: start; padding: var(--s-5); border-radius: 24px;
+  background: var(--white); border: 2px solid var(--ink); box-shadow: 0 6px 0 var(--ink);
+}
+.bcheck.is-gate { background: var(--ink); color: var(--white); box-shadow: 0 6px 0 var(--band-b2); }
+.bcheck.is-gate .muted { color: #c4d6ea; }
+.bcheck h2 { font-size: var(--step-2); display: flex; align-items: center; gap: var(--s-2); }
+.bcheck p { margin: 0; }
+.bcheck-meter { display: flex; gap: 3px; }
+.bcheck-meter span { flex: 1; height: 10px; border-radius: 3px; background: var(--line); }
+.bcheck-meter span.is-on { background: var(--good); }
+.bcheck.is-gate .bcheck-meter span { background: #2a4566; }
+.bcheck.is-gate .bcheck-meter span.is-on { background: var(--band-b2); }
+.bcheck .bcheck-mark { display: inline-block; height: 2px; }
+.bcheck-state { justify-self: start; padding: 0.35rem 0.8rem; border-radius: var(--r-pill); font: 700 0.8rem / 1 var(--font-body); background: var(--sky-soft); color: var(--ink); }
+.bcheck-state.is-good { background: var(--good-tint); color: var(--good); }
+.bcheck-state.is-wait { background: var(--try-tint); color: #7a4100; }
+.bcheck-note { padding: var(--s-3) var(--s-4); border-radius: var(--r-md); background: var(--try-tint); color: var(--ink); }
+.bcheck .btn { justify-self: start; }

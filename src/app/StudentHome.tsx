@@ -9,6 +9,8 @@ import { Results } from "./placement/Results";
 import { BandMap } from "./map/BandMap";
 import { BandView } from "./map/BandView";
 import { TreeView } from "./map/TreeView";
+import { useProgress } from "../lib/progress";
+import { BANDS } from "../content/bands";
 import "./placement/placement.css";
 import "./map/map.css";
 
@@ -22,6 +24,7 @@ export function StudentHome() {
   const { profile } = useAuth();
   const es = !!profile?.spanish_help;
   const route = useAppRoute();
+  const progress = useProgress();
   const mine = UNIVERSE_LIST.filter((u) => profile?.universes.includes(u.id));
   const [testing, setTesting] = useState(false);
   const [result, setResult] = useState<{ attempt: Attempt; submissions: Submission[] } | null>(null);
@@ -38,7 +41,10 @@ export function StudentHome() {
     return <Placement onExit={() => setTesting(false)} onFinished={() => { setTesting(false); setLoading(true); void load(); }} />;
   }
 
-  const start = result ? startBandIndex(result.attempt, result.submissions) ?? 0 : null;
+  // Placement sets the first band; passing a Gate (confirmed by the teacher) moves it up.
+  const placed = result ? startBandIndex(result.attempt, result.submissions) ?? 0 : null;
+  const unlocked = Math.max(-1, ...(progress?.unlocks ?? []).map((b) => BANDS.findIndex((x) => x.id === b)));
+  const start = placed === null ? null : Math.max(placed, unlocked);
 
   // Band and tree pages, once the student has a starting band.
   if (start !== null && route.band) {

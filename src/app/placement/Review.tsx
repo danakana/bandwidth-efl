@@ -34,7 +34,7 @@ export function Chip({ band }: { band: string | null | undefined }) {
   return band ? <span className="band-chip">{band}</span> : <span className="band-chip is-empty">–</span>;
 }
 
-function ReviewItem({ sub, onSaved }: { sub: Submission; onSaved: () => void }) {
+export function ReviewItem({ sub, onSaved }: { sub: Submission; onSaved: () => void }) {
   const { session } = useAuth();
   const [band, setBand] = useState<string | null>(sub.teacher_band);
   const [feedback, setFeedback] = useState(sub.teacher_feedback ?? "");
@@ -75,7 +75,7 @@ function ReviewItem({ sub, onSaved }: { sub: Submission; onSaved: () => void }) 
       </div>
       <p className="rv-prompt">{sub.prompt}</p>
       {sub.skill === "writing"
-        ? <div className="rv-body">{sub.body}</div>
+        ? <div className="rv-body" tabIndex={0} aria-label="Student writing">{sub.body}</div>
         : audioUrl ? <audio controls src={audioUrl} style={{ width: "100%", maxWidth: 520 }} /> : <p className="muted">Loading recording…</p>}
       <div className="rv-form">
         <fieldset className="rv-bands">
