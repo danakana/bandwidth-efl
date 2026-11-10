@@ -57,7 +57,7 @@
   background: var(--white); border: 3px solid var(--ink); font: 800 var(--step-1) / 1 var(--font-display);
 }
 .step p { color: var(--ink-soft); }
-.rule { margin-top: var(--s-7); padding: var(--s-5); border-left: 6px solid var(--cerulean); background: var(--white); border-radius: 0 var(--r-md) var(--r-md) 0; max-width: none; }
+.rule { margin-top: var(--s-7); padding: var(--s-5) var(--s-6); background: var(--sky-soft); border-radius: var(--r-lg); max-width: none; }
 @media (max-width: 860px) {
   .steps { grid-template-columns: 1fr; gap: var(--s-5); }
   .steps::before { top: 22px; bottom: 22px; left: 22px; right: auto; width: 4px; height: auto; background: linear-gradient(180deg, var(--band-a1), var(--band-a2), var(--band-b1), var(--band-b2), var(--band-c1)); }

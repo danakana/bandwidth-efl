@@ -51,7 +51,7 @@
 .pt-plan strong { font-family: var(--font-display); }
 .pt-plan span { color: var(--ink-soft); font-size: var(--step--1); }
 @media (max-width: 480px) { .pt-plan { grid-template-columns: 1fr; } }
-.pt-note { border-left: 4px solid var(--band-a1); padding: var(--s-2) var(--s-4); background: var(--good-tint); border-radius: 0 var(--r-sm) var(--r-sm) 0; }
+.pt-note { padding: var(--s-3) var(--s-4); background: var(--good-tint); border-radius: var(--r-md); }
 .pt-go { justify-self: start; min-width: 220px; }
 
 /* Question meter */

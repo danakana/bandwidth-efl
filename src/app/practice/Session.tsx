@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import type { Item } from "../../content/practice/types";
 import { ItemView, type Verdict } from "./Items";
+import { Icon } from "../../components/Icon";
 
 /** Runs a list of items one at a time with instant feedback, then reports the score. */
 export function Session({ items, label, onDone }: { items: Item[]; label: string; onDone: (score: number, total: number) => void }) {
@@ -18,7 +19,7 @@ export function Session({ items, label, onDone }: { items: Item[]; label: string
   }
 
   return (
-    <div className="px-session">
+    <div className={`px-session${verdict ? " has-feedback" : ""}`}>
       <div className="pt-meter" aria-hidden="true">
         {items.map((_, k) => <span key={k} className={k < i ? "is-on" : k === i ? "is-now" : ""} />)}
       </div>
@@ -35,8 +36,9 @@ export function Session({ items, label, onDone }: { items: Item[]; label: string
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
             role="status"
           >
+            <span className="px-fb-icon" aria-hidden="true"><Icon name={verdict.score > 0 ? "check" : "x"} size={26} /></span>
             <div>
-              <strong>{verdict.score === 1 ? pick(["Nailed it.", "Exactly.", "Spot on.", "Perfect."]) : verdict.score > 0 ? "Almost: half a point." : "Not quite."}</strong>
+              <strong>{verdict.score === 1 ? PRAISE[i % PRAISE.length] : verdict.score > 0 ? "Almost: half a point." : "Not quite."}</strong>
               {verdict.score < 1 && <p className="px-answer">Answer: <span>{verdict.correct}</span></p>}
               <p className="px-why">{item.why}</p>
             </div>
@@ -48,4 +50,4 @@ export function Session({ items, label, onDone }: { items: Item[]; label: string
   );
 }
 
-const pick = <T,>(a: T[]) => a[Math.floor(Math.random() * a.length)];
+const PRAISE = ["Nailed it.", "Exactly.", "Spot on.", "Perfect.", "Yes!"];

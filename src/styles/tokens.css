@@ -5,14 +5,14 @@
   --white: #ffffff;
   --ink: #173b63;
   --ink-soft: #3c5a7a;
-  --ink-muted: #5b7593;
+  --ink-muted: #4a6482; /* 5:1 or better on every tint (WCAG AA) */
   --line: #dbe6f0;
   --sky: #bcebff;
   --sky-soft: #eaf7fd;
 
   /* Signature */
   --cerulean: #49b8f2;
-  --cerulean-ink: #1f7fb6; /* text-safe cerulean, 4.6:1 on white */
+  --cerulean-ink: #176796; /* text-safe cerulean: 5.1:1 or better on every tint we use (WCAG AA) */
 
   /* Bands (fill colours) */
   --band-a1: #8bd77b;
@@ -31,7 +31,7 @@
   --tint-c2: #d5dfeb;
 
   /* Feedback */
-  --good: #2e8b3d;
+  --good: #257a33; /* white text on it: 5.4:1 */
   --good-tint: #e3f6de;
   --try: #b4541a;
   --try-tint: #ffe6d6;

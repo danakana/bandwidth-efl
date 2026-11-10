@@ -9,6 +9,7 @@ import { useProgress } from "../../lib/progress";
 import { nodeView, type NodeProgress, type NodeView } from "../../lib/progressApi";
 import { PracticePlayer, type PlayTarget } from "../practice/PracticePlayer";
 import { treeMeta } from "./trees";
+import { Icon } from "../../components/Icon";
 import { statusFor } from "./BandMap";
 import "../practice/practice.css";
 
@@ -107,7 +108,7 @@ function BossRow({ boss, locked, ready, beaten, onPlay }: { boss: Checkpoint; lo
   return (
     <li className={`boss-row${beaten ? " is-beaten" : ""}`}>
       <button type="button" disabled={!can} onClick={onPlay}>
-        <span className="boss-icon" aria-hidden="true">{beaten ? "✓" : "⚔"}</span>
+        <span className="boss-icon" aria-hidden="true">{beaten ? <Icon name="check" size={22} /> : can ? <Icon name="swords" size={22} /> : <Icon name="lock" size={20} />}</span>
         <span className="boss-text">
           <strong>{boss.title}</strong>
           <span>{beaten ? "Beaten. You can fight it again any time." : can ? "Ready! 9 mixed questions." : "Opens when the skills above are Secure."}</span>
@@ -161,7 +162,7 @@ function SkillPanel({ nodeId, area, title, example, note, locked, p, isStudent, 
               const can = isStudent && !locked && (done || next);
               return (
                 <li key={name} className={`step-row${done ? " is-done" : next && !locked ? " is-next" : " is-locked"}`}>
-                  <span className="step-num" aria-hidden="true">{done ? "✓" : step}</span>
+                  <span className="step-num" aria-hidden="true">{done ? <Icon name="check" size={18} /> : step}</span>
                   <span className="step-text">
                     <strong>{name}</strong>
                     <span>{STEP_BLOOM[k]}{best !== undefined && step < 6 ? ` · best ${best}%` : ""}</span>

@@ -1,6 +1,7 @@
 import { useAuth } from "../lib/auth";
 import { Logo } from "../components/Logo";
 import { useProgress } from "../lib/progress";
+import { Icon } from "../components/Icon";
 
 export function AppHeader() {
   const { profile, signOut } = useAuth();
@@ -13,9 +14,9 @@ export function AppHeader() {
         <div className="app-header-right">
           {st && (
             <div className="wallet" aria-label={`${st.streak}-day streak, ${st.coins} coins, ${st.xp} XP`}>
-              <span className="w-streak" title="Day streak"><b aria-hidden="true">🔥</b>{st.streak}</span>
-              <span className="w-coin" title="Coins"><b aria-hidden="true">◎</b>{st.coins}</span>
-              <span className="w-xp" title="XP"><b aria-hidden="true">⚡</b>{st.xp}</span>
+              <span className="w-streak" title="Day streak"><b><Icon name="flame" size={16} fill /></b>{st.streak}</span>
+              <span className="w-coin" title="Coins"><b><Icon name="coin" size={16} /></b>{st.coins}</span>
+              <span className="w-xp" title="XP"><b><Icon name="bolt" size={16} fill /></b>{st.xp}</span>
             </div>
           )}
           <span className="app-user">

@@ -5,7 +5,7 @@
 .px-intro h1 { font-size: var(--step-3); line-height: 1.15; }
 .px-boss { font-size: 3rem; line-height: 1; width: 84px; height: 84px; display: grid; place-items: center; border-radius: 24px; background: var(--ink); color: var(--band-a2); }
 .px-rule-toggle { justify-self: start; background: var(--sky-soft); border: 0; border-radius: var(--r-pill); padding: 0.5rem 1rem; font: 700 var(--step--1) / 1 var(--font-display); color: var(--ink); cursor: pointer; }
-.px-rule { padding: var(--s-4) var(--s-5); border-radius: var(--r-md); background: var(--paper); border-left: 5px solid var(--cerulean); display: grid; gap: var(--s-3); line-height: 1.6; }
+.px-rule { padding: var(--s-5); border-radius: 20px; background: var(--sky-soft); display: grid; gap: var(--s-3); line-height: 1.6; }
 .px-rule ul { margin: 0; padding-left: 1.1rem; display: grid; gap: var(--s-1); font-weight: 700; }
 
 .px-session { display: grid; gap: var(--s-4); }
@@ -142,3 +142,130 @@
 @media (max-width: 480px) { .wallet .w-xp { display: none; } }
 /* The player covers the whole screen, above the app header. */
 .pt.px { position: fixed; inset: 0; z-index: 60; overflow-y: auto; overscroll-behavior: contain; }
+
+/* =========================================================================
+   Design pass (Nov 2026): game, not dashboard.
+   - No card inside the full-screen player: content sits on the canvas.
+   - Chunky, pressable answers (thicker bottom edge, press-down on tap).
+   - Feedback is a full-width bottom sheet with an icon, not a floating box.
+   - Results show the six-step track lighting up instead of a generic ring.
+   - Only one accent (cerulean) for "what to do next"; green/red only for verdicts.
+   ========================================================================= */
+.pt.px { background: var(--paper); }
+.px-head {
+  position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-3) max(12px, 3vw); background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+}
+.px-close {
+  flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  border: 0; background: transparent; color: var(--ink-soft); cursor: pointer;
+}
+.px-close:hover { background: var(--line); color: var(--ink); }
+.px-close:focus-visible { box-shadow: var(--focus); }
+.px-head .px-head-title { flex: 1; text-align: left; color: var(--ink); display: grid; gap: 1px; font-size: var(--step-0); }
+.px-head .px-head-title span { font: 700 0.75rem / 1.2 var(--font-body); color: var(--ink-muted); }
+
+.px .pt-main { width: min(100% - 2rem, 680px); padding-block: var(--s-6) var(--s-9); }
+.px .pt-card { background: transparent; border: 0; box-shadow: none; padding: 0; }
+.px .pt-kicker { color: var(--ink-muted); letter-spacing: 0.04em; text-transform: none; font-weight: 700; }
+.px .pt-meter span { height: 10px; }
+.px .pt-meter span.is-on { background: var(--good); }
+.px .pt-meter span.is-now { background: var(--cerulean); }
+
+.px .pt-stem { font: 700 var(--step-2) / 1.25 var(--font-display); letter-spacing: -0.01em; margin-bottom: var(--s-4); }
+.px .pt-option {
+  min-height: 60px; border-radius: 16px; border: 2px solid var(--line); border-bottom-width: 5px;
+  background: var(--white); font-weight: 600; transform: none;
+  transition: transform 0.08s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+.px .pt-option:hover { border-color: #b9cde2; }
+.px .pt-option:active { transform: translateY(3px); border-bottom-width: 2px; }
+.px .pt-option.is-picked { border-color: var(--cerulean-ink); background: var(--sky-soft); transform: none; }
+.px .pt-option.is-right { border-color: var(--good); background: var(--good-tint); }
+.px .pt-option.is-wrong { border-color: var(--try); background: var(--try-tint); }
+.px .pt-option-key { border-radius: 10px; background: var(--paper); border: 2px solid var(--line); }
+.px .pt-option.is-picked .pt-option-key { background: var(--cerulean-ink); border-color: var(--cerulean-ink); }
+
+.px .pt-actions .btn-primary, .px-feedback .btn-primary {
+  min-height: 56px; min-width: 180px; border-radius: 16px; font-size: var(--step-0);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--ink) 70%, black);
+}
+.px .pt-actions .btn-primary:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--ink) 70%, black); }
+@media (max-width: 560px) { .px .pt-actions .btn-primary { width: 100%; } }
+
+.px-context, .px-say { border: 0; border-radius: 20px; background: var(--white); box-shadow: 0 1px 0 var(--line), 0 12px 32px -24px rgba(23, 59, 99, 0.35); }
+.px-say { background: var(--tint-c1); box-shadow: none; }
+.px-clip { border-radius: 20px; padding: var(--s-4); }
+.px-play { width: 60px; height: 60px; box-shadow: 0 4px 0 #1f7fb6; }
+.px-play:active { transform: translateY(3px); box-shadow: 0 1px 0 #1f7fb6; }
+.px-word { border-radius: 12px; border-bottom-width: 4px; }
+.px-part { border-radius: 12px; border-bottom-width: 4px; }
+
+/* Bottom sheet feedback */
+.px-session.has-feedback { padding-bottom: 220px; }
+.px-feedback {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; border: 0; border-radius: 24px 24px 0 0;
+  padding: var(--s-5) max(16px, calc((100% - 680px) / 2)) max(var(--s-5), env(safe-area-inset-bottom));
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s-4); align-items: center;
+  box-shadow: 0 -16px 40px -24px rgba(23, 59, 99, 0.45);
+}
+.px-feedback > div { flex: none; }
+.px-feedback.is-good { background: #dff3df; color: #14532d; }
+.px-feedback.is-half { background: #fdf0c4; color: #5c4400; }
+.px-feedback.is-bad { background: #fde2dd; color: #7a1d10; }
+.px-fb-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: currentColor; }
+.px-fb-icon svg { color: var(--white); stroke-width: 3; }
+.px-feedback strong { color: inherit; }
+.px-feedback .px-why { color: inherit; opacity: 0.85; }
+.px-feedback.is-good .btn-primary { background: #1f7a3a; box-shadow: 0 4px 0 #14532d; }
+.px-feedback.is-bad .btn-primary { background: #b3321f; box-shadow: 0 4px 0 #7a1d10; }
+.px-feedback.is-half .btn-primary { background: #8a6700; box-shadow: 0 4px 0 #5c4400; }
+@media (max-width: 560px) {
+  .px-feedback { grid-template-columns: auto minmax(0, 1fr); }
+  .px-feedback .btn-primary { grid-column: 1 / -1; width: 100%; }
+  .px-session.has-feedback { padding-bottom: 280px; }
+}
+
+/* Intro */
+.px-intro { gap: var(--s-5); }
+.px-intro h1 { font-size: var(--step-4); letter-spacing: -0.02em; line-height: 1.05; max-width: 16ch; }
+.px-boss { width: 96px; height: 96px; border-radius: 28px; background: var(--ink); color: var(--band-a2); box-shadow: 0 6px 0 #0d2440; }
+
+/* Results */
+.px-score { display: flex; align-items: baseline; justify-content: center; gap: var(--s-2); color: var(--try); font-variant-numeric: tabular-nums; }
+.px-score.is-pass { color: var(--good); }
+.px-score strong { font: 800 clamp(4.5rem, 14vw, 7rem) / 0.9 var(--font-display); letter-spacing: -0.04em; }
+.px-score span { font: 700 var(--step-2) / 1 var(--font-display); color: var(--ink-muted); }
+.px-score svg { width: 96px; height: 96px; padding: 18px; border-radius: 50%; background: var(--good); color: var(--white); stroke-width: 3; }
+.px-result h1 { font-size: var(--step-3); letter-spacing: -0.02em; }
+.px-track { list-style: none; margin: var(--s-2) 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s-2); width: min(100%, 520px); }
+.px-track li { display: grid; justify-items: center; gap: 6px; }
+.px-track li > span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--line); background: var(--white); font: 800 var(--step--1) / 1 var(--font-display); color: var(--ink-muted); }
+.px-track li.is-on > span { background: var(--good); border-color: var(--good); color: var(--white); }
+.px-track li.is-on > span svg { stroke-width: 3; }
+.px-track small { font-size: 0.72rem; color: var(--ink-muted); font-weight: 700; }
+@media (max-width: 420px) { .px-track small { display: none; } }
+.px-counter { border-radius: 20px; padding: var(--s-4) var(--s-6); }
+.px-counter.is-xp { background: var(--white); box-shadow: inset 0 0 0 2px var(--line); color: var(--cerulean-ink); }
+.px-counter.is-coin { background: var(--white); box-shadow: inset 0 0 0 2px var(--line); color: #a07800; }
+.px-counter strong { color: var(--ink); }
+.px-badge { border-radius: 20px; }
+.px-badge span { color: var(--band-a2); }
+
+/* Wallet icons */
+.wallet span b { display: inline-grid; }
+.wallet .w-streak b { color: #ff914d; }
+.wallet .w-coin b { color: #ffd95c; }
+.wallet .w-xp b { color: #49b8f2; }
+
+/* Skill panel: steps feel like buttons, not table rows */
+.step-row { border-radius: 16px; border-bottom-width: 4px; }
+.step-row.is-done { border-color: #bfe3c4; }
+.step-row.is-next { box-shadow: none; border-color: var(--ink); background: var(--white); }
+.step-num svg { stroke-width: 3; }
+.boss-row button { border-radius: 16px; }
+.boss-row .boss-icon svg { stroke-width: 2.4; }
+/* Locked steps: say "locked" with colour and a dashed edge, not by fading the text into illegibility. */
+.step-row.is-locked { opacity: 1; border-style: dashed; background: transparent; }
+.step-row.is-locked .step-text strong { color: var(--ink-muted); }

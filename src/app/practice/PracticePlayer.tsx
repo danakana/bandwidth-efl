@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, animate, motion, useMotionValue, useTransform } from "motion/react";
 import { STEP_BLOOM, STEP_BLURB, STEP_NAMES, type NodePractice } from "../../content/practice/types";
 import { mixedItems, type Checkpoint } from "../../content/practice";
@@ -6,7 +7,7 @@ import { NODES } from "../../content/curriculum";
 import { shuffle } from "../../lib/answers";
 import { badgeInfo, recordMilestone, recordStep, savePractice, type StepOutcome } from "../../lib/progressApi";
 import { useAuth } from "../../lib/auth";
-import { Logo } from "../../components/Logo";
+import { Icon } from "../../components/Icon";
 import { Session } from "./Session";
 import { CreateStep } from "./CreateStep";
 import "./practice.css";
@@ -41,7 +42,13 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [target, round]);
 
-  useEffect(() => { window.scrollTo({ top: 0 }); }, [phase]);
+  useEffect(() => { document.querySelector(".pt.px")?.scrollTo({ top: 0 }); }, [phase]);
+  // Keep keyboard focus inside the dialog: the app behind it is inert while practising.
+  useEffect(() => {
+    const root = document.getElementById("root");
+    if (root) root.inert = true;
+    return () => { if (root) root.inert = false; };
+  }, []);
 
   async function finish(score: number, total: number) {
     setRaw({ score, total }); setPhase("saving");
@@ -53,14 +60,16 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
     } catch { setPhase("error"); }
   }
 
-  return (
-    <div className="pt px">
-      <header className="pt-head">
-        <Logo size={28} tone="dark" />
-        <p className="px-head-title">{title}</p>
-        <button type="button" className="link-btn pt-exit" onClick={() => onClose(phase === "result")}>{phase === "result" ? "Done" : "Leave"}</button>
+  // Rendered over the whole app as a modal dialog, so screen readers treat it as one focused task.
+  return createPortal(
+    <div className="pt px" role="dialog" aria-modal="true" aria-label={`${label}: ${title}`}>
+      <header className="px-head">
+        <button type="button" className="px-close" onClick={() => onClose(phase === "result")} aria-label={phase === "result" ? "Done, back to the skill" : "Leave practice"}>
+          <Icon name="x" size={22} />
+        </button>
+        <p className="px-head-title"><span>{label}</span>{title}</p>
       </header>
-      <main id="main" className="pt-main">
+      <div className="pt-main">
         <AnimatePresence mode="wait">
           <motion.section key={phase + round} className="pt-card" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
             {phase === "intro" && <Intro target={target} label={label} onStart={() => setPhase("play")} />}
@@ -81,13 +90,15 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
             )}
             {phase === "result" && outcome && raw && (
               <Result outcome={outcome} raw={raw} isCreate={target.kind === "step" && target.step === 6}
+                step={target.kind === "step" ? target.step : 0}
                 onAgain={() => { setRound(round + 1); setOutcome(null); setPhase("play"); }}
                 onClose={() => onClose(true)} />
             )}
           </motion.section>
         </AnimatePresence>
-      </main>
-    </div>
+      </div>
+    </div>,
+    document.body,
   );
 }
 
@@ -96,7 +107,7 @@ function Intro({ target, label, onStart }: { target: PlayTarget; label: string; 
   if (target.kind === "milestone") {
     return (
       <div className="px-intro">
-        <div className="px-boss" aria-hidden="true">⚔</div>
+        <div className="px-boss" aria-hidden="true"><Icon name="swords" size={40} /></div>
         <p className="pt-kicker">Checkpoint · 9 mixed questions</p>
         <h1>{target.checkpoint.title}</h1>
         <p className="pt-lede">{target.checkpoint.story}</p>
@@ -127,16 +138,34 @@ function Intro({ target, label, onStart }: { target: PlayTarget; label: string; 
   );
 }
 
-function Result({ outcome, raw, isCreate, onAgain, onClose }: { outcome: StepOutcome; raw: { score: number; total: number }; isCreate: boolean; onAgain: () => void; onClose: () => void }) {
-  const pct = outcome.pct;
+function Result({ outcome, raw, isCreate, step, onAgain, onClose }: { outcome: StepOutcome; raw: { score: number; total: number }; isCreate: boolean; step: number; onAgain: () => void; onClose: () => void }) {
+  const [headline] = useState(() => outcome.passed
+    ? (isCreate ? "Sent and passed." : step === 7 ? "Still there. Nice." : step === 0 ? "Boss beaten." : pick(["Step cleared.", "That's locked in.", "Onto the next one."]))
+    : "Not yet. Go again.");
+  const lit = outcome.steps_passed ?? 0;
   return (
     <div className="px-result">
       {outcome.passed && <Burst />}
-      <motion.div className={`px-ring${outcome.passed ? " is-pass" : ""}`} initial={{ scale: 0.6 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 220, damping: 14 }}>
-        <span>{isCreate ? "✓" : `${pct}%`}</span>
-      </motion.div>
-      <h1>{outcome.passed ? (isCreate ? "Sent and passed!" : pick(["Step cleared!", "Level up!", "You've got it."])) : "Not yet. Let's go again."}</h1>
-      {!isCreate && <p className="muted">{fmt(raw.score)} out of {raw.total} · you need 80%</p>}
+      <div className={`px-score${outcome.passed ? " is-pass" : ""}`}>
+        {isCreate
+          ? <Icon name="check" size={56} />
+          : <><motion.strong initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>{fmt(raw.score)}</motion.strong><span>/ {raw.total}</span></>}
+      </div>
+      <h1>{headline}</h1>
+      {!isCreate && <p className="muted">{outcome.pct}% · you need 80%</p>}
+      {step >= 1 && step <= 6 && (
+        <ol className="px-track" aria-label={`${lit} of 6 steps done`}>
+          {STEP_NAMES.map((n, k) => (
+            <motion.li key={n} className={k < lit ? "is-on" : ""}
+              initial={false}
+              animate={k === step - 1 && outcome.passed ? { scale: [1, 1.25, 1] } : {}}
+              transition={{ delay: 0.5, duration: 0.5 }}>
+              <span>{k < lit ? <Icon name="check" size={14} /> : k + 1}</span>
+              <small>{n}</small>
+            </motion.li>
+          ))}
+        </ol>
+      )}
       {isCreate && <p className="muted">Your teacher can read or listen to it and leave feedback.</p>}
       <div className="px-loot">
         <Counter label="XP" value={outcome.xp} cls="is-xp" />
@@ -149,7 +178,7 @@ function Result({ outcome, raw, isCreate, onAgain, onClose }: { outcome: StepOut
         <div className="px-badges">
           {outcome.badges.map((b, i) => (
             <motion.div key={b} className="px-badge" initial={{ rotateY: 90, opacity: 0 }} animate={{ rotateY: 0, opacity: 1 }} transition={{ delay: 0.5 + i * 0.2 }}>
-              <span aria-hidden="true">★</span><strong>{badgeInfo(b).name}</strong><small>{badgeInfo(b).blurb}</small>
+              <span aria-hidden="true"><Icon name="trophy" size={28} /></span><strong>{badgeInfo(b).name}</strong><small>{badgeInfo(b).blurb}</small>
             </motion.div>
           ))}
         </div>
@@ -168,7 +197,7 @@ function Counter({ label, value, cls }: { label: string; value: number; cls: str
   useEffect(() => { const c = animate(mv, value, { duration: 1, ease: "easeOut", delay: 0.3 }); return c.stop; }, [mv, value]);
   return (
     <div className={`px-counter ${cls}`}>
-      <span className="px-counter-icon" aria-hidden="true">{cls === "is-coin" ? "◎" : "⚡"}</span>
+      <span className="px-counter-icon" aria-hidden="true"><Icon name={cls === "is-coin" ? "coin" : "bolt"} size={22} fill={cls !== "is-coin"} /></span>
       <motion.strong>{shown}</motion.strong>
       <span>{label}</span>
     </div>
