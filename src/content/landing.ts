@@ -4,17 +4,27 @@ export const STEPS = [
     text: "A short placement test checks reading, writing, listening and speaking separately, so each skill starts where it really is.",
   },
   {
-    title: "Choose what you're curious about",
+    title: "Pick your Universes",
     text: "Games, space, film, philosophy, careers. Your English practice happens inside topics you actually want to explore.",
   },
   {
-    title: "Earn stars on skill nodes",
-    text: "Each band is a tree of small skills. A star means you used the language on your own, and again days later.",
+    title: "Climb six steps per skill",
+    text: "Notice, understand, use, fix, judge, create. Every step mixes reading, writing, listening and speaking, and needs 80% to pass.",
   },
   {
-    title: "Beat the Gate",
-    text: "When most stars in a band are lit, a Gate Challenge opens. Pass it and the next band unlocks.",
+    title: "Prove it, then beat the Gate",
+    text: "Skills come back the next day and a week later. Bosses mix everything. Pass the Gate and the next band opens.",
   },
+];
+
+/** The six Bloom steps every skill goes through, shown as growing bars on the landing page. */
+export const BLOOM = [
+  { name: "Notice", verb: "Remember", text: "Hear it in a real voice, spot the pattern." },
+  { name: "Understand", verb: "Understand", text: "Show you know what it means, and why." },
+  { name: "Use", verb: "Apply", text: "Gaps, rewrites and dictation." },
+  { name: "Fix it", verb: "Analyse", text: "Find the mistakes Spanish speakers really make." },
+  { name: "Judge", verb: "Evaluate", text: "Pick the best version for the situation, then say it." },
+  { name: "Create", verb: "Create", text: "Write or record something of your own." },
 ];
 
 export const UNIVERSES = [
@@ -36,10 +46,10 @@ export const CORE = [
 ];
 
 export const SKILLS = [
-  { name: "Reading Room", colour: "var(--tint-a1)", text: "Stories, articles, essays and classics, with tasks on main ideas, inference, tone and argument." },
-  { name: "Writing Studio", colour: "var(--tint-a2)", text: "Plan, draft and revise messages, reviews, stories and essays. Compare your drafts side by side." },
-  { name: "Listening Studio", colour: "var(--tint-b1)", text: "Conversations, interviews and talks in many English accents, from Lagos to Glasgow to Mumbai." },
-  { name: "Speaking Studio", colour: "var(--tint-b2)", text: "Record yourself, listen back, try again. Role-plays, opinions, stories and presentations." },
+  { name: "Reading Room", icon: "book", colour: "var(--band-a1)", text: "Stories, articles, essays and classics, with tasks on main ideas, inference, tone and argument." },
+  { name: "Writing Studio", icon: "sparkle", colour: "var(--band-a2)", text: "Plan, draft and revise messages, reviews, stories and essays. Compare your drafts side by side." },
+  { name: "Listening Studio", icon: "headphones", colour: "var(--band-b1)", text: "Conversations, interviews and talks in many English accents, from Lagos to Glasgow to Mumbai." },
+  { name: "Speaking Studio", icon: "mic", colour: "var(--band-b2)", text: "Record yourself, listen back, try again. Role-plays, opinions, stories and presentations." },
 ];
 
 export const EXAMS = [
@@ -67,7 +77,7 @@ export const FAQ = [
   },
   {
     q: "Do points make my level go up?",
-    a: "No. Points and coins reward effort and unlock fun extras. Your band only changes when you pass a Gate Challenge, because that's real proof of your English.",
+    a: "No. XP and coins reward effort and unlock fun extras. Your band only changes when your skills are Mastered and you pass the Gate, because that's real proof of your English.",
   },
   {
     q: "Who checks my writing and speaking?",

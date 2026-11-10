@@ -4,7 +4,7 @@
   border-radius: var(--r-lg);
   padding: var(--s-6);
   box-shadow: 8px 8px 0 var(--sky);
-  min-height: 420px;
+  min-height: 0;
 }
 .ltv-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-4); margin-bottom: var(--s-5); }
 .ltv-title { font-size: var(--step-2); }

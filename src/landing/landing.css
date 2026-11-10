@@ -281,3 +281,118 @@ main { overflow-x: clip; }
 .nav-login { color: var(--white); font-weight: 700; text-decoration: none; font-size: var(--step--1); white-space: nowrap; }
 .nav-login:hover { color: var(--sky); }
 @media (max-width: 900px) { .nav-login { margin-left: auto; } .nav-cta { margin-left: 0; } }
+
+/* =========================================================================
+   "Navy arcade" pass (Nov 2026).
+   References (Taste Engine): DataCamp (deep navy + vivid colour blocks),
+   Bandai Namco (run of arcade colour bars), PlayVS (hard offset shadows).
+   - Alternate deep navy and paper sections so the page has rhythm.
+   - Solid band colours as blocks, never pastel washes.
+   - Tactile: hard 6px ink shadow on blocks that sit on paper.
+   ========================================================================= */
+:root { --deep: #0d2440; --hard: 6px 6px 0 var(--ink); }
+
+.section-deep { background: var(--deep); color: var(--white); position: relative; overflow: hidden; }
+.section-deep .section-title { color: var(--white); }
+.section-deep .section-lede, .section-deep p { color: #c9d9ea; }
+.section-deep .section-note { color: #9fb7d0; }
+/* The logo's bars, used as a signature edge on dark sections */
+.section-deep::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px;
+  background: linear-gradient(90deg, var(--band-a1) 0 16.6%, var(--band-a2) 0 33.3%, var(--band-b1) 0 50%, var(--band-b2) 0 66.6%, var(--band-c1) 0 83.3%, var(--white) 0);
+}
+.section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-6); align-items: end; margin-bottom: var(--s-7); }
+.section-head .section-title { margin: 0; font-size: clamp(2.2rem, 5vw, 3.6rem); letter-spacing: -0.03em; line-height: 1; }
+.section-head .section-lede { margin: 0; }
+@media (max-width: 860px) { .section-head { grid-template-columns: 1fr; gap: var(--s-4); } }
+
+/* How it works: four solid tiles */
+#how .steps { gap: var(--s-4); margin-top: var(--s-6); }
+#how .steps-rail { display: none; }
+#how .step {
+  padding: var(--s-6) var(--s-5) var(--s-5); border-radius: 20px; border: 3px solid var(--ink); box-shadow: var(--hard);
+  background: var(--fill, var(--white)); color: var(--ink); transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#how .step:nth-child(2) { --fill: var(--band-a1); }
+#how .step:nth-child(3) { --fill: var(--band-a2); }
+#how .step:nth-child(4) { --fill: var(--band-b1); }
+#how .step:nth-child(5) { --fill: var(--band-b2); }
+#how .step:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+#how .step p { color: var(--ink); }
+#how .step h3 { font-size: var(--step-1); }
+#how .step-num {
+  width: 56px; height: 56px; font: 800 1.6rem / 1 var(--font-display); background: var(--ink); color: var(--white); border: 0;
+}
+#how .step.is-lit .step-num { transform: none; }
+#how .section-title { font-size: clamp(2.2rem, 5vw, 3.6rem); letter-spacing: -0.03em; }
+@media (max-width: 860px) { #how .step { grid-template-columns: 56px minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { #how .step:hover { transform: none; } }
+
+/* Bloom ladder */
+.bloom { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: var(--s-7); align-items: start; }
+@media (max-width: 960px) { .bloom { grid-template-columns: 1fr; } }
+.bloom-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.bloom-bar {
+  width: var(--w); min-width: min(100%, 300px); transform-origin: left center;
+  display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4) var(--s-3) var(--s-3);
+  border-radius: 999px 18px 18px 999px; background: var(--fill); color: var(--ink);
+}
+.bloom-num { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--deep); color: var(--white); font: 800 var(--step-0) / 1 var(--font-display); }
+.bloom-text { flex: 1; min-width: 0; display: grid; }
+.bloom-text strong { font: 800 var(--step-1) / 1.15 var(--font-display); }
+.bloom-text span { font-size: var(--step--1); opacity: 0.85; }
+.bloom-verb { flex: none; font: 700 0.75rem / 1 var(--font-display); text-transform: uppercase; letter-spacing: 0.08em; padding: 0.35rem 0.6rem; border-radius: 999px; background: rgba(13, 36, 64, 0.12); }
+@media (max-width: 560px) { .bloom-bar { width: 100%; } .bloom-verb { display: none; } }
+.bloom-checks { display: grid; gap: var(--s-4); padding: var(--s-6); border-radius: 24px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); }
+.bloom-checks p { margin: 0; }
+.bloom-checks strong { color: var(--white); }
+.bloom-checks ol { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-3); position: relative; }
+.bloom-checks ol::before { content: ""; position: absolute; left: 11px; top: 12px; bottom: 12px; width: 2px; background: rgba(255, 255, 255, 0.2); }
+.bloom-checks li { position: relative; display: flex; align-items: center; gap: var(--s-3); font: 700 var(--step-0) / 1.2 var(--font-display); color: var(--white); }
+.bloom-checks li span { width: 24px; height: 24px; border-radius: 50%; border: 3px solid var(--band-c1); background: var(--deep); }
+.bloom-checks li span.is-secure { background: var(--band-c1); }
+.bloom-checks li span.is-mastered { background: #3fbf5f; border-color: #3fbf5f; }
+.bloom-legend { font-size: var(--step--1); }
+.bloom-legend span { font-weight: 700; color: var(--white); }
+.rule-dark { margin-top: var(--s-7); background: rgba(255, 255, 255, 0.06); color: #c9d9ea; }
+.rule-dark strong { color: var(--white); }
+
+/* Bands */
+#bands .section-title { font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: -0.03em; line-height: 1.02; }
+
+/* Game layer: vivid stat tiles */
+.game-tiles { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-3); }
+.game-tiles li { display: grid; gap: var(--s-1); align-content: start; padding: var(--s-4); border-radius: 18px; background: var(--fill); color: var(--ink); }
+.game-tiles strong { font: 800 var(--step-0) / 1.2 var(--font-display); }
+.game-tiles span:last-child { font-size: var(--step--1); line-height: 1.4; }
+.game-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--deep); color: var(--fill); margin-bottom: var(--s-2); }
+.section-ink .game-tiles li span:last-child { color: var(--ink); }
+@media (max-width: 420px) { .game-tiles { grid-template-columns: 1fr; } }
+
+/* Skills: solid blocks, icon, hard shadow */
+.skill { border: 3px solid var(--ink); box-shadow: var(--hard); border-radius: 20px; display: grid; gap: var(--s-2); align-content: start; }
+.skill h3 { font-size: var(--step-1); }
+.skill p { color: var(--ink); }
+.skill-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; background: var(--ink); color: var(--white); }
+
+/* Exams on deep navy */
+#exams .exam { padding: var(--s-5); border-radius: 20px; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.14); }
+#exams .exam dt { color: var(--white); font: 800 var(--step-2) / 1.1 var(--font-display); letter-spacing: -0.02em; }
+#exams .exam dd { color: #c9d9ea; margin: var(--s-2) 0 0; }
+#exams .exams .exam { border-top: 1px solid rgba(255, 255, 255, 0.14); }
+
+/* Teachers: numbered list instead of bordered pills */
+.teacher-list { counter-reset: none; display: grid; gap: 0; }
+.teacher-list li {
+  display: grid; grid-template-columns: 64px minmax(0, 1fr); align-items: baseline; gap: var(--s-3);
+  padding: var(--s-4) 0; border: 0; border-bottom: 2px solid var(--line); border-radius: 0; background: none; box-shadow: none;
+  font: 600 var(--step-1) / 1.35 var(--font-display);
+}
+.teacher-list li span { font: 800 var(--step-2) / 1 var(--font-display); color: var(--cerulean-ink); }
+/* Fixes after first look */
+.section-deep::before { background: linear-gradient(90deg, var(--band-a1) 0 20%, var(--band-a2) 0 40%, var(--band-b1) 0 60%, var(--band-b2) 0 80%, var(--band-c1) 0); }
+.game-tiles li strong { color: var(--ink); }
+.section .section-title { font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: -0.03em; line-height: 1.02; }
+.final { background: var(--deep); }
+.section-ink { background: var(--deep); }
+#how .step p { opacity: 1; }

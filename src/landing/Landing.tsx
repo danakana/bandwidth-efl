@@ -7,6 +7,8 @@ import { SignalField } from "./SignalField";
 import { Ticker } from "./Ticker";
 import { StepsTrack } from "./StepsTrack";
 import { Orbit } from "./Orbit";
+import { BloomLadder } from "./BloomLadder";
+import { Icon, type IconName } from "../components/Icon";
 import { CORE, EXAMS, FAQ, SKILLS, TEACHER } from "../content/landing";
 import "./landing.css";
 
@@ -16,6 +18,13 @@ const NAV = [
   { href: "#topics", label: "Topics" },
   { href: "#exams", label: "Exams" },
   { href: "#faq", label: "FAQ" },
+];
+
+const GAME: { icon: IconName; title: string; text: string; fill: string }[] = [
+  { icon: "swords", title: "Boss checkpoints", text: "Every few skills, a mixed challenge with a story.", fill: "var(--band-b2)" },
+  { icon: "flame", title: "No-guilt streaks", text: "Freezes save your streak on busy days.", fill: "var(--band-b1)" },
+  { icon: "coin", title: "Coins and XP", text: "For the Arcade and profile styles. Never for your level.", fill: "var(--band-a2)" },
+  { icon: "trophy", title: "Badges", text: "For milestones that took real work.", fill: "var(--band-a1)" },
 ];
 
 const HEADLINE = ["Your", "English", "has", "places", "to", "go."];
@@ -100,9 +109,23 @@ export function Landing() {
           <div className="page">
             <h2 className="section-title">How it works</h2>
             <StepsTrack />
-            <p className="rule">
-              <strong>Points reward effort. Only real proof of skill unlocks a new band.</strong> That's how your level
-              stays honest.
+          </div>
+        </section>
+
+        {/* The method: six Bloom steps */}
+        <section id="method" className="section section-deep">
+          <div className="page">
+            <div className="section-head">
+              <h2 className="section-title">Six steps to really know it</h2>
+              <p className="section-lede">
+                Every grammar point, word set and sound goes from noticing to creating, following Bloom's taxonomy.
+                No skipping ahead, and no "mastered" after one lucky quiz.
+              </p>
+            </div>
+            <BloomLadder />
+            <p className="rule rule-dark">
+              <strong>XP and coins reward effort. Only real proof of skill unlocks a new band.</strong> That's how your
+              level stays honest.
             </p>
           </div>
         </section>
@@ -160,11 +183,14 @@ export function Landing() {
                 Every word you save becomes a card. It only upgrades when you use it correctly, on different days, without
                 help. A gold collection means you really know those words.
               </p>
-              <ul className="game-list">
-                <li><strong>A map of your bands</strong> with the next ones visible ahead.</li>
-                <li><strong>Gate Challenges</strong> that mix skills, themed to your interests.</li>
-                <li><strong>Coins</strong> for the Arcade, mystery rooms and profile styles.</li>
-                <li><strong>Five-minute daily challenges</strong>, with rest days built in. No guilt.</li>
+              <ul className="game-tiles">
+                {GAME.map((g) => (
+                  <li key={g.title} style={{ ["--fill" as string]: g.fill }}>
+                    <span className="game-icon"><Icon name={g.icon} size={26} fill={g.icon === "flame" || g.icon === "bolt"} /></span>
+                    <strong>{g.title}</strong>
+                    <span>{g.text}</span>
+                  </li>
+                ))}
               </ul>
             </div>
             <WordCard />
@@ -182,11 +208,12 @@ export function Landing() {
                   className="skill"
                   style={{ background: s.colour }}
                   whileHover={{ y: -4 }}
-                  initial={{ opacity: 0.5, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ y: 16 }}
+                  whileInView={{ y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ delay: i * 0.06 }}
                 >
+                  <span className="skill-icon" aria-hidden="true"><Icon name={s.icon as IconName} size={28} /></span>
                   <h3>{s.name}</h3>
                   <p>{s.text}</p>
                 </motion.article>
@@ -200,7 +227,7 @@ export function Landing() {
         </section>
 
         {/* Exams */}
-        <section id="exams" className="section section-tint">
+        <section id="exams" className="section section-deep">
           <div className="page">
             <h2 className="section-title">Ready for the exam you need</h2>
             <p className="section-lede">Practise the real task types, learn the strategies and see which skills need work.</p>
@@ -226,9 +253,9 @@ export function Landing() {
                 needs next, not how long they stared at a screen.
               </p>
             </div>
-            <ul className="teacher-list">
-              {TEACHER.map((t) => <li key={t}>{t}</li>)}
-            </ul>
+            <ol className="teacher-list">
+              {TEACHER.map((t, i) => <li key={t}><span aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>{t}</li>)}
+            </ol>
           </div>
         </section>
 
