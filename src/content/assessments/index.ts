@@ -3,9 +3,10 @@ import { NODES } from "../curriculum";
 import type { NodeProgress } from "../../lib/progressApi";
 import { B2_GATE, B2_MIDPOINT } from "./b2";
 import { B2P_GATE, B2P_MIDPOINT } from "./b2p";
+import { C1_GATE, C1_MIDPOINT } from "./c1";
 import { READY_SHARE, type BandAssessment } from "./types";
 
-const ALL: BandAssessment[] = [B2_MIDPOINT, B2_GATE, B2P_MIDPOINT, B2P_GATE];
+const ALL: BandAssessment[] = [B2_MIDPOINT, B2_GATE, B2P_MIDPOINT, B2P_GATE, C1_MIDPOINT, C1_GATE];
 
 export const assessmentFor = (band: BandId, kind: "midpoint" | "gate") => ALL.find((a) => a.band === band && a.kind === kind);
 

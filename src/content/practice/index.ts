@@ -7,6 +7,10 @@ import { B2P_WORDS } from "./b2p-words";
 import { B2P_COMMUNICATE } from "./b2p-communicate";
 import { B2P_ERRORS, B2P_SOUNDS } from "./b2p-sounds-errors";
 import { B2P_EXTRA_ERRORS, B2P_EXTRA_GRAMMAR, B2P_EXTRA_SOUNDS, B2P_EXTRA_WORDS } from "./b2p-extra";
+import { C1_GRAMMAR } from "./c1-grammar";
+import { C1_WORDS } from "./c1-words";
+import { C1_COMMUNICATE } from "./c1-communicate";
+import { C1_ERRORS, C1_SOUNDS } from "./c1-sounds-errors";
 import type { Item, NodePractice } from "./types";
 import { shuffle } from "../../lib/answers";
 import type { BandId } from "../bands";
@@ -16,6 +20,7 @@ const ALL: NodePractice[] = [
   ...B2_GRAMMAR, ...B2_WORDS, ...B2_COMMUNICATE, ...B2_SOUNDS, ...B2_ERRORS,
   ...B2P_GRAMMAR, ...B2P_WORDS, ...B2P_COMMUNICATE, ...B2P_SOUNDS, ...B2P_ERRORS,
   ...B2P_EXTRA_GRAMMAR, ...B2P_EXTRA_WORDS, ...B2P_EXTRA_SOUNDS, ...B2P_EXTRA_ERRORS,
+  ...C1_GRAMMAR, ...C1_WORDS, ...C1_COMMUNICATE, ...C1_SOUNDS, ...C1_ERRORS,
 ];
 export const PRACTICE: Record<string, NodePractice> = Object.fromEntries(ALL.map((p) => [p.nodeId, p]));
 export const practiceFor = (nodeId: string): NodePractice | undefined => PRACTICE[nodeId];
@@ -78,6 +83,33 @@ export const CHECKPOINTS: Checkpoint[] = [
   { id: "b2p-errors-1", band: "B2+", tree: "errors", title: "Boss: The Editor", afterIndex: 2,
     story: "Your university application is due. Catch every phrase and preposition that came straight from Spanish.",
     nodeIds: ["b2p.fixed-phrases-translated-literally", "b2p.make-emphasis-give-importance", "b2p.dependent-prepositions"] },
+  { id: "c1-grammar-1", band: "C1", tree: "grammar", title: "Boss 1: The Opening Speech", afterIndex: 2,
+    story: "You're opening the international youth summit. Little do they know how good your speech will be: dramatic, precise and perfectly measured.",
+    nodeIds: ["c1.full-inversion", "c1.complex-noun-phrases-and-nominalisation", "c1.modal-nuance"] },
+  { id: "c1-grammar-2", band: "C1", tree: "grammar", title: "Boss 2: The Science Desk", afterIndex: 4,
+    story: "A new study has just dropped. Report it carefully, claim nothing you can't prove, and pack every sentence tight.",
+    nodeIds: ["c1.distancing-and-hedging-structures", "c1.participle-verbless-and-absolute-clauses"] },
+  { id: "c1-grammar-3", band: "C1", tree: "grammar", title: "Boss 3: The Closing Argument", afterIndex: 6,
+    story: "Final day in the mock trial. Had you not prepared, you'd lose. Make every point land with force.",
+    nodeIds: ["c1.advanced-conditionals-and-alternatives", "c1.emphasis-with-auxiliaries-and-fronting"] },
+  { id: "c1-words-1", band: "C1", tree: "words", title: "Boss 1: The Journal Review", afterIndex: 2,
+    story: "You're reviewing articles for a student journal. Choose the exact word, the right term and the collocation an expert would use.",
+    nodeIds: ["c1.shades-of-meaning", "c1.discipline-vocabulary-for-universes", "c1.strong-and-idiomatic-collocations"] },
+  { id: "c1-words-2", band: "C1", tree: "words", title: "Boss 2: The Op-Ed", afterIndex: 5,
+    story: "The newspaper gave you a column. Be that as it may, it's due tonight. Make it formal, sharp and precise.",
+    nodeIds: ["c1.phrasal-nouns-and-formal-equivalents", "c1.sophisticated-idioms-and-linkers", "c1.word-formation-for-precision"] },
+  { id: "c1-communicate-1", band: "C1", tree: "communicate", title: "Boss 1: The Model UN", afterIndex: 1,
+    story: "Two delegations, one resolution. Build the case from the sources, then find a deal both sides can sign.",
+    nodeIds: ["c1.build-an-extended-argument-synthesise-so", "c1.mediate-and-negotiate"] },
+  { id: "c1-communicate-2", band: "C1", tree: "communicate", title: "Boss 2: The Embassy Party", afterIndex: 4,
+    story: "Tweets, toasts and tense small talk. Change your style for every room, save everyone's face and hear what nobody says out loud.",
+    nodeIds: ["c1.style-shifting-across-genres", "c1.face-saving-and-politeness-strategies", "c1.implicature-what-is-meant-not-said"] },
+  { id: "c1-sounds-1", band: "C1", tree: "sounds", title: "Boss: The World Tour", afterIndex: 1,
+    story: "Sydney, Lagos, Dublin, Glasgow. Catch every accent, and stress the word that changes the meaning.",
+    nodeIds: ["c1.understanding-varieties-of-english", "c1.contrastive-stress-and-nuance"] },
+  { id: "c1-errors-1", band: "C1", tree: "errors", title: "Boss: The Final Draft", afterIndex: 3,
+    story: "Your scholarship essay is almost perfect. Cut the 'moreover's, fix the articles, split the long sentences and catch the false friends.",
+    nodeIds: ["c1.mechanical-linking", "c1.articles-with-abstract-nouns", "c1.long-run-on-sentences-from-spanish-style", "c1.cognates-that-mislead-at-c1"] },
 ];
 
 /** Mixed review items (Understand, Use, Fix it, Judge) from some skills. */
