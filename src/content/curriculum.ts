@@ -1378,6 +1378,22 @@ export const NODES: CurriculumNode[] = [
   "example": "It's essential that every student be informed."
  },
  {
+  "id": "b2p.future-in-the-past",
+  "band": "B2+",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "Future in the past",
+  "example": "I was going to call you, but… · She was about to leave when… · They would win the next year."
+ },
+ {
+  "id": "b2p.contrast-and-concession-linkers",
+  "band": "B2+",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "Contrast and concession linkers",
+  "example": "whereas, while, nonetheless, albeit, even though, much as I like…"
+ },
+ {
   "id": "b2p.academic-vocabulary",
   "band": "B2+",
   "tree": "words",
@@ -1416,6 +1432,14 @@ export const NODES: CurriculumNode[] = [
   "area": "Idioms & expressions",
   "title": "Idioms for analysis",
   "example": "read between the lines, a double-edged sword, the elephant in the room, move the goalposts"
+ },
+ {
+  "id": "b2p.compound-adjectives-and-prefixes",
+  "band": "B2+",
+  "tree": "words",
+  "area": "Word formation",
+  "title": "Compound adjectives and prefixes",
+  "example": "well-known, long-term, time-consuming; over-/under-/mis-/re-"
  },
  {
   "id": "b2p.critique-and-persuade",
@@ -1474,6 +1498,14 @@ export const NODES: CurriculumNode[] = [
   "example": "Group words into thought units; pause before key points"
  },
  {
+  "id": "b2p.word-stress-in-word-families",
+  "band": "B2+",
+  "tree": "sounds",
+  "area": "Pronunciation",
+  "title": "Word stress in word families",
+  "example": "PHOtograph · phoTOGraphy · photoGRAPHic; ECOnomy · ecoNOMic"
+ },
+ {
   "id": "b2p.fixed-phrases-translated-literally",
   "band": "B2+",
   "tree": "errors",
@@ -1488,6 +1520,14 @@ export const NODES: CurriculumNode[] = [
   "area": "Common errors (Spanish speakers)",
   "title": "Make emphasis / give importance",
   "example": "*make emphasis → place emphasis on; *give importance → attach importance to"
+ },
+ {
+  "id": "b2p.dependent-prepositions",
+  "band": "B2+",
+  "tree": "errors",
+  "area": "Common errors (Spanish speakers)",
+  "title": "Dependent prepositions",
+  "example": "*interested on → interested in; *depend of → depend on; *married with → married to"
  },
  {
   "id": "c1.full-inversion",
@@ -1530,6 +1570,22 @@ export const NODES: CurriculumNode[] = [
   "example": "Once inside, ... The work done, they left."
  },
  {
+  "id": "c1.advanced-conditionals-and-alternatives",
+  "band": "C1",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "Advanced conditionals and alternatives",
+  "example": "Had I known… · Were it not for… · Supposing… · Otherwise, … · But for…"
+ },
+ {
+  "id": "c1.emphasis-with-auxiliaries-and-fronting",
+  "band": "C1",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "Emphasis with auxiliaries and fronting",
+  "example": "I DID tell you. · Strange as it may seem, … · Much as I admire her, …"
+ },
+ {
   "id": "c1.shades-of-meaning",
   "band": "C1",
   "tree": "words",
@@ -1568,6 +1624,14 @@ export const NODES: CurriculumNode[] = [
   "area": "Idioms & expressions",
   "title": "Sophisticated idioms and linkers",
   "example": "by the same token, a far cry from, to all intents and purposes, hold your own"
+ },
+ {
+  "id": "c1.word-formation-for-precision",
+  "band": "C1",
+  "tree": "words",
+  "area": "Word formation",
+  "title": "Word formation for precision",
+  "example": "counter-argument, misinterpret, prioritise, sustainability, -ise/-ity/-ness"
  },
  {
   "id": "c1.build-an-extended-argument-synthesise-so",
@@ -1619,6 +1683,14 @@ export const NODES: CurriculumNode[] = [
   "note": "Goal is understanding, not imitation."
  },
  {
+  "id": "c1.contrastive-stress-and-nuance",
+  "band": "C1",
+  "tree": "sounds",
+  "area": "Pronunciation",
+  "title": "Contrastive stress and nuance",
+  "example": "I didn't say SHE stole it. · It's not BAD, exactly…"
+ },
+ {
   "id": "c1.mechanical-linking",
   "band": "C1",
   "tree": "errors",
@@ -1643,6 +1715,14 @@ export const NODES: CurriculumNode[] = [
   "example": "Split ideas; one main point per sentence"
  },
  {
+  "id": "c1.cognates-that-mislead-at-c1",
+  "band": "C1",
+  "tree": "errors",
+  "area": "Common errors (Spanish speakers)",
+  "title": "Cognates that mislead at C1",
+  "example": "*realise a project → carry out; *assist a class → attend; *eventual → possible"
+ },
+ {
   "id": "c2.rare-structures-for-style",
   "band": "C2",
   "tree": "grammar",
@@ -1657,6 +1737,38 @@ export const NODES: CurriculumNode[] = [
   "area": "Grammar",
   "title": "Fronting and deliberate rule-breaking for effect",
   "example": "Strange it may seem, but... Fragments. For rhythm."
+ },
+ {
+  "id": "c2.aspect-for-nuance",
+  "band": "C2",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "Aspect for nuance",
+  "example": "I've been meaning to… · I was hoping you might… · She'll have been working all night."
+ },
+ {
+  "id": "c2.reporting-with-stance",
+  "band": "C2",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "Reporting with stance",
+  "example": "He claimed / conceded / insisted that… · She is alleged to have…"
+ },
+ {
+  "id": "c2.implied-and-mixed-conditionals-in-style",
+  "band": "C2",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "Implied and mixed conditionals in style",
+  "example": "Given more time, I'd have… · Without her help, we'd still be lost."
+ },
+ {
+  "id": "c2.ellipsis-and-substitution-in-literary-styl",
+  "band": "C2",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "Ellipsis and substitution in literary style",
+  "example": "Tired she may have been, defeated she was not. · Some did, others not."
  },
  {
   "id": "c2.literary-and-archaic-vocabulary-in-conte",
@@ -1699,6 +1811,14 @@ export const NODES: CurriculumNode[] = [
   "example": "Achilles' heel, Pandora's box, a Pyrrhic victory, catch-22"
  },
  {
+  "id": "c2.register-specific-vocabulary",
+  "band": "C2",
+  "tree": "words",
+  "area": "Vocabulary",
+  "title": "Register-specific vocabulary",
+  "example": "legal (liable, waive), medical (chronic, benign), journalistic (embattled, slammed)"
+ },
+ {
   "id": "c2.write-with-voice-critique-sophisticated",
   "band": "C2",
   "tree": "communicate",
@@ -1723,6 +1843,30 @@ export const NODES: CurriculumNode[] = [
   "example": "'Not my finest hour.' British vs American pragmatics"
  },
  {
+  "id": "c2.summarise-complex-texts-concisely",
+  "band": "C2",
+  "tree": "communicate",
+  "area": "Functions",
+  "title": "Summarise complex texts concisely",
+  "example": "Reduce 600 words to 60 without losing the argument"
+ },
+ {
+  "id": "c2.negotiate-and-persuade-professionally",
+  "band": "C2",
+  "tree": "communicate",
+  "area": "Functions",
+  "title": "Negotiate and persuade professionally",
+  "example": "Anchor, concede, trade: If you could…, we'd be prepared to…"
+ },
+ {
+  "id": "c2.tone-control-in-writing",
+  "band": "C2",
+  "tree": "communicate",
+  "area": "Pragmatics: do's & don'ts",
+  "title": "Tone control in writing",
+  "example": "Firm but warm; humour that doesn't misfire; reading the room"
+ },
+ {
   "id": "c2.rhetorical-delivery",
   "band": "C2",
   "tree": "sounds",
@@ -1732,12 +1876,44 @@ export const NODES: CurriculumNode[] = [
   "note": "Intelligibility and effect, not accent."
  },
  {
+  "id": "c2.fast-natural-speech-and-accents",
+  "band": "C2",
+  "tree": "sounds",
+  "area": "Pronunciation",
+  "title": "Fast natural speech and accents",
+  "example": "Following films, podcasts and regional accents at full speed"
+ },
+ {
+  "id": "c2.prosody-for-persuasion",
+  "band": "C2",
+  "tree": "sounds",
+  "area": "Pronunciation",
+  "title": "Prosody for persuasion",
+  "example": "Pace, pitch and pause to move an audience"
+ },
+ {
   "id": "c2.residual-slips",
   "band": "C2",
   "tree": "errors",
   "area": "Common errors (Spanish speakers)",
   "title": "Residual slips",
   "example": "adjective + preposition: interested in, keen on, good at"
+ },
+ {
+  "id": "c2.collocation-fine-tuning",
+  "band": "C2",
+  "tree": "errors",
+  "area": "Common errors (Spanish speakers)",
+  "title": "Collocation fine-tuning",
+  "example": "*make a crime → commit; *strong rain → heavy rain; *big mistake vs grave error"
+ },
+ {
+  "id": "c2.over-long-over-formal-spanish-style-prose",
+  "band": "C2",
+  "tree": "errors",
+  "area": "Common errors (Spanish speakers)",
+  "title": "Over-long, over-formal Spanish-style prose",
+  "example": "Cut nominal chains, passive stacks and 'It is important to mention that…'"
  }
 ];
 
