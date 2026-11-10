@@ -9,6 +9,8 @@ import { Results } from "./placement/Results";
 import { BandMap } from "./map/BandMap";
 import { BandView } from "./map/BandView";
 import { TreeView } from "./map/TreeView";
+import { ArcadePage } from "./arcade/ArcadePage";
+import { ShopPage } from "./arcade/ShopPage";
 import { useProgress } from "../lib/progress";
 import { BANDS } from "../content/bands";
 import "./placement/placement.css";
@@ -35,7 +37,7 @@ export function StudentHome() {
     setLoading(false);
   }, []);
   useEffect(() => { void load(); }, [load]);
-  useEffect(() => { window.scrollTo({ top: 0 }); }, [route.band, route.tree]);
+  useEffect(() => { window.scrollTo({ top: 0 }); }, [route.band, route.tree, route.page]);
 
   if (testing) {
     return <Placement onExit={() => setTesting(false)} onFinished={() => { setTesting(false); setLoading(true); void load(); }} />;
@@ -45,6 +47,18 @@ export function StudentHome() {
   const placed = result ? startBandIndex(result.attempt, result.submissions) ?? 0 : null;
   const unlocked = Math.max(-1, ...(progress?.unlocks ?? []).map((b) => BANDS.findIndex((x) => x.id === b)));
   const start = placed === null ? null : Math.max(placed, unlocked);
+
+  // Arcade and shop.
+  if (start !== null && route.page !== "map") {
+    return (
+      <div className="shell">
+        <AppHeader />
+        <main id="main" className="page shell-main">
+          {route.page === "arcade" ? <ArcadePage /> : <ShopPage />}
+        </main>
+      </div>
+    );
+  }
 
   // Band and tree pages, once the student has a starting band.
   if (start !== null && route.band) {

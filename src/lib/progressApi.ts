@@ -9,7 +9,8 @@ export type NodeProgress = {
   check_stage: number;
   next_check_at: string | null;
 };
-export type Stats = { xp: number; coins: number; streak: number; best_streak: number; freezes: number; last_day: string | null };
+export type Stats = { xp: number; coins: number; streak: number; best_streak: number; freezes: number; last_day: string | null; color: string; title: string };
+export type ArcadeRun = { game: string; score: number; total: number; coins: number; created_at: string };
 export type StepOutcome = { passed: boolean; pct: number; xp: number; coins: number; steps_passed?: number; state?: string; next_check_at?: string | null; badges: string[] };
 
 export type AssessmentRow = {
@@ -18,24 +19,28 @@ export type AssessmentRow = {
   status: "failed" | "passed" | "awaiting_teacher" | "confirmed" | "returned"; teacher_note: string | null; created_at: string;
 };
 
-export async function loadProgress(): Promise<{ nodes: Record<string, NodeProgress>; stats: Stats; badges: string[]; milestones: Set<string>; assessments: AssessmentRow[]; unlocks: string[] }> {
-  const [n, s, b, m, a, u] = await Promise.all([
+export async function loadProgress(): Promise<{ nodes: Record<string, NodeProgress>; stats: Stats; badges: string[]; milestones: Set<string>; assessments: AssessmentRow[]; unlocks: string[]; purchases: string[]; arcade: ArcadeRun[] }> {
+  const [n, s, b, m, a, u, pu, ar] = await Promise.all([
     supabase.from("node_progress").select("node_id, steps_passed, best, state, check_stage, next_check_at"),
     supabase.from("student_stats").select("*").maybeSingle(),
     supabase.from("badges").select("badge_id"),
     supabase.from("milestone_results").select("milestone_id").eq("passed", true),
     supabase.from("assessments").select("*").order("created_at", { ascending: false }),
     supabase.from("band_unlocks").select("band"),
+    supabase.from("purchases").select("item_id"),
+    supabase.from("arcade_results").select("game, score, total, coins, created_at").order("created_at", { ascending: false }).limit(200),
   ]);
   const nodes: Record<string, NodeProgress> = {};
   for (const r of (n.data as NodeProgress[]) ?? []) nodes[r.node_id] = r;
   return {
     nodes,
-    stats: (s.data as Stats) ?? { xp: 0, coins: 0, streak: 0, best_streak: 0, freezes: 1, last_day: null },
+    stats: (s.data as Stats) ?? { xp: 0, coins: 0, streak: 0, best_streak: 0, freezes: 1, last_day: null, color: "sky", title: "learner" },
     badges: ((b.data as { badge_id: string }[]) ?? []).map((x) => x.badge_id),
     milestones: new Set(((m.data as { milestone_id: string }[]) ?? []).map((x) => x.milestone_id)),
     assessments: (a.data as AssessmentRow[]) ?? [],
     unlocks: ((u.data as { band: string }[]) ?? []).map((x) => x.band),
+    purchases: ((pu.data as { item_id: string }[]) ?? []).map((x) => x.item_id),
+    arcade: (ar.data as ArcadeRun[]) ?? [],
   };
 }
 
@@ -110,3 +115,21 @@ export const badgeInfo = (id: string) =>
     : id.startsWith("mid:") ? { name: `${id.slice(4)} halfway`, blurb: "Passed the four-skill Midpoint." }
     : id.startsWith("gate:") ? { name: `${id.slice(5)} complete`, blurb: "Passed the Gate. The next band is open." }
     : { name: id, blurb: "" });
+
+export async function buy(item: string): Promise<{ coins: number; freezes: number }> {
+  const { data, error } = await supabase.rpc("buy", { p_item: item });
+  if (error) throw error;
+  return data as { coins: number; freezes: number };
+}
+
+export async function equip(item: string) {
+  const { error } = await supabase.rpc("equip", { p_item: item });
+  if (error) throw error;
+}
+
+export type ArcadeOutcome = { xp: number; coins: number; best: number; new_best: boolean; capped: boolean; badges: string[] };
+export async function recordArcade(game: string, score: number, total: number): Promise<ArcadeOutcome> {
+  const { data, error } = await supabase.rpc("record_arcade", { p_game: game, p_score: score, p_total: total });
+  if (error) throw error;
+  return data as ArcadeOutcome;
+}

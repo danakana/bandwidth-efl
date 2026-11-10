@@ -134,3 +134,17 @@
 .class-card > .link-btn { justify-self: start; }
 .home-hero > .pill { justify-self: start; }
 .app-signout { white-space: nowrap; }
+
+/* Student nav and identity */
+.app-user-name { display: grid; line-height: 1.1; }
+.app-user-name small { font-weight: 600; font-size: 0.75rem; color: #c4d6ea; }
+.wallet a.w-coin { color: inherit; text-decoration: none; }
+.wallet a.w-coin:hover { background: rgba(255, 255, 255, 0.2); }
+.app-nav { border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.app-nav-inner { display: flex; gap: var(--s-1); padding-block: 6px; overflow-x: auto; }
+.app-nav a {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 var(--s-4); border-radius: var(--r-pill);
+  color: #dbe7f5; font-weight: 700; text-decoration: none;
+}
+.app-nav a:hover { background: rgba(255, 255, 255, 0.1); color: var(--white); }
+.app-nav a[aria-current="page"] { background: var(--white); color: var(--ink); }

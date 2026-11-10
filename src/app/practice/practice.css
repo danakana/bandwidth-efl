@@ -135,7 +135,7 @@
 
 /* ---------- Wallet in the header ---------- */
 .wallet { display: flex; gap: var(--s-2); }
-.wallet span { display: inline-flex; align-items: center; gap: 4px; padding: 0.3rem 0.65rem; border-radius: var(--r-pill); background: rgba(255, 255, 255, 0.1); font: 800 var(--step--1) / 1 var(--font-display); }
+.wallet span, .wallet a { display: inline-flex; align-items: center; gap: 4px; padding: 0.3rem 0.65rem; border-radius: var(--r-pill); background: rgba(255, 255, 255, 0.1); font: 800 var(--step--1) / 1 var(--font-display); }
 .wallet .w-streak b { color: var(--band-b1); }
 .wallet .w-coin b { color: var(--band-a2); }
 .wallet .w-xp b { color: var(--band-c1); }
@@ -254,7 +254,7 @@
 .px-badge span { color: var(--band-a2); }
 
 /* Wallet icons */
-.wallet span b { display: inline-grid; }
+.wallet span b, .wallet a b { display: inline-grid; }
 .wallet .w-streak b { color: #ff914d; }
 .wallet .w-coin b { color: #ffd95c; }
 .wallet .w-xp b { color: #49b8f2; }

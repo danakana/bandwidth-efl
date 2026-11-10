@@ -3,7 +3,7 @@ import { BANDS, type BandId } from "../content/bands";
 import type { TreeId } from "../content/curriculum";
 
 /** Inside the app the hash looks like #app, #app/band/b1-plus or #app/band/b1-plus/grammar. */
-export type AppRoute = { band: BandId | null; tree: TreeId | null };
+export type AppRoute = { band: BandId | null; tree: TreeId | null; page: "map" | "arcade" | "shop" };
 
 export const bandSlug = (id: BandId) => id.toLowerCase().replace("+", "-plus");
 const bandFromSlug = (s: string | undefined) => BANDS.find((b) => bandSlug(b.id) === s)?.id ?? null;
@@ -11,10 +11,11 @@ const TREES: TreeId[] = ["grammar", "words", "communicate", "sounds", "errors"];
 
 function read(): AppRoute {
   const parts = window.location.hash.replace(/^#/, "").split("/");
-  if (parts[0] !== "app" || parts[1] !== "band") return { band: null, tree: null };
+  if (parts[0] === "app" && (parts[1] === "arcade" || parts[1] === "shop")) return { band: null, tree: null, page: parts[1] };
+  if (parts[0] !== "app" || parts[1] !== "band") return { band: null, tree: null, page: "map" };
   const band = bandFromSlug(parts[2]);
   const tree = TREES.includes(parts[3] as TreeId) ? (parts[3] as TreeId) : null;
-  return { band, tree: band ? tree : null };
+  return { band, tree: band ? tree : null, page: "map" };
 }
 
 export function useAppRoute(): AppRoute {
