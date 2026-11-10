@@ -130,6 +130,8 @@ export function AssessmentPlayer({ test, preview, onClose }: { test: BandAssessm
 
 /** The band a Gate opens. */
 const nextBand = (band: string) => BANDS[BANDS.findIndex((b) => b.id === band) + 1]?.id ?? "the next band";
+/** C2 is the top band: its Gate completes the course instead of opening a band. */
+const isTop = (band: string) => BANDS[BANDS.length - 1]?.id === band;
 
 const PART_NAMES: Record<string, string> = { reading: "Reading", listening: "Listening", writing: "Writing", speaking: "Speaking" };
 
@@ -155,7 +157,7 @@ function Intro({ test, preview, onStart }: { test: BandAssessment; preview: bool
       <ul className="as-rules">
         <li>You need <strong>{test.bar}%</strong> in reading and in listening, and every check green in writing and speaking.</li>
         <li>No answers are shown during the test. You'll see how you did at the end.</li>
-        <li>{test.kind === "gate" ? `If you pass, your teacher reads and listens before ${nextBand(test.band)} opens.` : "Your teacher can read and listen to your work too."}</li>
+        <li>{test.kind !== "gate" ? "Your teacher can read and listen to your work too." : isTop(test.band) ? "If you pass, your teacher reads and listens, then confirms you've completed Bandwidth." : `If you pass, your teacher reads and listens before ${nextBand(test.band)} opens.`}</li>
         <li>One try a day. Use headphones, and find a quiet place for speaking.</li>
       </ul>
       {preview && <p className="preview-banner">Teacher preview: nothing is saved.</p>}
@@ -221,7 +223,7 @@ function Result({ test, outcome, writingOk, speakingOk, preview, onClose }: {
     <div className="px-result as-result">
       <div className={`as-emblem is-${test.kind}${outcome.passed ? " is-pass" : ""}`} aria-hidden="true"><Icon name={outcome.passed ? "trophy" : "arrow"} size={44} /></div>
       <h1>{head}</h1>
-      {outcome.status === "awaiting_teacher" && <p className="pt-lede">Your teacher will now read your writing and listen to your speaking. When they confirm, <strong>{nextBand(test.band)} opens</strong>.</p>}
+      {outcome.status === "awaiting_teacher" && <p className="pt-lede">Your teacher will now read your writing and listen to your speaking. When they confirm, {isTop(test.band) ? <strong>you've completed every band in Bandwidth</strong> : <strong>{nextBand(test.band)} opens</strong>}.</p>}
       {outcome.status === "passed" && <p className="pt-lede">Keep going: the Gate opens when most of the band's skills are Mastered.</p>}
       {outcome.status === "failed" && <p className="pt-lede">Look at which part fell short, practise those skills, and try again tomorrow.</p>}
       <ul className="as-scores">

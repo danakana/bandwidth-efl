@@ -58,7 +58,7 @@ function GateCard({ a, subs, name, onChanged }: { a: AssessmentRow; subs: Submis
         <textarea id={`gn-${a.id}`} value={note} maxLength={1500} onChange={(e) => setNote(e.target.value)} placeholder="What went well, and what to work on" />
         <div className="pt-actions">
           <button type="button" className="btn btn-primary btn-sm" disabled={!canConfirm || state === "saving"} onClick={() => void act(true)}>
-            Confirm and open {next ?? "the next band"}
+            {next ? `Confirm and open ${next}` : "Confirm: course complete"}
           </button>
           <button type="button" className="btn btn-ghost btn-sm" disabled={state === "saving"} onClick={() => void act(false)}>Send it back</button>
           {!canConfirm && <span className="muted px-small">Set both bands at {a.band} or higher to confirm.</span>}

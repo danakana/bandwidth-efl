@@ -11,6 +11,10 @@ import { C1_GRAMMAR } from "./c1-grammar";
 import { C1_WORDS } from "./c1-words";
 import { C1_COMMUNICATE } from "./c1-communicate";
 import { C1_ERRORS, C1_SOUNDS } from "./c1-sounds-errors";
+import { C2_GRAMMAR } from "./c2-grammar";
+import { C2_WORDS } from "./c2-words";
+import { C2_COMMUNICATE } from "./c2-communicate";
+import { C2_ERRORS, C2_SOUNDS } from "./c2-sounds-errors";
 import type { Item, NodePractice } from "./types";
 import { shuffle } from "../../lib/answers";
 import type { BandId } from "../bands";
@@ -21,6 +25,7 @@ const ALL: NodePractice[] = [
   ...B2P_GRAMMAR, ...B2P_WORDS, ...B2P_COMMUNICATE, ...B2P_SOUNDS, ...B2P_ERRORS,
   ...B2P_EXTRA_GRAMMAR, ...B2P_EXTRA_WORDS, ...B2P_EXTRA_SOUNDS, ...B2P_EXTRA_ERRORS,
   ...C1_GRAMMAR, ...C1_WORDS, ...C1_COMMUNICATE, ...C1_SOUNDS, ...C1_ERRORS,
+  ...C2_GRAMMAR, ...C2_WORDS, ...C2_COMMUNICATE, ...C2_SOUNDS, ...C2_ERRORS,
 ];
 export const PRACTICE: Record<string, NodePractice> = Object.fromEntries(ALL.map((p) => [p.nodeId, p]));
 export const practiceFor = (nodeId: string): NodePractice | undefined => PRACTICE[nodeId];
@@ -110,6 +115,33 @@ export const CHECKPOINTS: Checkpoint[] = [
   { id: "c1-errors-1", band: "C1", tree: "errors", title: "Boss: The Final Draft", afterIndex: 3,
     story: "Your scholarship essay is almost perfect. Cut the 'moreover's, fix the articles, split the long sentences and catch the false friends.",
     nodeIds: ["c1.mechanical-linking", "c1.articles-with-abstract-nouns", "c1.long-run-on-sentences-from-spanish-style", "c1.cognates-that-mislead-at-c1"] },
+  { id: "c2-grammar-1", band: "C2", tree: "grammar", title: "Boss 1: The Opening Night", afterIndex: 1,
+    story: "Come what may, the curtain rises at eight. Write the programme notes with style, and break the rules only on purpose.",
+    nodeIds: ["c2.rare-structures-for-style", "c2.fronting-and-deliberate-rule-breaking-fo"] },
+  { id: "c2-grammar-2", band: "C2", tree: "grammar", title: "Boss 2: The Scandal", afterIndex: 3,
+    story: "A rumour is spreading fast. Ask politely for the facts, then report every claim with exactly the right stance.",
+    nodeIds: ["c2.aspect-for-nuance", "c2.reporting-with-stance"] },
+  { id: "c2-grammar-3", band: "C2", tree: "grammar", title: "Boss 3: The Final Chapter", afterIndex: 5,
+    story: "Your novel needs an ending. Without it, there's no book. Tired you may be; finished you are not.",
+    nodeIds: ["c2.implied-and-mixed-conditionals-in-style", "c2.ellipsis-and-substitution-in-literary-styl"] },
+  { id: "c2-words-1", band: "C2", tree: "words", title: "Boss 1: The Comedy Club", afterIndex: 2,
+    story: "Open-mic night. Old words, double meanings and fixed pairs: by and large, the crowd will laugh. Sooner or later.",
+    nodeIds: ["c2.literary-and-archaic-vocabulary-in-conte", "c2.wordplay-puns-and-humour", "c2.binomials-and-fixed-pairs"] },
+  { id: "c2-words-2", band: "C2", tree: "words", title: "Boss 2: The Front Page", afterIndex: 5,
+    story: "The embattled editor needs a front page by midnight. Mull it over fast, avoid Pandora's box, and get the jargon right.",
+    nodeIds: ["c2.idiomatic-and-colloquial-range", "c2.allusions-and-proverbs", "c2.register-specific-vocabulary"] },
+  { id: "c2-communicate-1", band: "C2", tree: "communicate", title: "Boss 1: The Literary Festival", afterIndex: 2,
+    story: "Review the headliner, parody the sponsor's speech and survive the British small talk. Not your finest hour? We'll see.",
+    nodeIds: ["c2.write-with-voice-critique-sophisticated", "c2.full-spectrum-slang-to-academic-parody-a", "c2.cultural-references-and-understatement"] },
+  { id: "c2-communicate-2", band: "C2", tree: "communicate", title: "Boss 2: The Boardroom", afterIndex: 5,
+    story: "Sixty seconds to summarise the report, ten minutes to close the deal, and one email that must be firm but warm.",
+    nodeIds: ["c2.summarise-complex-texts-concisely", "c2.negotiate-and-persuade-professionally", "c2.tone-control-in-writing"] },
+  { id: "c2-sounds-1", band: "C2", tree: "sounds", title: "Boss: The Rally", afterIndex: 2,
+    story: "A crowd of thousands, accents from everywhere, one microphone. Pause, persuade, and land every line.",
+    nodeIds: ["c2.rhetorical-delivery", "c2.fast-natural-speech-and-accents", "c2.prosody-for-persuasion"] },
+  { id: "c2-errors-1", band: "C2", tree: "errors", title: "Boss: The Last Proofread", afterIndex: 2,
+    story: "The final draft of your scholarship essay. Not a single slip, collocation or Spanish-style sentence can survive.",
+    nodeIds: ["c2.residual-slips", "c2.collocation-fine-tuning", "c2.over-long-over-formal-spanish-style-prose"] },
 ];
 
 /** Mixed review items (Understand, Use, Fix it, Judge) from some skills. */

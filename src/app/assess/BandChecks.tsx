@@ -31,7 +31,7 @@ export function BandChecks({ band, next }: { band: BandId; next?: BandId }) {
     let state: { tag: string; cls?: string; text: string; go?: string } ;
     if (preview) state = { tag: "Teacher preview", text: "Try it as a student would. Nothing is saved.", go: "Try it" };
     else if (kind === "midpoint" && midPassed) state = { tag: "Passed", cls: "is-good", text: "Midpoint done. Now aim for the Gate." };
-    else if (kind === "gate" && last?.status === "confirmed") state = { tag: "Passed", cls: "is-good", text: `${band} is complete. ${next ?? "The next band"} is open.` };
+    else if (kind === "gate" && last?.status === "confirmed") state = { tag: "Passed", cls: "is-good", text: next ? `${band} is complete. ${next} is open.` : `${band} is complete. You've finished every band in Bandwidth.` };
     else if (kind === "gate" && last?.status === "awaiting_teacher") state = { tag: "With your teacher", cls: "is-wait", text: "You passed. Your teacher is reading and listening before confirming." };
     else if (kind === "gate" && !midPassed) state = { tag: "Locked", text: "Pass the Midpoint first." };
     else if (!r.ready) state = { tag: "Locked", text: `${r.need - r.have} more ${r.need - r.have === 1 ? "skill" : "skills"} ${kind === "midpoint" ? "Secure" : "Mastered"} to open it.` };
