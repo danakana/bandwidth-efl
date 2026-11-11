@@ -8,7 +8,7 @@ const E = (n: string, k: string) => `p/b1pe-${n}-${k}.mp3`;
 export const B1P_SOUNDS_ERRORS_CLIPS: { file: string; script: string; voice: string }[] = [
   { file: S("01", "notice"), voice: "cgSgspJ2msm6clMCkdW9", script: "No, no, the party is on TUESDAY, not Thursday. And it's at Ana's house, not Laura's. Bring a DRINK, not food. Oh, and it starts at SEVEN, not eight. Got it?" },
   { file: S("01", "dict"), voice: "3f6pec3wODJsjTqtcNI2", script: "I said Tuesday, not Thursday." },
-  { file: S("02", "notice"), voice: "tPDVQaZ6fdDCUmYpHyYd", script: "Listen to how the stress moves. PHOtograph. phoTOgrapher. photoGRAPHic. ECOnomy. eCOnomics. ecoNOMic. And one more: PERson, perSONality." },
+  { file: S("02", "notice"), voice: "tPDVQaZ6fdDCUmYpHyYd", script: "Listen to how the stress moves. Photograph. Photographer. Photographic. Economy. Economics. Economic. And one more: person, personality." },
   { file: S("02", "dict"), voice: "9hb1f7xQcMLB90qbYSY3", script: "My brother is a photographer, and his photographs are amazing." },
   { file: E("01", "notice"), voice: "ideEOMYLgcyF9rr94ycz", script: "I moved to the coast last year. At first, the heat was terrible. But now I'm used to living here. I'm used to swimming every morning, and I'm getting used to eating fish every day. I'm not used to cold weather any more!" },
   { file: E("01", "dict"), voice: "QW1sSL71Pw5oHbFDen25", script: "I'm used to waking up early for school." },

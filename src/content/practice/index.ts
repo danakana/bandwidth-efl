@@ -1,3 +1,7 @@
+import { B1P_GRAMMAR } from "./b1p-grammar";
+import { B1P_WORDS } from "./b1p-words";
+import { B1P_COMMUNICATE } from "./b1p-communicate";
+import { B1P_ERRORS, B1P_SOUNDS } from "./b1p-sounds-errors";
 import { B2_GRAMMAR } from "./b2-grammar";
 import { B2_WORDS } from "./b2-words";
 import { B2_COMMUNICATE } from "./b2-communicate";
@@ -21,6 +25,7 @@ import type { BandId } from "../bands";
 import type { TreeId } from "../curriculum";
 
 const ALL: NodePractice[] = [
+  ...B1P_GRAMMAR, ...B1P_WORDS, ...B1P_COMMUNICATE, ...B1P_SOUNDS, ...B1P_ERRORS,
   ...B2_GRAMMAR, ...B2_WORDS, ...B2_COMMUNICATE, ...B2_SOUNDS, ...B2_ERRORS,
   ...B2P_GRAMMAR, ...B2P_WORDS, ...B2P_COMMUNICATE, ...B2P_SOUNDS, ...B2P_ERRORS,
   ...B2P_EXTRA_GRAMMAR, ...B2P_EXTRA_WORDS, ...B2P_EXTRA_SOUNDS, ...B2P_EXTRA_ERRORS,
@@ -34,6 +39,33 @@ export const practiceFor = (nodeId: string): NodePractice | undefined => PRACTIC
 export type Checkpoint = { id: string; band: BandId; tree: TreeId; title: string; story: string; nodeIds: string[]; afterIndex: number };
 
 export const CHECKPOINTS: Checkpoint[] = [
+  { id: "b1p-grammar-1", band: "B1+", tree: "grammar", title: "Boss 1: The Lost Phone", afterIndex: 2,
+    story: "If you hadn't left your phone on the bus, none of this would have happened. Get it found, repaired and back.",
+    nodeIds: ["b1p.third-conditional-introduction", "b1p.passive-with-modals-and-perfect-tenses", "b1p.have-get-something-done"] },
+  { id: "b1p-grammar-2", band: "B1+", tree: "grammar", title: "Boss 2: The Exchange Student", afterIndex: 5,
+    story: "A new student from Canada is getting used to your school. Pass on every message, and remember what to stop doing.",
+    nodeIds: ["b1p.used-to-vs-be-get-used-to", "b1p.reported-requests-and-commands", "b1p.verbs-that-change-meaning-stop-remember"] },
+  { id: "b1p-grammar-3", band: "B1+", tree: "grammar", title: "Boss 3: The Big Trip", afterIndex: 8,
+    story: "This time next week you'll be flying. Ask the right questions politely, and plan a trip so good you'll talk about it for years.",
+    nodeIds: ["b1p.indirect-questions", "b1p.future-continuous-and-future-perfect", "b1p.so-such-that-relative-whose"] },
+  { id: "b1p-words-1", band: "B1+", tree: "words", title: "Boss 1: The School Paper", afterIndex: 2,
+    story: "You're the new culture and science editor. Write the headlines, review the film and get every word form right.",
+    nodeIds: ["b1p.news-and-media-environment-and-climate-t", "b1p.describing-art-film-and-books", "b1p.noun-and-adjective-suffixes"] },
+  { id: "b1p-words-2", band: "B1+", tree: "words", title: "Boss 2: The Debate Club", afterIndex: 6,
+    story: "Your first debate. Raise awareness, figure out the other side's argument and, as far as you're concerned, win.",
+    nodeIds: ["b1p.issue-and-opinion-collocations", "b1p.phrasal-verbs-for-events-and-discovery", "b1p.everyday-idioms", "b1p.opinion-chunks"] },
+  { id: "b1p-communicate-1", band: "B1+", tree: "communicate", title: "Boss 1: The Science Fair", afterIndex: 2,
+    story: "Three minutes to present your project, compare it with last year's, and answer the judges' questions politely.",
+    nodeIds: ["b1p.compare-and-contrast-describe-a-process", "b1p.give-a-short-presentation", "b1p.indirect-questions-as-politeness"] },
+  { id: "b1p-communicate-2", band: "B1+", tree: "communicate", title: "Boss 2: The Group Project", afterIndex: 5,
+    story: "Write the report, ask your teacher for more time, and keep the group discussion fair for everyone.",
+    nodeIds: ["b1p.review-and-report-structure", "b1p.do-soften-requests-with-i-was-wondering", "b1p.do-take-turns-in-group-discussion"] },
+  { id: "b1p-sounds-1", band: "B1+", tree: "sounds", title: "Boss: The Phone Call", afterIndex: 1,
+    story: "The line is bad and everyone keeps getting the details wrong. Stress the right word, every time.",
+    nodeIds: ["b1p.contrastive-stress", "b1p.stress-shift-in-word-families"] },
+  { id: "b1p-errors-1", band: "B1+", tree: "errors", title: "Boss: The Email Check", afterIndex: 2,
+    story: "Your email to an exchange family is full of little traps. Catch them before you press send.",
+    nodeIds: ["b1p.be-used-to-base-verb", "b1p.word-order-in-indirect-questions", "b1p.say-vs-tell"] },
   { id: "b2-grammar-1", band: "B2", tree: "grammar", title: "Boss 1: The Time Machine", afterIndex: 2,
     story: "A broken time machine is mixing up past, present and regrets. Fix every sentence to get it home.",
     nodeIds: ["b2.mixed-conditionals", "b2.wish-if-only-present-past-would", "b2.past-modals-of-deduction-and-criticism"] },
