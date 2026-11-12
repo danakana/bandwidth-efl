@@ -12,6 +12,7 @@ import { BandMap } from "./map/BandMap";
 import { BandView } from "./map/BandView";
 import { TreeView } from "./map/TreeView";
 import { GateReviews } from "./assess/GateReviews";
+import { PracticeReviews } from "./practice/PracticeReviews";
 import type { AssessmentRow } from "../lib/progressApi";
 
 type Student = Pick<Profile, "id" | "username" | "display_name" | "class_id" | "onboarded_at"> & { created_at: string };
@@ -122,13 +123,15 @@ export function TeacherHome() {
             <button type="submit" className="btn btn-primary">Create class</button>
           </form>
           {error && <p className="form-error" role="alert">{error}</p>}
-          {pending > 0 && <p className="pill" role="status">{pending} {pending === 1 ? "piece" : "pieces"} of writing or speaking to review</p>}
+          {pending > 0 && <p className="pill" role="status">{pending} placement {pending === 1 ? "piece" : "pieces"} to review</p>}
           {gates.length > 0 && <p className="pill" role="status">{gates.length} {gates.length === 1 ? "Gate" : "Gates"} waiting for you to confirm</p>}
         </section>
 
         <GateReviews items={gates} subs={subs}
           nameOf={(id) => { const st = students.find((x) => x.id === id); return st?.display_name ?? st?.username ?? "Student"; }}
           onChanged={() => void load()} />
+
+        <PracticeReviews subs={subs} classes={classes} students={students} onChanged={() => void load()} />
 
         {reviewStudent && (
           <Review

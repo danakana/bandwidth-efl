@@ -148,3 +148,5 @@
 }
 .app-nav a:hover { background: rgba(255, 255, 255, 0.1); color: var(--white); }
 .app-nav a[aria-current="page"] { background: var(--white); color: var(--ink); }
+.table-wrap { position: relative; max-width: 100%; } /* keeps hidden labels inside the scroller */
+.class-card { min-width: 0; grid-template-columns: minmax(0, 1fr); }

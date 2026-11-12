@@ -13,6 +13,7 @@ import { ArcadePage } from "./arcade/ArcadePage";
 import { ShopPage } from "./arcade/ShopPage";
 import { useProgress } from "../lib/progress";
 import { BANDS } from "../content/bands";
+import { TeacherNotes } from "./practice/TeacherNotes";
 import "./placement/placement.css";
 import "./map/map.css";
 
@@ -99,6 +100,7 @@ export function StudentHome() {
             </>
           )}
         </section>
+        {start !== null && <TeacherNotes es={es} />}
         {start !== null && <BandMap start={start} />}
         <section className="home-section">
           <h2>Your Universes</h2>

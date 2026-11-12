@@ -31,6 +31,9 @@ export type Submission = {
   teacher_band: string | null;
   teacher_feedback: string | null;
   reviewed_at: string | null;
+  node_id?: string | null;
+  auto_passed?: boolean | null;
+  feedback_seen_at?: string | null;
 };
 
 export async function startAttempt(): Promise<Attempt> {
