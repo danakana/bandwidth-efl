@@ -5,9 +5,10 @@
  */
 import type { ReactElement } from "react";
 
-export type IconName = "flame" | "coin" | "bolt" | "swords" | "star" | "check" | "lock" | "x" | "play" | "arrow" | "sparkle" | "trophy" | "headphones" | "mic" | "book";
+export type IconName = "flame" | "coin" | "bolt" | "swords" | "star" | "check" | "lock" | "x" | "play" | "arrow" | "sparkle" | "trophy" | "headphones" | "mic" | "book" | "clock";
 
 const P: Record<IconName, ReactElement> = {
+  clock: <><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></>,
   flame: <path d="M12 3c.5 3.2-2.5 4.8-2.5 8a2.5 2.5 0 0 0 5 0c0-1.2-.5-2-1-2.8C16.5 9.5 18 12 18 14.5A6 6 0 0 1 6 14.5C6 9.5 10.5 7.5 12 3z" />,
   coin: <><circle cx="12" cy="12" r="8.5" /><circle cx="12" cy="12" r="4.5" /></>,
   bolt: <path d="M13 2.5 5 13.5h6l-1 8 8-11h-6z" />,

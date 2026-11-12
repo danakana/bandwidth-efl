@@ -11,6 +11,7 @@ import { BandView } from "./map/BandView";
 import { TreeView } from "./map/TreeView";
 import { ArcadePage } from "./arcade/ArcadePage";
 import { ShopPage } from "./arcade/ShopPage";
+import { ExamsPage } from "./exams/ExamsPage";
 import { useProgress } from "../lib/progress";
 import { BANDS } from "../content/bands";
 import { TeacherNotes } from "./practice/TeacherNotes";
@@ -55,7 +56,7 @@ export function StudentHome() {
       <div className="shell">
         <AppHeader />
         <main id="main" className="page shell-main">
-          {route.page === "arcade" ? <ArcadePage /> : <ShopPage />}
+          {route.page === "arcade" ? <ArcadePage /> : route.page === "exams" ? <ExamsPage /> : <ShopPage />}
         </main>
       </div>
     );

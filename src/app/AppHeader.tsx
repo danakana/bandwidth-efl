@@ -34,7 +34,7 @@ export function AppHeader() {
       {st && (
         <nav className="app-nav" aria-label="Main">
           <div className="page app-nav-inner">
-            {([["map", "#app", "Map", "star"], ["arcade", "#app/arcade", "Arcade", "bolt"], ["shop", "#app/shop", "Shop", "coin"]] as const).map(([id, href, label, icon]) => (
+            {([["map", "#app", "Map", "star"], ["exams", "#app/exams", "Exams", "book"], ["arcade", "#app/arcade", "Arcade", "bolt"], ["shop", "#app/shop", "Shop", "coin"]] as const).map(([id, href, label, icon]) => (
               <a key={id} href={href} aria-current={route.page === id ? "page" : undefined}><Icon name={icon} size={16} /> {label}</a>
             ))}
           </div>
