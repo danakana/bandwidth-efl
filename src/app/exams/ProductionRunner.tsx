@@ -84,7 +84,7 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
       for (const p of parts) {
         const info = partInfo(p.part);
         const prompt = `${run.set.club} · ${info.name}: ${info.skill}. ${p.intro}${p.email ? `\n\n${p.email}` : ""}`;
-        const body = p.questions.map((q) => `${q.from ? `${q.from}: ` : ""}${q.ask}\n→ ${(text[q.id] ?? "").trim() || "(no answer)"}`).join("\n\n");
+        const body = p.questions.map((q) => `${q.from ? `${q.from}: ` : ""}${q.ask}\n→ ${(text[q.id] ?? "").trim() || "(no answer)"}`).join("\n\n* * *\n\n"); // the server counts the words between these markers
         const n = p.questions.reduce((s, q) => s + words(q), 0);
         ids.push(await savePractice(session!.user.id, `aptis-w${p.part}`, prompt, body, n, null, p.questions.every((q) => words(q) >= q.min)));
       }
