@@ -1,3 +1,7 @@
+import { B1_GRAMMAR } from "./b1-grammar";
+import { B1_WORDS } from "./b1-words";
+import { B1_COMMUNICATE } from "./b1-communicate";
+import { B1_ERRORS, B1_SOUNDS } from "./b1-sounds-errors";
 import { B1P_GRAMMAR } from "./b1p-grammar";
 import { B1P_WORDS } from "./b1p-words";
 import { B1P_COMMUNICATE } from "./b1p-communicate";
@@ -25,6 +29,7 @@ import type { BandId } from "../bands";
 import type { TreeId } from "../curriculum";
 
 const ALL: NodePractice[] = [
+  ...B1_GRAMMAR, ...B1_WORDS, ...B1_COMMUNICATE, ...B1_SOUNDS, ...B1_ERRORS,
   ...B1P_GRAMMAR, ...B1P_WORDS, ...B1P_COMMUNICATE, ...B1P_SOUNDS, ...B1P_ERRORS,
   ...B2_GRAMMAR, ...B2_WORDS, ...B2_COMMUNICATE, ...B2_SOUNDS, ...B2_ERRORS,
   ...B2P_GRAMMAR, ...B2P_WORDS, ...B2P_COMMUNICATE, ...B2P_SOUNDS, ...B2P_ERRORS,
@@ -39,6 +44,33 @@ export const practiceFor = (nodeId: string): NodePractice | undefined => PRACTIC
 export type Checkpoint = { id: string; band: BandId; tree: TreeId; title: string; story: string; nodeIds: string[]; afterIndex: number };
 
 export const CHECKPOINTS: Checkpoint[] = [
+  { id: "b1-grammar-1", band: "B1", tree: "grammar", title: "Boss 1: The Band Diary", afterIndex: 2,
+    story: "Your band has been practising for weeks, but the concert night went strangely. Tell the story, and imagine what you would change.",
+    nodeIds: ["b1.present-perfect-continuous", "b1.past-perfect", "b1.second-conditional"] },
+  { id: "b1-grammar-2", band: "B1", tree: "grammar", title: "Boss 2: The Mystery Neighbour", afterIndex: 5,
+    story: "A package was left at your door. Report what people said, and work out who it must be from.",
+    nodeIds: ["b1.passive-present-and-past", "b1.reported-speech-statements-and-questions", "b1.modals-of-deduction"] },
+  { id: "b1-grammar-3", band: "B1", tree: "grammar", title: "Boss 3: The Rainy Weekend", afterIndex: 8,
+    story: "The weekend plan fell apart, although it ended well. Describe the people, check the facts and link it all together.",
+    nodeIds: ["b1.defining-vs-non-defining-relative-clause", "b1.wish-past-question-tags", "b1.linkers-of-contrast-and-reason"] },
+  { id: "b1-words-1", band: "B1", tree: "words", title: "Boss 1: The Careers Fair", afterIndex: 2,
+    story: "Visit the stands at the careers fair: health, science, the arts and money. Use the right word at every table.",
+    nodeIds: ["b1.relationships-lifestyle-and-health-trave", "b1.science-and-tech-the-arts-money-and-work", "b1.common-prefixes-and-suffixes"] },
+  { id: "b1-words-2", band: "B1", tree: "words", title: "Boss 2: The End-of-Year Chat", afterIndex: 6,
+    story: "Look back on the school year with a friend: the progress you made, the plans you put off and the moments that turned out well.",
+    nodeIds: ["b1.verb-noun-for-study-and-work", "b1.abstract-phrasal-verbs", "b1.common-idioms-in-context", "b1.discourse-chunks"] },
+  { id: "b1-communicate-1", band: "B1", tree: "communicate", title: "Boss 1: The Broken Headphones", afterIndex: 2,
+    story: "Your new headphones stopped working. Give your opinion, explain the problem and choose the right style for the shop.",
+    nodeIds: ["b1.explain-and-justify-opinions-speculate", "b1.deal-with-problems-give-advice-summarise", "b1.neutral-vs-formal-vocabulary-pairs"] },
+  { id: "b1-communicate-2", band: "B1", tree: "communicate", title: "Boss 2: The Class Trip Vote", afterIndex: 5,
+    story: "Write to the travel company, disagree politely in the class vote and take a compliment when your plan wins.",
+    nodeIds: ["b1.formal-email-complaint-or-application", "b1.do-soften-disagreement", "b1.do-accept-compliments-simply"] },
+  { id: "b1-sounds-1", band: "B1", tree: "sounds", title: "Boss: The Voice Message", afterIndex: 1,
+    story: "A friend sent a fast voice message. Catch the questions, the tags and the linked words.",
+    nodeIds: ["b1.intonation-of-questions-and-question-tag", "b1.connected-speech-linking-and-reductions"] },
+  { id: "b1-errors-1", band: "B1", tree: "errors", title: "Boss: The Exchange Email", afterIndex: 3,
+    story: "Your exchange partner's email is full of small slips. Fix every one before it goes out.",
+    nodeIds: ["b1.would-in-the-if-clause", "b1.despite-of-look-forward-to-verb", "b1.make-vs-do-take", "b1.false-friends-set-2"] },
   { id: "b1p-grammar-1", band: "B1+", tree: "grammar", title: "Boss 1: The Lost Phone", afterIndex: 2,
     story: "If you hadn't left your phone on the bus, none of this would have happened. Get it found, repaired and back.",
     nodeIds: ["b1p.third-conditional-introduction", "b1p.passive-with-modals-and-perfect-tenses", "b1p.have-get-something-done"] },

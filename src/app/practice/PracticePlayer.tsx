@@ -130,6 +130,12 @@ function Intro({ target, label, onStart }: { target: PlayTarget; label: string; 
         <div className="px-rule">
           <p>{p.explain}</p>
           <ul>{p.pattern.map((x) => <li key={x}>{x}</li>)}</ul>
+          {p.es && (
+            <details className="px-es">
+              <summary>En español</summary>
+              <p lang="es">{p.es}</p>
+            </details>
+          )}
         </div>
       )}
       <p className="muted">You need 80% to pass. No lives, no timer: mistakes are how you learn.</p>

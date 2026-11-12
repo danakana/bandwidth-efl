@@ -41,6 +41,7 @@ export function Session({ items, label, onDone }: { items: Item[]; label: string
               <strong>{verdict.score === 1 ? PRAISE[i % PRAISE.length] : verdict.score > 0 ? "Almost: half a point." : "Not quite."}</strong>
               {verdict.score < 1 && <p className="px-answer">Answer: <span>{verdict.correct}</span></p>}
               <p className="px-why">{item.why}</p>
+              {verdict.score < 1 && item.es && <p className="px-es-gloss" lang="es">{item.es}</p>}
             </div>
             <button type="button" className="btn btn-primary" onClick={next} autoFocus>{last ? "See results" : "Continue"}</button>
           </motion.div>

@@ -1,5 +1,5 @@
 /** Short constructors for practice items, so content files stay readable. */
-import type { ChoiceItem, FixItem, OrderItem, SayItem, TransformItem, TypeItem } from "./types";
+import type { Item, ChoiceItem, FixItem, OrderItem, SayItem, TransformItem, TypeItem } from "./types";
 
 export const ch = (prompt: string, options: string[], answer: number, why: string, o: { context?: string; audio?: string } = {}): ChoiceItem =>
   ({ kind: "choice", prompt, options, answer, why, ...o });
@@ -16,3 +16,5 @@ export const ord = (answer: string, why: string, prompt = "Put the words in orde
 export const fix = (parts: string[], wrong: number, accept: string[], why: string): FixItem =>
   ({ kind: "fix", prompt: "Tap the mistake, then type the correction.", parts, wrong, accept, why });
 export const say = (target: string, why: string, prompt = "Say this aloud, naturally."): SayItem => ({ kind: "say", prompt, target, why });
+/** Attach a short Spanish gloss to an item (lower bands). Shown only when the answer is wrong. */
+export const es = <T extends Item>(item: T, gloss: string): T => ({ ...item, es: gloss });

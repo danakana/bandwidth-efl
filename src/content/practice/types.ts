@@ -22,7 +22,8 @@ export type FixItem = { kind: "fix"; prompt: string; parts: string[]; wrong: num
 /** Say a sentence aloud. Speech recognition checks it; typing is the fallback. */
 export type SayItem = { kind: "say"; prompt: string; target: string; why: string };
 
-export type Item = ChoiceItem | TypeItem | TransformItem | OrderItem | FixItem | SayItem;
+/** Lower bands (A1+ to A2+) may add a short Spanish gloss, shown only after a wrong answer. */
+export type Item = (ChoiceItem | TypeItem | TransformItem | OrderItem | FixItem | SayItem) & { es?: string };
 
 /** Step 6: an original piece of writing or speech that must use the skill. */
 export type CreateTask = {
@@ -41,6 +42,8 @@ export type NodePractice = {
   explain: string;
   /** Short form table or pattern. */
   pattern: string[];
+  /** Lower bands only: one or two sentences in Spanish, tucked behind "En español". */
+  es?: string;
   steps: [Item[], Item[], Item[], Item[], Item[]];
   create: CreateTask;
 };
