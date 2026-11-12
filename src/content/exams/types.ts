@@ -1,16 +1,40 @@
-/** Exam-prep content types. Letters are fixed (A, B, C…) like the real exam, so options are never shuffled. */
+/** Exam-prep content types. Letters are fixed (A, B, C…) like the real exams, so options are never shuffled. */
 export type Opt = { text: string; why: string };
 export type ExamQ = { id: string; prompt?: string; options: Opt[]; answer: number; challenge?: boolean };
+/** A recording. Several clips in a row make a dialogue (each line can have its own voice). */
+export type AudioClip = { file: string; script: string; voice: string; who?: string };
 
-/** Part 1: match short descriptions to a word bank with two extra words. */
-export type MatchBlock = { kind: "match"; part: 1; id: string; words: { w: string; means: string }[]; items: { id: string; desc: string; answer: number; why: string }[] };
-/** Parts 2 and 3: separate short items (a notice, a line of conversation). */
-export type ListBlock = { kind: "list"; part: 2 | 3; id: string; items: (ExamQ & { stem: string })[] };
-/** Parts 4–7: one text. In gap parts (4, 7) the text marks gaps as [1], [2]…; in reading parts (5, 6) questions have prompts. */
-export type TextBlock = { kind: "text"; part: 4 | 5 | 6 | 7; id: string; title: string; text: string; questions: ExamQ[]; challenge?: boolean };
-export type ExamBlock = MatchBlock | ListBlock | TextBlock;
+/**
+ * Matching: each item is matched to one entry in a shared list (Aptis lists can have up to 10).
+ * Used for ICFES Part 1 (descriptions → words), Aptis vocabulary, opinion matching (statements → people),
+ * headings (paragraphs → headings) and listening matching (speakers → statements).
+ */
+export type MatchBlock = {
+  kind: "match"; part: number; id: string; title?: string;
+  words: { w: string; means?: string }[];
+  items: { id: string; desc: string; answer: number; why: string; audio?: AudioClip[] }[];
+  /** Texts shown before the items, e.g. four people's opinions. */
+  passages?: { who: string; text: string }[];
+  /** Items are whole paragraphs (headings task). */
+  paragraphs?: boolean;
+  /** What to call each item ("Speaker", "Paragraph"…). */
+  itemLabel?: string;
+  audio?: AudioClip[];
+};
+/** Separate short items (a notice, a line of conversation, a sentence with a gap). Optional shared recording. */
+export type ListBlock = { kind: "list"; part: number; id: string; items: (ExamQ & { stem: string; audio?: AudioClip[] })[]; audio?: AudioClip[]; title?: string };
+/** One text. Gap parts mark gaps as [1], [2]…; reading parts give each question a prompt. Listening texts have audio and no visible text. */
+export type TextBlock = { kind: "text"; part: number; id: string; title: string; text: string; questions: ExamQ[]; challenge?: boolean; audio?: AudioClip[] };
+/** Put sentences in order. The first sentence is given; `sentences` is the correct order of the rest. */
+export type OrderBlock = { kind: "order"; part: number; id: string; title: string; first: string; sentences: string[]; why: string };
+export type ExamBlock = MatchBlock | ListBlock | TextBlock | OrderBlock;
 
 export type PartInfo = {
   part: number; name: string; skill: string; task: string; options: number; approx: number;
   method: string[]; trap: string; es: string; question: string;
+  /** Group heading on the hub (Aptis: Core, Reading, Listening). */
+  group?: string;
 };
+
+/** Everything the runner needs to know about an exam. */
+export type ExamConfig = { id: "icfes" | "aptis"; label: string; parts: PartInfo[]; neverBlank: boolean };

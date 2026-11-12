@@ -3,7 +3,7 @@
  * (Guía de orientación Saber 11 2026-2: 7 parts, Part 1 has 5 descriptions and 7 words A–G,
  * Parts 2–5 have options A–C, Parts 6–7 have A–D). Every option has a reason. For teacher review.
  */
-import type { ExamBlock, ExamQ, ListBlock, MatchBlock, Opt, PartInfo, TextBlock } from "./types";
+import type { ExamBlock, ExamConfig, ExamQ, ListBlock, MatchBlock, Opt, PartInfo, TextBlock } from "./types";
 
 const o = (text: string, why: string): Opt => ({ text, why });
 const q = (id: string, prompt: string | undefined, answer: number, options: Opt[], challenge?: boolean): ExamQ => ({ id, prompt, options, answer, challenge });
@@ -358,5 +358,7 @@ export const ICFES_MOCKS: Mock[] = [
   ] },
 ];
 
-/** How many questions a block holds. */
-export const countQ = (b: ExamBlock) => (b.kind === "match" ? b.items.length : b.kind === "list" ? b.items.length : b.questions.length);
+/** How many questions a block holds (an ordering task scores one point per sentence placed). */
+export const countQ = (b: ExamBlock) => (b.kind === "match" || b.kind === "list" ? b.items.length : b.kind === "order" ? b.sentences.length : b.questions.length);
+
+export const ICFES: ExamConfig = { id: "icfes", label: "ICFES Saber 11", parts: ICFES_PARTS, neverBlank: true };

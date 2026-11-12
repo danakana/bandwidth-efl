@@ -2,21 +2,44 @@ import { Fragment, useEffect, useMemo, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../lib/auth";
 import { Icon } from "../../components/Icon";
-import { ICFES_PARTS, countQ } from "../../content/exams/icfes";
-import type { ExamBlock, ExamQ, MatchBlock, TextBlock } from "../../content/exams/types";
+import { countQ } from "../../content/exams/icfes";
+import type { AudioClip, ExamBlock, ExamConfig, ExamQ, MatchBlock, OrderBlock, PartInfo, TextBlock } from "../../content/exams/types";
+import { ExamAudio, Transcript } from "./ExamAudio";
 
-const L = "ABCDEFG";
-export type ExamRun = { mode: "part" | "section"; ref: string; title: string; blocks: ExamBlock[]; minutes?: number };
+const L = "ABCDEFGHIJ";
+export type ExamRun = { exam: ExamConfig; mode: "part" | "section"; ref: string; title: string; blocks: ExamBlock[]; minutes?: number };
 type Outcome = { xp: number; coins: number; capped: boolean } | null;
+type Picks = Record<string, number>;
+type PickFn = (id: string, v: number) => void;
 
-/** Plays exam blocks. Part practice shows answers after each block; a mock section shows them only at the end. */
+/** Every scored answer in a block, with its key in `picks`. Order tasks score each position. */
+const qsOf = (b: ExamBlock) => (b.kind === "match" || b.kind === "list" ? b.items.map((x) => ({ id: x.id, answer: x.answer }))
+  : b.kind === "order" ? b.sentences.map((_, pos) => ({ id: `${b.id}-${pos}`, answer: pos })) : b.questions);
+
+/** A fixed starting order for an order task: scrambled the same way every time, never already correct. */
+function scramble(b: OrderBlock): number[] {
+  const h = (s: string) => { let x = 7; for (const ch of s) x = (x * 33 + ch.charCodeAt(0)) >>> 0; return x; };
+  const idx = b.sentences.map((s, k) => ({ k, h: h(s) })).sort((a, z) => a.h - z.h).map((x) => x.k);
+  return idx.every((k, pos) => k === pos) ? [...idx.slice(1), idx[0]] : idx;
+}
+function startPicks(blocks: ExamBlock[]): Picks {
+  const p: Picks = {};
+  for (const b of blocks) if (b.kind === "order") scramble(b).forEach((k, pos) => { p[`${b.id}-${pos}`] = k; });
+  return p;
+}
+/** All the audio in a block, for the transcript. */
+const clipsOf = (b: ExamBlock): AudioClip[] => [...("audio" in b && b.audio ? b.audio : []), ...(b.kind === "list" || b.kind === "match" ? b.items.flatMap((x) => x.audio ?? []) : [])];
+
+/** Plays exam blocks. Part practice shows answers after each block; a full test shows them only at the end. */
 export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: boolean) => void }) {
   const { profile } = useAuth();
   const es = !!profile?.spanish_help;
   const mock = run.mode === "section";
+  const exam = run.exam;
+  const partOf = (n: number) => exam.parts.find((p) => p.part === n)!;
   const [phase, setPhase] = useState<"intro" | "play" | "done">("intro");
   const [i, setI] = useState(0);
-  const [picks, setPicks] = useState<Record<string, number>>({});
+  const [picks, setPicks] = useState<Picks>(() => startPicks(run.blocks));
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [blankWarn, setBlankWarn] = useState(false);
   const [outcome, setOutcome] = useState<Outcome>(null);
@@ -24,7 +47,7 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
   const [left, setLeft] = useState((run.minutes ?? 0) * 60);
   const total = useMemo(() => run.blocks.reduce((n, b) => n + countQ(b), 0), [run.blocks]);
   const block = run.blocks[i];
-  const info = ICFES_PARTS[(phase === "intro" ? run.blocks[0] : block).part - 1];
+  const info = partOf((phase === "intro" ? run.blocks[0] : block).part);
 
   useEffect(() => {
     if (!mock || phase !== "play") return;
@@ -33,7 +56,6 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
   }, [mock, phase]);
   useEffect(() => { window.scrollTo({ top: 0 }); }, [i, phase]);
 
-  const qsOf = (b: ExamBlock) => (b.kind === "match" ? b.items.map((x) => ({ id: x.id, answer: x.answer })) : (b.kind === "list" ? b.items : b.questions));
   const correctIn = (b: ExamBlock) => qsOf(b).filter((x) => picks[x.id] === x.answer).length;
   const blanks = run.blocks.flatMap(qsOf).filter((x) => picks[x.id] === undefined).length;
   const blockDone = qsOf(block).every((x) => picks[x.id] !== undefined);
@@ -44,7 +66,7 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
     const by: Record<string, [number, number]> = {};
     for (const b of run.blocks) { const k = String(b.part); const c = by[k] ?? [0, 0]; by[k] = [c[0] + correctIn(b), c[1] + countQ(b)]; }
     const score = Object.values(by).reduce((n, [c]) => n + c, 0);
-    const { data, error } = await supabase.rpc("record_exam", { p_exam: "icfes", p_mode: run.mode, p_ref: run.ref, p_score: score, p_total: total, p_by_part: by });
+    const { data, error } = await supabase.rpc("record_exam", { p_exam: exam.id, p_mode: run.mode, p_ref: run.ref, p_score: score, p_total: total, p_by_part: by });
     if (error) setSaveError(true); else setOutcome(data as Outcome);
   }
 
@@ -55,7 +77,13 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
     void finish();
   }
 
-  const pick = (id: string, v: number) => { if (!revealed) { setPicks({ ...picks, [id]: v }); setBlankWarn(false); } };
+  const pick: PickFn = (id, v) => { if (!revealed) { setPicks((p) => ({ ...p, [id]: v })); setBlankWarn(false); } };
+  /** Order tasks: swap two positions. */
+  const swap = (b: OrderBlock, a: number, z: number) => {
+    if (revealed) return;
+    setPicks((p) => ({ ...p, [`${b.id}-${a}`]: p[`${b.id}-${z}`], [`${b.id}-${z}`]: p[`${b.id}-${a}`] }));
+  };
+  const listening = (b: ExamBlock) => clipsOf(b).length > 0;
 
   return (
     <div className="ex-run" role="region" aria-label={run.title}>
@@ -73,19 +101,22 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
         <section className="pt-card ex-intro">
           {mock ? (
             <>
-              <p className="pt-kicker">ICFES Saber 11 · mock exam</p>
+              <p className="pt-kicker">{exam.label} · {exam.id === "icfes" ? "mock exam" : "practice test"}</p>
               <h2>{run.title}</h2>
               <p className="pt-lede">{total} questions. About {run.minutes} minutes. Answers appear at the end, like the real test.</p>
               <ul className="ex-tips">
                 <li><strong>Never leave a blank.</strong> A guess can score; a blank can't.</li>
                 <li><strong>Remove wrong options first,</strong> then choose.</li>
-                <li><strong>Read the whole sentence</strong> around every gap.</li>
-                <li><strong>Move fast in Parts 1–3</strong> so you have time for the long texts.</li>
+                {run.blocks.some(listening)
+                  ? <><li><strong>Read the questions before you listen.</strong></li><li><strong>Each recording plays twice at most.</strong> Use the second time to check.</li></>
+                  : <li><strong>Read the whole sentence</strong> around every gap.</li>}
+                {exam.id === "icfes" ? <li><strong>Move fast in Parts 1–3</strong> so you have time for the long texts.</li>
+                  : !run.blocks.some(listening) && <li><strong>Do the short parts quickly</strong> so you have time for the long text at the end.</li>}
               </ul>
               {es && <p lang="es" className="es">Nunca dejes una pregunta en blanco: si no sabes, descarta opciones y adivina.</p>}
             </>
           ) : (
-            <MethodCard part={run.blocks[0].part} es={es} />
+            <MethodCard info={info} es={es} />
           )}
           <button type="button" className="btn btn-primary pt-go" onClick={() => setPhase("play")}>Start</button>
         </section>
@@ -99,7 +130,7 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
             <h2 id="ex-part-title">{info.task}</h2>
             {block.kind === "text" && block.challenge && <span className="pill">Challenge</span>}
           </header>
-          <BlockView block={block} picks={picks} revealed={revealed} onPick={pick} />
+          <BlockView key={block.id} block={block} info={info} exam={exam} picks={picks} revealed={revealed} onPick={pick} onSwap={swap} test={mock} />
           {revealed && <p className="ex-score" role="status">You got {correctIn(block)} of {countQ(block)}.</p>}
           {blankWarn && <p className="form-error" role="alert">You left {blanks} blank. On the real test, never leave a blank: guess! You can go back, or finish anyway.</p>}
           <div className="pt-actions">
@@ -119,13 +150,12 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
   );
 }
 
-export function MethodCard({ part, es }: { part: number; es: boolean }) {
-  const p = ICFES_PARTS[part - 1];
+export function MethodCard({ info: p, es }: { info: PartInfo; es: boolean }) {
   return (
     <div className="ex-method">
       <p className="pt-kicker">{p.name} · {p.skill}</p>
       <h2>{p.task}</h2>
-      <p className="muted">About {p.approx} questions on the real test · options A–{L[p.options - 1]}</p>
+      <p className="muted">About {p.approx} questions on the real test{p.options > 0 && <> · options A–{L[p.options - 1]}</>}</p>
       <h3>The method</h3>
       <ol className="ex-steps">{p.method.map((m) => <li key={m}>{m}</li>)}</ol>
       <p className="ex-trap"><strong>Watch out:</strong> {p.trap}</p>
@@ -134,47 +164,67 @@ export function MethodCard({ part, es }: { part: number; es: boolean }) {
   );
 }
 
-function BlockView({ block, picks, revealed, onPick }: { block: ExamBlock; picks: Record<string, number>; revealed: boolean; onPick: (id: string, v: number) => void }) {
-  if (block.kind === "match") return <MatchView b={block} picks={picks} revealed={revealed} onPick={onPick} />;
-  if (block.kind === "list") {
-    return (
-      <ol className="ex-items">
-        {block.items.map((x, n) => (
-          <li key={x.id}>
-            {block.part === 2
-              ? <div className="ex-notice" role="note"><span className="visually-hidden">Notice: </span>{x.stem}</div>
-              : <p className="ex-line"><span className="visually-hidden">The first person says: </span>“{x.stem}”</p>}
-            <Options q={x} label={`${n + 1}. ${ICFES_PARTS[block.part - 1].question}`} picks={picks} revealed={revealed} onPick={onPick} />
-          </li>
-        ))}
-      </ol>
-    );
-  }
-  return <TextView b={block} picks={picks} revealed={revealed} onPick={onPick} />;
-}
+type ViewProps = { picks: Picks; revealed: boolean; onPick: PickFn; test: boolean };
 
-function TextView({ b, picks, revealed, onPick }: { b: TextBlock; picks: Record<string, number>; revealed: boolean; onPick: (id: string, v: number) => void }) {
-  const gaps = b.part === 4 || b.part === 7;
+function BlockView({ block, info, exam, onSwap, ...v }: ViewProps & { block: ExamBlock; info: PartInfo; exam: ExamConfig; onSwap: (b: OrderBlock, a: number, z: number) => void }) {
+  const audio = "audio" in block && block.audio?.length ? block.audio : null;
   return (
     <>
-      <article className="ex-text" aria-label={b.title}>
-        <h3>{b.title}</h3>
-        {b.text.split("\n\n").map((para, k) => (
-          <p key={k}>{para.split(/\[(\d+)\]/).map((part, j) => j % 2 === 1
-            ? <span key={j} className="ex-gap"><span className="visually-hidden">gap </span>{part}{picks[b.questions[Number(part) - 1]?.id] !== undefined && <em> {b.questions[Number(part) - 1].options[picks[b.questions[Number(part) - 1].id]].text}</em>}</span>
-            : <Fragment key={j}>{part.split("\n").map((line, m) => <Fragment key={m}>{m > 0 && <br />}{line}</Fragment>)}</Fragment>)}</p>
-        ))}
-      </article>
+      {audio && <ExamAudio clips={audio} unlimited={v.revealed} allowSlow={!v.test} />}
+      {block.kind === "match" ? <MatchView b={block} {...v} />
+        : block.kind === "order" ? <OrderView b={block} picks={v.picks} revealed={v.revealed} onSwap={onSwap} />
+        : block.kind === "text" ? <TextView b={block} {...v} />
+        : (
+          <ol className="ex-items">
+            {block.items.map((x, n) => (
+              <li key={x.id}>
+                {exam.id === "icfes" ? (
+                  <>
+                    {block.part === 2
+                      ? <div className="ex-notice" role="note"><span className="visually-hidden">Notice: </span>{x.stem}</div>
+                      : <p className="ex-line"><span className="visually-hidden">The first person says: </span>“{x.stem}”</p>}
+                    <Options q={x} label={`${n + 1}. ${info.question}`} {...v} />
+                  </>
+                ) : (
+                  <>
+                    {x.audio && <ExamAudio clips={x.audio} unlimited={v.revealed} allowSlow={!v.test} label={`Listen to recording ${n + 1}`} />}
+                    <Options q={x} label={`${n + 1}. ${x.stem}`} {...v} />
+                    {v.revealed && x.audio && <Transcript clips={x.audio} />}
+                  </>
+                )}
+              </li>
+            ))}
+          </ol>
+        )}
+      {v.revealed && audio && <Transcript clips={audio} />}
+    </>
+  );
+}
+
+function TextView({ b, picks, revealed, onPick, test }: ViewProps & { b: TextBlock }) {
+  const gaps = b.questions.every((x) => !x.prompt);
+  return (
+    <>
+      {b.text && (
+        <article className="ex-text" aria-label={b.title}>
+          <h3>{b.title}</h3>
+          {b.text.split("\n\n").map((para, k) => (
+            <p key={k}>{para.split(/\[(\d+)\]/).map((part, j) => j % 2 === 1
+              ? <span key={j} className="ex-gap"><span className="visually-hidden">gap </span>{part}{picks[b.questions[Number(part) - 1]?.id] !== undefined && <em> {b.questions[Number(part) - 1].options[picks[b.questions[Number(part) - 1].id]].text}</em>}</span>
+              : <Fragment key={j}>{part.split("\n").map((line, m) => <Fragment key={m}>{m > 0 && <br />}{line}</Fragment>)}</Fragment>)}</p>
+          ))}
+        </article>
+      )}
       <ol className="ex-items">
         {b.questions.map((x, n) => (
-          <li key={x.id}><Options q={x} label={gaps ? `Gap ${n + 1}` : `${n + 1}. ${x.prompt}`} picks={picks} revealed={revealed} onPick={onPick} /></li>
+          <li key={x.id}><Options q={x} label={gaps ? `Gap ${n + 1}` : `${n + 1}. ${x.prompt}`} picks={picks} revealed={revealed} onPick={onPick} test={test} /></li>
         ))}
       </ol>
     </>
   );
 }
 
-function Options({ q, label, picks, revealed, onPick }: { q: ExamQ; label: string; picks: Record<string, number>; revealed: boolean; onPick: (id: string, v: number) => void }) {
+function Options({ q, label, picks, revealed, onPick }: ViewProps & { q: ExamQ; label: string }) {
   const mine = picks[q.id];
   return (
     <fieldset className="pt-options ex-options" disabled={revealed}>
@@ -204,21 +254,39 @@ function Why({ q, mine }: { q: ExamQ; mine: number | undefined }) {
   );
 }
 
-function MatchView({ b, picks, revealed, onPick }: { b: MatchBlock; picks: Record<string, number>; revealed: boolean; onPick: (id: string, v: number) => void }) {
+function MatchView({ b, picks, revealed, onPick, test }: ViewProps & { b: MatchBlock }) {
+  const people = !!b.passages;
   return (
     <>
-      <ul className="ex-bank" aria-label="Words">
-        {b.words.map((w, k) => (
-          <li key={w.w}><span className="pt-option-key">{L[k]}</span> {w.w}{revealed && <small> · {w.means}</small>}</li>
-        ))}
-      </ul>
+      {b.title && <h3 className="ex-match-title">{b.title}</h3>}
+      {b.passages && (
+        <div className="ex-people">
+          {b.passages.map((p, k) => (
+            <article key={p.who} className="ex-person" aria-label={p.who}>
+              <h4><span className="pt-option-key" aria-hidden="true">{L[k]}</span> {p.who}</h4>
+              <p>{p.text}</p>
+            </article>
+          ))}
+        </div>
+      )}
+      {!people && (
+        <ul className={`ex-bank${b.words.some((w) => w.w.length > 22) ? " is-long" : ""}`} aria-label={b.paragraphs ? "Headings" : b.itemLabel === "Speaker" ? "Sentences" : "Words"}>
+          {b.words.map((w, k) => (
+            <li key={w.w}><span className="pt-option-key">{L[k]}</span> {w.w}{revealed && w.means && <small> · {w.means}</small>}</li>
+          ))}
+        </ul>
+      )}
       <ol className="ex-items">
         {b.items.map((x, n) => {
           const mine = picks[x.id];
           return (
             <li key={x.id}>
               <fieldset className="ex-match" disabled={revealed}>
-                <legend className="pt-stem">{n + 1}. {x.desc}</legend>
+                <legend className="pt-stem">
+                  {b.paragraphs ? <>Paragraph {n + 1}</> : x.audio ? <>{x.desc}</> : <>{n + 1}. {x.desc}</>}
+                </legend>
+                {b.paragraphs && <p className="ex-text ex-para">{x.desc}</p>}
+                {x.audio && <ExamAudio clips={x.audio} unlimited={revealed} allowSlow={!test} label={`Listen to ${x.desc}`} />}
                 <div className="ex-letters">
                   {b.words.map((w, k) => {
                     const state = revealed ? (k === x.answer ? " is-right" : k === mine ? " is-wrong" : "") : mine === k ? " is-picked" : "";
@@ -232,7 +300,8 @@ function MatchView({ b, picks, revealed, onPick }: { b: MatchBlock; picks: Recor
                 </div>
                 {revealed && (
                   <div className={`ex-why${mine === x.answer ? " is-right" : ""}`} role="status">
-                    <strong>{mine === x.answer ? "Right." : `The answer is ${L[x.answer]}: ${b.words[x.answer].w}.`}</strong> {x.why}
+                    <strong>{mine === x.answer ? "Right." : `The answer is ${L[x.answer]}: ${b.words[x.answer].w}`}</strong>{" "}
+                    {x.audio ? <>They said: “{x.why}”</> : x.why}
                   </div>
                 )}
               </fieldset>
@@ -244,9 +313,52 @@ function MatchView({ b, picks, revealed, onPick }: { b: MatchBlock; picks: Recor
   );
 }
 
+function OrderView({ b, picks, revealed, onSwap }: { b: OrderBlock; picks: Picks; revealed: boolean; onSwap: (b: OrderBlock, a: number, z: number) => void }) {
+  const n = b.sentences.length;
+  const [moved, setMoved] = useState<string>("");
+  const move = (pos: number, dir: -1 | 1) => {
+    onSwap(b, pos, pos + dir);
+    setMoved(`Moved to position ${pos + dir + 2} of ${n + 1}.`);
+  };
+  return (
+    <>
+      <h3 className="ex-match-title">{b.title}</h3>
+      <ol className="ex-order">
+        <li className="ex-order-item is-fixed"><span className="ex-order-num" aria-hidden="true">1</span><span>{b.first}</span><span className="pill">Given</span></li>
+        {b.sentences.map((_, pos) => {
+          const k = picks[`${b.id}-${pos}`];
+          const state = revealed ? (k === pos ? " is-right" : " is-wrong") : "";
+          return (
+            <li key={pos} className={`ex-order-item${state}`}>
+              <span className="ex-order-num" aria-hidden="true">{pos + 2}</span>
+              <span>{b.sentences[k]}</span>
+              {!revealed && (
+                <span className="ex-order-moves">
+                  <button type="button" className="btn btn-ghost btn-sm" disabled={pos === 0} onClick={() => move(pos, -1)} aria-label={`Move up: ${b.sentences[k]}`}>▲</button>
+                  <button type="button" className="btn btn-ghost btn-sm" disabled={pos === n - 1} onClick={() => move(pos, 1)} aria-label={`Move down: ${b.sentences[k]}`}>▼</button>
+                </span>
+              )}
+              {revealed && <span className="visually-hidden">{k === pos ? "Right place" : "Wrong place"}</span>}
+            </li>
+          );
+        })}
+      </ol>
+      <p className="visually-hidden" aria-live="polite">{moved}</p>
+      {revealed && (
+        <div className={`ex-why${b.sentences.every((_, p) => picks[`${b.id}-${p}`] === p) ? " is-right" : ""}`} role="status">
+          <strong>The right order:</strong>
+          <ol className="ex-order-key" start={2}>{b.sentences.map((s) => <li key={s}>{s}</li>)}</ol>
+          {b.why}
+        </div>
+      )}
+    </>
+  );
+}
+
 function Results({ run, picks, total, correctIn, outcome, saveError }: {
-  run: ExamRun; picks: Record<string, number>; total: number; correctIn: (b: ExamBlock) => number; outcome: Outcome; saveError: boolean;
+  run: ExamRun; picks: Picks; total: number; correctIn: (b: ExamBlock) => number; outcome: Outcome; saveError: boolean;
 }) {
+  const partOf = (n: number) => run.exam.parts.find((p) => p.part === n)!;
   const score = run.blocks.reduce((n, b) => n + correctIn(b), 0);
   const parts = [...new Set(run.blocks.map((b) => b.part))];
   const rows = parts.map((p) => {
@@ -256,11 +368,15 @@ function Results({ run, picks, total, correctIn, outcome, saveError }: {
   });
   const weakest = [...rows].sort((a, b) => a.pct - b.pct)[0];
   const [review, setReview] = useState(run.mode === "section");
+  const aptis = run.exam.id === "aptis" && run.mode === "section";
   return (
     <section className="pt-card ex-results" aria-labelledby="ex-res-title">
       <p className="pt-kicker">{run.title}</p>
       <h2 id="ex-res-title">{score} of {total} correct</h2>
       <p className="pt-lede">{Math.round((score / total) * 100)}% of the questions.</p>
+      {aptis && (
+        <p className="ex-next"><strong>Estimated Aptis score: {Math.round((score / total) * 50)} / 50.</strong> <span className="muted">An estimate only: the real test uses its own scale.</span></p>
+      )}
       {outcome && (
         <p className="ex-reward"><Icon name="bolt" size={18} /> +{outcome.xp} XP · <Icon name="coin" size={18} /> +{outcome.coins} coins{outcome.capped && <span className="muted"> (daily exam coins reached)</span>}</p>
       )}
@@ -269,7 +385,7 @@ function Results({ run, picks, total, correctIn, outcome, saveError }: {
         <ul className="ex-bars" aria-label="Score by part">
           {rows.map((r) => (
             <li key={r.p}>
-              <span>{ICFES_PARTS[r.p - 1].name} · {ICFES_PARTS[r.p - 1].skill}</span>
+              <span>{partOf(r.p).name} · {partOf(r.p).skill}</span>
               <span className="ex-bar" aria-hidden="true"><span style={{ width: `${r.pct}%` }} /></span>
               <strong>{r.c}/{r.t}</strong>
             </li>
@@ -277,15 +393,15 @@ function Results({ run, picks, total, correctIn, outcome, saveError }: {
         </ul>
       )}
       {rows.length > 1 && weakest.pct < 100 && (
-        <p className="ex-next"><strong>Practise next:</strong> {ICFES_PARTS[weakest.p - 1].name} ({ICFES_PARTS[weakest.p - 1].skill}). Its method and trap are in the part list.</p>
+        <p className="ex-next"><strong>Practise next:</strong> {partOf(weakest.p).name} ({partOf(weakest.p).skill}). Its method and trap are in the part list.</p>
       )}
       {run.mode === "section" && (
         <>
           <button type="button" className="link-btn" aria-expanded={review} onClick={() => setReview(!review)}>{review ? "Hide answers" : "Show answers"}</button>
           {review && run.blocks.map((b) => (
             <div key={b.id} className="ex-review">
-              <h3>{ICFES_PARTS[b.part - 1].name} · {ICFES_PARTS[b.part - 1].skill}</h3>
-              <BlockView block={b} picks={picks} revealed onPick={() => {}} />
+              <h3>{partOf(b.part).name} · {partOf(b.part).skill}</h3>
+              <BlockView block={b} info={partOf(b.part)} exam={run.exam} picks={picks} revealed test onPick={() => {}} onSwap={() => {}} />
             </div>
           ))}
         </>
