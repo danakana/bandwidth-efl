@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../lib/auth";
+import { supabase } from "../../lib/supabase";
 import { savePractice } from "../../lib/progressApi";
 import { wordCount } from "../../lib/answers";
 import { Icon } from "../../components/Icon";
@@ -13,6 +14,21 @@ export type ProductionRun =
   | { kind: "speaking"; test: boolean; title: string; set: SpeakingSet; parts: number[] };
 
 const partInfo = (n: number) => [...APTIS_W_PARTS, ...APTIS_S_PARTS].find((p) => p.part === n)!;
+type Reward = { xp: number; coins: number; capped: boolean };
+/** Coins and XP for sending real work (the server checks the word count, once per piece). Never blocks sending. */
+async function rewardFor(ids: string[]): Promise<Reward | null> {
+  const total: Reward = { xp: 0, coins: 0, capped: false };
+  for (const id of ids) {
+    const { data, error } = await supabase.rpc("reward_production", { p_submission: id });
+    if (error) continue;
+    const r = data as Reward; total.xp += r.xp; total.coins += r.coins; total.capped ||= r.capped;
+  }
+  return total.xp ? total : null;
+}
+function RewardLine({ r }: { r: Reward | null }) {
+  if (!r) return null;
+  return <p className="ex-reward"><Icon name="bolt" size={18} /> +{r.xp} XP · <Icon name="coin" size={18} /> +{r.coins} coins{r.capped && <span className="muted"> (daily exam coins reached)</span>}</p>;
+}
 const fmt = (s: number) => `${Math.floor(Math.max(0, s) / 60)}:${String(Math.max(0, s) % 60).padStart(2, "0")}`;
 
 export function ProductionRunner({ run, onClose }: { run: ProductionRun; onClose: () => void }) {
@@ -48,6 +64,7 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
   const [left, setLeft] = useState((run.minutes ?? 0) * 60);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
+  const [reward, setReward] = useState<Reward | null>(null);
   const part = parts[i];
 
   useEffect(() => {
@@ -63,13 +80,15 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
   async function send() {
     setBusy(true); setError(false);
     try {
+      const ids: string[] = [];
       for (const p of parts) {
         const info = partInfo(p.part);
         const prompt = `${run.set.club} · ${info.name}: ${info.skill}. ${p.intro}${p.email ? `\n\n${p.email}` : ""}`;
         const body = p.questions.map((q) => `${q.from ? `${q.from}: ` : ""}${q.ask}\n→ ${(text[q.id] ?? "").trim() || "(no answer)"}`).join("\n\n");
         const n = p.questions.reduce((s, q) => s + words(q), 0);
-        await savePractice(session!.user.id, `aptis-w${p.part}`, prompt, body, n, null, p.questions.every((q) => words(q) >= q.min));
+        ids.push(await savePractice(session!.user.id, `aptis-w${p.part}`, prompt, body, n, null, p.questions.every((q) => words(q) >= q.min)));
       }
+      setReward(await rewardFor(ids));
       setPhase("sent");
     } catch { setError(true); } finally { setBusy(false); }
   }
@@ -105,6 +124,8 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
           <p className="pt-kicker">{run.title}</p>
           <h2 id="pw-sent">Sent to your teacher</h2>
           <p className="pt-lede">Your teacher will read it and leave a comment on your home page.</p>
+          <RewardLine r={reward} />
+          {reward && reward.xp < parts.length * 15 && <p className="muted px-small">Full coins go to answers that reach the word count.</p>}
           <h3>While you wait, check your own work</h3>
           <ul className="ex-tips">
             <li>Did you answer <strong>every</strong> question?</li>
@@ -180,6 +201,7 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
   const [clips, setClips] = useState<{ part: number; blob: Blob; url: string }[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
+  const [reward, setReward] = useState<Reward | null>(null);
   const stream = useRef<MediaStream | null>(null);
   const rec = useRef<MediaRecorder | null>(null);
   const chunks = useRef<Blob[]>([]);
@@ -260,12 +282,14 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
   async function send() {
     setBusy(true); setError(false);
     try {
+      const ids: string[] = [];
       for (const c of clips) {
         const p = parts.find((x) => x.part === c.part)!;
         const info = partInfo(p.part);
         const prompt = `${info.name}: ${info.skill}. ${p.questions.map((q, k) => `${k + 1}. ${q.ask}`).join(" ")}`;
-        await savePractice(session!.user.id, `aptis-s${p.part}`, prompt, "", 0, c.blob, null);
+        ids.push(await savePractice(session!.user.id, `aptis-s${p.part}`, prompt, "", 0, c.blob, null));
       }
+      setReward(await rewardFor(ids));
       setPhase("sent");
     } catch { setError(true); } finally { setBusy(false); }
   }
@@ -304,6 +328,7 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
           <p className="pt-kicker">{run.title}</p>
           <h2 id="sp-done">{phase === "sent" ? "Sent to your teacher" : "Listen to yourself"}</h2>
           <p className="pt-lede">{phase === "sent" ? "Your teacher will listen and leave a comment on your home page." : "Did you answer every question and keep talking until the time ended?"}</p>
+          {phase === "sent" && <RewardLine r={reward} />}
           <ul className="ex-recs">
             {clips.map((c) => (
               <li key={c.part}><strong>{partInfo(c.part).name}</strong><audio controls src={c.url} /></li>

@@ -61,7 +61,7 @@ export function ExamsPage() {
     setRun({ exam, mode: "part", ref: String(part), title: `${p.name} practice`, blocks: [block] });
   }
 
-  if (prod) return <ProductionRunner run={prod} onClose={() => setProd(null)} />;
+  if (prod) return <ProductionRunner run={prod} onClose={() => { setProd(null); void load(); void progress?.refresh(); }} />;
   const pick = <T,>(xs: T[]) => xs[Math.floor(Math.random() * xs.length)];
   const writePart = (part: number) => setProd({ kind: "writing", test: false, title: `${APTIS_W_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(APTIS_WRITING), parts: [part] });
   const speakPart = (part: number) => setProd({ kind: "speaking", test: false, title: `${APTIS_S_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(APTIS_SPEAKING), parts: [part] });
