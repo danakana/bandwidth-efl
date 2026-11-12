@@ -6,7 +6,9 @@ import { Icon } from "../../components/Icon";
 import { ICFES, ICFES_BANK, ICFES_MOCKS, countQ } from "../../content/exams/icfes";
 import { APTIS, APTIS_BANK, APTIS_TESTS } from "../../content/exams/aptis";
 import type { ExamConfig, PartInfo } from "../../content/exams/types";
+import { APTIS_SPEAKING, APTIS_S_PARTS, APTIS_WRITING, APTIS_W_PARTS } from "../../content/exams/aptis-production";
 import { ExamRunner, type ExamRun } from "./ExamRunner";
+import { ProductionRunner, type ProductionRun } from "./ProductionRunner";
 import "./exams.css";
 
 type Row = { exam: "icfes" | "aptis"; mode: "part" | "section"; ref: string; score: number; total: number; by_part: Record<string, [number, number]>; created_at: string };
@@ -40,6 +42,7 @@ export function ExamsPage() {
   const es = !!profile?.spanish_help;
   const [rows, setRows] = useState<Row[]>([]);
   const [run, setRun] = useState<ExamRun | null>(null);
+  const [prod, setProd] = useState<ProductionRun | null>(null);
   const [which, setWhich] = useState<Which>(() => { try { return localStorage.getItem(KEY) === "aptis" ? "aptis" : "icfes"; } catch { return "icfes"; } });
 
   const load = useCallback(async () => {
@@ -57,6 +60,11 @@ export function ExamsPage() {
     const p = exam.parts.find((x) => x.part === part)!;
     setRun({ exam, mode: "part", ref: String(part), title: `${p.name} practice`, blocks: [block] });
   }
+
+  if (prod) return <ProductionRunner run={prod} onClose={() => setProd(null)} />;
+  const pick = <T,>(xs: T[]) => xs[Math.floor(Math.random() * xs.length)];
+  const writePart = (part: number) => setProd({ kind: "writing", test: false, title: `${APTIS_W_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(APTIS_WRITING), parts: [part] });
+  const speakPart = (part: number) => setProd({ kind: "speaking", test: false, title: `${APTIS_S_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(APTIS_SPEAKING), parts: [part] });
 
   if (run) {
     return <ExamRunner run={run} onClose={(changed) => { setRun(null); if (changed) { void load(); void progress?.refresh(); } }} />;
@@ -109,7 +117,7 @@ export function ExamsPage() {
           <header className="ex-head">
             <p className="pt-kicker">Exam prep</p>
             <h1>Aptis General</h1>
-            <p className="pt-lede">The British Council test many Colombian universities use. Core (grammar and vocabulary), Reading and Listening, each scored out of 50. Learn each part, then try a full practice test.</p>
+            <p className="pt-lede">The British Council test many Colombian universities use. Core (grammar and vocabulary), Reading, Listening, Writing and Speaking. Learn each part, then try a full practice test.</p>
             {es && <p lang="es" className="es">Practica cada parte y luego haz la prueba completa de cada componente.</p>}
           </header>
           {(["Core", "Reading", "Listening"] as const).map((g) => {
@@ -132,7 +140,25 @@ export function ExamsPage() {
               </Fragment>
             );
           })}
-          <p className="muted px-small">Writing and Speaking are coming next. Listening uses recorded voices where we have them, and your device's voice for the rest.</p>
+          <PartList exam={{ ...APTIS, parts: APTIS_W_PARTS }} rows={[]} title="Writing" onPractise={writePart} />
+          <div className="ex-mocks ex-aptis-tests">
+            {APTIS_WRITING.map((w, k) => (
+              <article key={w.id} className="class-card ex-mock">
+                <ProdRow name={`Writing test ${"AB"[k]}: ${w.club}`} desc="4 parts · about 50 min · marked by your teacher"
+                  onStart={() => setProd({ kind: "writing", test: true, title: `Aptis Writing test ${"AB"[k]}`, set: w, parts: [11, 12, 13, 14], minutes: 50 })} />
+              </article>
+            ))}
+          </div>
+          <PartList exam={{ ...APTIS, parts: APTIS_S_PARTS }} rows={[]} title="Speaking" onPractise={speakPart} />
+          <div className="ex-mocks ex-aptis-tests">
+            {APTIS_SPEAKING.map((sp, k) => (
+              <article key={sp.id} className="class-card ex-mock">
+                <ProdRow name={`Speaking test ${"AB"[k]}`} desc="4 parts · about 12 min · recorded for your teacher"
+                  onStart={() => setProd({ kind: "speaking", test: true, title: `Aptis Speaking test ${"AB"[k]}`, set: sp, parts: [15, 16, 17, 18] })} />
+              </article>
+            ))}
+          </div>
+          <p className="muted px-small">Listening uses recorded voices where we have them, and your device's voice for the rest. Speaking questions are read by your device's voice.</p>
         </>
       )}
 
@@ -163,13 +189,22 @@ function PartList({ exam, rows, title, onPractise }: { exam: ExamConfig; rows: R
             <div className="ex-part-body">
               <h3>{exam.id === "icfes" || p.name === p.skill ? p.skill : `${p.name}: ${p.skill}`}</h3>
               <p>{p.task}</p>
-              <p className="muted px-small">≈{p.approx} questions{p.options > 0 && <> · options A–{"ABCDEFGHIJ"[p.options - 1]}</>}{acc[k] !== null && <> · your recent score: <strong>{acc[k]}%</strong></>}</p>
+              <p className="muted px-small">{p.options === 0 ? "Marked by your teacher" : <>≈{p.approx} questions</>}{p.options > 0 && <> · options A–{"ABCDEFGHIJ"[p.options - 1]}</>}{acc[k] !== null && <> · your recent score: <strong>{acc[k]}%</strong></>}</p>
             </div>
             <button type="button" className="btn btn-primary btn-sm" onClick={() => onPractise(p.part)}>Practise</button>
           </li>
         ))}
       </ol>
     </section>
+  );
+}
+
+function ProdRow({ name, desc, onStart }: { name: string; desc: string; onStart: () => void }) {
+  return (
+    <div className="ex-section">
+      <div><strong>{name}</strong><p className="muted px-small">{desc}</p></div>
+      <button type="button" className="btn btn-sm btn-primary" onClick={onStart}>Start</button>
+    </div>
   );
 }
 

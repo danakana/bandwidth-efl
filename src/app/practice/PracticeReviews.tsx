@@ -4,6 +4,9 @@ import { useAuth } from "../../lib/auth";
 import type { Submission } from "../../lib/placementApi";
 import { NODES } from "../../content/curriculum";
 import { TREES } from "../map/trees";
+import { aptisLabel } from "../../content/exams/aptis-production";
+
+const APTIS_LEVELS = ["A0", "A1", "A2", "B1", "B2", "C"];
 
 /** A practice piece: written or recorded at the end of a skill, not part of placement or a Midpoint / Gate. */
 export const isPractice = (s: Submission) => !s.attempt_id && !!s.node_id && !s.node_id.includes(":");
@@ -77,7 +80,9 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
   const { session } = useAuth();
   const node = NODES.find((n) => n.id === sub.node_id);
   const tree = TREES.find((t) => t.id === node?.tree);
+  const aptis = aptisLabel(sub.node_id);
   const [feedback, setFeedback] = useState(sub.teacher_feedback ?? "");
+  const [level, setLevel] = useState(sub.teacher_band ?? "");
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
@@ -97,6 +102,7 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
     const text = feedback.trim() || null;
     const { error } = await supabase.from("submissions").update({
       teacher_feedback: text,
+      ...(aptis ? { teacher_band: level || null } : {}),
       reviewed_at: new Date().toISOString(),
       reviewed_by: session!.user.id,
       // A new or changed comment shows up as new for the student.
@@ -109,22 +115,23 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
 
   const label = sub.skill === "writing" ? "Writing" : "Speaking";
   return (
-    <article className={`class-card rv-item pw-card${sub.reviewed_at ? " is-done" : ""}`} aria-label={`${name}: ${label} for ${node?.title ?? "a skill"}`}>
+    <article className={`class-card rv-item pw-card${sub.reviewed_at ? " is-done" : ""}`} aria-label={`${name}: ${label} for ${aptis ?? node?.title ?? "a skill"}`}>
       <div className="rv-meta">
         <strong>{name}</strong>
-        <span className="band-chip">{node?.band ?? sub.target_band ?? "?"}</span>
-        <span className="muted">{tree?.name ?? ""}{tree ? " · " : ""}{node?.title ?? sub.node_id}</span>
+        <span className="band-chip">{aptis ? "Aptis" : node?.band ?? sub.target_band ?? "?"}</span>
+        <span className="muted">{aptis ?? <>{tree?.name ?? ""}{tree ? " · " : ""}{node?.title ?? sub.node_id}</>}</span>
       </div>
       <div className="rv-meta">
         <span className="pill">{label}</span>
         {sub.word_count != null && <span className="muted">{sub.word_count} words</span>}
-        {sub.auto_passed === true && <span className="pill pill-good">Auto-check passed</span>}
-        {sub.auto_passed === false && <span className="pill">Auto-check not passed</span>}
+        {sub.auto_passed === true && <span className="pill pill-good">{aptis ? "Word counts met" : "Auto-check passed"}</span>}
+        {sub.auto_passed === false && <span className="pill">{aptis ? "Some answers too short" : "Auto-check not passed"}</span>}
         <span className="muted">{new Date(sub.created_at).toLocaleDateString()}</span>
         {sub.reviewed_at && <span className="pill pill-good">Reviewed</span>}
         {sub.feedback_seen_at && <span className="muted">Seen by student</span>}
       </div>
       <p className="rv-prompt">{sub.prompt}</p>
+      {aptis && sub.skill === "speaking" && <p className="muted px-small">One recording for the whole part. Each question was read aloud before the student answered.</p>}
       {sub.skill === "writing"
         ? <div className="rv-body" tabIndex={0} aria-label="Student writing">{sub.body}</div>
         : audioUrl ? <audio controls src={audioUrl} style={{ width: "100%", maxWidth: 520 }} /> : <p className="muted">Loading recording…</p>}
@@ -134,6 +141,15 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
             <button key={q} type="button" className="pw-chip" onClick={() => add(q)}>{q}</button>
           ))}
         </div>
+        {aptis && (
+          <label className="pw-level">
+            Aptis level for this part{" "}
+            <select value={level} onChange={(e) => { setLevel(e.target.value); setState("idle"); }}>
+              <option value="">Not set</option>
+              {APTIS_LEVELS.map((l) => <option key={l} value={l}>{l}</option>)}
+            </select>
+          </label>
+        )}
         <label className="visually-hidden" htmlFor={`pw-${sub.id}`}>Comment for {name}</label>
         <textarea id={`pw-${sub.id}`} placeholder="Comment the student will see (optional)" value={feedback}
           maxLength={1500} onChange={(e) => { setFeedback(e.target.value); setState("idle"); }} />

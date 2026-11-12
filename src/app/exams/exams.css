@@ -130,3 +130,38 @@
   .ex-order-moves { grid-column: 2; }
 }
 .ex-plays { color: inherit; opacity: 0.92; }
+
+/* Aptis Writing */
+.ex-email { padding: var(--s-4) var(--s-5); background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--cerulean); border-radius: var(--r-md); line-height: 1.6; }
+.ex-email p { margin: 0 0 var(--s-2); white-space: pre-line; }
+.ex-email p:last-child { margin: 0; }
+.ex-wq { display: grid; gap: var(--s-2); }
+.ex-chat { margin: 0; padding: var(--s-3) var(--s-4); background: var(--sky-soft); border-radius: var(--r-md) var(--r-md) var(--r-md) 4px; line-height: 1.5; max-width: 52ch; }
+.ex-chat strong { display: block; font-size: var(--step--1); }
+.ex-short { width: 100%; max-width: 24rem; min-height: 44px; padding: var(--s-2) var(--s-3); border: 2px solid var(--line); border-radius: var(--r-sm); font: inherit; }
+.ex-short:focus-visible { outline: none; box-shadow: var(--focus); border-color: var(--cerulean); }
+.ex-count { margin: 0; font-size: var(--step--1); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.ex-count.is-ok { color: var(--good-ink, var(--ink)); font-weight: 700; }
+.ex-count.is-short, .ex-count.is-long { font-weight: 700; }
+
+/* Aptis Speaking */
+.ex-scenes { display: grid; gap: var(--s-3); }
+.ex-scenes.is-two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.ex-scene { margin: 0; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); }
+.ex-scene svg { display: block; width: 100%; height: auto; }
+.ex-sq { margin: 0; font: 700 var(--step-2) / 1.3 var(--font-display); }
+.ex-sq-list { margin: 0; padding-left: 1.4rem; display: grid; gap: var(--s-2); font: 700 var(--step-1) / 1.35 var(--font-display); }
+.ex-live { display: flex; align-items: center; gap: var(--s-2); padding: var(--s-3) var(--s-4); border-radius: var(--r-md); background: var(--sky-soft); font-weight: 600; font-variant-numeric: tabular-nums; }
+.ex-live.is-answer { background: var(--try-tint); }
+.ex-live.is-prep { background: var(--tint-a2); }
+.ex-live-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); flex: none; }
+.ex-live.is-answer .ex-live-dot { background: #c0392b; animation: ex-pulse 1.2s ease-in-out infinite; }
+@keyframes ex-pulse { 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) { .ex-live.is-answer .ex-live-dot { animation: none; } }
+.ex-recs { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-3); }
+.ex-recs li { display: grid; gap: var(--s-1); }
+.ex-recs audio { width: 100%; max-width: 520px; }
+
+/* Teacher: Aptis level */
+.pw-level { display: inline-flex; align-items: center; gap: var(--s-2); font-weight: 600; font-size: var(--step--1); }
+.pw-level select { min-height: 40px; }

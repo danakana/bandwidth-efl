@@ -104,3 +104,11 @@ export function Transcript({ clips }: { clips: AudioClip[] }) {
     </details>
   );
 }
+
+/** Reads a question aloud with the device voice, like the examiner's recorded voice. */
+export function say(text: string): Promise<void> {
+  window.speechSynthesis?.cancel();
+  // Some browsers never fire "end"; don't let that freeze the test.
+  const limit = new Promise<void>((r) => setTimeout(r, 1500 + text.split(/\s+/).length * 450));
+  return Promise.race([speak({ file: "", script: text, voice: "examiner" }, false), limit]);
+}
