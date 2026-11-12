@@ -86,3 +86,12 @@
 @media (max-width: 560px) { .ex-bars li { grid-template-columns: 1fr auto; } .ex-bar { grid-column: 1 / -1; grid-row: 2; } }
 .ex-review { display: grid; gap: var(--s-3); padding-top: var(--s-4); border-top: 1px solid var(--line); }
 .ex-review h3 { font-size: var(--step-1); margin: 0; }
+
+/* Teacher ICFES overview */
+.ic-table th, .ic-table td { white-space: nowrap; }
+.ic-table abbr { text-decoration: none; }
+.ic-cell { text-align: center; font-variant-numeric: tabular-nums; font-weight: 700; }
+.ic-cell.is-good { background: var(--good-tint); }
+.ic-cell.is-mid { background: var(--tint-a2); }
+.ic-cell.is-low { background: var(--try-tint); }
+.ic-group th, .ic-group td { border-bottom: 2px solid var(--ink); }

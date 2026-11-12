@@ -13,6 +13,8 @@ import { BandView } from "./map/BandView";
 import { TreeView } from "./map/TreeView";
 import { GateReviews } from "./assess/GateReviews";
 import { PracticeReviews } from "./practice/PracticeReviews";
+import { IcfesOverview } from "./exams/IcfesOverview";
+import "./exams/exams.css";
 import type { AssessmentRow } from "../lib/progressApi";
 
 type Student = Pick<Profile, "id" | "username" | "display_name" | "class_id" | "onboarded_at"> & { created_at: string };
@@ -132,6 +134,7 @@ export function TeacherHome() {
           onChanged={() => void load()} />
 
         <PracticeReviews subs={subs} classes={classes} students={students} onChanged={() => void load()} />
+        <IcfesOverview classes={classes} students={students} />
 
         {reviewStudent && (
           <Review
