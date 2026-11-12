@@ -1,3 +1,11 @@
+import { A1P_GRAMMAR } from "./a1p-grammar";
+import { A1P_WORDS } from "./a1p-words";
+import { A1P_COMMUNICATE } from "./a1p-communicate";
+import { A1P_ERRORS, A1P_SOUNDS } from "./a1p-sounds-errors";
+import { A2_GRAMMAR } from "./a2-grammar";
+import { A2_WORDS } from "./a2-words";
+import { A2_COMMUNICATE } from "./a2-communicate";
+import { A2_ERRORS, A2_SOUNDS } from "./a2-sounds-errors";
 import { A2P_GRAMMAR } from "./a2p-grammar";
 import { A2P_WORDS } from "./a2p-words";
 import { A2P_COMMUNICATE } from "./a2p-communicate";
@@ -33,6 +41,8 @@ import type { BandId } from "../bands";
 import type { TreeId } from "../curriculum";
 
 const ALL: NodePractice[] = [
+  ...A1P_GRAMMAR, ...A1P_WORDS, ...A1P_COMMUNICATE, ...A1P_SOUNDS, ...A1P_ERRORS,
+  ...A2_GRAMMAR, ...A2_WORDS, ...A2_COMMUNICATE, ...A2_SOUNDS, ...A2_ERRORS,
   ...A2P_GRAMMAR, ...A2P_WORDS, ...A2P_COMMUNICATE, ...A2P_SOUNDS, ...A2P_ERRORS,
   ...B1_GRAMMAR, ...B1_WORDS, ...B1_COMMUNICATE, ...B1_SOUNDS, ...B1_ERRORS,
   ...B1P_GRAMMAR, ...B1P_WORDS, ...B1P_COMMUNICATE, ...B1P_SOUNDS, ...B1P_ERRORS,
@@ -49,6 +59,60 @@ export const practiceFor = (nodeId: string): NodePractice | undefined => PRACTIC
 export type Checkpoint = { id: string; band: BandId; tree: TreeId; title: string; story: string; nodeIds: string[]; afterIndex: number };
 
 export const CHECKPOINTS: Checkpoint[] = [
+  { id: "a1p-grammar-1", band: "A1+", tree: "grammar", title: "Boss 1: The New Classmate", afterIndex: 3,
+    story: "A new student sits next to you. Tell them who you are, what you do every day, what you have and what you can do.",
+    nodeIds: ["a1p.verb-be-am-is-are-all-forms", "a1p.present-simple-for-routines-and-facts", "a1p.have-have-got-for-possession", "a1p.can-can-t-for-ability-and-permission"] },
+  { id: "a1p-grammar-2", band: "A1+", tree: "grammar", title: "Boss 2: The House Tour", afterIndex: 7,
+    story: "Your cousin visits your house for the first time. Show them every room and whose things are where.",
+    nodeIds: ["a1p.there-is-there-are", "a1p.possessive-adjectives-and-s", "a1p.this-that-these-those", "a1p.articles-a-an-the-basic-and-plurals"] },
+  { id: "a1p-grammar-3", band: "A1+", tree: "grammar", title: "Boss 3: The Phone Call", afterIndex: 12,
+    story: "Your grandma calls. Tell her what you are doing now, ask her questions and tell her about yesterday.",
+    nodeIds: ["a1p.present-continuous-for-now", "a1p.prepositions-of-place-and-time", "a1p.question-words", "a1p.imperatives", "a1p.was-were-introduction"] },
+  { id: "a1p-words-1", band: "A1+", tree: "words", title: "Boss 1: The Family Album", afterIndex: 3,
+    story: "Look through a family photo album: birthdays, rooms, meals and people.",
+    nodeIds: ["a1p.numbers-dates-times-prices", "a1p.family-people-physical-description", "a1p.home-and-rooms-school-subjects-and-objec", "a1p.food-and-drinks-daily-routine-verbs"] },
+  { id: "a1p-words-2", band: "A1+", tree: "words", title: "Boss 2: Saturday in Town", afterIndex: 7,
+    story: "A Saturday in town with friends: the weather, the shops and lots of small talk.",
+    nodeIds: ["a1p.city-places-weather-clothes-and-colours", "a1p.high-frequency-verb-noun", "a1p.literal-physical-phrasal-verbs", "a1p.everyday-social-chunks"] },
+  { id: "a1p-communicate-1", band: "A1+", tree: "communicate", title: "Boss 1: The Pen Pal Call", afterIndex: 2,
+    story: "Your first video call with a pen pal. Say who you are, what you like, and order a snack politely.",
+    nodeIds: ["a1p.greet-introduce-give-personal-info", "a1p.express-likes-and-dislikes", "a1p.ask-for-things-politely"] },
+  { id: "a1p-communicate-2", band: "A1+", tree: "communicate", title: "Boss 2: The School Visit", afterIndex: 5,
+    story: "You visit a school in England for a day. Greet the right way, say please and thank you, and talk to the teachers.",
+    nodeIds: ["a1p.formal-vs-informal-greetings", "a1p.do-say-please-and-thank-you-more-often-t", "a1p.don-t-call-a-teacher-teacher"] },
+  { id: "a1p-sounds-1", band: "A1+", tree: "sounds", title: "Boss: The Sheep on the Ship", afterIndex: 2,
+    story: "A silly story read aloud. Catch every -s ending, every s + consonant word and every short and long vowel.",
+    nodeIds: ["a1p.third-person-s-and-plural-endings-s-z-z", "a1p.no-extra-e-before-s-consonant", "a1p.short-vs-long-vowels"] },
+  { id: "a1p-errors-1", band: "A1+", tree: "errors", title: "Boss: The Profile Page", afterIndex: 3,
+    story: "A classmate's online profile has lots of mistakes. Fix them before anyone sees!",
+    nodeIds: ["a1p.age-with-have", "a1p.missing-subject-it", "a1p.plural-adjectives-and-people-is", "a1p.missing-s-in-3rd-person"] },
+  { id: "a2-grammar-1", band: "A2", tree: "grammar", title: "Boss 1: The Lazy Sunday", afterIndex: 2,
+    story: "Your friend wants to know about your weekend and your plans. Tell what you did, what you usually do and what you are going to do.",
+    nodeIds: ["a2.past-simple-regular-and-irregular", "a2.present-simple-vs-present-continuous", "a2.future-going-to-and-will-basic"] },
+  { id: "a2-grammar-2", band: "A2", tree: "grammar", title: "Boss 2: The Market Trip", afterIndex: 5,
+    story: "You are planning a trip to the market with your cousin. Compare the stalls and decide how much food you need.",
+    nodeIds: ["a2.present-continuous-for-arrangements", "a2.comparatives-and-superlatives", "a2.countable-uncountable-some-any-much-many"] },
+  { id: "a2-grammar-3", band: "A2", tree: "grammar", title: "Boss 3: The New Student", afterIndex: 8,
+    story: "A new student joins your class. Tell them about the routines, the rules and what people love doing here.",
+    nodeIds: ["a2.adverbs-of-frequency-and-their-position", "a2.should-for-advice-have-to-don-t-have-to", "a2.verb-ing-to-infinitive-common-verbs"] },
+  { id: "a2-words-1", band: "A2", tree: "words", title: "Boss 1: The Bus to the Match", afterIndex: 2,
+    story: "You take the bus across town to watch a match and buy a new phone case on the way.",
+    nodeIds: ["a2.travel-and-transport-shopping-and-money", "a2.health-and-the-body-sports-and-hobbies", "a2.entertainment-and-tech-devices"] },
+  { id: "a2-words-2", band: "A2", tree: "words", title: "Boss 2: The Busy Saturday", afterIndex: 5,
+    story: "A full Saturday: chores, friends and plans. Pick the right verb and the natural phrase every time.",
+    nodeIds: ["a2.make-do-take-play-go", "a2.common-everyday-phrasal-verbs", "a2.conversational-chunks"] },
+  { id: "a2-communicate-1", band: "A2", tree: "communicate", title: "Boss 1: The Birthday Plan", afterIndex: 1,
+    story: "You invite friends to a birthday picnic, then tell them how to get there.",
+    nodeIds: ["a2.suggest-invite-accept-refuse", "a2.talk-about-past-events-give-directions-o"] },
+  { id: "a2-communicate-2", band: "A2", tree: "communicate", title: "Boss 2: The Café and the Coach", afterIndex: 4,
+    story: "You order at a café, message a friend and write to your coach. Choose the right tone each time.",
+    nodeIds: ["a2.informal-message-vs-formal-email-opening", "a2.don-t-say-i-want-when-ordering-or-asking", "a2.do-soften-a-refusal-with-a-reason"] },
+  { id: "a2-sounds-1", band: "A2", tree: "sounds", title: "Boss: The Teacher's Story", afterIndex: 1,
+    story: "Listen to a story about yesterday. Catch every -ed ending and the strong part of each word.",
+    nodeIds: ["a2.ed-endings-t-d-d", "a2.word-stress-in-two-syllable-words"] },
+  { id: "a2-errors-1", band: "A2", tree: "errors", title: "Boss: The Holiday Postcard", afterIndex: 4,
+    story: "Your friend wrote a postcard from the coast. Fix the mistakes before it goes in the post.",
+    nodeIds: ["a2.double-past-in-questions-and-negatives", "a2.double-comparatives", "a2.uncountable-nouns-made-plural", "a2.false-friends-set-1", "a2.explain-me-go-to-home"] },
   { id: "a2p-grammar-1", band: "A2+", tree: "grammar", title: "Boss 1: The Rainy Walk Home", afterIndex: 3,
     story: "You were walking home when it started to rain. Tell what you have done, what happened and what you'll do next time.",
     nodeIds: ["a2p.present-perfect-ever-never-just-already", "a2p.present-perfect-vs-past-simple", "a2p.past-continuous-with-when-while", "a2p.first-conditional"] },

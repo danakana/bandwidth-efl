@@ -1,6 +1,8 @@
 import type { BandId } from "../bands";
 import { NODES } from "../curriculum";
 import type { NodeProgress } from "../../lib/progressApi";
+import { A1P_GATE, A1P_MIDPOINT } from "./a1p";
+import { A2_GATE, A2_MIDPOINT } from "./a2";
 import { A2P_GATE, A2P_MIDPOINT } from "./a2p";
 import { B1_GATE, B1_MIDPOINT } from "./b1";
 import { B1P_GATE, B1P_MIDPOINT } from "./b1p";
@@ -10,7 +12,7 @@ import { C1_GATE, C1_MIDPOINT } from "./c1";
 import { C2_GATE, C2_MIDPOINT } from "./c2";
 import { READY_SHARE, type BandAssessment } from "./types";
 
-const ALL: BandAssessment[] = [A2P_MIDPOINT, A2P_GATE, B1_MIDPOINT, B1_GATE, B1P_MIDPOINT, B1P_GATE, B2_MIDPOINT, B2_GATE, B2P_MIDPOINT, B2P_GATE, C1_MIDPOINT, C1_GATE, C2_MIDPOINT, C2_GATE];
+const ALL: BandAssessment[] = [A1P_MIDPOINT, A1P_GATE, A2_MIDPOINT, A2_GATE, A2P_MIDPOINT, A2P_GATE, B1_MIDPOINT, B1_GATE, B1P_MIDPOINT, B1P_GATE, B2_MIDPOINT, B2_GATE, B2P_MIDPOINT, B2P_GATE, C1_MIDPOINT, C1_GATE, C2_MIDPOINT, C2_GATE];
 
 export const assessmentFor = (band: BandId, kind: "midpoint" | "gate") => ALL.find((a) => a.band === band && a.kind === kind);
 
