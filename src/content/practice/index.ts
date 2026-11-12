@@ -1,3 +1,7 @@
+import { A2P_GRAMMAR } from "./a2p-grammar";
+import { A2P_WORDS } from "./a2p-words";
+import { A2P_COMMUNICATE } from "./a2p-communicate";
+import { A2P_ERRORS, A2P_SOUNDS } from "./a2p-sounds-errors";
 import { B1_GRAMMAR } from "./b1-grammar";
 import { B1_WORDS } from "./b1-words";
 import { B1_COMMUNICATE } from "./b1-communicate";
@@ -29,6 +33,7 @@ import type { BandId } from "../bands";
 import type { TreeId } from "../curriculum";
 
 const ALL: NodePractice[] = [
+  ...A2P_GRAMMAR, ...A2P_WORDS, ...A2P_COMMUNICATE, ...A2P_SOUNDS, ...A2P_ERRORS,
   ...B1_GRAMMAR, ...B1_WORDS, ...B1_COMMUNICATE, ...B1_SOUNDS, ...B1_ERRORS,
   ...B1P_GRAMMAR, ...B1P_WORDS, ...B1P_COMMUNICATE, ...B1P_SOUNDS, ...B1P_ERRORS,
   ...B2_GRAMMAR, ...B2_WORDS, ...B2_COMMUNICATE, ...B2_SOUNDS, ...B2_ERRORS,
@@ -44,6 +49,30 @@ export const practiceFor = (nodeId: string): NodePractice | undefined => PRACTIC
 export type Checkpoint = { id: string; band: BandId; tree: TreeId; title: string; story: string; nodeIds: string[]; afterIndex: number };
 
 export const CHECKPOINTS: Checkpoint[] = [
+  { id: "a2p-grammar-1", band: "A2+", tree: "grammar", title: "Boss 1: The Rainy Walk Home", afterIndex: 3,
+    story: "You were walking home when it started to rain. Tell what you have done, what happened and what you'll do next time.",
+    nodeIds: ["a2p.present-perfect-ever-never-just-already", "a2p.present-perfect-vs-past-simple", "a2p.past-continuous-with-when-while", "a2p.first-conditional"] },
+  { id: "a2p-grammar-2", band: "A2+", tree: "grammar", title: "Boss 2: Grandma's Photo Album", afterIndex: 7,
+    story: "Grandma shows you old photos. Who are these people, what did they use to do, and is there enough cake for everyone?",
+    nodeIds: ["a2p.relative-clauses-who-which-that-where", "a2p.used-to-for-past-habits", "a2p.might-may-for-possibility-too-enough", "a2p.quantifiers-a-few-a-little-none"] },
+  { id: "a2p-words-1", band: "A2+", tree: "words", title: "Boss 1: The Green Week", afterIndex: 2,
+    story: "It's Green Week at school. Describe the people, the plans and the things you'll make and do.",
+    nodeIds: ["a2p.personality-feelings-with-ed-ing-adjecti", "a2p.environment-basics-education-media-and-i", "a2p.common-adjective-noun-and-verb-noun"] },
+  { id: "a2p-words-2", band: "A2+", tree: "words", title: "Boss 2: The House Sitter", afterIndex: 4,
+    story: "You're looking after a neighbour's house. Follow the notes, and keep calm: it's a piece of cake!",
+    nodeIds: ["a2p.separable-vs-inseparable-introduction", "a2p.high-frequency-idioms"] },
+  { id: "a2p-communicate-1", band: "A2+", tree: "communicate", title: "Boss 1: The Class Debate", afterIndex: 1,
+    story: "Your class is debating a new rule. Give your opinion, tell a story to support it and ask when you don't understand.",
+    nodeIds: ["a2p.give-opinions-agree-and-disagree", "a2p.tell-a-story-in-sequence-ask-for-clarifi"] },
+  { id: "a2p-communicate-2", band: "A2+", tree: "communicate", title: "Boss 2: The Lost Library Card", afterIndex: 4,
+    story: "You lost your library card. Write to the school, ask adults for help and interrupt politely when you need to.",
+    nodeIds: ["a2p.semi-formal-email-to-a-teacher-or-school", "a2p.do-use-could-you-with-adults-and-strange", "a2p.do-interrupt-politely"] },
+  { id: "a2p-sounds-1", band: "A2+", tree: "sounds", title: "Boss: The Very Big Van", afterIndex: 1,
+    story: "A fast phone call about Victor's van. Catch the short words and every B and V.",
+    nodeIds: ["a2p.contractions-and-weak-forms", "a2p.b-vs-v"] },
+  { id: "a2p-errors-1", band: "A2+", tree: "errors", title: "Boss: The Pen Pal Letter", afterIndex: 3,
+    story: "Your pen pal's letter has some classic slips. Fix them before you reply.",
+    nodeIds: ["a2p.i-am-agree", "a2p.since-vs-for", "a2p.present-perfect-with-finished-time", "a2p.prepositions-after-verbs"] },
   { id: "b1-grammar-1", band: "B1", tree: "grammar", title: "Boss 1: The Band Diary", afterIndex: 2,
     story: "Your band has been practising for weeks, but the concert night went strangely. Tell the story, and imagine what you would change.",
     nodeIds: ["b1.present-perfect-continuous", "b1.past-perfect", "b1.second-conditional"] },
