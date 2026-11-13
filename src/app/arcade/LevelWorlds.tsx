@@ -7,6 +7,7 @@ import { WordTower } from "./WordTower";
 import { WordRain } from "./WordRain";
 import { CollocationCrush } from "./CollocationCrush";
 import { WordKitchen } from "./WordKitchen";
+import { GrammarGolf } from "./GrammarGolf";
 
 type Row = { game: LevelGame; band: string; level: number; stars: number; best: number };
 
@@ -14,13 +15,14 @@ const WORLDS: { id: LevelGame; name: string; blurb: string; emoji: string }[] = 
   { id: "tower", name: "Word Tower", blurb: "Pull out the blocks with mistakes before the tower falls.", emoji: "🧱" },
   { id: "rain", name: "Word Rain", blurb: "Catch the right word before it splashes on the city.", emoji: "🌧️" },
   { id: "kitchen", name: "Word Kitchen", blurb: "Customers' orders have mistakes. Cook the correct sentence before they leave.", emoji: "👩‍🍳" },
+  { id: "golf", name: "Grammar Golf", blurb: "Pick the right word to sink the ball. Hole-in-one streaks score big.", emoji: "⛳" },
   { id: "crush", name: "Collocation Crush", blurb: "Pop words that go together: make a mistake, heavy rain, highly recommended.", emoji: "🍬" },
 ];
 
 /** The two level-based games, each a path of seven levels per band, unlocked in order. */
 export function LevelWorlds({ start }: { start: number }) {
   const [rows, setRows] = useState<Row[]>([]);
-  const [band, setBand] = useState<Record<LevelGame, LevelBand>>({ tower: BANDS[start].id, rain: BANDS[start].id, crush: BANDS[start].id, kitchen: BANDS[start].id });
+  const [band, setBand] = useState<Record<LevelGame, LevelBand>>({ tower: BANDS[start].id, rain: BANDS[start].id, crush: BANDS[start].id, kitchen: BANDS[start].id, golf: BANDS[start].id });
   const [playing, setPlaying] = useState<{ game: LevelGame; band: LevelBand; level: number } | null>(null);
 
   const load = async () => {
@@ -79,6 +81,7 @@ export function LevelWorlds({ start }: { start: number }) {
         })}
       </div>
       {playing?.game === "tower" && <WordTower key={`${playing.band}-${playing.level}`} band={playing.band as BandId} level={playing.level} onClose={close} onLevel={(n) => { void load(); setPlaying({ ...playing, level: n }); }} />}
+      {playing?.game === "golf" && <GrammarGolf key={`${playing.band}-${playing.level}`} band={playing.band as BandId} level={playing.level} onClose={close} onLevel={(n) => { void load(); setPlaying({ ...playing, level: n }); }} />}
       {playing?.game === "kitchen" && <WordKitchen key={`${playing.band}-${playing.level}`} band={playing.band as BandId} level={playing.level} onClose={close} onLevel={(n) => { void load(); setPlaying({ ...playing, level: n }); }} />}
       {playing?.game === "crush" && <CollocationCrush key={`${playing.band}-${playing.level}`} band={playing.band as BandId} level={playing.level} onClose={close} onLevel={(n) => { void load(); setPlaying({ ...playing, level: n }); }} />}
       {playing?.game === "rain" && <WordRain key={`${playing.band}-${playing.level}`} band={playing.band} level={playing.level} onClose={close} onLevel={(n) => { void load(); setPlaying({ ...playing, level: n }); }} />}

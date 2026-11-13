@@ -4,13 +4,14 @@ import { NODES } from "../../content/curriculum";
 import type { BandId } from "../../content/bands";
 import { EXAM_SETS, setsFor, gapped, formIn, type VocabWord } from "../../content/vocab";
 
-export type LevelGame = "tower" | "rain" | "crush" | "kitchen";
+export type LevelGame = "tower" | "rain" | "crush" | "kitchen" | "golf";
 
 /** Name, life icon and the line shown when a level is lost. */
 export const GAME_META: Record<LevelGame, { name: string; life: string; lives: string; lost: string }> = {
   tower: { name: "Word Tower", life: "🧱", lives: "steadiness", lost: "The tower fell!" },
   rain: { name: "Word Rain", life: "❤️", lives: "lives", lost: "The city got soaked!" },
   crush: { name: "Collocation Crush", life: "", lives: "moves", lost: "Out of moves!" },
+  golf: { name: "Grammar Golf", life: "", lives: "strokes", lost: "Too many strokes!" },
   kitchen: { name: "Word Kitchen", life: "⭐", lives: "customer ratings", lost: "The restaurant closed early!" },
 };
 /** A band, or "EX" for the Exams & essays words (Word Rain only). */
@@ -34,6 +35,46 @@ for (const [id, p] of Object.entries(PRACTICE)) {
   const b = BAND_OF.get(id);
   if (!b) continue;
   for (const step of p.steps) for (const it of step) if (it.kind === "fix") (FIXES[b] ??= []).push(it);
+}
+
+/* ---------------- Grammar Golf ---------------- */
+
+/** One hole: a sentence with a gap and the clubs (options) to choose from. */
+export type Hole = { id: number; before: string; after: string; options: string[]; answer: string; why: string };
+
+const GAPS: Record<string, Hole[]> = {};
+{
+  let n = 0;
+  for (const [id, p] of Object.entries(PRACTICE)) {
+    const b = BAND_OF.get(id);
+    if (!b) continue;
+    for (const step of p.steps) for (const it of step) {
+      if (it.kind === "choice" && !it.audio && it.options.every((o) => o.split(" ").length <= 3)) {
+        const text = it.prompt.includes("___") ? it.prompt : it.context?.includes("___") ? it.context : null;
+        if (!text) continue;
+        const [before, after = ""] = text.split(/_{2,}/);
+        (GAPS[b] ??= []).push({ id: n++, before, after, options: it.options, answer: it.options[it.answer], why: it.why });
+      } else if (it.kind === "fix" && it.parts[it.wrong].split(" ").length <= 3 && it.accept[0].split(" ").length <= 3) {
+        // A fix-the-mistake sentence becomes a two-club hole: the mistake or the correction.
+        const before = it.parts.slice(0, it.wrong).join(" ");
+        const after = it.parts.slice(it.wrong + 1).join(" ");
+        const right = it.accept[0].replace(/[,.!?;:]+$/, "");
+        const wrong = it.parts[it.wrong].replace(/[,.!?;:]+$/, "");
+        if (right.toLowerCase() === wrong.toLowerCase()) continue;
+        const tail = it.parts[it.wrong].match(/[,.!?;:]+$/)?.[0] ?? "";
+        (GAPS[b] ??= []).push({ id: n++, before, after: tail + (after ? " " + after : ""), options: [right, wrong], answer: right, why: it.why });
+      }
+    }
+  }
+}
+
+export const golfShape = (level: number) => ({ holes: level === 7 ? 9 : 6, par: 2 });
+
+export function buildGolf(band: BandId, level: number): Hole[] {
+  const { holes } = golfShape(level);
+  // Later levels prefer holes with more clubs (harder to get a hole-in-one).
+  const pool = shuffle(GAPS[band] ?? []).sort((a, b) => (level >= 4 ? b.options.length - a.options.length : 0));
+  return pool.slice(0, holes).map((h) => ({ ...h, options: shuffle(h.options) }));
 }
 
 /* ---------------- Word Kitchen ---------------- */
@@ -112,6 +153,7 @@ export const starsFrom = (cleared: boolean, hearts: number) => (cleared ? Math.m
 export const LEVEL_NAMES: Record<LevelGame, string[]> = {
   tower: ["Wobbly start", "Two floors up", "Windy day", "Night shift", "Earthquake drill", "Sky high", "The Great Tower"],
   rain: ["Light drizzle", "Showers", "Downpour", "Thunder", "Hailstorm", "Monsoon", "The Storm Boss"],
+  golf: ["Practice green", "Palm Hills", "Windy links", "Lake course", "Desert dunes", "Mountain pass", "The Championship"],
   kitchen: ["Opening day", "Lunch rush", "Food critic", "Family dinner", "Busy Friday", "Wedding party", "The Master Chef"],
   crush: ["Sweet start", "Sugar rush", "Double trouble", "Candy cave", "Combo canyon", "Sticky situation", "The Big Crush"],
 };

@@ -215,3 +215,33 @@
 .wk-word:focus-visible { outline: 3px solid #1c2f57; outline-offset: 2px; }
 .wk-actions { display: flex; gap: var(--s-2); justify-content: center; }
 @media (max-width: 520px) { .wk-face { width: 64px; height: 64px; font-size: 2.4rem; } .wk-ticket p { font-size: var(--step-0); } .wk-word { font-size: var(--step--1); } }
+
+/* ---------- Grammar Golf ---------- */
+.lw-world.is-golf { background: linear-gradient(160deg, #9be27a 0%, #3d9a3a 55%, #1f5a24 100%); }
+.gk-golf { background: linear-gradient(180deg, #bfe7ff 0%, #e6f7ff 35%, #a9df8c 35.1%, #7cc65d 100%); }
+.gg { display: grid; gap: var(--s-3); width: min(760px, 100%); justify-self: center; align-self: start; }
+.gg-card { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; }
+.gg-card span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-weight: 900; }
+.gg-card span.is-now { background: #ffd95c; }
+.gg-card span.is-ace { background: #7ee08a; }
+.gg-sentence { margin: 0; padding: var(--s-3) var(--s-4); border-radius: 18px; background: #fff; border: 3px solid var(--ink); box-shadow: 0 5px 0 var(--ink); font: 700 var(--step-1) / 1.5 var(--font-display); text-align: center; }
+.gg-gap { display: inline-block; min-width: 4ch; margin: 0 0.25em; padding: 0 0.4em; border-bottom: 3px dashed #3d9a3a; color: #3d9a3a; }
+.gg-gap.is-filled { border-bottom-style: solid; background: #dff6e3; border-radius: 6px; }
+.gg-course { position: relative; height: 210px; border-radius: 26px; background: radial-gradient(ellipse at 80% 25%, #b8f09a 0 16%, transparent 17%), repeating-linear-gradient(100deg, #6fbf4f 0 30px, #64b247 30px 60px); border: 3px solid #2f6b22; overflow: hidden; }
+.gg-sand { position: absolute; width: 18%; height: 16%; border-radius: 50%; background: #f1dc9a; box-shadow: inset 0 -4px 0 #d8bf73; }
+.gg-water { position: absolute; width: 18%; height: 16%; border-radius: 45%; background: #4aa3df; box-shadow: inset 0 -4px 0 #2f7fb5; }
+.gg-flag { position: absolute; left: 78%; top: 2%; font-size: 2.6rem; }
+.gg-ball { position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: #fff; border: 2px solid #4a5a70; box-shadow: 0 3px 0 rgba(0,0,0,0.25); transition: left 0.7s cubic-bezier(.3,.6,.4,1), top 0.7s cubic-bezier(.2,-0.6,.6,1); z-index: 2; }
+.gg-ball.is-in { transform: scale(0.4); opacity: 0.6; transition: transform 0.3s, opacity 0.3s; }
+.gg-ball.is-hazard { animation: gg-plop 0.4s; }
+@keyframes gg-plop { 50% { transform: scale(1.5); } }
+.gg-msg { min-height: 2.6rem; padding: 0.45rem 0.9rem; border-radius: 14px; font-weight: 800; text-align: center; background: rgba(255,255,255,0.8); border: 2px solid var(--ink); }
+.gg-msg.is-ok { background: #dff6e3; color: #17602c; border-color: #17602c; }
+.gg-msg.is-no { background: #fff; color: #8a2a00; border-color: #8a2a00; }
+.gg-clubs { display: flex; flex-wrap: wrap; gap: var(--s-2); justify-content: center; }
+.gg-club { padding: 0.6rem 1.1rem; border-radius: 14px; border: 3px solid var(--ink); background: #fff; color: var(--ink); font: 900 var(--step-1) / 1.1 var(--font-display); box-shadow: 0 5px 0 var(--ink); cursor: pointer; }
+.gg-club:hover:not(:disabled) { background: #fff7cc; transform: translateY(-2px); }
+.gg-club:disabled { cursor: default; }
+.gg-club.is-used { opacity: 0.35; text-decoration: line-through; box-shadow: none; }
+.gg-club:focus-visible { outline: 3px solid #1c2f57; outline-offset: 2px; }
+@media (max-width: 520px) { .gg-course { height: 150px; } .gg-sentence, .gg-club { font-size: var(--step-0); } }
