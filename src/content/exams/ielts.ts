@@ -335,11 +335,68 @@ const S4 = lfill("s4", "A lecture on bird migration", S4_AUDIO, ONE, 2, "Bird mi
   ["The biggest threat: loss of ___", ["habitat"], "\"The biggest threat is the loss of habitat.\""],
 ]);
 
+/* Extra recordings for the trainers only (not in the full test). */
+const S1B = lfill("s1b", "Bike hire booking", talk("s1b", V.jessica, V.noah, [
+  ["W", "Good morning, City Bike Hire. How can I help?"],
+  ["M", "Hello. I'd like to hire some bikes for my family while we're here on holiday."],
+  ["W", "Of course. Can I start with your surname?"],
+  ["M", "It's Brennan. B, R, E, N, N, A, N."],
+  ["W", "Thank you, Mr Brennan. And your nationality?"],
+  ["M", "We're Irish. We're from Cork."],
+  ["W", "Lovely. Where are you staying?"],
+  ["M", "At the Harbour Hotel, near the old port."],
+  ["W", "And how long would you like the bikes for?"],
+  ["M", "For a week, I think. Actually, no, we leave on Saturday, so five days."],
+  ["W", "Five days. And what kind of bikes? We have mountain bikes, city bikes and electric bikes."],
+  ["M", "The city has a lot of hills, doesn't it? I think we'll take electric bikes."],
+  ["W", "Good idea. Do you need anything else?"],
+  ["M", "Yes, a seat for our little girl. She's three."],
+  ["W", "No problem, a child seat. When would you like to pick them up?"],
+  ["M", "Tomorrow morning. Is nine o'clock OK?"],
+  ["W", "We open at half past nine, I'm afraid."],
+  ["M", "Then half past nine."],
+  ["W", "There's a deposit of fifty pounds, which you get back when you return the bikes."],
+  ["M", "Can I pay that in cash?"],
+  ["W", "We only take card for the deposit."],
+  ["M", "Card is fine."],
+  ["W", "When you finish, you can return the bikes here or at our shop at the train station."],
+  ["M", "The train station is perfect. We're catching a train on Saturday."],
+]), ONE, 2, "City Bike Hire: customer details", [
+  ["Surname: ___", ["Brennan"], "He spells it: B, R, E, N, N, A, N."],
+  ["Nationality: ___", ["Irish"], "\"We're Irish.\""],
+  ["Staying at: the ___ Hotel", ["Harbour", "Harbor"], "\"At the Harbour Hotel, near the old port.\""],
+  ["Length of hire: ___ days", ["5", "five"], "He says a week, then corrects himself: \"so five days\"."],
+  ["Type of bike: ___", ["electric"], "\"I think we'll take electric bikes.\""],
+  ["Extra: a child ___", ["seat"], "\"A seat for our little girl.\" \"A child seat.\""],
+  ["Pick-up time: ___", ["9:30", "half past nine", "9.30"], "Nine o'clock is too early; they open at half past nine."],
+  ["Deposit: £___", ["50", "fifty"], "\"A deposit of fifty pounds.\""],
+  ["Deposit paid by: ___", ["card", "credit card"], "Cash isn't accepted: \"We only take card for the deposit.\""],
+  ["Return bikes to the shop at the ___ station", ["train"], "\"Our shop at the train station.\""],
+]);
+const S4B = lfill("s4b", "A lecture on the history of chocolate", mono("s4b", V.noah, [
+  "Today we're going to look at the history of chocolate. Chocolate comes from the seeds of the cacao tree, which grows naturally in the tropical forests of Central and South America. In fact, recent research in Ecuador suggests that people were using cacao more than five thousand years ago.",
+  "The Maya, and later the Aztecs, prepared cacao as a drink, not as a solid food. It was bitter, not sweet, and was often mixed with chilli and maize. Cacao beans were so valuable to the Aztecs that they were used as money: a rabbit, for example, could cost about ten beans.",
+  "When the Spanish brought cacao to Europe in the sixteenth century, Europeans added sugar to make the drink sweeter, and it became fashionable among rich people.",
+  "The big change came in the nineteenth century. In 1828, a Dutch chemist invented a machine that pressed the fat, called cocoa butter, out of the beans, leaving a powder that was easier to mix. This made it possible, in 1847, for a British company to make the first chocolate bar.",
+  "Today, most of the world's cacao is grown not in the Americas but in West Africa, especially in Ivory Coast and Ghana. Many cacao farmers earn very little, which is why some consumers choose chocolate with a fair trade label.",
+]), ONE, 2, "The history of chocolate", [
+  ["Cacao grows naturally in the tropical ___ of Central and South America.", ["forests", "forest"], "\"The tropical forests of Central and South America.\""],
+  ["Research in ___ shows cacao was used over 5,000 years ago.", ["Ecuador"], "\"Recent research in Ecuador.\""],
+  ["The Maya and Aztecs' cacao drink tasted ___.", ["bitter"], "\"It was bitter, not sweet.\""],
+  ["It was often mixed with chilli and ___.", ["maize", "corn"], "\"Mixed with chilli and maize.\""],
+  ["The Aztecs used cacao beans as ___.", ["money"], "\"They were used as money.\""],
+  ["In Europe, people added ___ to the drink.", ["sugar"], "\"Europeans added sugar.\""],
+  ["1828: a machine pressed out the cocoa ___.", ["butter"], "\"The fat, called cocoa butter.\""],
+  ["The first chocolate bar was made in ___.", ["1847"], "\"In 1847, … the first chocolate bar.\""],
+  ["Today most cacao is grown in West ___.", ["Africa"], "\"Most of the world's cacao is grown … in West Africa.\""],
+  ["Some people buy chocolate with a fair ___ label.", ["trade"], "\"A fair trade label.\""],
+]);
+
 export const IELTS_BANK: Record<number, ExamBlock[]> = {
-  5: [S1],
+  5: [S1, S1B],
   6: [S2_MC, S3_MC],
   7: [S3_MATCH, S2_MATCH],
-  8: [S4],
+  8: [S4, S4B],
   1: [P1_TF, P3_TF],
   2: [P2_HEAD, P4_HEAD],
   3: [P1_FILL, P3_FILL],
@@ -353,7 +410,7 @@ export const IELTS_TESTS: IeltsTest[] = [
 ];
 
 /** Every recording, for generating the audio later. */
-export const IELTS_CLIPS: AudioClip[] = [...S1_AUDIO, ...S2_AUDIO, ...S3_AUDIO, ...S4_AUDIO];
+export const IELTS_CLIPS: AudioClip[] = [...S1_AUDIO, ...S2_AUDIO, ...S3_AUDIO, ...S4_AUDIO, ...(S1B.audio ?? []), ...(S4B.audio ?? [])];
 
 /** Official Academic Reading conversion: correct answers out of 40 → band. */
 const READING_BANDS: [number, number][] = [[39, 9], [37, 8.5], [35, 8], [33, 7.5], [30, 7], [27, 6.5], [23, 6], [19, 5.5], [15, 5], [13, 4.5], [10, 4], [8, 3.5], [6, 3], [4, 2.5], [0, 0]];

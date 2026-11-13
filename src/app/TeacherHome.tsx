@@ -14,6 +14,7 @@ import { TreeView } from "./map/TreeView";
 import { GateReviews } from "./assess/GateReviews";
 import { PracticeReviews } from "./practice/PracticeReviews";
 import { IcfesOverview } from "./exams/IcfesOverview";
+import { ExamOverview } from "./exams/ExamOverview";
 import "./exams/exams.css";
 import type { AssessmentRow } from "../lib/progressApi";
 
@@ -135,6 +136,7 @@ export function TeacherHome() {
 
         <PracticeReviews subs={subs} classes={classes} students={students} onChanged={() => void load()} />
         <IcfesOverview classes={classes} students={students} />
+        <ExamOverview classes={classes} students={students} />
 
         {reviewStudent && (
           <Review

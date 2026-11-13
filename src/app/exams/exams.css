@@ -211,3 +211,4 @@
 .ex-chip:focus-visible { outline: none; box-shadow: var(--focus); }
 .ex-chip.is-placed { background: var(--ink); color: var(--white); }
 .ex-chip:disabled { cursor: default; }
+.ov-controls { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
