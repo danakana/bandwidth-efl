@@ -81,7 +81,7 @@ const greet: NodePractice = {
 const likes: NodePractice = {
   nodeId: "a1p.express-likes-and-dislikes",
   explain: "Say what you like with love, like, don't like, hate. After these verbs, use a noun or verb-ing: 'I love basketball.' 'I hate getting up early.' Make it stronger or softer: I really like, I quite like, I don't like … very much. Ask: Do you like …? What about you?",
-  pattern: ["♥♥ I love … · ♥ I like … · ✗ I don't like … · ✗✗ I hate …", "+ noun: I like pizza.", "+ verb-ing: I love dancing.", "Ask: Do you like …? What about you?"],
+  pattern: ["++ I love … · + I like … · − I don't like … · −− I hate …", "+ noun: I like pizza.", "+ verb-ing: I love dancing.", "Ask: Do you like …? What about you?"],
   es: "«Me gusta» = I like (yo soy el sujeto). No digas 'Me like'. Y para la tercera persona: she likes.",
   steps: [
     [

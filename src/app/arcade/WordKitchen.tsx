@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { BandId } from "../../content/bands";
+import { Customer } from "./GameArt";
 import { EndScreen, GameShell, sfx, type Learnt } from "./GameKit";
 import { buildKitchen, kitchenShape, starsFrom } from "./levels";
 
@@ -7,7 +8,6 @@ import { buildKitchen, kitchenShape, starsFrom } from "./levels";
  * Word Kitchen: customers hand in messy orders (a sentence with a mistake). Cook the correct sentence
  * from the word ingredients on the counter, avoiding the rotten one, and serve it before they lose patience.
  */
-const FACES = ["👩🏽", "👨🏾", "🧕🏻", "👵🏼", "🧑🏻‍🦱", "👨🏻‍🦰", "👩🏿‍🦳", "🧒🏽"];
 const norm = (s: string) => s.toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, " ").trim();
 
 export function WordKitchen({ band, level, onClose, onLevel }: { band: BandId; level: number; onClose: (changed: boolean) => void; onLevel: (n: number) => void }) {
@@ -73,7 +73,7 @@ export function WordKitchen({ band, level, onClose, onLevel }: { band: BandId; l
 
   const restart = () => { setSeed((s) => s + 1); setO(0); setPlate([]); setHearts(3); setScore(0); setCombo(0); setMood("wait"); setNote(null); setLearnt([]); setDone(null); };
   const stars = starsFrom(done === "won", hearts);
-  const face = FACES[(o + seed) % FACES.length];
+  const face = o + seed * 3;
   const pct = Math.max(0, left / time);
 
   return (
@@ -84,7 +84,7 @@ export function WordKitchen({ band, level, onClose, onLevel }: { band: BandId; l
       ) : (
         <div className="wk">
           <div className="wk-customer">
-            <div className={`wk-face is-${mood}`} aria-hidden="true">{face}<span className="wk-mood">{mood === "happy" ? "😋" : mood === "angry" ? "😠" : pct < 0.3 ? "😤" : pct < 0.6 ? "😐" : "🙂"}</span></div>
+            <div className={`wk-face is-${mood}`} aria-hidden="true"><Customer seed={face} size={92} mood={mood === "happy" ? "happy" : mood === "angry" ? "angry" : pct < 0.3 ? "cross" : pct < 0.6 ? "meh" : "ok"} /></div>
             <div className="wk-ticket">
               <span className="wk-no">Order {o + 1} of {orders.length}</span>
               <p>"{order.messy}"</p>
@@ -109,7 +109,7 @@ export function WordKitchen({ band, level, onClose, onLevel }: { band: BandId; l
           </div>
           <div className="wk-actions">
             <button type="button" className="btn btn-ghost" onClick={() => setPlate([])} disabled={!plate.length || mood !== "wait"}>Clear plate</button>
-            <button type="button" className="btn btn-primary" onClick={serve} disabled={!plate.length || mood !== "wait"}>🍽️ Serve</button>
+            <button type="button" className="btn btn-primary" onClick={serve} disabled={!plate.length || mood !== "wait"}>Serve</button>
           </div>
         </div>
       )}

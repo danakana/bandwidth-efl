@@ -3,6 +3,7 @@ import type { BandId } from "../../content/bands";
 import { storiesFor } from "../../content/stories";
 import { EndScreen, GameShell, sfx, type Learnt } from "./GameKit";
 import { starsFrom } from "./levels";
+import { StoryCover } from "./GameArt";
 
 /**
  * Story Builder: a choose-your-own-adventure. At each step, pick what you do next. Two choices are good
@@ -61,7 +62,7 @@ export function StoryBuilder({ band, level, onClose, onLevel }: { band: BandId; 
       ) : (
         <article className="sb" aria-labelledby="sb-title">
           <div className="sb-book">
-            <div className="sb-art" aria-hidden="true">{story.emoji}</div>
+            <div className="sb-art" aria-hidden="true"><StoryCover index={level - 1} title={story.title} size={112} /></div>
             <h1 id="sb-title" className="sb-title">{story.title}</h1>
             <div className="sb-text" aria-live="polite">
               <p>{story.intro}</p>

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import type { BandId } from "../../content/bands";
+import { Club, GolfFlag } from "./GameArt";
 import { EndScreen, GameShell, sfx, type Learnt } from "./GameKit";
 import { buildGolf, golfShape } from "./levels";
 
@@ -78,14 +79,14 @@ export function GrammarGolf({ band, level, onClose, onLevel }: { band: BandId; l
           <div className="gg-course" aria-hidden="true">
             {HAZARDS.map((z, i) => <span key={i} className={`gg-${z.kind}`} style={{ left: `${z.x - 9}%`, top: `${z.y - 8}%` }} />)}
             <span className="gg-green" />
-            <span className="gg-flag">⛳</span>
+            <span className="gg-flag"><GolfFlag size={46} /></span>
             <span key={hazard} className={`gg-ball is-${ball.state}`} style={{ left: `${ball.x}%`, top: `${ball.y}%` }} />
           </div>
           <div className={`gg-msg${msg ? (msg.ok ? " is-ok" : " is-no") : ""}`} role="status">{msg?.text ?? "Choose your club."}</div>
           <div className="gg-clubs" role="group" aria-label="Clubs">
             {hole.options.map((o) => (
               <button key={o} type="button" className={`gg-club${tried.includes(o) ? " is-used" : ""}`} disabled={tried.includes(o) || ball.state === "flying" || ball.state === "in"} onClick={() => shoot(o)}>
-                <span aria-hidden="true">🏌️</span> {o}
+                <span aria-hidden="true" className="gg-ico"><Club size={20} /></span>{o}
               </button>
             ))}
           </div>

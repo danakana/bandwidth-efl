@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { supabase } from "../../lib/supabase";
 import { Icon } from "../../components/Icon";
+import { Life, Speaker } from "./GameArt";
 import { GAME_META, LEVEL_NAMES, LEVELS, type LevelBand, type LevelGame } from "./levels";
 
 /* ---------------- Sound: tiny synth blips, no files to download ---------------- */
@@ -37,7 +38,7 @@ export function SoundToggle() {
   return (
     <button type="button" className="gk-icon-btn" aria-pressed={!off} aria-label={off ? "Sound off" : "Sound on"}
       onClick={() => { const v = !off; setOff(v); try { localStorage.setItem("bw-sfx", v ? "off" : "on"); } catch { /* ignore */ } }}>
-      {off ? "🔇" : "🔊"}
+      <Speaker on={!off} />
     </button>
   );
 }
@@ -61,7 +62,7 @@ export function GameShell({ game, band, level, hearts, score, combo, onClose, ch
         <div className="gk-title"><strong>{LEVEL_NAMES[game][level - 1]}</strong><span>{band === "EX" ? "Exams & essays" : band} · Level {level}</span></div>
         {status ?? (
           <div className="gk-hearts" role="img" aria-label={`${hearts} ${GAME_META[game].lives} left`}>
-            {[0, 1, 2].map((i) => <span key={i} className={i < hearts ? "is-on" : ""} aria-hidden="true">{GAME_META[game].life}</span>)}
+            {[0, 1, 2].map((i) => { const k = GAME_META[game].life; return <span key={i} className={i < hearts ? "is-on" : ""} aria-hidden="true">{k && <Life kind={k} on={i < hearts} />}</span>; })}
           </div>
         )}
         <div className="gk-score" aria-live="off"><Icon name="star" size={16} fill /> {score}{combo > 1 && <em> ×{combo}</em>}</div>

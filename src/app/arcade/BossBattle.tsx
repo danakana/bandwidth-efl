@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { BandId } from "../../content/bands";
+import { Monster } from "./GameArt";
 import { EndScreen, GameShell, sfx, type Learnt } from "./GameKit";
 import { LEVEL_NAMES, bossShape, buildBoss, starsFrom } from "./levels";
 
@@ -7,8 +8,6 @@ import { LEVEL_NAMES, bossShape, buildBoss, starsFrom } from "./levels";
  * Boss Battles: every right answer is an attack on the monster (streaks land critical hits);
  * every wrong answer, or running out of time, lets the monster strike back.
  */
-const MONSTERS = ["👺", "🦠", "🧌", "🦉", "👻", "🧙", "🐉"];
-const HUES = [0, 120, 30, 260, 200, 300, 350];
 
 export function BossBattle({ band, level, onClose, onLevel }: { band: BandId; level: number; onClose: (changed: boolean) => void; onLevel: (n: number) => void }) {
   const [seed, setSeed] = useState(0);
@@ -76,8 +75,8 @@ export function BossBattle({ band, level, onClose, onLevel }: { band: BandId; le
               <span style={{ width: `${(hp / maxHp) * 100}%` }} />
               <b>{LEVEL_NAMES.boss[level - 1]}</b>
             </div>
-            <div className={`bb-monster is-${phase}`} style={{ ["--h" as string]: `${HUES[level - 1]}deg` }} aria-hidden="true">
-              <span>{MONSTERS[level - 1]}</span>
+            <div className={`bb-monster is-${phase}`} aria-hidden="true">
+              <Monster kind={level - 1} size={170} />
               {dmg && <em className={dmg.crit ? "is-crit" : ""}>{dmg.crit ? "CRITICAL! " : ""}-{dmg.n}</em>}
             </div>
             <div className="bb-timer" aria-hidden="true"><span style={{ width: `${(left / seconds) * 100}%` }} className={left < seconds * 0.3 ? "is-low" : ""} /></div>
@@ -90,7 +89,7 @@ export function BossBattle({ band, level, onClose, onLevel }: { band: BandId; le
                 <button key={o} type="button" disabled={phase !== "ask"}
                   className={`bb-opt${phase !== "ask" && o === a.answer ? " is-right" : ""}${phase === "hurt" && o === pick ? " is-wrong" : ""}`}
                   onClick={() => answer(o)}>
-                  <span className="bb-key" aria-hidden="true">{["⚔️", "🔥", "⚡", "🛡️"][i] ?? "✦"}</span>{o}
+                  <span className="bb-key" aria-hidden="true">{"ABCD"[i]}</span>{o}
                 </button>
               ))}
             </div>

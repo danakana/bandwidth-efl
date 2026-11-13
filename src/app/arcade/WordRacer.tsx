@@ -3,6 +3,7 @@ import type { BandId } from "../../content/bands";
 import { makeRecogniser } from "../practice/Items";
 import { overlap } from "../../lib/answers";
 import { say } from "../exams/ExamAudio";
+import { FinishFlag, Kart, Mic, Speaker } from "./GameArt";
 import { EndScreen, GameShell, sfx, type Learnt } from "./GameKit";
 import { buildRacer, racerShape } from "./levels";
 
@@ -109,10 +110,10 @@ export function WordRacer({ band, level, onClose, onLevel }: { band: BandId; lev
       ) : (
         <div className="pr">
           <div className="pr-track" aria-hidden="true">
-            {[{ x: rivals[0], car: "🚙", name: "Rival", you: false }, { x: me, car: "🏎️", name: "You", you: true }, { x: rivals[1], car: "🚕", name: "Rival", you: false }].map((c, k) => (
+            {[{ x: rivals[0], car: "#49b8f2", name: "Rival", you: false }, { x: me, car: "#ff3d6e", name: "You", you: true }, { x: rivals[1], car: "#ffd95c", name: "Rival", you: false }].map((c, k) => (
               <div key={k} className={`pr-lane${c.you ? " is-you" : ""}`}>
-                <span key={c.you ? boost : 0} className={`pr-car${c.you && boost ? " is-boost" : ""}`} style={{ left: pos(c.x) }}>{c.car}<small>{c.name}</small></span>
-                <span className="pr-finish">🏁</span>
+                <span key={c.you ? boost : 0} className={`pr-car${c.you && boost ? " is-boost" : ""}`} style={{ left: pos(c.x) }}><Kart color={c.car} size={c.you ? 58 : 50} /><small>{c.name}</small></span>
+                <span className="pr-finish"><FinishFlag size={26} /></span>
               </div>
             ))}
             {count > 0 && <div className="pr-count">{count}</div>}
@@ -121,10 +122,10 @@ export function WordRacer({ band, level, onClose, onLevel }: { band: BandId; lev
             <p className="pr-say">{canHear ? "Say this clearly:" : "Listen and type what you hear:"}</p>
             {canHear ? <p className="pr-target">{target}</p> : <p className="pr-target is-hidden">{"• ".repeat(Math.min(8, target.split(" ").length)).trim()}</p>}
             <div className="pr-actions">
-              <button type="button" className="btn btn-ghost" onClick={() => void say(target)} disabled={count > 0}>🔊 Hear it</button>
+              <button type="button" className="btn btn-ghost" onClick={() => void say(target)} disabled={count > 0}><Speaker on size={18} /> Hear it</button>
               {canHear ? (
                 <button type="button" className={`btn btn-primary pr-mic${state === "listening" ? " is-on" : ""}`} onClick={listen} disabled={count > 0 || state !== "idle" && state !== "heard"}>
-                  {state === "listening" ? "🎙️ Listening…" : "🎤 Say it"}
+                  <Mic size={18} /> {state === "listening" ? "Listening…" : "Say it"}
                 </button>
               ) : (
                 <form className="pr-type" onSubmit={(e) => { e.preventDefault(); if (typed.trim()) submitTyped(); }}>

@@ -151,7 +151,7 @@ export function WordSnake({ band, level, onClose, onLevel }: { band: LevelBand; 
               const x = i % N, y = Math.floor(i / N);
               const kind = cells.get(`${x},${y}`);
               const f = food.find((p) => p.x === x && p.y === y);
-              return <span key={i} className={`ws-cell${kind ? ` is-${kind}` : ""}${f ? " is-food" : ""}`}>{f ? f.ch : kind === "head" ? "👀" : ""}</span>;
+              return <span key={i} className={`ws-cell${kind ? ` is-${kind}` : ""}${f ? " is-food" : ""}`}>{f ? f.ch : kind === "head" ? <i className="ws-eyes" aria-hidden="true"><b /><b /></i> : ""}</span>;
             })}
             {paused && <button type="button" className="ws-start" onClick={() => setPaused(false)}>{typed === 0 && wi === 0 && hearts === 3 ? "Tap to start" : "Tap to go on"}<small>Arrow keys, swipe or the buttons below</small></button>}
           </div>

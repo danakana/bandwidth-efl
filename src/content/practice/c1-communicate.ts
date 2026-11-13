@@ -186,7 +186,7 @@ const styleShift: NodePractice = {
       { label: "A contraction or ellipsis in the message (it's, can't, no…!)", pattern: "\\b\\w+'(s|re|ve|ll|t|d|m)\\b|!", min: 1 },
     ],
     rubric: ["Each part sounds like its genre.", "I changed grammar and vocabulary, not just the tone.", "A reader could tell the genre without the label."],
-    model: "News: A concert by the Colombian band Los Rayos was cancelled last night after a power cut hit the city stadium. Around 20,000 fans had been waiting for over an hour. Organisers have promised full refunds, and a new date is expected to be announced next week.\n\nMessage: Concert's off!! Power cut, can you believe it? We waited for an hour in the rain for nothing 😭 They're giving refunds though. Want to go when they move it?\n\nStory: The lights died just as the crowd began to sing. For a moment there was only silence, then twenty thousand phones lit up the stadium like stars. Nobody knew whether to laugh or cry, so we did both, standing in the dark and singing every word.",
+    model: "News: A concert by the Colombian band Los Rayos was cancelled last night after a power cut hit the city stadium. Around 20,000 fans had been waiting for over an hour. Organisers have promised full refunds, and a new date is expected to be announced next week.\n\nMessage: Concert's off!! Power cut, can you believe it? We waited for an hour in the rain for nothing, ugh. They're giving refunds though. Want to go when they move it?\n\nStory: The lights died just as the crowd began to sing. For a moment there was only silence, then twenty thousand phones lit up the stadium like stars. Nobody knew whether to laugh or cry, so we did both, standing in the dark and singing every word.",
   },
 };
 

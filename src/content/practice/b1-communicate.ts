@@ -222,7 +222,7 @@ const formalEmail: NodePractice = {
       fix(["I look forward to", "hear", "from you."], 1, ["hearing"], "look forward to + -ing."),
       fix(["I'm writing to complain", "because the pizza was horrible lol.", "Yours faithfully, Ana"], 1, ["because the pizza was cold when it arrived.", "about the pizza, which was cold when it arrived."], "No slang; give a clear detail."),
       ch("Which is correct?", ["I would be grateful if you could call me.", "I would be grateful if you can calling me.", "I am grateful if you call me now."], 0, "would be grateful if you could + verb."),
-      ch("Which line does NOT belong in a formal email?", ["Thx for ur help 😊", "Thank you for your help.", "I look forward to hearing from you."], 0, "No abbreviations or emojis."),
+      ch("Which line does NOT belong in a formal email?", ["Thx for ur help :)", "Thank you for your help.", "I look forward to hearing from you."], 0, "No abbreviations or emojis."),
     ],
     [
       ch("Best first sentence for a complaint?", ["I am writing to complain about the late delivery of my order.", "You are the worst company ever and I hate your delivery service.", "Hi, so, about my thing that didn't come…"], 0, "Clear purpose."),

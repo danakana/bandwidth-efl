@@ -12,19 +12,20 @@ import { BossBattle } from "./BossBattle";
 import { WordSnake } from "./WordSnake";
 import { WordRacer } from "./WordRacer";
 import { StoryBuilder } from "./StoryBuilder";
+import { Crown, WorldIcon } from "./GameArt";
 
 type Row = { game: LevelGame; band: string; level: number; stars: number; best: number };
 
-const WORLDS: { id: LevelGame; name: string; blurb: string; emoji: string }[] = [
-  { id: "tower", name: "Word Tower", blurb: "Pull out the blocks with mistakes before the tower falls.", emoji: "🧱" },
-  { id: "rain", name: "Word Rain", blurb: "Catch the right word before it splashes on the city.", emoji: "🌧️" },
-  { id: "kitchen", name: "Word Kitchen", blurb: "Customers' orders have mistakes. Cook the correct sentence before they leave.", emoji: "👩‍🍳" },
-  { id: "story", name: "Story Builder", blurb: "Choose what happens next, but only sentences with no mistakes move the story on.", emoji: "📖" },
-  { id: "racer", name: "Pronunciation Racer", blurb: "Say it clearly and your car speeds ahead. Beat the rivals to the finish.", emoji: "🏎️" },
-  { id: "snake", name: "Word Snake", blurb: "Read the clue, then eat the letters in order to spell the word.", emoji: "🐍" },
-  { id: "boss", name: "Boss Battles", blurb: "Right answers are attacks. Beat seven monsters, up to the Grammar Dragon.", emoji: "🐉" },
-  { id: "golf", name: "Grammar Golf", blurb: "Pick the right word to sink the ball. Hole-in-one streaks score big.", emoji: "⛳" },
-  { id: "crush", name: "Collocation Crush", blurb: "Pop words that go together: make a mistake, heavy rain, highly recommended.", emoji: "🍬" },
+const WORLDS: { id: LevelGame; name: string; blurb: string }[] = [
+  { id: "tower", name: "Word Tower", blurb: "Pull out the blocks with mistakes before the tower falls." },
+  { id: "rain", name: "Word Rain", blurb: "Catch the right word before it splashes on the city." },
+  { id: "kitchen", name: "Word Kitchen", blurb: "Customers' orders have mistakes. Cook the correct sentence before they leave." },
+  { id: "story", name: "Story Builder", blurb: "Choose what happens next, but only sentences with no mistakes move the story on." },
+  { id: "racer", name: "Pronunciation Racer", blurb: "Say it clearly and your car speeds ahead. Beat the rivals to the finish." },
+  { id: "snake", name: "Word Snake", blurb: "Read the clue, then eat the letters in order to spell the word." },
+  { id: "boss", name: "Boss Battles", blurb: "Right answers are attacks. Beat seven monsters, up to the Grammar Dragon." },
+  { id: "golf", name: "Grammar Golf", blurb: "Pick the right word to sink the ball. Hole-in-one streaks score big." },
+  { id: "crush", name: "Collocation Crush", blurb: "Pop words that go together: make a mistake, heavy rain, highly recommended." },
 ];
 
 /** The two level-based games, each a path of seven levels per band, unlocked in order. */
@@ -57,7 +58,7 @@ export function LevelWorlds({ start }: { start: number }) {
           return (
             <article key={wd.id} className={`lw-world is-${wd.id}`}>
               <header className="lw-head">
-                <span className="lw-emoji" aria-hidden="true">{wd.emoji}</span>
+                <span className="lw-emoji" aria-hidden="true"><WorldIcon game={wd.id} size={52} /></span>
                 <div><h3>{wd.name}</h3><p>{wd.blurb}</p></div>
                 <span className="lw-total"><span aria-hidden="true">★</span> {total} / {LEVELS * 3}</span>
               </header>
@@ -76,7 +77,7 @@ export function LevelWorlds({ start }: { start: number }) {
                     <li key={lv} className={`lw-node${open ? "" : " is-locked"}${boss ? " is-boss" : ""}${st ? " is-done" : ""}`}>
                       <button type="button" disabled={!open} onClick={() => setPlaying({ game: wd.id, band: b, level: lv })}
                         aria-label={`Level ${lv}: ${LEVEL_NAMES[wd.id][i]}${open ? `, ${st} stars` : ", locked"}`}>
-                        {open ? (boss ? "👑" : lv) : <Icon name="lock" size={16} />}
+                        {open ? (boss ? <Crown size={24} /> : lv) : <Icon name="lock" size={16} />}
                       </button>
                       <span className="lw-stars" aria-hidden="true">{[1, 2, 3].map((s) => <i key={s} className={s <= st ? "is-on" : ""}>★</i>)}</span>
                       <span className="lw-name">{LEVEL_NAMES[wd.id][i]}</span>

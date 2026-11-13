@@ -106,7 +106,7 @@ const spectrum: NodePractice = {
       fix(["Owing to a failure in the system,", "the classes got cancelled lol."], 1, ["classes were suspended.", "classes were cancelled.", "the classes were suspended.", "the classes were cancelled."], "Keep the academic style consistent to the end."),
       fix(["My dearest cousin,", "hey, guess what,", "the waters have conquered our schoolhouse."], 1, ["I write with the most extraordinary news:", "I write with extraordinary news:"], "Keep the Victorian voice consistent."),
       ch("Which mixes styles badly by accident?", ["Dear Professor, the data is kinda sus, tbh.", "Dear Professor, the data appears unreliable.", "hey, the data looks a bit off tbh"], 0, "Academic opening, slang content."),
-      ch("Which text-message version is most natural?", ["no school tmrw!! pipes burst 😂", "Classes are hereby suspended until further notice.", "I write to inform thee of the school's closure."], 0, "Real text-speak."),
+      ch("Which text-message version is most natural?", ["no school tmrw!! pipes burst lol", "Classes are hereby suspended until further notice.", "I write to inform thee of the school's closure."], 0, "Real text-speak."),
       ch("What's wrong with this 'Victorian' letter: 'Dear cousin, school's off, cool.'?", ["It keeps modern slang and short sentences.", "It's much too long for a letter to a cousin.", "It uses 'Dear' at the start."], 0, "Change grammar and vocabulary, not just the greeting."),
     ],
     [
@@ -336,7 +336,7 @@ const tone: NodePractice = {
       fix(["As per my last email,", "the meeting is", "at ten."], 0, ["Just a quick reminder:", "Just to confirm,", "A quick reminder:"], "Replace a passive-aggressive phrase with a neutral one."),
       fix(["Please send the report by Friday,", "or else.", "Thanks!"], 1, ["if possible.", "please.", "so I can check it."], "'Or else' is a threat; replace it with something supportive."),
       fix(["Great job forgetting the tickets,", "Pablo.", "Very helpful."], 0, ["No worries about the tickets,", "Don't worry about the tickets,"], "Sarcasm in writing hurts; be direct or kind."),
-      ch("Which message reads the room badly (the team just lost a big client)?", ["LOL well that was a disaster 😂 pizza time!", "Tough day, team. Let's meet tomorrow to look at what we learnt.", "I know today was hard. Thank you for everything you put into this."], 0, "Humour at the wrong time."),
+      ch("Which message reads the room badly (the team just lost a big client)?", ["LOL well that was a disaster haha pizza time!", "Tough day, team. Let's meet tomorrow to look at what we learnt.", "I know today was hard. Thank you for everything you put into this."], 0, "Humour at the wrong time."),
       ch("Which is too soft for an urgent safety rule?", ["If it's not too much trouble, maybe consider wearing gloves?", "Gloves must be worn in the lab at all times.", "Please wear gloves in the lab. It's essential for your safety."], 0, "Some messages need to be direct."),
     ],
     [

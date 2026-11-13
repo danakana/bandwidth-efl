@@ -7,16 +7,16 @@ import { EXAM_SETS, setsFor, gapped, formIn, type VocabWord } from "../../conten
 export type LevelGame = "tower" | "rain" | "crush" | "kitchen" | "golf" | "boss" | "snake" | "racer" | "story";
 
 /** Name, life icon and the line shown when a level is lost. */
-export const GAME_META: Record<LevelGame, { name: string; life: string; lives: string; lost: string }> = {
-  tower: { name: "Word Tower", life: "🧱", lives: "steadiness", lost: "The tower fell!" },
-  rain: { name: "Word Rain", life: "❤️", lives: "lives", lost: "The city got soaked!" },
+export const GAME_META: Record<LevelGame, { name: string; life: "heart" | "block" | "star" | "page" | "snake" | "";  lives: string; lost: string }> = {
+  tower: { name: "Word Tower", life: "block", lives: "steadiness", lost: "The tower fell!" },
+  rain: { name: "Word Rain", life: "heart", lives: "lives", lost: "The city got soaked!" },
   crush: { name: "Collocation Crush", life: "", lives: "moves", lost: "Out of moves!" },
-  story: { name: "Story Builder", life: "📖", lives: "pages", lost: "The story fell apart!" },
+  story: { name: "Story Builder", life: "page", lives: "pages", lost: "The story fell apart!" },
   racer: { name: "Pronunciation Racer", life: "", lives: "", lost: "The others crossed the line first!" },
-  snake: { name: "Word Snake", life: "🐍", lives: "lives", lost: "Game over, snake!" },
-  boss: { name: "Boss Battles", life: "💖", lives: "hit points", lost: "The monster won this time!" },
+  snake: { name: "Word Snake", life: "snake", lives: "lives", lost: "Game over, snake!" },
+  boss: { name: "Boss Battles", life: "heart", lives: "hit points", lost: "The monster won this time!" },
   golf: { name: "Grammar Golf", life: "", lives: "strokes", lost: "Too many strokes!" },
-  kitchen: { name: "Word Kitchen", life: "⭐", lives: "customer ratings", lost: "The restaurant closed early!" },
+  kitchen: { name: "Word Kitchen", life: "star", lives: "customer ratings", lost: "The restaurant closed early!" },
 };
 /** A band, or "EX" for the Exams & essays words (Word Rain only). */
 export type LevelBand = BandId | "EX";
