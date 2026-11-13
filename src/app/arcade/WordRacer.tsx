@@ -112,7 +112,7 @@ export function WordRacer({ band, level, onClose, onLevel }: { band: BandId; lev
           <div className="pr-track" aria-hidden="true">
             {[{ x: rivals[0], car: "#49b8f2", name: "Rival", you: false }, { x: me, car: "#ff3d6e", name: "You", you: true }, { x: rivals[1], car: "#ffd95c", name: "Rival", you: false }].map((c, k) => (
               <div key={k} className={`pr-lane${c.you ? " is-you" : ""}`}>
-                <span key={c.you ? boost : 0} className={`pr-car${c.you && boost ? " is-boost" : ""}`} style={{ left: pos(c.x) }}><Kart color={c.car} size={c.you ? 58 : 50} /><small>{c.name}</small></span>
+                <span key={c.you ? boost : 0} className={`pr-car${c.you && boost ? " is-boost" : ""}`} style={{ left: pos(c.x) }}><Kart color={c.car} size={c.you ? 86 : 72} /><small>{c.name}</small></span>
                 <span className="pr-finish"><FinishFlag size={26} /></span>
               </div>
             ))}

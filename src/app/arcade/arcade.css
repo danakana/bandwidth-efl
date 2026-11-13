@@ -9,7 +9,7 @@
 @media (min-width: 820px) { .ar-games { grid-template-columns: repeat(3, 1fr); } }
 .ar-game {
   display: grid; gap: var(--s-3); align-content: start; padding: var(--s-5); border-radius: 24px;
-  background: var(--white); border: 2px solid var(--ink); box-shadow: 0 6px 0 var(--ink);
+  background: var(--white); border: 2px solid var(--g-edge); box-shadow: var(--g-lift);
 }
 .ar-game h2 { font-size: var(--step-2); }
 .ar-game p { margin: 0; }
@@ -36,7 +36,7 @@
 /* Shop */
 .sh-head { grid-template-columns: 1fr; align-items: end; }
 @media (min-width: 820px) { .sh-head { grid-template-columns: 1fr auto; } }
-.sh-me { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4); border-radius: 20px; background: var(--white); border: 2px solid var(--ink); box-shadow: 0 5px 0 var(--ink); }
+.sh-me { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4); border-radius: 20px; background: var(--white); border: 2px solid var(--g-edge); box-shadow: var(--g-lift); }
 .sh-me div { display: grid; gap: 2px; }
 .sh-balance { display: inline-flex; align-items: center; gap: 4px; font-weight: 800; }
 .sh-balance svg { color: #b8860b; }

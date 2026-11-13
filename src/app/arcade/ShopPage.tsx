@@ -4,10 +4,11 @@ import { useAuth } from "../../lib/auth";
 import { buy, equip } from "../../lib/progressApi";
 import { COLORS, FREEZE, ITEMS, TITLES, owns, rarity, type ShopItem } from "../../content/shop";
 import { Icon } from "../../components/Icon";
-import { WorldIcon } from "./GameArt";
+import { Chest, Coin, FreezeArt, WorldIcon } from "./GameArt";
 import { calm, tiltHandlers, useRolling } from "../../lib/motion";
 import "./arcade.css";
 import "./shop.css";
+import "./game-skin.css";
 
 /**
  * The shop as a collector's binder: foil skins, nameplate titles, game cartridges and a frost-blue freeze.
@@ -60,7 +61,7 @@ export function ShopPage() {
     return (
       <button type="button" className={`sp-btn${arming === it.id ? " is-arming" : ""}`} disabled={!!busy || full || poor}
         onClick={() => void purchase(it)} aria-label={arming === it.id ? `Confirm: spend ${it.price} coins on ${it.name}` : `Buy ${it.name} for ${it.price} coins`}>
-        {busy === it.id ? "…" : full ? "Full" : arming === it.id ? <>Confirm <Icon name="coin" size={15} /> {it.price}</> : <><Icon name="coin" size={15} /> {it.price}</>}
+        {busy === it.id ? "…" : full ? "Full" : arming === it.id ? <>Confirm <Coin size={20} /> {it.price}</> : <><Coin size={20} /> {it.price}</>}
       </button>
     );
   };
@@ -82,10 +83,11 @@ export function ShopPage() {
           <h1 id="sp-title">Spend your coins.</h1>
           <p>Skins, titles, games and streak freezes. Coins never buy progress: only practice moves you up a band.</p>
           <div className="sp-wallet">
-            <span className="sp-coins" aria-label={`${st.coins} coins`}><Icon name="coin" size={22} /><b aria-hidden="true">{coins}</b> coins</span>
+            <span className="sp-coins" aria-label={`${st.coins} coins`}><Coin size={30} /><b aria-hidden="true">{coins}</b> coins</span>
             <span className="sp-freezes"><Icon name="snow" size={18} /> {st.freezes} of 2 freezes</span>
           </div>
         </div>
+        <Chest size={170} className="sp-hero-chest" />
         <div className="sp-player-wrap">
           <article className={`sp-player${preview.color || preview.title ? " is-preview" : ""}`} style={{ "--skin": skin.grad, "--skin-ink": skin.ink } as CSSProperties} {...tiltHandlers(9)} aria-label={`Your player card: ${TITLES[titleId] ?? "Learner"}`}>
             <span className="sp-foil" aria-hidden="true" />
@@ -154,7 +156,7 @@ export function ShopPage() {
       <section className="sp-section" aria-labelledby="sp-freeze">
         <div className="sp-section-head"><h2 id="sp-freeze">Streak freeze</h2></div>
         <div className={`sp-frost${bought === FREEZE.id ? " is-bought" : ""}`}>
-          <span className="sp-frost-art" aria-hidden="true"><Icon name="snow" size={34} /></span>
+          <span className="sp-frost-art" aria-hidden="true"><FreezeArt size={72} /></span>
           <div><strong>{FREEZE.name}</strong><p>{FREEZE.blurb} You have {st.freezes}.</p></div>
           {action(FREEZE)}
           <Stamp id={FREEZE.id} />

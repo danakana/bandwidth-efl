@@ -8,6 +8,7 @@ import { GAMES, poolFor, type Game } from "./games";
 import { LevelWorlds } from "./LevelWorlds";
 import "./arcade.css";
 import "./games.css";
+import "./game-skin.css";
 
 export function ArcadePage({ start }: { start: number }) {
   const progress = useProgress();

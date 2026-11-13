@@ -1,0 +1,113 @@
+/* =====================================================================
+   Game skin: the polished layer that sits on top of games.css and shop.css.
+   Soft 3D surfaces (a light bottom edge + a real drop shadow) instead of thick
+   outlines, illustrated art on spotlit stages, and quiet glass HUD pills.
+   ===================================================================== */
+:root {
+  --g-edge: rgba(15, 36, 71, 0.08);
+  --g-lift: inset 0 -3px 0 rgba(15, 36, 71, 0.10), 0 10px 22px -10px rgba(10, 24, 52, 0.55), 0 2px 4px rgba(10, 24, 52, 0.12);
+  --g-lift-sm: inset 0 -2px 0 rgba(15, 36, 71, 0.10), 0 4px 10px -4px rgba(10, 24, 52, 0.45);
+  --g-glass: rgba(255, 255, 255, 0.14);
+  --g-night: #0e1f3d;
+}
+
+/* ---------- Art basics ---------- */
+.gart { display: block; object-fit: contain; user-select: none; -webkit-user-drag: none; }
+.gart-cust { position: relative; display: inline-grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 50% 35%, #fff 0%, #e9f1fb 70%); box-shadow: var(--g-lift-sm), 0 0 0 4px #fff; overflow: hidden; }
+.gart-cust .gart { width: 100%; height: 100%; transform: translateY(6%); }
+.gart-cust.is-happy { box-shadow: var(--g-lift-sm), 0 0 0 4px #7ee08a; animation: wk-bounce 0.6s; }
+.gart-cust.is-meh { box-shadow: var(--g-lift-sm), 0 0 0 4px #ffd95c; }
+.gart-cust.is-cross { box-shadow: var(--g-lift-sm), 0 0 0 4px #ff914d; }
+.gart-cust.is-angry { box-shadow: var(--g-lift-sm), 0 0 0 4px #ff3d6e; animation: cc-shake 0.45s; }
+.gart-cover { display: grid; place-items: center; border-radius: 10px 16px 16px 10px; box-shadow: inset 6px 0 0 rgba(0,0,0,0.12), var(--g-lift); }
+
+/* ---------- Level map: world cards ---------- */
+.lw-world { border: 0; box-shadow: 0 18px 40px -18px rgba(10, 24, 52, 0.7); isolation: isolate; }
+.lw-world::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(circle at 12% 0%, rgba(255,255,255,0.28), transparent 45%); pointer-events: none; }
+.lw-head { grid-template-columns: 96px 1fr auto; }
+.lw-emoji { width: 96px; height: 96px; margin: -10px 0 -14px -6px; display: grid; place-items: center; filter: drop-shadow(0 10px 12px rgba(0,0,0,0.3)); transition: transform 0.25s cubic-bezier(.3,1.5,.5,1); }
+.lw-emoji .gart { width: 100%; height: 100%; }
+.lw-world:hover .lw-emoji { transform: rotate(-4deg) scale(1.06); }
+.lw-head h3 { font-weight: 800; letter-spacing: -0.01em; }
+.lw-total { background: rgba(0, 0, 0, 0.22); backdrop-filter: blur(4px); }
+.lw-band select { border: 0; box-shadow: var(--g-lift-sm); }
+.lw-path::before { background: repeating-linear-gradient(90deg, rgba(255,255,255,0.55) 0 8px, transparent 8px 16px); height: 4px; top: calc(var(--s-2) + 27px); }
+.lw-node button { border: 0; background: linear-gradient(#fff3b8, #ffd24d); box-shadow: inset 0 -4px 0 rgba(160, 100, 0, 0.35), 0 8px 14px -6px rgba(0,0,0,0.55); }
+.lw-node button:active:not(:disabled) { box-shadow: inset 0 -1px 0 rgba(160, 100, 0, 0.35), 0 3px 6px -3px rgba(0,0,0,0.55); }
+.lw-node.is-done button { background: linear-gradient(#c9f7c4, #6fd67a); box-shadow: inset 0 -4px 0 rgba(20, 110, 40, 0.35), 0 8px 14px -6px rgba(0,0,0,0.55); }
+.lw-node.is-boss button { background: linear-gradient(#ffd0e6, #ff79b5); box-shadow: inset 0 -4px 0 rgba(160, 20, 90, 0.35), 0 8px 14px -6px rgba(0,0,0,0.55); }
+.lw-node.is-locked button { background: rgba(255,255,255,0.28); color: rgba(255,255,255,0.9); box-shadow: inset 0 0 0 2px rgba(255,255,255,0.35); }
+@media (max-width: 560px) { .lw-head { grid-template-columns: 72px 1fr; } .lw-emoji { width: 72px; height: 72px; } .lw-total { grid-column: 1 / -1; justify-self: start; } }
+
+/* ---------- In-game HUD ---------- */
+.gk-hud { gap: 10px; }
+.gk-icon-btn { border: 0; background: var(--g-glass); color: inherit; backdrop-filter: blur(8px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25); }
+.gk-tower .gk-icon-btn, .gk-kitchen .gk-icon-btn, .gk-snake .gk-icon-btn, .gk-crush .gk-icon-btn { background: rgba(255,255,255,0.75); color: var(--ink); box-shadow: var(--g-lift-sm); }
+.gk-title strong { font-weight: 800; letter-spacing: -0.01em; }
+.gk-hearts { padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,0.18); backdrop-filter: blur(6px); }
+.gk-score { background: rgba(10, 20, 45, 0.82); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); backdrop-filter: blur(6px); }
+
+/* ---------- End screen ---------- */
+.gk-end { border: 0; box-shadow: 0 30px 60px -24px rgba(10, 24, 52, 0.65); }
+.gk-end-kicker { font-weight: 800; letter-spacing: -0.02em; }
+
+/* ---------- Boss Battles: a spotlit stage ---------- */
+.gk-boss { background:
+  radial-gradient(ellipse 60% 45% at 50% 30%, rgba(167, 139, 250, 0.55), transparent 70%),
+  radial-gradient(circle at 50% 120%, #2a1060 0%, transparent 60%),
+  linear-gradient(180deg, #160a33 0%, #241052 55%, #0d0620 100%); }
+.bb-arena { position: relative; padding-top: var(--s-4); background: none; }
+.bb-arena::after { content: ""; position: absolute; bottom: 64px; left: 50%; width: min(300px, 70%); height: 34px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(ellipse, rgba(0,0,0,0.55), transparent 70%); z-index: 0; }
+.bb-monster { width: clamp(170px, 42vw, 230px); z-index: 1; filter: drop-shadow(0 16px 24px rgba(0,0,0,0.45)); }
+.bb-monster .gart { width: 100%; height: auto; }
+.bb-monster.is-hit .gart { animation: bb-hit 0.5s; }
+.bb-monster.is-hurt .gart { animation: bb-lunge 0.5s; }
+.bb-hpbar { border: 0; background: rgba(0,0,0,0.45); box-shadow: inset 0 0 0 2px rgba(255,255,255,0.25); height: 22px; }
+.bb-hpbar span { background: linear-gradient(180deg, #ff8fa8, #ff3d6e 55%, #d01f50); box-shadow: inset 0 3px 0 rgba(255,255,255,0.35); }
+.bb-hpbar b { line-height: 22px; }
+.bb-q { border: 0; border-radius: 26px; box-shadow: 0 24px 50px -20px rgba(0,0,0,0.7); }
+.bb-opt { border: 0; background: #f4f6fb; box-shadow: inset 0 -3px 0 rgba(15,36,71,0.10); padding: 0.8rem 1rem; transition: transform 0.12s, background 0.12s; }
+.bb-opt:hover:not(:disabled) { background: #ece6ff; }
+.bb-opt.is-right { background: #d9f6df; box-shadow: inset 0 -3px 0 #2f9e4a; }
+.bb-opt.is-wrong { background: #ffe3dc; box-shadow: inset 0 -3px 0 #d0491b; }
+.bb-key { background: linear-gradient(#fff3b8, #ffd24d); box-shadow: inset 0 -2px 0 rgba(160,100,0,0.35); }
+
+/* ---------- Word Kitchen ---------- */
+.gk-kitchen { background: radial-gradient(circle at 50% -10%, #fffaf0 0%, #ffe9c7 55%, #f7c98d 100%); }
+.wk-face { width: auto; height: auto; border: 0; background: none; box-shadow: none; font-size: inherit; }
+.wk-ticket { border: 0; border-radius: 14px; box-shadow: var(--g-lift); font-family: var(--font-body); }
+.wk-plate { border: 0; box-shadow: 0 14px 28px -14px rgba(10,24,52,0.5); }
+.wk-counter { border: 0; background: linear-gradient(#a26a36, #7b4b22); box-shadow: inset 0 4px 0 rgba(255,255,255,0.18), 0 14px 26px -14px rgba(0,0,0,0.6); }
+.wk-word { border: 0; background: #fff8d6; box-shadow: inset 0 -3px 0 rgba(150,100,0,0.25), 0 4px 8px -4px rgba(0,0,0,0.4); }
+
+/* ---------- Racer: a sunny track, not a grey car park ---------- */
+.gk-racer { background: radial-gradient(ellipse 70% 40% at 50% 0%, #ffd9a8, transparent 70%), linear-gradient(180deg, #ff9a5a 0%, #e8573a 40%, #7a2a2a 100%); }
+.pr-track { border: 0; background: linear-gradient(#7ccf63, #5bb348); box-shadow: 0 24px 50px -22px rgba(0,0,0,0.6); padding: 14px; }
+.pr-lane { height: 76px; border: 0; border-radius: 14px; background: linear-gradient(90deg, #3d4250 0 92%, transparent 92%), repeating-linear-gradient(0deg, #fff 0 10px, #222 10px 20px); box-shadow: inset 0 3px 0 rgba(255,255,255,0.08), inset 0 -3px 0 rgba(0,0,0,0.25); }
+.pr-lane + .pr-lane { margin-top: 2px; }
+.pr-lane.is-you { background: linear-gradient(90deg, #4a4f60 0 92%, transparent 92%), repeating-linear-gradient(0deg, #fff 0 10px, #222 10px 20px); outline: 3px solid #ffd95c; outline-offset: 2px; }
+.pr-car { top: -4px; filter: drop-shadow(0 8px 6px rgba(0,0,0,0.4)); }
+.pr-car .gart { width: 84px; height: 84px; margin: -6px 0 -16px; }
+.pr-car small { padding: 1px 6px; border-radius: 999px; background: rgba(0,0,0,0.55); }
+.pr-finish { display: none; }
+.pr-card { border: 0; border-radius: 26px; box-shadow: 0 24px 50px -20px rgba(0,0,0,0.6); }
+
+/* ---------- Shop ---------- */
+.sp-hero-chest { position: absolute; left: 47%; bottom: 18px; z-index: 0; filter: drop-shadow(0 18px 20px rgba(0,0,0,0.45)); transform: rotate(-6deg); pointer-events: none; }
+.sp-hero-copy, .sp-player-wrap { position: relative; z-index: 1; }
+@media (max-width: 819px) { .sp-hero-chest { display: none; } }
+.sp-coins .gart { margin: -6px 0; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.25)); }
+.sp-btn .gart { margin: -4px 0; }
+.sp-frost-art { width: 84px; height: 84px; background: none; border: 0; box-shadow: none; }
+.sp-frost-art .gart { filter: drop-shadow(0 8px 10px rgba(20,80,140,0.35)); }
+
+/* ---------- Story ---------- */
+.sb-art .gart-cover { transform: rotate(6deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lw-world:hover .lw-emoji { transform: none; }
+}
+
+/* Black outlines left over from the first game set */
+.bb-q, .sb-card { border: 0; }
+.sb-card { box-shadow: var(--g-lift); }
