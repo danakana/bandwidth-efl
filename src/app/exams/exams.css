@@ -189,3 +189,25 @@
 .ex-cue { padding: var(--s-4) var(--s-5); border: 3px solid var(--ink); border-radius: var(--r-md); background: var(--paper); }
 .ex-cue .ex-sq { font-size: var(--step-1); }
 .ex-cue ul { margin: var(--s-2) 0 0; padding-left: 1.4rem; display: grid; gap: var(--s-1); font: 600 var(--step-0) / 1.4 var(--font-body); }
+
+/* TOEFL: complete the words, build a sentence */
+.ex-words p { line-height: 2.4; }
+.ex-word { white-space: nowrap; font-weight: 700; }
+.ex-word-input { min-width: 3ch; height: 1.9em; margin-left: 1px; padding: 0 0.2em; border: 0; border-bottom: 2px solid var(--ink); border-radius: 3px 3px 0 0; background: var(--sky-soft); font: 700 var(--step-0) / 1 var(--font-body); color: var(--ink); }
+.ex-word-input:focus-visible { outline: none; box-shadow: var(--focus); }
+.ex-word-input.is-right { background: var(--good-tint); border-color: var(--good); }
+.ex-word-input.is-wrong { background: var(--try-tint); border-color: var(--try); }
+.ex-word-input:disabled { opacity: 1; color: var(--ink); -webkit-text-fill-color: var(--ink); }
+.ex-word-key { margin: 0; padding-left: 1.6rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--s-1) var(--s-4); }
+.ex-word-key .is-right strong { color: var(--good-ink, var(--ink)); }
+.ex-build { display: grid; gap: var(--s-2); }
+.ex-build-line { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); min-height: 56px; padding: var(--s-2) var(--s-3); border: 2px dashed var(--line); border-radius: var(--r-md); background: var(--white); }
+.ex-build-line.is-right { border-style: solid; border-color: var(--good); background: var(--good-tint); }
+.ex-build-line.is-wrong { border-style: solid; border-color: var(--try); background: var(--try-tint); }
+.ex-build-end { margin-left: calc(-1 * var(--s-2) + 2px); font-weight: 800; font-size: var(--step-1); }
+.ex-build-pool { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.ex-chip { min-height: 44px; padding: 0.3rem 0.9rem; border: 2px solid var(--ink); border-radius: var(--r-pill); background: var(--white); color: var(--ink); font: 700 var(--step-0) / 1.2 var(--font-body); cursor: pointer; }
+.ex-chip:hover { background: var(--sky-soft); }
+.ex-chip:focus-visible { outline: none; box-shadow: var(--focus); }
+.ex-chip.is-placed { background: var(--ink); color: var(--white); }
+.ex-chip:disabled { cursor: default; }

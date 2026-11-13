@@ -359,6 +359,6 @@ export const ICFES_MOCKS: Mock[] = [
 ];
 
 /** How many questions a block holds (an ordering task scores one point per sentence placed). */
-export const countQ = (b: ExamBlock) => (b.kind === "match" || b.kind === "list" || b.kind === "fill" ? b.items.length : b.kind === "order" ? b.sentences.length : b.questions.length);
+export const countQ = (b: ExamBlock) => (b.kind === "match" || b.kind === "list" || b.kind === "fill" || b.kind === "build" ? b.items.length : b.kind === "order" ? b.sentences.length : b.kind === "words" ? (b.text.match(/\[\[/g) ?? []).length : b.questions.length);
 
 export const ICFES: ExamConfig = { id: "icfes", label: "ICFES Saber 11", parts: ICFES_PARTS, neverBlank: true };

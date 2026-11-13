@@ -14,13 +14,14 @@ import { say } from "./ExamAudio";
 
 export type ProductionRun =
   | { kind: "writing"; exam: ProductionExam; test: boolean; title: string; set: WritingSet & { charts?: Partial<Record<number, ChartId>> }; parts: number[]; minutes?: number }
-  | { kind: "speaking"; exam: ProductionExam; test: boolean; title: string; set: SpeakingSet & { cues?: Partial<Record<number, string>> }; parts: number[] };
+  | { kind: "speaking"; exam: ProductionExam; test: boolean; title: string; set: SpeakingSet & { cues?: Partial<Record<number, string>>; repeat?: number[] }; parts: number[] };
 
 const partInfo = productionPart;
 /** What the teacher's mark is worth, in the student's words. */
 const MARK_NOTE: Record<ProductionExam, string> = {
   aptis: "up to 10 coins for each part, depending on your level (B1 = 6 coins).",
   ielts: "up to 10 coins for each part, depending on your band (band 6 = 6 coins).",
+  toefl: "up to 10 coins for each part, depending on your score (4 out of 6 = 6 coins).",
 };
 type Reward = { xp: number; coins: number; capped: boolean };
 /** Coins and XP for sending real work (the server checks the word count, once per piece). Never blocks sending. */
@@ -107,7 +108,19 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
         <section className="pt-card ex-intro">
           {run.test ? (
             <>
-              {run.exam === "aptis" ? (
+              {run.exam === "toefl" ? (
+                <>
+                  <p className="pt-kicker">TOEFL iBT · practice test</p>
+                  <h2>{run.title}</h2>
+                  <p className="pt-lede">An email (about 7 minutes) and an academic discussion post (about 10 minutes). Your teacher marks it and gives you a score out of 6.</p>
+                  <ul className="ex-tips">
+                    <li><strong>Email:</strong> answer every point, with the right tone for the person.</li>
+                    <li><strong>Discussion:</strong> give your opinion and add a new idea, not one a classmate already said.</li>
+                    <li><strong>Leave a minute to check</strong> verbs, spelling and punctuation.</li>
+                  </ul>
+                  {es && <p lang="es" className="es">Responde todos los puntos y agrega ideas nuevas en la discusión.</p>}
+                </>
+              ) : run.exam === "aptis" ? (
                 <>
                   <p className="pt-kicker">Aptis General · practice test</p>
                   <h2>{run.title}</h2>
@@ -158,6 +171,8 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
             {parts.some((p) => p.part === 14) && <li>Is your friend email informal, and your manager email formal with clear paragraphs?</li>}
             {parts.some((p) => p.part === 21) && <li>Task 1: did you write an overview of the main trends, and compare the numbers?</li>}
             {parts.some((p) => p.part === 22) && <li>Task 2: did you answer every part of the question, with examples?</li>}
+            {parts.some((p) => p.part === 31) && <li>Email: did you cover every point, with the right greeting and ending?</li>}
+            {parts.some((p) => p.part === 32) && <li>Discussion: did you add a new idea, not just repeat a classmate?</li>}
             <li>Did you use linking words: because, so, but, however, also?</li>
           </ul>
         </section>
@@ -175,7 +190,7 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
           <h2 id="wr-title">{part.intro}</h2>
         </header>
         {run.set.charts?.[part.part] && <Chart id={run.set.charts[part.part]!} />}
-        {part.email && <div className="ex-email" aria-label="Email from the club">{part.email.split("\n\n").map((para, k) => <p key={k}>{para}</p>)}</div>}
+        {part.email && <div className="ex-email" aria-label={part.part === 32 ? "The discussion" : "The email"}>{part.email.split("\n\n").map((para, k) => <p key={k}>{para}</p>)}</div>}
         <ol className="ex-items">
           {part.questions.map((q, n) => {
             const w = words(q);
@@ -235,6 +250,8 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
   const chunks = useRef<Blob[]>([]);
   const part = parts[pi];
   const four = !!part?.prep;
+  /** Listen and Repeat: the sentence is only heard, never shown. */
+  const repeat = !!part && !!run.set.repeat?.includes(part.part);
 
   useEffect(() => () => {
     rec.current?.state !== "inactive" && rec.current?.stop();
@@ -332,10 +349,12 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
         <section className="pt-card ex-intro">
           {run.test ? (
             <>
-              <p className="pt-kicker">{run.exam === "aptis" ? "Aptis General" : "IELTS Academic"} · practice test</p>
+              <p className="pt-kicker">{run.exam === "aptis" ? "Aptis General" : run.exam === "ielts" ? "IELTS Academic" : "TOEFL iBT"} · practice test</p>
               <h2>{run.title}</h2>
               <p className="pt-lede">{run.exam === "aptis"
                 ? "Four parts, about 12 minutes. Each question is read aloud, then the recording starts and a timer shows how long you have. Your teacher listens and gives you a level."
+                : run.exam === "toefl"
+                ? "Two parts, about 8 minutes. First you repeat seven sentences, then you answer four interview questions with no time to plan. Your teacher listens and gives you a score out of 6."
                 : "Three parts, about 12 minutes. Each question is read aloud, then the recording starts and a timer shows how long you have. In Part 2 you get one minute to plan. Your teacher listens and gives you a band."}</p>
               <ul className="ex-tips">
                 <li><strong>Find a quiet place</strong> and use headphones with a microphone if you can.</li>
@@ -387,13 +406,14 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
         {parts.length > 1 && <div className="pt-meter" aria-hidden="true">{parts.map((p, k) => <span key={p.part} className={k < pi ? "is-on" : k === pi ? "is-now" : ""} />)}</div>}
         <header className="ex-block-head">
           <p className="pt-kicker">{info.name} · {info.skill}</p>
-          <h2 id="sp-title">{four ? (run.set.cues?.[part.part] ? "Plan for one minute, then talk for up to two minutes" : "Plan, then answer all three questions") : `Question ${qi + 1} of ${part.questions.length}`}</h2>
+          <h2 id="sp-title">{repeat ? `Sentence ${qi + 1} of ${part.questions.length}: listen, then repeat` : four ? (run.set.cues?.[part.part] ? "Plan for one minute, then talk for up to two minutes" : "Plan, then answer all three questions") : `Question ${qi + 1} of ${part.questions.length}`}</h2>
         </header>
         {part.scenes && <div className={`ex-scenes${part.scenes.length > 1 ? " is-two" : ""}`}>{part.scenes.map((s) => <Scene key={s} id={s} />)}</div>}
         {four && run.set.cues?.[part.part]
           ? <div className="ex-cue"><p className="ex-sq">{run.set.cues[part.part]}</p><ul>{part.questions.map((x) => <li key={x.ask}>{x.ask}</li>)}</ul></div>
           : four
           ? <ol className="ex-sq-list">{part.questions.map((x) => <li key={x.ask}>{x.ask}</li>)}</ol>
+          : repeat ? <p className="ex-sq muted">{step === "reading" ? "Listen carefully…" : "Now repeat the sentence."}</p>
           : <p className="ex-sq">{q.ask}</p>}
         <div className={`ex-live is-${step}`} role="status" aria-live="polite">
           {step === "reading" && <><span className="ex-live-dot" aria-hidden="true" /> Listen to the question…</>}
@@ -403,7 +423,7 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
         {step === "prep" && <textarea className="pt-textarea" rows={4} aria-label="Notes (only for you, not sent)" placeholder="Key words for each question (only for you)" />}
         <div className="pt-actions">
           {step === "prep" && <button type="button" className="btn btn-primary" onClick={() => void advance()}>I'm ready, start recording</button>}
-          {step === "answer" && <button type="button" className="btn btn-ghost" onClick={() => void advance()}>{!four && qi < part.questions.length - 1 ? "I've finished, next question" : "I've finished"}</button>}
+          {step === "answer" && <button type="button" className="btn btn-ghost" onClick={() => void advance()}>{!four && qi < part.questions.length - 1 ? (repeat ? "Done, next sentence" : "I've finished, next question") : "I've finished"}</button>}
         </div>
       </section>
     </Shell>

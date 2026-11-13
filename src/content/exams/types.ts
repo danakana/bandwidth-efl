@@ -39,7 +39,17 @@ export type FillBlock = {
   notesTitle?: string;
   items: { id: string; prompt: string; accept: string[]; why: string }[];
 };
-export type ExamBlock = MatchBlock | ListBlock | TextBlock | OrderBlock | FillBlock;
+/**
+ * TOEFL "Complete the Words": a short text where words are cut; the first letters are shown.
+ * `text` marks each cut word as [[prefix|rest]]; students type the rest (or the whole word).
+ */
+export type WordsBlock = { kind: "words"; part: number; id: string; title: string; text: string };
+/** TOEFL "Build a Sentence": put the words in order to answer or ask something. */
+export type BuildBlock = {
+  kind: "build"; part: number; id: string; title: string;
+  items: { id: string; context: string; words: string[]; answers: string[]; end: string; why: string }[];
+};
+export type ExamBlock = MatchBlock | ListBlock | TextBlock | OrderBlock | FillBlock | WordsBlock | BuildBlock;
 
 export type PartInfo = {
   part: number; name: string; skill: string; task: string; options: number; approx: number;
@@ -49,4 +59,4 @@ export type PartInfo = {
 };
 
 /** Everything the runner needs to know about an exam. */
-export type ExamConfig = { id: "icfes" | "aptis" | "ielts"; label: string; parts: PartInfo[]; neverBlank: boolean };
+export type ExamConfig = { id: "icfes" | "aptis" | "ielts" | "toefl"; label: string; parts: PartInfo[]; neverBlank: boolean };

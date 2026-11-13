@@ -8,17 +8,16 @@ import { APTIS, APTIS_BANK, APTIS_TESTS } from "../../content/exams/aptis";
 import { IELTS, IELTS_BANK, IELTS_TESTS, ieltsBand } from "../../content/exams/ielts";
 import type { ExamConfig, PartInfo } from "../../content/exams/types";
 import { APTIS_SPEAKING, APTIS_S_PARTS, APTIS_WRITING, APTIS_W_PARTS } from "../../content/exams/aptis-production";
+import { TOEFL, TOEFL_BANK, TOEFL_SPEAKING, TOEFL_S_PARTS, TOEFL_TESTS, TOEFL_WRITING, TOEFL_W_PARTS, toeflBand } from "../../content/exams/toefl";
 import { IELTS_SPEAKING, IELTS_S_PARTS, IELTS_WRITING, IELTS_W_PARTS } from "../../content/exams/ielts-production";
 import { ExamRunner, type ExamRun } from "./ExamRunner";
 import { ProductionRunner, type ProductionRun } from "./ProductionRunner";
 import "./exams.css";
 
-type Row = { exam: "icfes" | "aptis" | "ielts"; mode: "part" | "section"; ref: string; score: number; total: number; by_part: Record<string, [number, number]>; created_at: string };
-type Which = "icfes" | "aptis" | "ielts";
+type Row = { exam: "icfes" | "aptis" | "ielts" | "toefl"; mode: "part" | "section"; ref: string; score: number; total: number; by_part: Record<string, [number, number]>; created_at: string };
+type Which = "icfes" | "aptis" | "ielts" | "toefl";
 
-const OTHER = [
-  { name: "TOEFL", blurb: "For universities in the US and beyond." },
-];
+const OTHER: { name: string; blurb: string }[] = [];
 const KEY = "bw-exam";
 
 /** Recent accuracy per part: the last five results that include it (practice and full tests). */
@@ -44,7 +43,7 @@ export function ExamsPage() {
   const [rows, setRows] = useState<Row[]>([]);
   const [run, setRun] = useState<ExamRun | null>(null);
   const [prod, setProd] = useState<ProductionRun | null>(null);
-  const [which, setWhich] = useState<Which>(() => { try { const v = localStorage.getItem(KEY); return v === "aptis" || v === "ielts" ? v : "icfes"; } catch { return "icfes"; } });
+  const [which, setWhich] = useState<Which>(() => { try { const v = localStorage.getItem(KEY); return v === "aptis" || v === "ielts" || v === "toefl" ? v : "icfes"; } catch { return "icfes"; } });
 
   const load = useCallback(async () => {
     const { data } = await supabase.from("exam_results").select("exam, mode, ref, score, total, by_part, created_at").order("created_at", { ascending: false }).limit(500);
@@ -55,7 +54,7 @@ export function ExamsPage() {
   function choose(w: Which) { setWhich(w); try { localStorage.setItem(KEY, w); } catch { /* private mode */ } }
 
   function practise(exam: ExamConfig, part: number) {
-    const bank = (exam.id === "icfes" ? ICFES_BANK : exam.id === "ielts" ? IELTS_BANK : APTIS_BANK)[part];
+    const bank = (exam.id === "icfes" ? ICFES_BANK : exam.id === "ielts" ? IELTS_BANK : exam.id === "toefl" ? TOEFL_BANK : APTIS_BANK)[part];
     const recent = rows.filter((r) => r.exam === exam.id && r.mode === "part" && r.ref === String(part)).length;
     const block = bank[(recent + Math.floor(Math.random() * bank.length)) % bank.length];
     const p = exam.parts.find((x) => x.part === part)!;
@@ -67,6 +66,8 @@ export function ExamsPage() {
   const writePart = (part: number) => setProd({ kind: "writing", exam: "aptis", test: false, title: `${APTIS_W_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(APTIS_WRITING), parts: [part] });
   const speakPart = (part: number) => setProd({ kind: "speaking", exam: "aptis", test: false, title: `${APTIS_S_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(APTIS_SPEAKING), parts: [part] });
   const ieWritePart = (part: number) => setProd({ kind: "writing", exam: "ielts", test: false, title: `IELTS ${IELTS_W_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(IELTS_WRITING), parts: [part] });
+  const tfWritePart = (part: number) => (part === 8 ? practise(TOEFL, 8) : setProd({ kind: "writing", exam: "toefl", test: false, title: `TOEFL ${TOEFL_W_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(TOEFL_WRITING), parts: [part] }));
+  const tfSpeakPart = (part: number) => setProd({ kind: "speaking", exam: "toefl", test: false, title: `TOEFL ${TOEFL_S_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(TOEFL_SPEAKING), parts: [part] });
   const ieSpeakPart = (part: number) => setProd({ kind: "speaking", exam: "ielts", test: false, title: `IELTS ${IELTS_S_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(IELTS_SPEAKING), parts: [part] });
 
   if (run) {
@@ -82,6 +83,7 @@ export function ExamsPage() {
         <button type="button" aria-pressed={which === "icfes"} onClick={() => choose("icfes")}>ICFES Saber 11</button>
         <button type="button" aria-pressed={which === "aptis"} onClick={() => choose("aptis")}>Aptis</button>
         <button type="button" aria-pressed={which === "ielts"} onClick={() => choose("ielts")}>IELTS</button>
+        <button type="button" aria-pressed={which === "toefl"} onClick={() => choose("toefl")}>TOEFL</button>
       </div>
 
       {which === "icfes" ? (
@@ -115,6 +117,51 @@ export function ExamsPage() {
               })}
             </div>
           </section>
+        </>
+      ) : which === "toefl" ? (
+        <>
+          <header className="ex-head">
+            <p className="pt-kicker">Exam prep</p>
+            <h1>TOEFL iBT</h1>
+            <p className="pt-lede">For universities in the US and around the world. Since January 2026 each section is scored from 1 to 6. Learn each task, then try a full test.</p>
+            {es && <p lang="es" className="es">Practica cada tarea y luego haz la prueba completa. Cada sección se califica de 1 a 6.</p>}
+          </header>
+          {(["Reading", "Listening"] as const).map((g) => (
+            <Fragment key={g}>
+              <PartList exam={{ ...TOEFL, parts: TOEFL.parts.filter((p) => p.group === g) }} rows={mine} title={g} onPractise={(p) => practise(TOEFL, p)} />
+              <div className="ex-mocks ex-aptis-tests">
+                {TOEFL_TESTS.filter((t) => t.group === g).map((t) => {
+                  const total = t.blocks.reduce((n, b) => n + countQ(b), 0);
+                  const b = best(t.id);
+                  return (
+                    <article key={t.id} className="class-card ex-mock">
+                      <TestRow name={t.name} total={total} minutes={t.minutes} best={b} extra={b !== null ? ` · about ${toeflBand(b, total)} of 6` : ""}
+                        onStart={() => setRun({ exam: TOEFL, mode: "section", ref: t.id, title: `TOEFL ${t.name}`, blocks: t.blocks, minutes: t.minutes })} />
+                    </article>
+                  );
+                })}
+              </div>
+            </Fragment>
+          ))}
+          <PartList exam={{ ...TOEFL, parts: [...TOEFL.parts.filter((p) => p.group === "Writing"), ...TOEFL_W_PARTS] }} rows={mine} title="Writing" onPractise={tfWritePart} />
+          <div className="ex-mocks ex-aptis-tests">
+            {TOEFL_WRITING.map((w, k) => (
+              <article key={w.id} className="class-card ex-mock">
+                <ProdRow name={`Writing test ${"AB"[k]}`} desc="Email and academic discussion · about 17 min · marked by your teacher"
+                  onStart={() => setProd({ kind: "writing", exam: "toefl", test: true, title: `TOEFL Writing test ${"AB"[k]}`, set: w, parts: [31, 32], minutes: 17 })} />
+              </article>
+            ))}
+          </div>
+          <PartList exam={{ ...TOEFL, parts: TOEFL_S_PARTS }} rows={[]} title="Speaking" onPractise={tfSpeakPart} />
+          <div className="ex-mocks ex-aptis-tests">
+            {TOEFL_SPEAKING.map((sp, k) => (
+              <article key={sp.id} className="class-card ex-mock">
+                <ProdRow name={`Speaking test ${"AB"[k]}`} desc="2 parts · about 8 min · recorded for your teacher"
+                  onStart={() => setProd({ kind: "speaking", exam: "toefl", test: true, title: `TOEFL Speaking test ${"AB"[k]}`, set: sp, parts: [33, 34] })} />
+              </article>
+            ))}
+          </div>
+          <p className="muted px-small">The real TOEFL adapts to you; these practice tests are fixed and shorter, so scores are a rough guide. Listening uses your device's voice until the recorded voices are ready.</p>
         </>
       ) : which === "ielts" ? (
         <>
@@ -211,6 +258,7 @@ export function ExamsPage() {
         </>
       )}
 
+      {OTHER.length > 0 && (
       <section className="home-section" aria-labelledby="ex-other-title">
         <h2 id="ex-other-title">More exams</h2>
         <ul className="ex-other">
@@ -219,6 +267,7 @@ export function ExamsPage() {
           ))}
         </ul>
       </section>
+      )}
     </div>
   );
 }
@@ -238,7 +287,7 @@ function PartList({ exam, rows, title, onPractise }: { exam: ExamConfig; rows: R
             <div className="ex-part-body">
               <h3>{exam.id === "icfes" || p.name === p.skill ? p.skill : `${p.name}: ${p.skill}`}</h3>
               <p>{p.task}</p>
-              <p className="muted px-small">{p.group === "Writing" || p.group === "Speaking" ? "Marked by your teacher" : <>≈{p.approx} questions</>}{p.options > 0 && <> · options A–{"ABCDEFGHIJ"[p.options - 1]}</>}{acc[k] !== null && <> · your recent score: <strong>{acc[k]}%</strong></>}</p>
+              <p className="muted px-small">{p.part >= 11 ? "Marked by your teacher" : <>≈{p.approx} questions</>}{p.options > 0 && <> · options A–{"ABCDEFGHIJ"[p.options - 1]}</>}{acc[k] !== null && <> · your recent score: <strong>{acc[k]}%</strong></>}</p>
             </div>
             <button type="button" className="btn btn-primary btn-sm" onClick={() => onPractise(p.part)}>Practise</button>
           </li>

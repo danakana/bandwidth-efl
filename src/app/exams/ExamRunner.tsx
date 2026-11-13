@@ -4,7 +4,8 @@ import { useAuth } from "../../lib/auth";
 import { Icon } from "../../components/Icon";
 import { countQ } from "../../content/exams/icfes";
 import { ieltsBand } from "../../content/exams/ielts";
-import type { AudioClip, ExamBlock, ExamConfig, ExamQ, FillBlock, MatchBlock, OrderBlock, PartInfo, TextBlock } from "../../content/exams/types";
+import type { AudioClip, BuildBlock, ExamBlock, ExamConfig, ExamQ, FillBlock, MatchBlock, OrderBlock, PartInfo, TextBlock, WordsBlock } from "../../content/exams/types";
+import { toeflBand } from "../../content/exams/toefl";
 import { ExamAudio, Transcript } from "./ExamAudio";
 
 const L = "ABCDEFGHIJ";
@@ -15,17 +16,27 @@ type PickFn = (id: string, v: number) => void;
 type Typed = Record<string, string>;
 type TypeFn = (id: string, v: string) => void;
 /** One scored answer: a choice (`answer`) or typed words (`accept`, at most `max` words). */
-type Key = { id: string; answer?: number; accept?: string[]; max?: number };
+type Key = { id: string; answer?: number; accept?: string[]; max?: number; words?: string[] };
+
+/** "Complete the Words" gaps: [[prefix|rest]] in the text. */
+const wordGaps = (b: WordsBlock) => [...b.text.matchAll(/\[\[([^|\]]+)\|([^\]]+)\]\]/g)].map((m, k) => ({ id: `${b.id}-${k + 1}`, pre: m[1], rest: m[2] }));
+/** Build a Sentence answers are stored as the chosen word positions, "3,0,2". */
+const builtText = (words: string[], t: string | undefined) => (t ?? "").split(",").filter(Boolean).map((i) => words[Number(i)]).join(" ");
 
 /** Every scored answer in a block. Order tasks score each position. */
 const qsOf = (b: ExamBlock): Key[] => (b.kind === "match" || b.kind === "list" ? b.items.map((x) => ({ id: x.id, answer: x.answer }))
   : b.kind === "fill" ? b.items.map((x) => ({ id: x.id, accept: x.accept, max: b.maxWords }))
+  : b.kind === "words" ? wordGaps(b).map((g) => ({ id: g.id, accept: [g.rest, g.pre + g.rest], max: 1 }))
+  : b.kind === "build" ? b.items.map((x) => ({ id: x.id, accept: x.answers, max: 99, words: x.words }))
   : b.kind === "order" ? b.sentences.map((_, pos) => ({ id: `${b.id}-${pos}`, answer: pos })) : b.questions);
 
 /** Typed answers: ignore case, extra spaces and punctuation around the words. */
 export const norm = (t: string) => t.toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9'%/\- ]+/g, " ").replace(/\s+/g, " ").trim();
 const nWords = (t: string) => norm(t).split(" ").filter(Boolean).length;
-const typedRight = (k: Key, t: string | undefined) => !!t && nWords(t) <= (k.max ?? 99) && k.accept!.some((a) => norm(a) === norm(t));
+const typedRight = (k: Key, raw: string | undefined) => {
+  const t = k.words ? builtText(k.words, raw) : raw;
+  return !!t && nWords(t) <= (k.max ?? 99) && k.accept!.some((a) => norm(a) === norm(t));
+};
 
 /** A fixed starting order for an order task: scrambled the same way every time, never already correct. */
 function scramble(b: OrderBlock): number[] {
@@ -211,6 +222,8 @@ function BlockView({ block, info, exam, onSwap, hideAudio, ...v }: ViewProps & {
         : block.kind === "order" ? <OrderView b={block} picks={v.picks} revealed={v.revealed} onSwap={onSwap} />
         : block.kind === "text" ? <TextView b={block} {...v} />
         : block.kind === "fill" ? <FillView b={block} {...v} />
+        : block.kind === "words" ? <WordsView b={block} {...v} />
+        : block.kind === "build" ? <BuildView b={block} {...v} />
         : (
           <ol className="ex-items">
             {block.items.map((x, n) => (
@@ -287,6 +300,84 @@ function FillView({ b, typed = {}, onType = () => {}, revealed }: ViewProps & { 
         </ol>
       </div>
     </>
+  );
+}
+
+/** TOEFL Complete the Words: type the end of each cut word, inside the text. */
+function WordsView({ b, typed = {}, onType = () => {}, revealed }: ViewProps & { b: WordsBlock }) {
+  const gaps = wordGaps(b);
+  let n = 0;
+  const parts = b.text.split(/(\[\[[^\]]+\]\])/);
+  return (
+    <>
+      <p className="ex-instruction"><strong>Type the missing letters to complete each word.</strong></p>
+      <article className="ex-text ex-words" aria-label={b.title}>
+        <h3>{b.title}</h3>
+        <p>
+          {parts.map((part, j) => {
+            if (!part.startsWith("[[")) return <Fragment key={j}>{part}</Fragment>;
+            const g = gaps[n++];
+            const k: Key = { id: g.id, accept: [g.rest, g.pre + g.rest], max: 1 };
+            const t = typed[g.id] ?? "";
+            const right = typedRight(k, t);
+            return (
+              <span key={j} className="ex-word">
+                <span aria-hidden="true">{g.pre}</span>
+                <input className={`ex-word-input${revealed ? (right ? " is-right" : " is-wrong") : ""}`} style={{ width: `${Math.max(3, g.rest.length + 1.5)}ch` }}
+                  value={t} disabled={revealed} aria-label={`Word ${n}: ${g.pre}…`} autoComplete="off" autoCapitalize="off" spellCheck={false}
+                  onChange={(e) => onType(g.id, e.target.value)} />
+              </span>
+            );
+          })}
+        </p>
+      </article>
+      {revealed && (
+        <ol className="ex-word-key" aria-label="Answers">
+          {gaps.map((g) => {
+            const right = typedRight({ id: g.id, accept: [g.rest, g.pre + g.rest], max: 1 }, typed[g.id]);
+            return <li key={g.id} className={right ? "is-right" : "is-wrong"}><strong>{g.pre}{g.rest}</strong>{!right && <span className="muted"> (you wrote: {g.pre}{typed[g.id]?.trim() || "…"})</span>}</li>;
+          })}
+        </ol>
+      )}
+    </>
+  );
+}
+
+/** TOEFL Build a Sentence: tap the words in order. */
+function BuildView({ b, typed = {}, onType = () => {}, revealed }: ViewProps & { b: BuildBlock }) {
+  return (
+    <ol className="ex-items">
+      {b.items.map((x, n) => {
+        const chosen = (typed[x.id] ?? "").split(",").filter(Boolean).map(Number);
+        const set = (list: number[]) => onType(x.id, list.join(","));
+        const right = typedRight({ id: x.id, accept: x.answers, max: 99, words: x.words }, typed[x.id]);
+        return (
+          <li key={x.id} className="ex-build">
+            <p className="pt-stem">{n + 1}. {x.context}</p>
+            <div className={`ex-build-line${revealed ? (right ? " is-right" : " is-wrong") : ""}`} aria-label="Your sentence">
+              {chosen.length === 0 && <span className="muted">Tap the words below in order.</span>}
+              {chosen.map((wi, pos) => (
+                <button key={`${wi}-${pos}`} type="button" className="ex-chip is-placed" disabled={revealed}
+                  aria-label={`Remove ${x.words[wi]}`} onClick={() => set(chosen.filter((_, p) => p !== pos))}>{pos === 0 ? x.words[wi][0].toUpperCase() + x.words[wi].slice(1) : x.words[wi]}</button>
+              ))}
+              {chosen.length > 0 && <span className="ex-build-end">{x.end}</span>}
+            </div>
+            {!revealed && (
+              <div className="ex-build-pool" role="group" aria-label="Words">
+                {x.words.map((w, wi) => chosen.includes(wi) ? null : (
+                  <button key={wi} type="button" className="ex-chip" onClick={() => set([...chosen, wi])}>{w}</button>
+                ))}
+              </div>
+            )}
+            {revealed && (
+              <div className={`ex-why${right ? " is-right" : ""}`} role="status">
+                <strong>{right ? "Right." : `The answer is: ${x.answers[0]}${x.end}`}</strong> {x.why}
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 
@@ -460,6 +551,7 @@ function Results({ run, picks, typed, total, correctIn, outcome, saveError }: {
   const [review, setReview] = useState(run.mode === "section");
   const aptis = run.exam.id === "aptis" && run.mode === "section";
   const ielts = run.exam.id === "ielts" && run.mode === "section";
+  const toefl = run.exam.id === "toefl" && run.mode === "section";
   return (
     <section className="pt-card ex-results" aria-labelledby="ex-res-title">
       <p className="pt-kicker">{run.title}</p>
@@ -470,6 +562,9 @@ function Results({ run, picks, typed, total, correctIn, outcome, saveError }: {
       )}
       {ielts && (
         <p className="ex-next"><strong>Estimated IELTS {run.ref.includes("listening") ? "Listening" : "Reading"} band: {ieltsBand(run.ref, score, total)}.</strong> <span className="muted">From the official table for 40 questions. Treat it as a guide: the real test is longer and harder to predict.</span></p>
+      )}
+      {toefl && (
+        <p className="ex-next"><strong>Rough TOEFL {run.ref.includes("listening") ? "Listening" : "Reading"} score: about {toeflBand(score, total)} out of 6.</strong> <span className="muted">A guide only: ETS doesn't publish a conversion table for the new scale, and the real test adapts to you.</span></p>
       )}
       {outcome && (
         <p className="ex-reward"><Icon name="bolt" size={18} /> +{outcome.xp} XP · <Icon name="coin" size={18} /> +{outcome.coins} coins{outcome.capped && <span className="muted"> (daily exam coins reached)</span>}</p>
