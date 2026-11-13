@@ -4,13 +4,14 @@ import { NODES } from "../../content/curriculum";
 import type { BandId } from "../../content/bands";
 import { EXAM_SETS, setsFor, gapped, formIn, type VocabWord } from "../../content/vocab";
 
-export type LevelGame = "tower" | "rain" | "crush";
+export type LevelGame = "tower" | "rain" | "crush" | "kitchen";
 
 /** Name, life icon and the line shown when a level is lost. */
 export const GAME_META: Record<LevelGame, { name: string; life: string; lives: string; lost: string }> = {
   tower: { name: "Word Tower", life: "🧱", lives: "steadiness", lost: "The tower fell!" },
   rain: { name: "Word Rain", life: "❤️", lives: "lives", lost: "The city got soaked!" },
   crush: { name: "Collocation Crush", life: "", lives: "moves", lost: "Out of moves!" },
+  kitchen: { name: "Word Kitchen", life: "⭐", lives: "customer ratings", lost: "The restaurant closed early!" },
 };
 /** A band, or "EX" for the Exams & essays words (Word Rain only). */
 export type LevelBand = BandId | "EX";
@@ -33,6 +34,22 @@ for (const [id, p] of Object.entries(PRACTICE)) {
   const b = BAND_OF.get(id);
   if (!b) continue;
   for (const step of p.steps) for (const it of step) if (it.kind === "fix") (FIXES[b] ??= []).push(it);
+}
+
+/* ---------------- Word Kitchen ---------------- */
+
+/** One order: the customer's messy sentence, the correct one as word ingredients, plus rotten decoys. */
+export type Order = { id: number; messy: string; target: string[]; decoys: string[]; why: string };
+
+export const kitchenShape = (level: number) => ({ orders: level === 7 ? 8 : 5, seconds: level === 7 ? 30 : 50 - level * 3, maxWords: level <= 2 ? 8 : level <= 4 ? 11 : 14 });
+
+export function buildKitchen(band: BandId, level: number): Order[] {
+  const { orders, maxWords } = kitchenShape(level);
+  const pool = shuffle(FIXES[band] ?? []).map((f) => ({ f, words: corrected(f).split(/\s+/) })).filter((x) => x.words.length >= 3 && x.words.length <= maxWords);
+  return pool.slice(0, orders).map(({ f, words }, i) => {
+    const bad = f.parts[f.wrong].split(/\s+/).filter((w) => !words.includes(w));
+    return { id: i, messy: f.parts.join(" ").replace(/\s+([,.!?;:])/g, "$1"), target: words, decoys: bad.slice(0, 2), why: f.why };
+  });
 }
 
 /** Put the correction in place, keeping punctuation the original part ended with. */
@@ -95,5 +112,6 @@ export const starsFrom = (cleared: boolean, hearts: number) => (cleared ? Math.m
 export const LEVEL_NAMES: Record<LevelGame, string[]> = {
   tower: ["Wobbly start", "Two floors up", "Windy day", "Night shift", "Earthquake drill", "Sky high", "The Great Tower"],
   rain: ["Light drizzle", "Showers", "Downpour", "Thunder", "Hailstorm", "Monsoon", "The Storm Boss"],
+  kitchen: ["Opening day", "Lunch rush", "Food critic", "Family dinner", "Busy Friday", "Wedding party", "The Master Chef"],
   crush: ["Sweet start", "Sugar rush", "Double trouble", "Candy cave", "Combo canyon", "Sticky situation", "The Big Crush"],
 };

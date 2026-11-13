@@ -99,10 +99,10 @@ export function EndScreen({ game, band, level, stars, score, learnt, onNext, onR
       {reward && (reward.xp > 0 || reward.coins > 0) && (
         <p className="ex-reward"><Icon name="bolt" size={18} /> +{reward.xp} XP{reward.coins > 0 && <> · <Icon name="coin" size={18} /> +{reward.coins} coins for {reward.new_stars} new {reward.new_stars === 1 ? "star" : "stars"}</>}</p>
       )}
-      {stars > 0 && stars < 3 && <p className="muted">{game === "crush" ? "Finish with more moves left" : `Lose fewer ${game === "tower" ? "blocks" : "lives"}`} to get 3 stars.</p>}
+      {stars > 0 && stars < 3 && <p className="muted">{game === "crush" ? "Finish with more moves left" : game === "kitchen" ? "Keep every customer happy" : `Lose fewer ${game === "tower" ? "blocks" : "lives"}`} to get 3 stars.</p>}
       {learnt.length > 0 && (
         <details className="gk-learnt" open={stars === 0}>
-          <summary>{game === "tower" ? "The mistakes and how to fix them" : game === "crush" ? "Pairs to remember" : "Words to look at again"} ({learnt.length})</summary>
+          <summary>{game === "tower" || game === "kitchen" ? "The mistakes and how to fix them" : game === "crush" ? "Pairs to remember" : "Words to look at again"} ({learnt.length})</summary>
           <ul>{learnt.map((l, i) => <li key={i}><strong>{l.text}</strong> <span>{l.note}</span></li>)}</ul>
         </details>
       )}
