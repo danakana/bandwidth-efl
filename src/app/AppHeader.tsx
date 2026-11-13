@@ -4,6 +4,8 @@ import { useProgress } from "../lib/progress";
 import { Icon } from "../components/Icon";
 import { COLORS, TITLES } from "../content/shop";
 import { useAppRoute } from "../lib/route";
+import { useRolling } from "../lib/motion";
+import { useEffect, useRef, useState } from "react";
 
 export function AppHeader() {
   const { profile, signOut } = useAuth();
@@ -11,6 +13,8 @@ export function AppHeader() {
   const st = progress?.stats;
   const route = useAppRoute();
   const color = COLORS[st?.color ?? "sky"] ?? COLORS.sky;
+  const coins = useRolling(st?.coins ?? 0), xp = useRolling(st?.xp ?? 0);
+  const bump = useBump(st?.coins ?? 0), bumpXp = useBump(st?.xp ?? 0), bumpStreak = useBump(st?.streak ?? 0);
   return (
     <header className="app-header">
       <div className="page app-header-inner">
@@ -18,9 +22,9 @@ export function AppHeader() {
         <div className="app-header-right">
           {st && (
             <div className="wallet" aria-label={`${st.streak}-day streak, ${st.coins} coins, ${st.xp} XP`}>
-              <span className="w-streak" title="Day streak"><b><Icon name="flame" size={16} fill /></b>{st.streak}</span>
-              <a className="w-coin" href="#app/shop" title="Coins: open the shop"><b><Icon name="coin" size={16} /></b>{st.coins}</a>
-              <span className="w-xp" title="XP"><b><Icon name="bolt" size={16} fill /></b>{st.xp}</span>
+              <span className={`w-streak${bumpStreak}`} title="Day streak"><b><Icon name="flame" size={16} fill /></b>{st.streak}</span>
+              <a className={`w-coin${bump}`} href="#app/shop" title="Coins: open the shop"><b><Icon name="coin" size={16} /></b>{coins}</a>
+              <span className={`w-xp${bumpXp}`} title="XP"><b><Icon name="bolt" size={16} fill /></b>{xp}</span>
             </div>
           )}
           <span className="app-user">
@@ -42,4 +46,15 @@ export function AppHeader() {
       )}
     </header>
   );
+}
+
+/** Returns " is-bump" for a moment whenever a number goes up, so the wallet can celebrate earnings. */
+function useBump(n: number) {
+  const prev = useRef(n);
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    if (n > prev.current) { setOn(false); requestAnimationFrame(() => setOn(true)); const t = setTimeout(() => setOn(false), 900); prev.current = n; return () => clearTimeout(t); }
+    prev.current = n;
+  }, [n]);
+  return on ? " is-bump" : "";
 }

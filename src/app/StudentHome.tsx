@@ -62,7 +62,9 @@ export function StudentHome() {
       <div className="shell">
         <AppHeader />
         <main id="main" className="page shell-main">
-          {route.page === "arcade" ? <ArcadePage start={start} /> : route.page === "exams" ? <ExamsPage /> : route.page === "library" ? <LibraryPage start={start} /> : route.page === "words" ? <WordLab start={start} /> : <ShopPage />}
+          <div key={route.page} className="route-in">
+            {route.page === "arcade" ? <ArcadePage start={start} /> : route.page === "exams" ? <ExamsPage /> : route.page === "library" ? <LibraryPage start={start} /> : route.page === "words" ? <WordLab start={start} /> : <ShopPage />}
+          </div>
         </main>
       </div>
     );
@@ -74,9 +76,11 @@ export function StudentHome() {
       <div className="shell">
         <AppHeader />
         <main id="main" className="page shell-main">
-          {route.tree
-            ? <TreeView band={route.band} tree={route.tree} start={start} />
-            : <BandView band={route.band} start={start} />}
+          <div key={`${route.band}-${route.tree ?? ""}`} className="route-in">
+            {route.tree
+              ? <TreeView band={route.band} tree={route.tree} start={start} />
+              : <BandView band={route.band} start={start} />}
+          </div>
         </main>
       </div>
     );
@@ -85,7 +89,7 @@ export function StudentHome() {
   return (
     <div className="shell">
       <AppHeader />
-      <main id="main" className="page shell-main">
+      <main id="main" key="home" className="page shell-main route-in">
         <section className="home-hero">
           <h1>Welcome, {profile?.display_name}.</h1>
           {start !== null && <GoalCard start={start} es={es} onFixMistakes={() => document.getElementById("mk-start")?.click()} />}

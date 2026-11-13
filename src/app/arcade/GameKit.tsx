@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { supabase } from "../../lib/supabase";
 import { Icon } from "../../components/Icon";
 import { Life, Speaker } from "./GameArt";
+import { useRolling } from "../../lib/motion";
 import { GAME_META, LEVEL_NAMES, LEVELS, type LevelBand, type LevelGame } from "./levels";
 
 /* ---------------- Sound: tiny synth blips, no files to download ---------------- */
@@ -84,6 +85,7 @@ export function EndScreen({ game, band, level, stars, score, learnt, onNext, onR
 }) {
   const [reward, setReward] = useState<{ xp: number; coins: number; new_stars: number } | null>(null);
   const [saved, setSaved] = useState(false);
+  const shown = useRolling(score, 1100, 0);
   useEffect(() => {
     sfx(stars > 0 ? "win" : "lose");
     void supabase.rpc("finish_level", { p_game: game, p_band: band, p_level: level, p_stars: stars, p_score: score })
@@ -96,7 +98,7 @@ export function EndScreen({ game, band, level, stars, score, learnt, onNext, onR
       <div className="gk-stars" role="img" aria-label={`${stars} of 3 stars`}>
         {[1, 2, 3].map((i) => <span key={i} className={i <= stars ? "is-on" : ""} style={{ animationDelay: `${i * 0.25}s` }} aria-hidden="true">★</span>)}
       </div>
-      <p className="gk-end-score">{score} points</p>
+      <p className="gk-end-score" aria-label={`${score} points`}><span aria-hidden="true">{shown}</span> points</p>
       {reward && (reward.xp > 0 || reward.coins > 0) && (
         <p className="ex-reward"><Icon name="bolt" size={18} /> +{reward.xp} XP{reward.coins > 0 && <> · <Icon name="coin" size={18} /> +{reward.coins} coins for {reward.new_stars} new {reward.new_stars === 1 ? "star" : "stars"}</>}</p>
       )}

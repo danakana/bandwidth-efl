@@ -194,3 +194,10 @@
 .jr-stats span { font-size: var(--step--1); color: var(--muted, inherit); }
 .jr-retake { margin-top: var(--s-4); display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; justify-content: space-between; }
 .jr-retake p { margin: 0; max-width: 56ch; }
+
+/* Wallet celebrates when a number goes up */
+.wallet > * { font-variant-numeric: tabular-nums; }
+.wallet .is-bump { animation: w-bump 0.9s cubic-bezier(.3,1.6,.5,1); }
+.wallet .is-bump b { animation: w-spin 0.9s ease-out; }
+@keyframes w-bump { 0% { transform: scale(1); } 25% { transform: scale(1.22); background: rgba(255, 217, 92, 0.35); } 100% { transform: scale(1); } }
+@keyframes w-spin { 40% { transform: rotateY(360deg); } }

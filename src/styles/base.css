@@ -53,9 +53,10 @@ img, svg { display: block; max-width: 100%; }
   font: 700 var(--step-0) / 1 var(--font-display);
   border-radius: var(--r-pill); border: 2px solid transparent;
   text-decoration: none; cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition: transform 0.18s cubic-bezier(.3,1.6,.5,1), background-color 0.15s ease, box-shadow 0.15s ease;
 }
-.btn:active { transform: translateY(1px); }
+.btn:hover:not(:disabled) { transform: translateY(-1px); }
+.btn:active:not(:disabled) { transform: translateY(1px) scale(0.97); transition-duration: 0.06s; }
 .btn-primary { background: var(--ink); color: var(--white); }
 .btn-primary:hover { background: #0f2b4a; color: var(--white); }
 .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
@@ -68,3 +69,15 @@ img, svg { display: block; max-width: 100%; }
   font: 700 var(--step--1) / 1.2 var(--font-display); color: var(--ink);
 }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ---------- Motion ---------- */
+/* One moment per page change: the new page rises in. Nothing else moves on its own. */
+.route-in > * { animation: route-in 0.42s cubic-bezier(.2,.8,.2,1) backwards; }
+.route-in > *:nth-child(2) { animation-delay: 0.04s; }
+.route-in > *:nth-child(3) { animation-delay: 0.08s; }
+.route-in > *:nth-child(n+4) { animation-delay: 0.12s; }
+@keyframes route-in { from { opacity: 0; transform: translateY(14px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

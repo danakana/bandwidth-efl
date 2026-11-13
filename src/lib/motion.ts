@@ -5,11 +5,11 @@ export const calm = () => typeof window !== "undefined" && window.matchMedia?.("
 
 /**
  * A number that rolls to its new value instead of jumping (coins, XP, scores).
- * Eases out over `ms`; with reduced motion it simply shows the new value.
+ * Eases out over `ms`; pass `start` to roll up from there on first show. With reduced motion it simply shows the new value.
  */
-export function useRolling(value: number, ms = 700) {
-  const [shown, setShown] = useState(value);
-  const from = useRef(value);
+export function useRolling(value: number, ms = 700, start?: number) {
+  const [shown, setShown] = useState(start ?? value);
+  const from = useRef(start ?? value);
   useEffect(() => {
     if (calm() || from.current === value) { from.current = value; setShown(value); return; }
     const start = performance.now(), a = from.current, b = value;
