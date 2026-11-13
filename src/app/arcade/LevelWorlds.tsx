@@ -11,6 +11,7 @@ import { GrammarGolf } from "./GrammarGolf";
 import { BossBattle } from "./BossBattle";
 import { WordSnake } from "./WordSnake";
 import { WordRacer } from "./WordRacer";
+import { StoryBuilder } from "./StoryBuilder";
 
 type Row = { game: LevelGame; band: string; level: number; stars: number; best: number };
 
@@ -18,6 +19,7 @@ const WORLDS: { id: LevelGame; name: string; blurb: string; emoji: string }[] = 
   { id: "tower", name: "Word Tower", blurb: "Pull out the blocks with mistakes before the tower falls.", emoji: "🧱" },
   { id: "rain", name: "Word Rain", blurb: "Catch the right word before it splashes on the city.", emoji: "🌧️" },
   { id: "kitchen", name: "Word Kitchen", blurb: "Customers' orders have mistakes. Cook the correct sentence before they leave.", emoji: "👩‍🍳" },
+  { id: "story", name: "Story Builder", blurb: "Choose what happens next, but only sentences with no mistakes move the story on.", emoji: "📖" },
   { id: "racer", name: "Pronunciation Racer", blurb: "Say it clearly and your car speeds ahead. Beat the rivals to the finish.", emoji: "🏎️" },
   { id: "snake", name: "Word Snake", blurb: "Read the clue, then eat the letters in order to spell the word.", emoji: "🐍" },
   { id: "boss", name: "Boss Battles", blurb: "Right answers are attacks. Beat seven monsters, up to the Grammar Dragon.", emoji: "🐉" },
@@ -28,7 +30,7 @@ const WORLDS: { id: LevelGame; name: string; blurb: string; emoji: string }[] = 
 /** The two level-based games, each a path of seven levels per band, unlocked in order. */
 export function LevelWorlds({ start }: { start: number }) {
   const [rows, setRows] = useState<Row[]>([]);
-  const [band, setBand] = useState<Record<LevelGame, LevelBand>>({ tower: BANDS[start].id, rain: BANDS[start].id, crush: BANDS[start].id, kitchen: BANDS[start].id, golf: BANDS[start].id, boss: BANDS[start].id, snake: BANDS[start].id, racer: BANDS[start].id });
+  const [band, setBand] = useState<Record<LevelGame, LevelBand>>({ tower: BANDS[start].id, rain: BANDS[start].id, crush: BANDS[start].id, kitchen: BANDS[start].id, golf: BANDS[start].id, boss: BANDS[start].id, snake: BANDS[start].id, racer: BANDS[start].id, story: BANDS[start].id });
   const [playing, setPlaying] = useState<{ game: LevelGame; band: LevelBand; level: number } | null>(null);
 
   const load = async () => {
@@ -87,6 +89,7 @@ export function LevelWorlds({ start }: { start: number }) {
         })}
       </div>
       {playing?.game === "tower" && <WordTower key={`${playing.band}-${playing.level}`} band={playing.band as BandId} level={playing.level} onClose={close} onLevel={(n) => { void load(); setPlaying({ ...playing, level: n }); }} />}
+      {playing?.game === "story" && <StoryBuilder key={`${playing.band}-${playing.level}`} band={playing.band as BandId} level={playing.level} onClose={close} onLevel={(n) => { void load(); setPlaying({ ...playing, level: n }); }} />}
       {playing?.game === "racer" && <WordRacer key={`${playing.band}-${playing.level}`} band={playing.band as BandId} level={playing.level} onClose={close} onLevel={(n) => { void load(); setPlaying({ ...playing, level: n }); }} />}
       {playing?.game === "snake" && <WordSnake key={`${playing.band}-${playing.level}`} band={playing.band} level={playing.level} onClose={close} onLevel={(n) => { void load(); setPlaying({ ...playing, level: n }); }} />}
       {playing?.game === "boss" && <BossBattle key={`${playing.band}-${playing.level}`} band={playing.band as BandId} level={playing.level} onClose={close} onLevel={(n) => { void load(); setPlaying({ ...playing, level: n }); }} />}

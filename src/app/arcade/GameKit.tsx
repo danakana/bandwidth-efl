@@ -99,10 +99,10 @@ export function EndScreen({ game, band, level, stars, score, learnt, onNext, onR
       {reward && (reward.xp > 0 || reward.coins > 0) && (
         <p className="ex-reward"><Icon name="bolt" size={18} /> +{reward.xp} XP{reward.coins > 0 && <> · <Icon name="coin" size={18} /> +{reward.coins} coins for {reward.new_stars} new {reward.new_stars === 1 ? "star" : "stars"}</>}</p>
       )}
-      {stars > 0 && stars < 3 && <p className="muted">{game === "crush" ? "Finish with more moves left" : game === "golf" ? "Use fewer strokes" : game === "kitchen" ? "Keep every customer happy" : game === "boss" ? "Take fewer hits" : game === "racer" ? "Finish first" : `Lose fewer ${game === "tower" ? "blocks" : "lives"}`} to get 3 stars.</p>}
+      {stars > 0 && stars < 3 && <p className="muted">{game === "crush" ? "Finish with more moves left" : game === "golf" ? "Use fewer strokes" : game === "kitchen" ? "Keep every customer happy" : game === "boss" ? "Take fewer hits" : game === "racer" ? "Finish first" : game === "story" ? "Avoid the sentences with mistakes" : `Lose fewer ${game === "tower" ? "blocks" : "lives"}`} to get 3 stars.</p>}
       {learnt.length > 0 && (
         <details className="gk-learnt" open={stars === 0}>
-          <summary>{game === "tower" || game === "kitchen" ? "The mistakes and how to fix them" : game === "crush" ? "Pairs to remember" : game === "golf" ? "Holes to look at again" : game === "boss" ? "Questions to look at again" : game === "snake" ? "Words to practise spelling" : game === "racer" ? "Words and sentences to practise saying" : "Words to look at again"} ({learnt.length})</summary>
+          <summary>{game === "tower" || game === "kitchen" ? "The mistakes and how to fix them" : game === "crush" ? "Pairs to remember" : game === "golf" ? "Holes to look at again" : game === "boss" ? "Questions to look at again" : game === "snake" ? "Words to practise spelling" : game === "racer" ? "Words and sentences to practise saying" : game === "story" ? "The mistakes in the story" : "Words to look at again"} ({learnt.length})</summary>
           <ul>{learnt.map((l, i) => <li key={i}><strong>{l.text}</strong> <span>{l.note}</span></li>)}</ul>
         </details>
       )}

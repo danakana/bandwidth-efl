@@ -4,13 +4,14 @@ import { NODES } from "../../content/curriculum";
 import type { BandId } from "../../content/bands";
 import { EXAM_SETS, setsFor, gapped, formIn, type VocabWord } from "../../content/vocab";
 
-export type LevelGame = "tower" | "rain" | "crush" | "kitchen" | "golf" | "boss" | "snake" | "racer";
+export type LevelGame = "tower" | "rain" | "crush" | "kitchen" | "golf" | "boss" | "snake" | "racer" | "story";
 
 /** Name, life icon and the line shown when a level is lost. */
 export const GAME_META: Record<LevelGame, { name: string; life: string; lives: string; lost: string }> = {
   tower: { name: "Word Tower", life: "🧱", lives: "steadiness", lost: "The tower fell!" },
   rain: { name: "Word Rain", life: "❤️", lives: "lives", lost: "The city got soaked!" },
   crush: { name: "Collocation Crush", life: "", lives: "moves", lost: "Out of moves!" },
+  story: { name: "Story Builder", life: "📖", lives: "pages", lost: "The story fell apart!" },
   racer: { name: "Pronunciation Racer", life: "", lives: "", lost: "The others crossed the line first!" },
   snake: { name: "Word Snake", life: "🐍", lives: "lives", lost: "Game over, snake!" },
   boss: { name: "Boss Battles", life: "💖", lives: "hit points", lost: "The monster won this time!" },
@@ -216,6 +217,7 @@ export const starsFrom = (cleared: boolean, hearts: number) => (cleared ? Math.m
 export const LEVEL_NAMES: Record<LevelGame, string[]> = {
   tower: ["Wobbly start", "Two floors up", "Windy day", "Night shift", "Earthquake drill", "Sky high", "The Great Tower"],
   rain: ["Light drizzle", "Showers", "Downpour", "Thunder", "Hailstorm", "Monsoon", "The Storm Boss"],
+  story: ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7"],
   racer: ["Go-kart track", "City circuit", "Coastal road", "Mountain pass", "Night race", "Rainy grand prix", "The Golden Cup"],
   snake: ["Garden path", "Long grass", "Jungle", "Desert", "Night garden", "Speed snake", "The Python King"],
   boss: ["Grumble the Goblin", "Syntax Slime", "The Tense Troll", "Professor Preposition", "The Phrasal Phantom", "Lord Lexicon", "The Grammar Dragon"],
