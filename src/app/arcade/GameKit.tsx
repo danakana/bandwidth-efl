@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { supabase } from "../../lib/supabase";
 import { Icon } from "../../components/Icon";
-import { LEVEL_NAMES, LEVELS, type LevelBand, type LevelGame } from "./levels";
+import { GAME_META, LEVEL_NAMES, LEVELS, type LevelBand, type LevelGame } from "./levels";
 
 /* ---------------- Sound: tiny synth blips, no files to download ---------------- */
 
@@ -44,9 +44,9 @@ export function SoundToggle() {
 
 /* ---------------- Screen ---------------- */
 
-export function GameShell({ game, band, level, hearts, score, combo, onClose, children, theme }: {
+export function GameShell({ game, band, level, hearts, score, combo, onClose, children, theme, status }: {
   game: LevelGame; band: LevelBand; level: number; hearts: number; score: number; combo: number;
-  onClose: () => void; children: ReactNode; theme: string;
+  onClose: () => void; children: ReactNode; theme: string; status?: ReactNode;
 }) {
   useEffect(() => {
     const root = document.getElementById("root");
@@ -55,13 +55,15 @@ export function GameShell({ game, band, level, hearts, score, combo, onClose, ch
     return () => { if (root) root.inert = false; document.body.style.overflow = ""; };
   }, []);
   return createPortal(
-    <div className={`gk gk-${theme}`} role="dialog" aria-modal="true" aria-label={`${game === "tower" ? "Word Tower" : "Word Rain"}, level ${level}`}>
+    <div className={`gk gk-${theme}`} role="dialog" aria-modal="true" aria-label={`${GAME_META[game].name}, level ${level}`}>
       <header className="gk-hud">
         <button type="button" className="gk-icon-btn" onClick={onClose} aria-label="Leave the game"><Icon name="x" size={20} /></button>
         <div className="gk-title"><strong>{LEVEL_NAMES[game][level - 1]}</strong><span>{band === "EX" ? "Exams & essays" : band} · Level {level}</span></div>
-        <div className="gk-hearts" role="img" aria-label={`${hearts} ${game === "tower" ? "steadiness" : "lives"} left`}>
-          {[0, 1, 2].map((i) => <span key={i} className={i < hearts ? "is-on" : ""} aria-hidden="true">{game === "tower" ? "🧱" : "❤️"}</span>)}
-        </div>
+        {status ?? (
+          <div className="gk-hearts" role="img" aria-label={`${hearts} ${GAME_META[game].lives} left`}>
+            {[0, 1, 2].map((i) => <span key={i} className={i < hearts ? "is-on" : ""} aria-hidden="true">{GAME_META[game].life}</span>)}
+          </div>
+        )}
         <div className="gk-score" aria-live="off"><Icon name="star" size={16} fill /> {score}{combo > 1 && <em> ×{combo}</em>}</div>
         <SoundToggle />
       </header>
@@ -89,7 +91,7 @@ export function EndScreen({ game, band, level, stars, score, learnt, onNext, onR
 
   return (
     <div className="gk-end" role="status">
-      <p className="gk-end-kicker">{stars > 0 ? "Level cleared!" : game === "tower" ? "The tower fell!" : "The city got soaked!"}</p>
+      <p className="gk-end-kicker">{stars > 0 ? "Level cleared!" : GAME_META[game].lost}</p>
       <div className="gk-stars" role="img" aria-label={`${stars} of 3 stars`}>
         {[1, 2, 3].map((i) => <span key={i} className={i <= stars ? "is-on" : ""} style={{ animationDelay: `${i * 0.25}s` }} aria-hidden="true">★</span>)}
       </div>
@@ -97,10 +99,10 @@ export function EndScreen({ game, band, level, stars, score, learnt, onNext, onR
       {reward && (reward.xp > 0 || reward.coins > 0) && (
         <p className="ex-reward"><Icon name="bolt" size={18} /> +{reward.xp} XP{reward.coins > 0 && <> · <Icon name="coin" size={18} /> +{reward.coins} coins for {reward.new_stars} new {reward.new_stars === 1 ? "star" : "stars"}</>}</p>
       )}
-      {stars > 0 && stars < 3 && <p className="muted">Lose fewer {game === "tower" ? "blocks" : "lives"} to get 3 stars.</p>}
+      {stars > 0 && stars < 3 && <p className="muted">{game === "crush" ? "Finish with more moves left" : `Lose fewer ${game === "tower" ? "blocks" : "lives"}`} to get 3 stars.</p>}
       {learnt.length > 0 && (
         <details className="gk-learnt" open={stars === 0}>
-          <summary>{game === "tower" ? "The mistakes and how to fix them" : "Words to look at again"} ({learnt.length})</summary>
+          <summary>{game === "tower" ? "The mistakes and how to fix them" : game === "crush" ? "Pairs to remember" : "Words to look at again"} ({learnt.length})</summary>
           <ul>{learnt.map((l, i) => <li key={i}><strong>{l.text}</strong> <span>{l.note}</span></li>)}</ul>
         </details>
       )}

@@ -4,7 +4,14 @@ import { NODES } from "../../content/curriculum";
 import type { BandId } from "../../content/bands";
 import { EXAM_SETS, setsFor, gapped, formIn, type VocabWord } from "../../content/vocab";
 
-export type LevelGame = "tower" | "rain";
+export type LevelGame = "tower" | "rain" | "crush";
+
+/** Name, life icon and the line shown when a level is lost. */
+export const GAME_META: Record<LevelGame, { name: string; life: string; lives: string; lost: string }> = {
+  tower: { name: "Word Tower", life: "🧱", lives: "steadiness", lost: "The tower fell!" },
+  rain: { name: "Word Rain", life: "❤️", lives: "lives", lost: "The city got soaked!" },
+  crush: { name: "Collocation Crush", life: "", lives: "moves", lost: "Out of moves!" },
+};
 /** A band, or "EX" for the Exams & essays words (Word Rain only). */
 export type LevelBand = BandId | "EX";
 export const LEVELS = 7;
@@ -88,4 +95,5 @@ export const starsFrom = (cleared: boolean, hearts: number) => (cleared ? Math.m
 export const LEVEL_NAMES: Record<LevelGame, string[]> = {
   tower: ["Wobbly start", "Two floors up", "Windy day", "Night shift", "Earthquake drill", "Sky high", "The Great Tower"],
   rain: ["Light drizzle", "Showers", "Downpour", "Thunder", "Hailstorm", "Monsoon", "The Storm Boss"],
+  crush: ["Sweet start", "Sugar rush", "Double trouble", "Candy cave", "Combo canyon", "Sticky situation", "The Big Crush"],
 };
