@@ -24,7 +24,7 @@ export function AppHeader() {
             </div>
           )}
           <span className="app-user">
-            {st && <span className="avatar" style={{ background: color.bg, color: color.ink }} aria-hidden="true">{(profile?.display_name ?? "?").slice(0, 1).toUpperCase()}</span>}
+            {st && <span className="avatar" style={{ background: color.grad, color: color.ink }} aria-hidden="true">{(profile?.display_name ?? "?").slice(0, 1).toUpperCase()}</span>}
             <span className="app-user-name">{profile?.display_name}{st && <small>{TITLES[st.title] ?? "Learner"}</small>}</span>
             {profile?.role === "teacher" && <span className="role-tag">Teacher</span>}
           </span>
