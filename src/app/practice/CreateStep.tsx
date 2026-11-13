@@ -42,9 +42,14 @@ export function CreateStep({ task, onSubmit, only, exam = false, submitLabel = "
   const words = wordCount(body);
   const checks = runChecks(body, task.checks);
   const minSeconds = "seconds" in task && task.seconds ? task.seconds : 0;
-  // Speaking in a browser without transcription: only the length can be checked here.
-  const lengthOnly = mode === "speak" && !canTranscribe;
-  const ok = lengthOnly ? rec.blob !== null && rec.seconds >= minSeconds : words >= task.minWords && checks.every((c) => c.ok);
+  // Speaking where the browser can't transcribe (no support, or it failed or heard nothing):
+  // only the length can be checked here, and the teacher listens instead.
+  const lengthOnly = mode === "speak" && (!canTranscribe || rec.deaf);
+  const autoOk = words >= task.minWords && checks.every((c) => c.ok);
+  const ok = lengthOnly ? rec.blob !== null && rec.seconds >= minSeconds : autoOk;
+  // Speech-to-text often mishears learners. A full-length recording can always go to the teacher,
+  // so the machine never blocks a student who actually spoke.
+  const teacherListens = mode === "speak" && !lengthOnly && !autoOk && rec.blob !== null && rec.state !== "recording" && rec.seconds >= Math.max(minSeconds, 10);
   const prompt = options[pi];
   const noMic = mode === "speak" && !canRecord;
 
@@ -79,7 +84,7 @@ export function CreateStep({ task, onSubmit, only, exam = false, submitLabel = "
       {noMic && <p className="form-error">This browser can't record audio. Open Bandwidth in Chrome or Edge to do the speaking part.</p>}
       {lengthOnly ? (
         <>
-          <p className="muted px-small">This browser can't check your words automatically, so your teacher will listen to your recording.</p>
+          <p className="muted px-small">{rec.deaf ? "The browser couldn't turn your voice into words, so" : "This browser can't check your words automatically, so"} your teacher will listen to your recording instead.</p>
           <ul className="px-checks" aria-live="polite">
             <li className={rec.seconds >= minSeconds ? "is-ok" : ""}>{Math.min(rec.seconds, minSeconds)} / {minSeconds} seconds</li>
           </ul>
@@ -98,14 +103,19 @@ export function CreateStep({ task, onSubmit, only, exam = false, submitLabel = "
         ))}
       </fieldset>
 
+      {teacherListens && (
+        <div className="px-teacher-listens" role="status">
+          <p><strong>Some circles aren't green?</strong> The browser often mishears. Listen to your recording: if you did the task, send it and your teacher will listen and decide.</p>
+        </div>
+      )}
       <div className="pt-actions">
-        <button type="button" className="btn btn-primary" disabled={!ok || !ticks.every(Boolean) || busy || rec.state === "recording"}
-          onClick={() => { setBusy(true); void onSubmit({ prompt: prompt.text, text: body, words, audio: mode === "speak" ? rec.blob : null, ok: lengthOnly ? null : ok }).finally(() => setBusy(false)); }}>
-          {busy ? "Sending…" : submitLabel}
+        <button type="button" className="btn btn-primary" disabled={!(ok || teacherListens) || !ticks.every(Boolean) || busy || rec.state === "recording"}
+          onClick={() => { setBusy(true); void onSubmit({ prompt: prompt.text, text: body, words, audio: mode === "speak" ? rec.blob : null, ok: lengthOnly || (teacherListens && !ok) ? null : ok }).finally(() => setBusy(false)); }}>
+          {busy ? "Sending…" : teacherListens && !ok ? `${submitLabel} (teacher listens)` : submitLabel}
         </button>
         {!exam && <button type="button" className="link-btn" onClick={() => setShowModel(!showModel)}>{showModel ? "Hide example" : "Stuck? See an example"}</button>}
       </div>
-      {!ok && <p className="muted px-small">{submitLabel} unlocks when every check above is green and you've ticked your self-check.</p>}
+      {!ok && !teacherListens && <p className="muted px-small">{mode === "speak" ? `${submitLabel} unlocks when every check above is green, or after you record for at least ${Math.max(minSeconds, 10)} seconds, and you've ticked your self-check.` : `${submitLabel} unlocks when every check above is green and you've ticked your self-check.`}</p>}
       {!exam && showModel && <blockquote className="px-context">{task.model}</blockquote>}
     </div>
   );
@@ -118,6 +128,9 @@ function useSpeaking() {
   const [url, setUrl] = useState<string | null>(null);
   const [transcript, setTranscript] = useState("");
   const [seconds, setSeconds] = useState(0);
+  // True when speech-to-text failed (blocked service, no network, wrong device) or heard nothing at all.
+  const [deaf, setDeaf] = useState(false);
+  const heardAny = useRef(false);
   const media = useRef<MediaRecorder | null>(null);
   const timer = useRef<number | null>(null);
   const recog = useRef<ReturnType<typeof makeRecogniser>>(null);
@@ -139,9 +152,10 @@ function useSpeaking() {
       stream.getTracks().forEach((t) => t.stop());
       const b = new Blob(chunks, { type: m.mimeType || type || "audio/webm" });
       setBlob(b); setUrl(URL.createObjectURL(b));
+      if (!heardAny.current && Date.now() - t0 > 4000) setDeaf(true);
     };
     media.current = m; m.start();
-    finals.current = []; setTranscript(""); setSeconds(0);
+    finals.current = []; setTranscript(""); setSeconds(0); heardAny.current = false;
     const t0 = Date.now();
     timer.current = window.setInterval(() => setSeconds(Math.floor((Date.now() - t0) / 1000)), 500);
     const r = makeRecogniser();
@@ -152,6 +166,11 @@ function useSpeaking() {
       r.onresult = (e) => {
         session = Array.from(e.results as ArrayLike<ArrayLike<{ transcript: string }>>).map((x) => x[0].transcript.trim());
         setTranscript([...finals.current, ...session].join(". "));
+        if (session.some(Boolean)) { heardAny.current = true; setDeaf(false); }
+      };
+      r.onerror = (e: unknown) => {
+        const err = (e as { error?: string }).error;
+        if (err && err !== "no-speech" && err !== "aborted") setDeaf(true);
       };
       r.onend = () => {
         finals.current = [...finals.current, ...session]; session = [];
@@ -168,5 +187,5 @@ function useSpeaking() {
     if (r) { r.onend = null; r.stop(); }
     setState("idle");
   }
-  return { state, blob, url, transcript, seconds, start: () => void start(), stop };
+  return { state, blob, url, transcript, seconds, deaf, start: () => void start(), stop };
 }
