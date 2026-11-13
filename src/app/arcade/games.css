@@ -47,7 +47,7 @@
 .gk-hud { display: flex; align-items: center; gap: var(--s-2); padding: var(--s-3) var(--s-4); flex-wrap: wrap; }
 .gk-icon-btn { width: 42px; height: 42px; border-radius: 14px; border: 2px solid var(--ink); background: #fff; color: var(--ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 3px 0 var(--ink); font-size: 1.1rem; }
 .gk-icon-btn:focus-visible { outline: 3px solid #ffd95c; outline-offset: 2px; }
-.gk-title { display: grid; line-height: 1.15; margin-right: auto; }
+.gk-title { display: grid; line-height: 1.15; margin-right: auto; min-width: 0; }
 .gk-title strong { font: 900 var(--step-1) / 1.1 var(--font-display); }
 .gk-title span { font-size: var(--step--1); opacity: 0.85; }
 .gk-hearts { display: flex; gap: 2px; font-size: 1.3rem; }
@@ -98,7 +98,7 @@
 .wt-block.is-out { transform: translateX(130vw) rotate(12deg); opacity: 0; max-height: 0; padding-block: 0; margin-block: -2px; }
 .wt-tower.is-falling .wt-block { animation: wt-fall 1.2s cubic-bezier(.5,0,.9,.6) var(--d) forwards; }
 @keyframes wt-fall { to { transform: translate(calc(var(--x) * 6), 110vh) rotate(var(--fr)); } }
-.wt-ground { width: min(700px, 96vw); height: 18px; border-radius: 6px; background: linear-gradient(#6aa84f, #3f7a2c); box-shadow: 0 4px 0 #2b5a1c; }
+.wt-ground { width: min(700px, 100%); height: 18px; border-radius: 6px; background: linear-gradient(#6aa84f, #3f7a2c); box-shadow: 0 4px 0 #2b5a1c; }
 
 /* ---------- Word Rain ---------- */
 .wr { display: grid; grid-template-rows: auto auto 1fr; gap: var(--s-2); width: min(860px, 100%); justify-self: center; min-height: 0; }
@@ -133,4 +133,15 @@
 @media (prefers-reduced-motion: reduce) {
   .wt-tower.is-wobble, .wr-city.is-hit span { animation: none; }
   .wt-block { transition-duration: 0.15s; }
+}
+
+@media (max-width: 520px) {
+  .gk-hud { gap: 6px; padding: var(--s-2) var(--s-3); flex-wrap: nowrap; }
+  .gk-icon-btn { width: 36px; height: 36px; }
+  .gk-title strong { font-size: var(--step-0); }
+  .gk-hearts { font-size: 1rem; }
+  .gk-score { padding: 0.3rem 0.55rem; font-size: var(--step--1); }
+  .gk-main { padding: 0 var(--s-3) var(--s-4); }
+  .wt-block { font-size: var(--step--1); min-height: 44px; }
+  .wr-drop { font-size: var(--step--1); width: 30%; }
 }
