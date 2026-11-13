@@ -4,9 +4,8 @@ import { useAuth } from "../../lib/auth";
 import type { Submission } from "../../lib/placementApi";
 import { NODES } from "../../content/curriculum";
 import { TREES } from "../map/trees";
-import { aptisLabel, APTIS_MARK_COINS } from "../../content/exams/aptis-production";
+import { productionInfo } from "../../content/exams/production";
 
-const APTIS_LEVELS = ["A0", "A1", "A2", "B1", "B2", "C"];
 
 /** A practice piece: written or recorded at the end of a skill, not part of placement or a Midpoint / Gate. */
 export const isPractice = (s: Submission) => !s.attempt_id && !!s.node_id && !s.node_id.includes(":");
@@ -80,7 +79,8 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
   const { session } = useAuth();
   const node = NODES.find((n) => n.id === sub.node_id);
   const tree = TREES.find((t) => t.id === node?.tree);
-  const aptis = aptisLabel(sub.node_id);
+  const prod = productionInfo(sub.node_id);
+  const aptis = prod?.label ?? null;
   const [feedback, setFeedback] = useState(sub.teacher_feedback ?? "");
   const [level, setLevel] = useState(sub.teacher_band ?? "");
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
@@ -118,14 +118,14 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
     <article className={`class-card rv-item pw-card${sub.reviewed_at ? " is-done" : ""}`} aria-label={`${name}: ${label} for ${aptis ?? node?.title ?? "a skill"}`}>
       <div className="rv-meta">
         <strong>{name}</strong>
-        <span className="band-chip">{aptis ? "Aptis" : node?.band ?? sub.target_band ?? "?"}</span>
+        <span className="band-chip">{prod ? prod.name : node?.band ?? sub.target_band ?? "?"}</span>
         <span className="muted">{aptis ?? <>{tree?.name ?? ""}{tree ? " · " : ""}{node?.title ?? sub.node_id}</>}</span>
       </div>
       <div className="rv-meta">
         <span className="pill">{label}</span>
         {sub.word_count != null && <span className="muted">{sub.word_count} words</span>}
         {sub.auto_passed === true && <span className="pill pill-good">{aptis ? "Word counts met" : "Auto-check passed"}</span>}
-        {sub.auto_passed === false && <span className="pill">{aptis ? "Some answers too short" : "Auto-check not passed"}</span>}
+        {sub.auto_passed === false && <span className="pill">{aptis ? (prod!.exam === "ielts" ? "Under the word count" : "Some answers too short") : "Auto-check not passed"}</span>}
         <span className="muted">{new Date(sub.created_at).toLocaleDateString()}</span>
         {sub.reviewed_at && <span className="pill pill-good">Reviewed</span>}
         {sub.feedback_seen_at && <span className="muted">Seen by student</span>}
@@ -143,10 +143,10 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
         </div>
         {aptis && (
           <label className="pw-level">
-            Aptis level for this part{" "}
+            {prod!.name} {prod!.markWord.toLowerCase()} for this part{" "}
             <select value={level} onChange={(e) => { setLevel(e.target.value); setState("idle"); }}>
               <option value="">Not set</option>
-              {APTIS_LEVELS.map((l) => <option key={l} value={l}>{l} ({APTIS_MARK_COINS[l]} coins)</option>)}
+              {prod!.levels.map((l) => <option key={l} value={l}>{l} ({prod!.coins(l)} {prod!.coins(l) === 1 ? "coin" : "coins"})</option>)}
             </select>
             <span className="muted">The student earns these coins when you send.</span>
           </label>

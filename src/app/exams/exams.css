@@ -179,3 +179,13 @@
 .ex-fill-input.is-wrong { background: var(--try-tint); border-color: var(--try); }
 .ex-fill-input:disabled { opacity: 1; color: var(--ink); -webkit-text-fill-color: var(--ink); }
 .ex-sub { margin: var(--s-4) 0 0; padding-top: var(--s-4); border-top: 1px solid var(--line); font-size: var(--step-1); }
+
+/* IELTS: charts and cue cards */
+.ex-chart { margin: 0; padding: var(--s-4); background: var(--white); border: 1px solid var(--line); border-radius: var(--r-md); display: grid; gap: var(--s-2); }
+.ex-chart figcaption { font-weight: 700; }
+.ex-chart > svg { width: 100%; height: auto; display: block; }
+.ex-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); font-size: var(--step--1); }
+.ex-legend li { display: inline-flex; align-items: center; gap: var(--s-2); }
+.ex-cue { padding: var(--s-4) var(--s-5); border: 3px solid var(--ink); border-radius: var(--r-md); background: var(--paper); }
+.ex-cue .ex-sq { font-size: var(--step-1); }
+.ex-cue ul { margin: var(--s-2) 0 0; padding-left: 1.4rem; display: grid; gap: var(--s-1); font: 600 var(--step-0) / 1.4 var(--font-body); }

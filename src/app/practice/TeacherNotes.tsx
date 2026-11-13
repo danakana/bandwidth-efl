@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import type { Submission } from "../../lib/placementApi";
 import { NODES } from "../../content/curriculum";
-import { aptisLabel, APTIS_MARK_COINS } from "../../content/exams/aptis-production";
+import { productionInfo } from "../../content/exams/production";
 
 /** "From your teacher": comments on the student's practice writing and speaking. New ones stay highlighted until read. */
 export function TeacherNotes({ es }: { es: boolean }) {
@@ -49,8 +49,8 @@ export function TeacherNotes({ es }: { es: boolean }) {
               <button type="button" className="tn-head" aria-expanded={isOpen} onClick={() => void read(n)}>
                 {!n.feedback_seen_at && <span className="tn-dot" aria-label="New" />}
                 <span className="tn-title">
-                  <strong>{aptisLabel(n.node_id) ?? node?.title ?? "Your practice"}</strong>
-                  <small>{n.skill === "writing" ? "Your writing" : "Your speaking"} · {aptisLabel(n.node_id) ? (n.teacher_band ? `Level ${n.teacher_band}${APTIS_MARK_COINS[n.teacher_band] ? ` · +${APTIS_MARK_COINS[n.teacher_band]} coins` : ""}` : "Aptis") : node?.band ?? ""}</small>
+                  <strong>{productionInfo(n.node_id)?.label ?? node?.title ?? "Your practice"}</strong>
+                  <small>{n.skill === "writing" ? "Your writing" : "Your speaking"} · {(() => { const pi = productionInfo(n.node_id); if (!pi) return node?.band ?? ""; if (!n.teacher_band) return pi.name; const c = pi.coins(n.teacher_band); return `${pi.markWord} ${n.teacher_band}${c ? ` · +${c} ${c === 1 ? "coin" : "coins"}` : ""}`; })()}</small>
                 </span>
               </button>
               {isOpen && (

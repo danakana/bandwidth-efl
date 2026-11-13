@@ -8,6 +8,7 @@ import { APTIS, APTIS_BANK, APTIS_TESTS } from "../../content/exams/aptis";
 import { IELTS, IELTS_BANK, IELTS_TESTS, ieltsBand } from "../../content/exams/ielts";
 import type { ExamConfig, PartInfo } from "../../content/exams/types";
 import { APTIS_SPEAKING, APTIS_S_PARTS, APTIS_WRITING, APTIS_W_PARTS } from "../../content/exams/aptis-production";
+import { IELTS_SPEAKING, IELTS_S_PARTS, IELTS_WRITING, IELTS_W_PARTS } from "../../content/exams/ielts-production";
 import { ExamRunner, type ExamRun } from "./ExamRunner";
 import { ProductionRunner, type ProductionRun } from "./ProductionRunner";
 import "./exams.css";
@@ -63,8 +64,10 @@ export function ExamsPage() {
 
   if (prod) return <ProductionRunner run={prod} onClose={() => { setProd(null); void load(); void progress?.refresh(); }} />;
   const pick = <T,>(xs: T[]) => xs[Math.floor(Math.random() * xs.length)];
-  const writePart = (part: number) => setProd({ kind: "writing", test: false, title: `${APTIS_W_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(APTIS_WRITING), parts: [part] });
-  const speakPart = (part: number) => setProd({ kind: "speaking", test: false, title: `${APTIS_S_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(APTIS_SPEAKING), parts: [part] });
+  const writePart = (part: number) => setProd({ kind: "writing", exam: "aptis", test: false, title: `${APTIS_W_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(APTIS_WRITING), parts: [part] });
+  const speakPart = (part: number) => setProd({ kind: "speaking", exam: "aptis", test: false, title: `${APTIS_S_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(APTIS_SPEAKING), parts: [part] });
+  const ieWritePart = (part: number) => setProd({ kind: "writing", exam: "ielts", test: false, title: `IELTS ${IELTS_W_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(IELTS_WRITING), parts: [part] });
+  const ieSpeakPart = (part: number) => setProd({ kind: "speaking", exam: "ielts", test: false, title: `IELTS ${IELTS_S_PARTS.find((p) => p.part === part)!.name} practice`, set: pick(IELTS_SPEAKING), parts: [part] });
 
   if (run) {
     return <ExamRunner run={run} onClose={(changed) => { setRun(null); if (changed) { void load(); void progress?.refresh(); } }} />;
@@ -118,7 +121,7 @@ export function ExamsPage() {
           <header className="ex-head">
             <p className="pt-kicker">Exam prep</p>
             <h1>IELTS Academic</h1>
-            <p className="pt-lede">For studying at university abroad. Scores go from band 1 to 9. Reading and Listening are ready: learn each question type, then try a full test. Writing and Speaking are coming next.</p>
+            <p className="pt-lede">For studying at university abroad. Scores go from band 1 to 9. Learn each question type and task, then try a full test. Reading and Listening give you a band at once; your teacher marks Writing and Speaking.</p>
             {es && <p lang="es" className="es">Practica cada tipo de pregunta y luego haz la prueba completa de Reading.</p>}
           </header>
           {(["Reading", "Listening"] as const).map((g) => (
@@ -138,7 +141,25 @@ export function ExamsPage() {
           </div>
           </Fragment>
           ))}
-          <p className="muted px-small">Listening uses your device's voice until the recorded voices are ready.</p>
+          <PartList exam={{ ...IELTS, parts: IELTS_W_PARTS }} rows={[]} title="Writing" onPractise={ieWritePart} />
+          <div className="ex-mocks ex-aptis-tests">
+            {IELTS_WRITING.map((w, k) => (
+              <article key={w.id} className="class-card ex-mock">
+                <ProdRow name={`Writing test ${"AB"[k]}`} desc="Task 1 and Task 2 · 60 min · marked by your teacher"
+                  onStart={() => setProd({ kind: "writing", exam: "ielts", test: true, title: `IELTS Writing test ${"AB"[k]}`, set: w, parts: [21, 22], minutes: 60 })} />
+              </article>
+            ))}
+          </div>
+          <PartList exam={{ ...IELTS, parts: IELTS_S_PARTS }} rows={[]} title="Speaking" onPractise={ieSpeakPart} />
+          <div className="ex-mocks ex-aptis-tests">
+            {IELTS_SPEAKING.map((sp, k) => (
+              <article key={sp.id} className="class-card ex-mock">
+                <ProdRow name={`Speaking test ${"AB"[k]}`} desc="3 parts · about 12 min · recorded for your teacher"
+                  onStart={() => setProd({ kind: "speaking", exam: "ielts", test: true, title: `IELTS Speaking test ${"AB"[k]}`, set: sp, parts: [23, 24, 25] })} />
+              </article>
+            ))}
+          </div>
+          <p className="muted px-small">Listening and the speaking questions use your device's voice until the recorded voices are ready. Writing Task 1 charts use practice data.</p>
         </>
       ) : (
         <>
@@ -173,7 +194,7 @@ export function ExamsPage() {
             {APTIS_WRITING.map((w, k) => (
               <article key={w.id} className="class-card ex-mock">
                 <ProdRow name={`Writing test ${"AB"[k]}: ${w.club}`} desc="4 parts · about 50 min · marked by your teacher"
-                  onStart={() => setProd({ kind: "writing", test: true, title: `Aptis Writing test ${"AB"[k]}`, set: w, parts: [11, 12, 13, 14], minutes: 50 })} />
+                  onStart={() => setProd({ kind: "writing", exam: "aptis", test: true, title: `Aptis Writing test ${"AB"[k]}`, set: w, parts: [11, 12, 13, 14], minutes: 50 })} />
               </article>
             ))}
           </div>
@@ -182,7 +203,7 @@ export function ExamsPage() {
             {APTIS_SPEAKING.map((sp, k) => (
               <article key={sp.id} className="class-card ex-mock">
                 <ProdRow name={`Speaking test ${"AB"[k]}`} desc="4 parts · about 12 min · recorded for your teacher"
-                  onStart={() => setProd({ kind: "speaking", test: true, title: `Aptis Speaking test ${"AB"[k]}`, set: sp, parts: [15, 16, 17, 18] })} />
+                  onStart={() => setProd({ kind: "speaking", exam: "aptis", test: true, title: `Aptis Speaking test ${"AB"[k]}`, set: sp, parts: [15, 16, 17, 18] })} />
               </article>
             ))}
           </div>
@@ -213,7 +234,7 @@ function PartList({ exam, rows, title, onPractise }: { exam: ExamConfig; rows: R
       <ol className="ex-parts">
         {exam.parts.map((p, k) => (
           <li key={p.part} className={`ex-part${exam.id === "icfes" && suggest === k ? " is-next" : ""}`}>
-            <div className="ex-part-num" aria-hidden="true">{exam.id !== "aptis" ? p.part : p.name.replace(/\D/g, "") || p.name[0]}</div>
+            <div className="ex-part-num" aria-hidden="true">{exam.id === "icfes" ? p.part : k + 1}</div>
             <div className="ex-part-body">
               <h3>{exam.id === "icfes" || p.name === p.skill ? p.skill : `${p.name}: ${p.skill}`}</h3>
               <p>{p.task}</p>

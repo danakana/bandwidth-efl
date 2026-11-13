@@ -4,16 +4,24 @@ import { supabase } from "../../lib/supabase";
 import { savePractice } from "../../lib/progressApi";
 import { wordCount } from "../../lib/answers";
 import { Icon } from "../../components/Icon";
-import { APTIS_W_PARTS, APTIS_S_PARTS, type SpeakingSet, type WritingSet, type WQ } from "../../content/exams/aptis-production";
+import type { SpeakingSet, WritingSet, WQ } from "../../content/exams/aptis-production";
+import type { ChartId } from "../../content/exams/ielts-production";
+import { productionPart, type ProductionExam } from "../../content/exams/production";
+import { Chart } from "./Chart";
 import { MethodCard } from "./ExamRunner";
 import { Scene } from "./Scenes";
 import { say } from "./ExamAudio";
 
 export type ProductionRun =
-  | { kind: "writing"; test: boolean; title: string; set: WritingSet; parts: number[]; minutes?: number }
-  | { kind: "speaking"; test: boolean; title: string; set: SpeakingSet; parts: number[] };
+  | { kind: "writing"; exam: ProductionExam; test: boolean; title: string; set: WritingSet & { charts?: Partial<Record<number, ChartId>> }; parts: number[]; minutes?: number }
+  | { kind: "speaking"; exam: ProductionExam; test: boolean; title: string; set: SpeakingSet & { cues?: Partial<Record<number, string>> }; parts: number[] };
 
-const partInfo = (n: number) => [...APTIS_W_PARTS, ...APTIS_S_PARTS].find((p) => p.part === n)!;
+const partInfo = productionPart;
+/** What the teacher's mark is worth, in the student's words. */
+const MARK_NOTE: Record<ProductionExam, string> = {
+  aptis: "up to 10 coins for each part, depending on your level (B1 = 6 coins).",
+  ielts: "up to 10 coins for each part, depending on your band (band 6 = 6 coins).",
+};
 type Reward = { xp: number; coins: number; capped: boolean };
 /** Coins and XP for sending real work (the server checks the word count, once per piece). Never blocks sending. */
 async function rewardFor(ids: string[]): Promise<Reward | null> {
@@ -86,7 +94,7 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
         const prompt = `${run.set.club} · ${info.name}: ${info.skill}. ${p.intro}${p.email ? `\n\n${p.email}` : ""}`;
         const body = p.questions.map((q) => `${q.from ? `${q.from}: ` : ""}${q.ask}\n→ ${(text[q.id] ?? "").trim() || "(no answer)"}`).join("\n\n* * *\n\n"); // the server counts the words between these markers
         const n = p.questions.reduce((s, q) => s + words(q), 0);
-        ids.push(await savePractice(session!.user.id, `aptis-w${p.part}`, prompt, body, n, null, p.questions.every((q) => words(q) >= q.min)));
+        ids.push(await savePractice(session!.user.id, `${run.exam}-w${p.part}`, prompt, body, n, null, p.questions.every((q) => words(q) >= q.min)));
       }
       setReward(await rewardFor(ids));
       setPhase("sent");
@@ -99,16 +107,33 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
         <section className="pt-card ex-intro">
           {run.test ? (
             <>
-              <p className="pt-kicker">Aptis General · practice test</p>
-              <h2>{run.title}</h2>
-              <p className="pt-lede">Four parts about the {run.set.club}. About {run.minutes} minutes. Your teacher marks it and gives you a level.</p>
-              <ul className="ex-tips">
-                <li><strong>Watch the word counts.</strong> Too short loses marks.</li>
-                <li><strong>Answer every question</strong> in every message.</li>
-                <li><strong>Part 4 is worth the most:</strong> leave about 25 minutes for the two emails.</li>
-                <li><strong>Save two minutes at the end</strong> to check verbs, spelling and capital letters.</li>
-              </ul>
-              {es && <p lang="es" className="es">Respeta el número de palabras y deja tiempo para la parte 4.</p>}
+              {run.exam === "aptis" ? (
+                <>
+                  <p className="pt-kicker">Aptis General · practice test</p>
+                  <h2>{run.title}</h2>
+                  <p className="pt-lede">Four parts about the {run.set.club}. About {run.minutes} minutes. Your teacher marks it and gives you a level.</p>
+                  <ul className="ex-tips">
+                    <li><strong>Watch the word counts.</strong> Too short loses marks.</li>
+                    <li><strong>Answer every question</strong> in every message.</li>
+                    <li><strong>Part 4 is worth the most:</strong> leave about 25 minutes for the two emails.</li>
+                    <li><strong>Save two minutes at the end</strong> to check verbs, spelling and capital letters.</li>
+                  </ul>
+                  {es && <p lang="es" className="es">Respeta el número de palabras y deja tiempo para la parte 4.</p>}
+                </>
+              ) : (
+                <>
+                  <p className="pt-kicker">IELTS Academic · practice test</p>
+                  <h2>{run.title}</h2>
+                  <p className="pt-lede">Two tasks, 60 minutes. Your teacher marks it and gives you a band.</p>
+                  <ul className="ex-tips">
+                    <li><strong>Task 2 is worth twice as much as Task 1.</strong> Spend about 20 minutes on Task 1 and 40 on Task 2.</li>
+                    <li><strong>Task 1:</strong> write an overview of the main trends. No opinions.</li>
+                    <li><strong>Task 2:</strong> plan for five minutes and answer every part of the question.</li>
+                    <li><strong>Under the minimum word count loses marks:</strong> 150 for Task 1, 250 for Task 2.</li>
+                  </ul>
+                  {es && <p lang="es" className="es">La tarea 2 vale el doble: dedícale unos 40 minutos.</p>}
+                </>
+              )}
             </>
           ) : <MethodCard info={partInfo(parts[0].part)} es={es} />}
           <button type="button" className="btn btn-primary pt-go" onClick={() => setPhase("play")}>Start</button>
@@ -125,12 +150,14 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
           <h2 id="pw-sent">Sent to your teacher</h2>
           <p className="pt-lede">Your teacher will read it and leave a comment on your home page.</p>
           <RewardLine r={reward} />
-          <p className="ex-next"><strong>More coins when your teacher marks it:</strong> up to 10 coins for each part, depending on your level (B1 = 6 coins).</p>
+          <p className="ex-next"><strong>More coins when your teacher marks it:</strong> {MARK_NOTE[run.exam]}</p>
           <h3>While you wait, check your own work</h3>
           <ul className="ex-tips">
             <li>Did you answer <strong>every</strong> question?</li>
             <li>Are your verbs in the right tense (I went, I have been, I will…)?</li>
             {parts.some((p) => p.part === 14) && <li>Is your friend email informal, and your manager email formal with clear paragraphs?</li>}
+            {parts.some((p) => p.part === 21) && <li>Task 1: did you write an overview of the main trends, and compare the numbers?</li>}
+            {parts.some((p) => p.part === 22) && <li>Task 2: did you answer every part of the question, with examples?</li>}
             <li>Did you use linking words: because, so, but, however, also?</li>
           </ul>
         </section>
@@ -147,6 +174,7 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
           <p className="pt-kicker">{info.name} · {info.skill}</p>
           <h2 id="wr-title">{part.intro}</h2>
         </header>
+        {run.set.charts?.[part.part] && <Chart id={run.set.charts[part.part]!} />}
         {part.email && <div className="ex-email" aria-label="Email from the club">{part.email.split("\n\n").map((para, k) => <p key={k}>{para}</p>)}</div>}
         <ol className="ex-items">
           {part.questions.map((q, n) => {
@@ -161,10 +189,10 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
                 <label htmlFor={id} className={q.from ? "visually-hidden" : "pt-stem"}>{q.from ? `Your reply to ${q.from}` : `${part.questions.length > 1 ? `${n + 1}. ` : ""}${q.ask}`}</label>
                 {part.part === 11
                   ? <input id={id} className="ex-short" value={text[q.id] ?? ""} onChange={(e) => setText({ ...text, [q.id]: e.target.value })} autoComplete="off" spellCheck={false} onPaste={(e) => e.preventDefault()} />
-                  : <textarea id={id} className="pt-textarea" rows={q.max > 100 ? 10 : 4} value={text[q.id] ?? ""} onChange={(e) => setText({ ...text, [q.id]: e.target.value })} spellCheck={false} onPaste={(e) => e.preventDefault()} />}
+                  : <textarea id={id} className="pt-textarea" rows={q.max > 100 ? (q.min >= 250 ? 16 : 10) : 4} value={text[q.id] ?? ""} onChange={(e) => setText({ ...text, [q.id]: e.target.value })} spellCheck={false} onPaste={(e) => e.preventDefault()} />}
                 <p className={`ex-count${state}`} aria-live="polite">
-                  {w} words · aim for {q.min === 1 ? `1 to ${q.max}` : q.min === 40 ? "about 50" : `${q.min} to ${q.max}`}
-                  {state === " is-short" && " · a bit more"}{state === " is-long" && " · a bit long"}
+                  {w} words · {q.max >= 999 ? `at least ${q.min}` : `aim for ${q.min === 1 ? `1 to ${q.max}` : q.min === 40 ? "about 50" : `${q.min} to ${q.max}`}`}
+                  {state === " is-short" && (q.max >= 999 ? ` · ${q.min - w} more to go` : " · a bit more")}{state === " is-long" && " · a bit long"}
                 </p>
               </li>
             );
@@ -246,14 +274,15 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
     if (phase !== "run" || step !== "reading") return;
     let live = true;
     rec.current?.state === "recording" && rec.current.pause();
-    const text = four ? part.questions.map((q) => q.ask).join(" ") : part.questions[qi].ask;
+    const cue = run.set.cues?.[part.part];
+    const text = four ? `${cue ? `${cue} ` : ""}${part.questions.map((q) => q.ask).join(". ")}` : part.questions[qi].ask;
     void say(text).then(() => {
       if (!live) return;
       if (four) { setLeft(part.prep!); setStep("prep"); }
       else { setLeft(part.questions[qi].seconds); rec.current?.resume(); setStep("answer"); }
     });
     return () => { live = false; };
-  }, [phase, step, pi, qi, four, part]);
+  }, [phase, step, pi, qi, four, part, run.set.cues]);
 
   // Countdown for planning and answering.
   useEffect(() => {
@@ -286,8 +315,9 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
       for (const c of clips) {
         const p = parts.find((x) => x.part === c.part)!;
         const info = partInfo(p.part);
-        const prompt = `${info.name}: ${info.skill}. ${p.questions.map((q, k) => `${k + 1}. ${q.ask}`).join(" ")}`;
-        ids.push(await savePractice(session!.user.id, `aptis-s${p.part}`, prompt, "", 0, c.blob, null));
+        const cue = run.set.cues?.[p.part];
+        const prompt = `${info.name}: ${info.skill}. ${cue ? `${cue} ${p.questions.map((q) => q.ask).join("; ")}` : p.questions.map((q, k) => `${k + 1}. ${q.ask}`).join(" ")}`;
+        ids.push(await savePractice(session!.user.id, `${run.exam}-s${p.part}`, prompt, "", 0, c.blob, null));
       }
       setReward(await rewardFor(ids));
       setPhase("sent");
@@ -302,9 +332,11 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
         <section className="pt-card ex-intro">
           {run.test ? (
             <>
-              <p className="pt-kicker">Aptis General · practice test</p>
+              <p className="pt-kicker">{run.exam === "aptis" ? "Aptis General" : "IELTS Academic"} · practice test</p>
               <h2>{run.title}</h2>
-              <p className="pt-lede">Four parts, about 12 minutes. Each question is read aloud, then the recording starts and a timer shows how long you have. Your teacher listens and gives you a level.</p>
+              <p className="pt-lede">{run.exam === "aptis"
+                ? "Four parts, about 12 minutes. Each question is read aloud, then the recording starts and a timer shows how long you have. Your teacher listens and gives you a level."
+                : "Three parts, about 12 minutes. Each question is read aloud, then the recording starts and a timer shows how long you have. In Part 2 you get one minute to plan. Your teacher listens and gives you a band."}</p>
               <ul className="ex-tips">
                 <li><strong>Find a quiet place</strong> and use headphones with a microphone if you can.</li>
                 <li><strong>Keep talking until the time ends.</strong> Silence scores nothing.</li>
@@ -329,7 +361,7 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
           <h2 id="sp-done">{phase === "sent" ? "Sent to your teacher" : "Listen to yourself"}</h2>
           <p className="pt-lede">{phase === "sent" ? "Your teacher will listen and leave a comment on your home page." : "Did you answer every question and keep talking until the time ended?"}</p>
           {phase === "sent" && <RewardLine r={reward} />}
-          {phase === "sent" && <p className="ex-next"><strong>More coins when your teacher marks it:</strong> up to 10 coins for each part, depending on your level (B1 = 6 coins).</p>}
+          {phase === "sent" && <p className="ex-next"><strong>More coins when your teacher marks it:</strong> {MARK_NOTE[run.exam]}</p>}
           <ul className="ex-recs">
             {clips.map((c) => (
               <li key={c.part}><strong>{partInfo(c.part).name}</strong><audio controls src={c.url} /></li>
@@ -355,10 +387,12 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
         {parts.length > 1 && <div className="pt-meter" aria-hidden="true">{parts.map((p, k) => <span key={p.part} className={k < pi ? "is-on" : k === pi ? "is-now" : ""} />)}</div>}
         <header className="ex-block-head">
           <p className="pt-kicker">{info.name} · {info.skill}</p>
-          <h2 id="sp-title">{four ? "Plan, then answer all three questions" : `Question ${qi + 1} of ${part.questions.length}`}</h2>
+          <h2 id="sp-title">{four ? (run.set.cues?.[part.part] ? "Plan for one minute, then talk for up to two minutes" : "Plan, then answer all three questions") : `Question ${qi + 1} of ${part.questions.length}`}</h2>
         </header>
         {part.scenes && <div className={`ex-scenes${part.scenes.length > 1 ? " is-two" : ""}`}>{part.scenes.map((s) => <Scene key={s} id={s} />)}</div>}
-        {four
+        {four && run.set.cues?.[part.part]
+          ? <div className="ex-cue"><p className="ex-sq">{run.set.cues[part.part]}</p><ul>{part.questions.map((x) => <li key={x.ask}>{x.ask}</li>)}</ul></div>
+          : four
           ? <ol className="ex-sq-list">{part.questions.map((x) => <li key={x.ask}>{x.ask}</li>)}</ol>
           : <p className="ex-sq">{q.ask}</p>}
         <div className={`ex-live is-${step}`} role="status" aria-live="polite">
