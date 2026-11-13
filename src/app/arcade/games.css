@@ -245,3 +245,38 @@
 .gg-club.is-used { opacity: 0.35; text-decoration: line-through; box-shadow: none; }
 .gg-club:focus-visible { outline: 3px solid #1c2f57; outline-offset: 2px; }
 @media (max-width: 520px) { .gg-course { height: 150px; } .gg-sentence, .gg-club { font-size: var(--step-0); } }
+
+/* ---------- Boss Battles ---------- */
+.lw-world.is-boss { background: linear-gradient(160deg, #8b5cf6 0%, #4c1d95 55%, #1e0b3d 100%); }
+.gk-boss { background: radial-gradient(circle at 50% 20%, #4c1d95 0%, #1e0b3d 60%, #0b0418 100%); color: #fff; }
+.bb { display: grid; gap: var(--s-3); width: min(760px, 100%); justify-self: center; align-self: start; }
+.bb.is-hurt { animation: bb-quake 0.45s; }
+@keyframes bb-quake { 20% { transform: translate(-8px, 4px); } 40% { transform: translate(8px, -4px); } 60% { transform: translate(-5px, 2px); } 80% { transform: translate(4px, 0); } }
+.bb-arena { display: grid; gap: var(--s-2); justify-items: center; padding: var(--s-3); border-radius: 26px; background: radial-gradient(ellipse at 50% 90%, rgba(255,255,255,0.12), transparent 60%); }
+.bb-hpbar { position: relative; width: min(420px, 100%); height: 26px; border-radius: 999px; background: #2a0f45; border: 3px solid #fff; overflow: hidden; }
+.bb-hpbar span { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, #ff3d6e, #ff8a3d); transition: width 0.4s; }
+.bb-hpbar b { position: relative; display: block; text-align: center; font: 900 0.85rem / 20px var(--font-display); text-shadow: 0 1px 2px #000; }
+.bb-monster { position: relative; font-size: clamp(5rem, 18vw, 8rem); line-height: 1; filter: hue-rotate(var(--h)) drop-shadow(0 10px 0 rgba(0,0,0,0.4)); animation: bb-idle 1.6s ease-in-out infinite; }
+@keyframes bb-idle { 50% { transform: translateY(-8px) scale(1.03); } }
+.bb-monster.is-hit span { display: inline-block; animation: bb-hit 0.5s; }
+@keyframes bb-hit { 20% { transform: translateX(14px) rotate(8deg); filter: brightness(2.2); } 60% { transform: translateX(-6px); } }
+.bb-monster.is-hurt span { display: inline-block; animation: bb-lunge 0.5s; }
+@keyframes bb-lunge { 40% { transform: scale(1.35) translateY(20px); } }
+.bb-monster em { position: absolute; top: 35%; right: -45%; font: 900 1.4rem / 1 var(--font-display); font-style: normal; color: #ffd95c; text-shadow: 0 2px 0 #000; filter: none; animation: bb-dmg 1s ease-out forwards; white-space: nowrap; }
+.bb-monster em.is-crit { color: #ff5d8f; font-size: 1.8rem; }
+@keyframes bb-dmg { to { transform: translateY(-40px); opacity: 0; } }
+.bb-timer { width: min(420px, 100%); height: 8px; border-radius: 999px; background: rgba(255,255,255,0.2); overflow: hidden; }
+.bb-timer span { display: block; height: 100%; background: #7ee08a; transition: width 0.5s linear; }
+.bb-timer span.is-low { background: #ff3d6e; }
+.bb-q { display: grid; gap: var(--s-2); padding: var(--s-4); border-radius: 22px; background: #fff; color: var(--ink); border: 3px solid #000; box-shadow: 0 6px 0 #000; }
+.bb-context { margin: 0; padding: var(--s-2) var(--s-3); border-left: 4px solid #8b5cf6; background: #f3eeff; border-radius: 6px; }
+.bb-prompt { margin: 0; font: 800 var(--step-1) / 1.35 var(--font-display); }
+.bb-options { display: grid; gap: var(--s-2); }
+.bb-opt { display: flex; gap: var(--s-2); align-items: center; text-align: left; padding: 0.6rem 0.9rem; border-radius: 14px; border: 2px solid var(--ink); background: #fff; color: var(--ink); font: 700 var(--step-0) / 1.3 inherit; box-shadow: 0 4px 0 var(--ink); cursor: pointer; }
+.bb-opt:hover:not(:disabled) { background: #f3eeff; transform: translateY(-1px); }
+.bb-opt:disabled { cursor: default; }
+.bb-opt.is-right { background: #dff6e3; border-color: #17602c; }
+.bb-opt.is-wrong { background: #ffe1d6; border-color: #8a2a00; }
+.bb-opt:focus-visible { outline: 3px solid #8b5cf6; outline-offset: 2px; }
+.bb-key { font-size: 1.1rem; }
+.bb-why { margin: 0; min-height: 1.5rem; font-weight: 700; color: #4c1d95; }

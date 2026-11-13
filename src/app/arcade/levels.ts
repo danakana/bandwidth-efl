@@ -4,13 +4,14 @@ import { NODES } from "../../content/curriculum";
 import type { BandId } from "../../content/bands";
 import { EXAM_SETS, setsFor, gapped, formIn, type VocabWord } from "../../content/vocab";
 
-export type LevelGame = "tower" | "rain" | "crush" | "kitchen" | "golf";
+export type LevelGame = "tower" | "rain" | "crush" | "kitchen" | "golf" | "boss";
 
 /** Name, life icon and the line shown when a level is lost. */
 export const GAME_META: Record<LevelGame, { name: string; life: string; lives: string; lost: string }> = {
   tower: { name: "Word Tower", life: "🧱", lives: "steadiness", lost: "The tower fell!" },
   rain: { name: "Word Rain", life: "❤️", lives: "lives", lost: "The city got soaked!" },
   crush: { name: "Collocation Crush", life: "", lives: "moves", lost: "Out of moves!" },
+  boss: { name: "Boss Battles", life: "💖", lives: "hit points", lost: "The monster won this time!" },
   golf: { name: "Grammar Golf", life: "", lives: "strokes", lost: "Too many strokes!" },
   kitchen: { name: "Word Kitchen", life: "⭐", lives: "customer ratings", lost: "The restaurant closed early!" },
 };
@@ -35,6 +36,32 @@ for (const [id, p] of Object.entries(PRACTICE)) {
   const b = BAND_OF.get(id);
   if (!b) continue;
   for (const step of p.steps) for (const it of step) if (it.kind === "fix") (FIXES[b] ??= []).push(it);
+}
+
+/* ---------------- Boss Battles ---------------- */
+
+/** One attack: any multiple-choice question from the band that works without audio. */
+export type Attack = { id: number; prompt: string; context?: string; options: string[]; answer: string; why: string };
+
+const ATTACKS: Record<string, Attack[]> = {};
+{
+  let n = 0;
+  const needsAudio = /speaker|you hear|listen|clip|video|recording|audio/i;
+  for (const [id, p] of Object.entries(PRACTICE)) {
+    const b = BAND_OF.get(id);
+    if (!b) continue;
+    for (const step of p.steps) for (const it of step) {
+      if (it.kind !== "choice" || it.audio || needsAudio.test(it.prompt) || it.options.length < 2) continue;
+      (ATTACKS[b] ??= []).push({ id: n++, prompt: it.prompt, context: it.context, options: it.options, answer: it.options[it.answer], why: it.why });
+    }
+  }
+}
+
+/** Monster HP and seconds to answer before it strikes. */
+export const bossShape = (level: number) => ({ hp: level === 7 ? 14 : 6 + level, seconds: level === 7 ? 12 : 22 - level * 1.5 });
+
+export function buildBoss(band: BandId): Attack[] {
+  return shuffle(ATTACKS[band] ?? []).slice(0, 40).map((a) => ({ ...a, options: shuffle(a.options) }));
 }
 
 /* ---------------- Grammar Golf ---------------- */
@@ -153,6 +180,7 @@ export const starsFrom = (cleared: boolean, hearts: number) => (cleared ? Math.m
 export const LEVEL_NAMES: Record<LevelGame, string[]> = {
   tower: ["Wobbly start", "Two floors up", "Windy day", "Night shift", "Earthquake drill", "Sky high", "The Great Tower"],
   rain: ["Light drizzle", "Showers", "Downpour", "Thunder", "Hailstorm", "Monsoon", "The Storm Boss"],
+  boss: ["Grumble the Goblin", "Syntax Slime", "The Tense Troll", "Professor Preposition", "The Phrasal Phantom", "Lord Lexicon", "The Grammar Dragon"],
   golf: ["Practice green", "Palm Hills", "Windy links", "Lake course", "Desert dunes", "Mountain pass", "The Championship"],
   kitchen: ["Opening day", "Lunch rush", "Food critic", "Family dinner", "Busy Friday", "Wedding party", "The Master Chef"],
   crush: ["Sweet start", "Sugar rush", "Double trouble", "Candy cave", "Combo canyon", "Sticky situation", "The Big Crush"],
