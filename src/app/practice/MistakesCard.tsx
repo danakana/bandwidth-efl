@@ -48,7 +48,7 @@ export function MistakesCard({ es }: { es: boolean }) {
           {es && due.length > 0 && <p lang="es" className="es">Repasar tus errores unos días después es una de las mejores formas de aprender.</p>}
         </div>
         {due.length > 0 && (
-          <button type="button" className="btn btn-primary" onClick={start}>Fix {Math.min(ROUND, due.length)} now</button>
+          <button type="button" id="mk-start" className="btn btn-primary" onClick={start}>Fix {Math.min(ROUND, due.length)} now</button>
         )}
       </div>
       {bySkill.length > 0 && (

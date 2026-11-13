@@ -16,6 +16,7 @@ import { useProgress } from "../lib/progress";
 import { BANDS } from "../content/bands";
 import { TeacherNotes } from "./practice/TeacherNotes";
 import { MistakesCard } from "./practice/MistakesCard";
+import { GoalCard } from "./GoalCard";
 import "./placement/placement.css";
 import "./map/map.css";
 
@@ -83,6 +84,7 @@ export function StudentHome() {
       <main id="main" className="page shell-main">
         <section className="home-hero">
           <h1>Welcome, {profile?.display_name}.</h1>
+          {start !== null && <GoalCard start={start} es={es} onFixMistakes={() => document.getElementById("mk-start")?.click()} />}
           {loading ? (
             <p className="muted">Loading…</p>
           ) : result ? (
