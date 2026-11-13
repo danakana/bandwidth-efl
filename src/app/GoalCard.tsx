@@ -9,6 +9,9 @@ import { loadMistakes, today } from "../lib/mistakesApi";
 import { hrefFor } from "../lib/route";
 import { TREES } from "./map/trees";
 import { Icon } from "../components/Icon";
+import { LIBRARY, minutesFor } from "../content/library";
+import { supabase } from "../lib/supabase";
+import { useAuth } from "../lib/auth";
 
 type Plan = { id: string; title: string; detail: string; minutes: number; href?: string; onClick?: () => void };
 
@@ -18,7 +21,14 @@ type Plan = { id: string; title: string; detail: string; minutes: number; href?:
  */
 export function GoalCard({ start, es, onFixMistakes }: { start: number; es: boolean; onFixMistakes: () => void }) {
   const progress = useProgress();
+  const { profile } = useAuth();
   const [due, setDue] = useState(0);
+  const [read, setRead] = useState<Set<string>>(new Set());
+  useEffect(() => {
+    let live = true;
+    void supabase.from("library_reads").select("story_id").limit(500).then(({ data }) => { if (live) setRead(new Set(((data as { story_id: string }[]) ?? []).map((r) => r.story_id))); });
+    return () => { live = false; };
+  }, [progress?.stats.xp]);
   useEffect(() => {
     let live = true;
     void loadMistakes().then((m) => { if (live) setDue(m.filter((x) => x.next_due <= today()).length); });
@@ -59,7 +69,11 @@ export function GoalCard({ start, es, onFixMistakes }: { start: number; es: bool
     const s = (step.p?.steps_passed ?? 0) + 1;
     plan.push({ id: "step", title: `${going ? "Continue" : "Start"}: ${step.n.title}`, detail: `Step ${s} · ${STEP_NAMES[s - 1]}`, minutes: 5, href: hrefFor(band.id, step.n.tree) });
   }
-  if (Object.values(nodes).some((x) => x.steps_passed > 0)) plan.push({ id: "fun", title: "One arcade game", detail: "Quick review of skills you've already passed, against the clock.", minutes: 2, href: "#arcade" });
+  // Reading at your level, about something you like: input is how a language grows.
+  const unread = LIBRARY.filter((s) => s.band === band.id && !read.has(s.id))
+    .sort((a, b) => Number(profile?.universes.includes(b.universe)) - Number(profile?.universes.includes(a.universe)))[0];
+  if (unread) plan.push({ id: "read", title: `Read: ${unread.title}`, detail: unread.blurb, minutes: minutesFor(unread) + 2, href: `#app/library/${unread.id}` });
+  if (Object.values(nodes).some((x) => x.steps_passed > 0)) plan.push({ id: "fun", title: "One arcade game", detail: "Quick review of skills you've already passed, against the clock.", minutes: 2, href: "#app/arcade" });
   const minutes = plan.slice(0, 4).reduce((n, p) => n + p.minutes, 0);
 
   return (
