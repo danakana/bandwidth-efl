@@ -165,3 +165,16 @@
 /* Teacher: Aptis level */
 .pw-level { display: inline-flex; align-items: center; gap: var(--s-2); font-weight: 600; font-size: var(--step--1); }
 .pw-level select { min-height: 40px; }
+
+/* IELTS: typed answers */
+.ex-para-letter { display: inline-grid; place-items: center; width: 1.6em; height: 1.6em; margin-right: 0.2em; border-radius: 50%; background: var(--ink); color: var(--white); font: 800 var(--step--1) / 1 var(--font-display); }
+.ex-instruction { margin: 0; padding: var(--s-3) var(--s-4); border: 2px solid var(--ink); border-radius: var(--r-sm); font-size: var(--step--1); letter-spacing: 0.01em; }
+.ex-notes { display: grid; gap: var(--s-3); padding: var(--s-4) var(--s-5); background: var(--white); border: 1px solid var(--line); border-radius: var(--r-md); }
+.ex-notes h3 { margin: 0; font-size: var(--step-1); }
+.ex-fill { margin: 0; padding-left: 1.6rem; display: grid; gap: var(--s-4); line-height: 2.1; }
+.ex-fill-line { font-size: var(--step-0); }
+.ex-fill-input { width: 11em; max-width: 100%; min-height: 40px; margin: 0 0.35em; padding: 0.15em 0.5em; border: 0; border-bottom: 2px solid var(--ink); border-radius: 4px 4px 0 0; background: var(--sky-soft); font: 700 var(--step-0) / 1.4 var(--font-body); color: var(--ink); }
+.ex-fill-input:focus-visible { outline: none; box-shadow: var(--focus); }
+.ex-fill-input.is-right { background: var(--good-tint); border-color: var(--good); }
+.ex-fill-input.is-wrong { background: var(--try-tint); border-color: var(--try); }
+.ex-fill-input:disabled { opacity: 1; color: var(--ink); -webkit-text-fill-color: var(--ink); }

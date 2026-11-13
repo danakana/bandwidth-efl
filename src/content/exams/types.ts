@@ -27,7 +27,19 @@ export type ListBlock = { kind: "list"; part: number; id: string; items: (ExamQ 
 export type TextBlock = { kind: "text"; part: number; id: string; title: string; text: string; questions: ExamQ[]; challenge?: boolean; audio?: AudioClip[] };
 /** Put sentences in order. The first sentence is given; `sentences` is the correct order of the rest. */
 export type OrderBlock = { kind: "order"; part: number; id: string; title: string; first: string; sentences: string[]; why: string };
-export type ExamBlock = MatchBlock | ListBlock | TextBlock | OrderBlock;
+/**
+ * Typed answers (IELTS completion tasks). Each item is a sentence with a gap written as "___".
+ * `accept` lists every right answer (compared ignoring case and extra spaces); longer than `maxWords` is wrong, as in IELTS.
+ * With `text` the passage is shown (reading); with `audio` it is played (listening).
+ */
+export type FillBlock = {
+  kind: "fill"; part: number; id: string; title: string; text?: string; audio?: AudioClip[];
+  instruction: string; maxWords: number; numbers?: boolean;
+  /** Optional heading for the notes or summary the gaps are in. */
+  notesTitle?: string;
+  items: { id: string; prompt: string; accept: string[]; why: string }[];
+};
+export type ExamBlock = MatchBlock | ListBlock | TextBlock | OrderBlock | FillBlock;
 
 export type PartInfo = {
   part: number; name: string; skill: string; task: string; options: number; approx: number;
@@ -37,4 +49,4 @@ export type PartInfo = {
 };
 
 /** Everything the runner needs to know about an exam. */
-export type ExamConfig = { id: "icfes" | "aptis"; label: string; parts: PartInfo[]; neverBlank: boolean };
+export type ExamConfig = { id: "icfes" | "aptis" | "ielts"; label: string; parts: PartInfo[]; neverBlank: boolean };

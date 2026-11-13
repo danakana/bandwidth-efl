@@ -3,7 +3,8 @@ import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../lib/auth";
 import { Icon } from "../../components/Icon";
 import { countQ } from "../../content/exams/icfes";
-import type { AudioClip, ExamBlock, ExamConfig, ExamQ, MatchBlock, OrderBlock, PartInfo, TextBlock } from "../../content/exams/types";
+import { readingBand } from "../../content/exams/ielts";
+import type { AudioClip, ExamBlock, ExamConfig, ExamQ, FillBlock, MatchBlock, OrderBlock, PartInfo, TextBlock } from "../../content/exams/types";
 import { ExamAudio, Transcript } from "./ExamAudio";
 
 const L = "ABCDEFGHIJ";
@@ -11,10 +12,20 @@ export type ExamRun = { exam: ExamConfig; mode: "part" | "section"; ref: string;
 type Outcome = { xp: number; coins: number; capped: boolean } | null;
 type Picks = Record<string, number>;
 type PickFn = (id: string, v: number) => void;
+type Typed = Record<string, string>;
+type TypeFn = (id: string, v: string) => void;
+/** One scored answer: a choice (`answer`) or typed words (`accept`, at most `max` words). */
+type Key = { id: string; answer?: number; accept?: string[]; max?: number };
 
-/** Every scored answer in a block, with its key in `picks`. Order tasks score each position. */
-const qsOf = (b: ExamBlock) => (b.kind === "match" || b.kind === "list" ? b.items.map((x) => ({ id: x.id, answer: x.answer }))
+/** Every scored answer in a block. Order tasks score each position. */
+const qsOf = (b: ExamBlock): Key[] => (b.kind === "match" || b.kind === "list" ? b.items.map((x) => ({ id: x.id, answer: x.answer }))
+  : b.kind === "fill" ? b.items.map((x) => ({ id: x.id, accept: x.accept, max: b.maxWords }))
   : b.kind === "order" ? b.sentences.map((_, pos) => ({ id: `${b.id}-${pos}`, answer: pos })) : b.questions);
+
+/** Typed answers: ignore case, extra spaces and punctuation around the words. */
+export const norm = (t: string) => t.toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9'%/\- ]+/g, " ").replace(/\s+/g, " ").trim();
+const nWords = (t: string) => norm(t).split(" ").filter(Boolean).length;
+const typedRight = (k: Key, t: string | undefined) => !!t && nWords(t) <= (k.max ?? 99) && k.accept!.some((a) => norm(a) === norm(t));
 
 /** A fixed starting order for an order task: scrambled the same way every time, never already correct. */
 function scramble(b: OrderBlock): number[] {
@@ -40,6 +51,7 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
   const [phase, setPhase] = useState<"intro" | "play" | "done">("intro");
   const [i, setI] = useState(0);
   const [picks, setPicks] = useState<Picks>(() => startPicks(run.blocks));
+  const [typed, setTyped] = useState<Typed>({});
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [blankWarn, setBlankWarn] = useState(false);
   const [outcome, setOutcome] = useState<Outcome>(null);
@@ -56,9 +68,11 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
   }, [mock, phase]);
   useEffect(() => { window.scrollTo({ top: 0 }); }, [i, phase]);
 
-  const correctIn = (b: ExamBlock) => qsOf(b).filter((x) => picks[x.id] === x.answer).length;
-  const blanks = run.blocks.flatMap(qsOf).filter((x) => picks[x.id] === undefined).length;
-  const blockDone = qsOf(block).every((x) => picks[x.id] !== undefined);
+  const isRight = (k: Key) => (k.accept ? typedRight(k, typed[k.id]) : picks[k.id] === k.answer);
+  const isBlank = (k: Key) => (k.accept ? !(typed[k.id] ?? "").trim() : picks[k.id] === undefined);
+  const correctIn = (b: ExamBlock) => qsOf(b).filter(isRight).length;
+  const blanks = run.blocks.flatMap(qsOf).filter(isBlank).length;
+  const blockDone = qsOf(block).every((k) => !isBlank(k));
   const revealed = !mock && !!checked[block.id];
 
   async function finish() {
@@ -78,6 +92,7 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
   }
 
   const pick: PickFn = (id, v) => { if (!revealed) { setPicks((p) => ({ ...p, [id]: v })); setBlankWarn(false); } };
+  const type: TypeFn = (id, v) => { if (!revealed) { setTyped((p) => ({ ...p, [id]: v })); setBlankWarn(false); } };
   /** Order tasks: swap two positions. */
   const swap = (b: OrderBlock, a: number, z: number) => {
     if (revealed) return;
@@ -109,9 +124,11 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
                 <li><strong>Remove wrong options first,</strong> then choose.</li>
                 {run.blocks.some(listening)
                   ? <><li><strong>Read the questions before you listen.</strong></li><li><strong>Each recording plays twice at most.</strong> Use the second time to check.</li></>
-                  : <li><strong>Read the whole sentence</strong> around every gap.</li>}
+                  : exam.id !== "ielts" && <li><strong>Read the whole sentence</strong> around every gap.</li>}
+                {run.blocks.some((b) => b.kind === "fill") && <li><strong>Keep to the word limit</strong> and copy words exactly from the passage.</li>}
+                {exam.id === "ielts" && <li><strong>About 20 minutes for each passage.</strong> The last one is the hardest.</li>}
                 {exam.id === "icfes" ? <li><strong>Move fast in Parts 1–3</strong> so you have time for the long texts.</li>
-                  : !run.blocks.some(listening) && <li><strong>Do the short parts quickly</strong> so you have time for the long text at the end.</li>}
+                  : exam.id === "aptis" && !run.blocks.some(listening) && <li><strong>Do the short parts quickly</strong> so you have time for the long text at the end.</li>}
               </ul>
               {es && <p lang="es" className="es">Nunca dejes una pregunta en blanco: si no sabes, descarta opciones y adivina.</p>}
             </>
@@ -130,7 +147,7 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
             <h2 id="ex-part-title">{info.task}</h2>
             {block.kind === "text" && block.challenge && <span className="pill">Challenge</span>}
           </header>
-          <BlockView key={block.id} block={block} info={info} exam={exam} picks={picks} revealed={revealed} onPick={pick} onSwap={swap} test={mock} />
+          <BlockView key={block.id} block={block} info={info} exam={exam} picks={picks} typed={typed} revealed={revealed} onPick={pick} onType={type} onSwap={swap} test={mock} />
           {revealed && <p className="ex-score" role="status">You got {correctIn(block)} of {countQ(block)}.</p>}
           {blankWarn && <p className="form-error" role="alert">You left {blanks} blank. On the real test, never leave a blank: guess! You can go back, or finish anyway.</p>}
           <div className="pt-actions">
@@ -144,7 +161,7 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
       )}
 
       {phase === "done" && (
-        <Results run={run} picks={picks} total={total} correctIn={correctIn} outcome={outcome} saveError={saveError} />
+        <Results run={run} picks={picks} typed={typed} total={total} correctIn={correctIn} outcome={outcome} saveError={saveError} />
       )}
     </div>
   );
@@ -164,7 +181,7 @@ export function MethodCard({ info: p, es }: { info: PartInfo; es: boolean }) {
   );
 }
 
-type ViewProps = { picks: Picks; revealed: boolean; onPick: PickFn; test: boolean };
+type ViewProps = { picks: Picks; revealed: boolean; onPick: PickFn; test: boolean; typed?: Typed; onType?: TypeFn };
 
 function BlockView({ block, info, exam, onSwap, ...v }: ViewProps & { block: ExamBlock; info: PartInfo; exam: ExamConfig; onSwap: (b: OrderBlock, a: number, z: number) => void }) {
   const audio = "audio" in block && block.audio?.length ? block.audio : null;
@@ -174,6 +191,7 @@ function BlockView({ block, info, exam, onSwap, ...v }: ViewProps & { block: Exa
       {block.kind === "match" ? <MatchView b={block} {...v} />
         : block.kind === "order" ? <OrderView b={block} picks={v.picks} revealed={v.revealed} onSwap={onSwap} />
         : block.kind === "text" ? <TextView b={block} {...v} />
+        : block.kind === "fill" ? <FillView b={block} {...v} />
         : (
           <ol className="ex-items">
             {block.items.map((x, n) => (
@@ -201,11 +219,64 @@ function BlockView({ block, info, exam, onSwap, ...v }: ViewProps & { block: Exa
   );
 }
 
+/** The passage, kept as written: paragraphs, line breaks, and "[A] " paragraph letters shown in bold. */
+function Passage({ title, text }: { title: string; text: string }) {
+  return (
+    <article className="ex-text" aria-label={title}>
+      <h3>{title}</h3>
+      {text.split("\n\n").map((para, k) => {
+        const m = para.match(/^\[([A-H])\] (.*)$/s);
+        const body = (m ? m[2] : para).split("\n").map((line, j) => <Fragment key={j}>{j > 0 && <br />}{line}</Fragment>);
+        return <p key={k}>{m && <strong className="ex-para-letter">{m[1]}</strong>}{m && " "}{body}</p>;
+      })}
+    </article>
+  );
+}
+
+/** Typed answers: gaps inside sentences or notes, with a word limit. */
+function FillView({ b, typed = {}, onType = () => {}, revealed }: ViewProps & { b: FillBlock }) {
+  return (
+    <>
+      {b.text && <Passage title={b.title} text={b.text} />}
+      <p className="ex-instruction"><strong>{b.instruction}</strong></p>
+      <div className="ex-notes">
+        {b.notesTitle && <h3>{b.notesTitle}</h3>}
+        <ol className="ex-fill">
+          {b.items.map((x, n) => {
+            const k: Key = { id: x.id, accept: x.accept, max: b.maxWords };
+            const t = typed[x.id] ?? "";
+            const right = typedRight(k, t);
+            const [before, after = ""] = x.prompt.split("___");
+            return (
+              <li key={x.id}>
+                <span className="ex-fill-line">
+                  {before}
+                  <input className={`ex-fill-input${revealed ? (right ? " is-right" : " is-wrong") : ""}`} value={t} disabled={revealed}
+                    aria-label={`Answer ${n + 1}`} autoComplete="off" autoCapitalize="off" spellCheck={false}
+                    inputMode={b.numbers ? "text" : undefined} onChange={(e) => onType(x.id, e.target.value)} />
+                  {after}
+                </span>
+                {revealed && (
+                  <div className={`ex-why${right ? " is-right" : ""}`} role="status">
+                    <strong>{right ? "Right." : !t.trim() ? `Blank. The answer is: ${x.accept[0]}.` : nWords(t) > b.maxWords ? `Too many words. The answer is: ${x.accept[0]}.` : `Not quite. The answer is: ${x.accept[0]}.`}</strong> {x.why}
+                    {x.accept.length > 1 && <span className="ex-why-wrong"> Also accepted: {x.accept.slice(1).join(", ")}.</span>}
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    </>
+  );
+}
+
 function TextView({ b, picks, revealed, onPick, test }: ViewProps & { b: TextBlock }) {
   const gaps = b.questions.every((x) => !x.prompt);
   return (
     <>
-      {b.text && (
+      {b.text && !gaps && <Passage title={b.title} text={b.text} />}
+      {b.text && gaps && (
         <article className="ex-text" aria-label={b.title}>
           <h3>{b.title}</h3>
           {b.text.split("\n\n").map((para, k) => (
@@ -355,8 +426,8 @@ function OrderView({ b, picks, revealed, onSwap }: { b: OrderBlock; picks: Picks
   );
 }
 
-function Results({ run, picks, total, correctIn, outcome, saveError }: {
-  run: ExamRun; picks: Picks; total: number; correctIn: (b: ExamBlock) => number; outcome: Outcome; saveError: boolean;
+function Results({ run, picks, typed, total, correctIn, outcome, saveError }: {
+  run: ExamRun; picks: Picks; typed: Typed; total: number; correctIn: (b: ExamBlock) => number; outcome: Outcome; saveError: boolean;
 }) {
   const partOf = (n: number) => run.exam.parts.find((p) => p.part === n)!;
   const score = run.blocks.reduce((n, b) => n + correctIn(b), 0);
@@ -369,6 +440,7 @@ function Results({ run, picks, total, correctIn, outcome, saveError }: {
   const weakest = [...rows].sort((a, b) => a.pct - b.pct)[0];
   const [review, setReview] = useState(run.mode === "section");
   const aptis = run.exam.id === "aptis" && run.mode === "section";
+  const ielts = run.exam.id === "ielts" && run.mode === "section";
   return (
     <section className="pt-card ex-results" aria-labelledby="ex-res-title">
       <p className="pt-kicker">{run.title}</p>
@@ -376,6 +448,9 @@ function Results({ run, picks, total, correctIn, outcome, saveError }: {
       <p className="pt-lede">{Math.round((score / total) * 100)}% of the questions.</p>
       {aptis && (
         <p className="ex-next"><strong>Estimated Aptis score: {Math.round((score / total) * 50)} / 50.</strong> <span className="muted">An estimate only: the real test uses its own scale.</span></p>
+      )}
+      {ielts && (
+        <p className="ex-next"><strong>Estimated IELTS Reading band: {readingBand(score, total)}.</strong> <span className="muted">From the official table for 40 questions. Real passages are longer, so treat it as a guide.</span></p>
       )}
       {outcome && (
         <p className="ex-reward"><Icon name="bolt" size={18} /> +{outcome.xp} XP · <Icon name="coin" size={18} /> +{outcome.coins} coins{outcome.capped && <span className="muted"> (daily exam coins reached)</span>}</p>
@@ -401,7 +476,7 @@ function Results({ run, picks, total, correctIn, outcome, saveError }: {
           {review && run.blocks.map((b) => (
             <div key={b.id} className="ex-review">
               <h3>{partOf(b.part).name} · {partOf(b.part).skill}</h3>
-              <BlockView block={b} info={partOf(b.part)} exam={run.exam} picks={picks} revealed test onPick={() => {}} onSwap={() => {}} />
+              <BlockView block={b} info={partOf(b.part)} exam={run.exam} picks={picks} typed={typed} revealed test onPick={() => {}} onSwap={() => {}} />
             </div>
           ))}
         </>
