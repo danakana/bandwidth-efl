@@ -3,6 +3,9 @@ import type { AudioClip } from "../exams/types";
 import { A_LEVEL_STORIES } from "./a-levels";
 import { B_LEVEL_STORIES } from "./b-levels";
 import { C_LEVEL_STORIES } from "./c-levels";
+import { A_MORE_STORIES } from "./a-more";
+import { B_MORE_STORIES } from "./b-more";
+import { C_MORE_STORIES } from "./c-more";
 import type { Story } from "./types";
 
 export type { Story, StoryQ, Gloss } from "./types";
@@ -21,7 +24,7 @@ const balance = (s: Story): Story => ({
   }),
 });
 
-export const LIBRARY: Story[] = [...A_LEVEL_STORIES, ...B_LEVEL_STORIES, ...C_LEVEL_STORIES].map(balance);
+export const LIBRARY: Story[] = [...A_LEVEL_STORIES, ...A_MORE_STORIES, ...B_LEVEL_STORIES, ...B_MORE_STORIES, ...C_LEVEL_STORIES, ...C_MORE_STORIES].map(balance);
 export const storyById = (id: string) => LIBRARY.find((s) => s.id === id);
 export const storiesFor = (band: BandId) => LIBRARY.filter((s) => s.band === band);
 export const wordsIn = (s: Story) => s.text.split(/\s+/).filter(Boolean).length;

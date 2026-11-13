@@ -5,7 +5,7 @@ const files = [
   ...readdirSync(`${R}/assessments`).filter(f => !/index|types/.test(f)).map(f => ["assessments", `${R}/assessments/${f}`]),
   ...readdirSync(`${R}/practice`).filter(f => /^[a-c]/.test(f)).map(f => ["practice", `${R}/practice/${f}`]),
   ...["icfes","aptis","ielts","toefl"].map(f => ["exams", `${R}/exams/${f}.ts`]),
-  ...["a-levels","b-levels","c-levels"].map(f => ["library", `${R}/library/${f}.ts`]),
+  ...["a-levels","b-levels","c-levels","a-more","b-more","c-more"].map(f => ["library", `${R}/library/${f}.ts`]),
 ];
 type Row = { bank: string; file: string; opts: string[]; ans: number; stem: string };
 const rows: Row[] = []; const seen = new WeakSet();
