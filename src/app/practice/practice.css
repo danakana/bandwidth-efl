@@ -275,3 +275,15 @@
 .px-es summary { cursor: pointer; font-weight: 700; width: fit-content; }
 .px-es p { margin: var(--s-2) 0 0; font-style: italic; }
 .px-es-gloss { margin: var(--s-1) 0 0; font-size: var(--step--1); font-style: italic; opacity: 0.85; }
+
+/* Fix your mistakes */
+.mk-card { padding: var(--s-5); background: var(--white); border: 2px solid var(--ink); border-radius: var(--r-lg, var(--r-md)); }
+.mk-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s-4); align-items: center; }
+.mk-head h2 { margin: 0; }
+.mk-head p { margin: var(--s-1) 0 0; }
+.mk-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; background: var(--tint-a2); }
+.mk-skills { margin: var(--s-3) 0 0; font-size: var(--step--1); }
+@media (max-width: 560px) {
+  .mk-head { grid-template-columns: auto minmax(0, 1fr); }
+  .mk-head > .btn { grid-column: 1 / -1; justify-self: start; }
+}

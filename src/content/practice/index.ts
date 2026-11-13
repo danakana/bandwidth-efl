@@ -55,6 +55,13 @@ const ALL: NodePractice[] = [
 export const PRACTICE: Record<string, NodePractice> = Object.fromEntries(ALL.map((p) => [p.nodeId, p]));
 export const practiceFor = (nodeId: string): NodePractice | undefined => PRACTICE[nodeId];
 
+/** Every practice question has a stable key, "node:step:index", so a missed question can come back later. */
+const KEY_OF = new Map<Item, string>();
+const BY_KEY = new Map<string, Item>();
+for (const p of ALL) p.steps.forEach((list, s) => list.forEach((item, i) => { const k = `${p.nodeId}:${s + 1}:${i}`; KEY_OF.set(item, k); BY_KEY.set(k, item); }));
+export const itemKey = (item: Item) => KEY_OF.get(item);
+export const itemByKey = (key: string) => BY_KEY.get(key);
+
 /** A "boss" round after every few skills in a tree. Mixes items from those skills. */
 export type Checkpoint = { id: string; band: BandId; tree: TreeId; title: string; story: string; nodeIds: string[]; afterIndex: number };
 

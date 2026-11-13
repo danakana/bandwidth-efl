@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { shuffle } from "../../lib/answers";
 import type { Item } from "../../content/practice/types";
 import { recordArcade, type ArcadeOutcome } from "../../lib/progressApi";
+import { logAnswers, type Answer } from "../../lib/mistakesApi";
 import { Icon } from "../../components/Icon";
 import { ItemView, type Verdict } from "../practice/Items";
 import type { Game } from "./games";
@@ -24,6 +25,7 @@ export function ArcadeGame({ game, pool, onClose }: { game: Game; pool: Item[]; 
   const [result, setResult] = useState<ArcadeOutcome | null>(null);
   const [failed, setFailed] = useState(false);
   const finished = useRef(false);
+  const log = useRef<Answer[]>([]);
 
   useEffect(() => {
     const root = document.getElementById("root");
@@ -52,6 +54,8 @@ export function ArcadeGame({ game, pool, onClose }: { game: Game; pool: Item[]; 
     setPhase("saving");
     const total = Math.max(1, Math.min(n, game.max));
     const sc = Math.min(Math.floor(s), total);
+    // Questions missed in a game come back in "Fix your mistakes" too.
+    void logAnswers(log.current).catch(() => {});
     try { setResult(await recordArcade(game.id, sc, total)); }
     catch { setFailed(true); }
     setPhase("over");
@@ -60,6 +64,7 @@ export function ArcadeGame({ game, pool, onClose }: { game: Game; pool: Item[]; 
   function answer(v: Verdict) {
     const s = score + v.score, n = answered + 1;
     setScore(s); setAnswered(n);
+    log.current.push({ item, ok: v.score >= 1 });
     setStreak(v.score >= 1 ? streak + 1 : 0);
     setFlash(v.score >= 1
       ? { ok: true, text: streak + 1 >= 3 ? `${streak + 1} in a row!` : "Right!" }

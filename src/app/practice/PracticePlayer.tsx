@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, animate, motion, useMotionValue, useTransform } from "motion/react";
-import { STEP_BLOOM, STEP_BLURB, STEP_NAMES, type NodePractice } from "../../content/practice/types";
+import { STEP_BLOOM, STEP_BLURB, STEP_NAMES, type Item, type NodePractice } from "../../content/practice/types";
+import { logAnswers, type Answer, type ReviewOutcome } from "../../lib/mistakesApi";
 import { mixedItems, type Checkpoint } from "../../content/practice";
 import { NODES } from "../../content/curriculum";
 import { shuffle } from "../../lib/answers";
@@ -14,7 +15,9 @@ import "./practice.css";
 
 export type PlayTarget =
   | { kind: "step"; practice: NodePractice; step: number }
-  | { kind: "milestone"; checkpoint: Checkpoint };
+  | { kind: "milestone"; checkpoint: Checkpoint }
+  /** "Fix your mistakes": questions the student got wrong before. */
+  | { kind: "review"; items: Item[] };
 
 /** Full-screen practice: intro, the items, then the reward screen. */
 export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClose: (changed: boolean) => void }) {
@@ -23,13 +26,17 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
   const [outcome, setOutcome] = useState<StepOutcome | null>(null);
   const [raw, setRaw] = useState<{ score: number; total: number } | null>(null);
   const [round, setRound] = useState(0);
+  const [review, setReview] = useState<ReviewOutcome | null>(null);
+  const answers = useRef<Answer[]>([]);
 
-  const title = target.kind === "milestone" ? target.checkpoint.title
+  const title = target.kind === "milestone" ? target.checkpoint.title : target.kind === "review" ? "Fix your mistakes"
     : NODES.find((n) => n.id === target.practice.nodeId)?.title ?? "";
   const stepIdx = target.kind === "step" ? target.step - 1 : -1;
-  const label = target.kind === "milestone" ? "Checkpoint" : target.step === 7 ? "Skill check" : `Step ${target.step} · ${STEP_NAMES[stepIdx]}`;
+  const label = target.kind === "milestone" ? "Checkpoint" : target.kind === "review" ? "Review" : target.step === 7 ? "Skill check" : `Step ${target.step} · ${STEP_NAMES[stepIdx]}`;
 
   const items = useMemo(() => {
+    answers.current = [];
+    if (target.kind === "review") return target.items;
     if (target.kind === "milestone") return mixedItems(target.checkpoint.nodeIds, 9);
     if (target.step === 7) return mixedItems([target.practice.nodeId], 6);
     if (target.step <= 5) {
@@ -53,9 +60,18 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
   async function finish(score: number, total: number) {
     setRaw({ score, total }); setPhase("saving");
     try {
+      if (target.kind === "review") {
+        const r = await logAnswers(answers.current, true);
+        setReview(r);
+        setOutcome({ passed: true, pct: Math.round((score / total) * 100), xp: r?.xp ?? 0, coins: r?.coins ?? 0, badges: r?.badges ?? [] });
+        setPhase("result");
+        return;
+      }
       const o = target.kind === "milestone"
         ? await recordMilestone(target.checkpoint.id, score, total)
         : await recordStep(target.practice.nodeId, target.step, score, total);
+      // Missed questions come back later in "Fix your mistakes". Never blocks the result.
+      void logAnswers(answers.current).catch(() => {});
       setOutcome(o); setPhase("result");
     } catch { setPhase("error"); }
   }
@@ -79,7 +95,7 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
                   catch { setPhase("error"); return; }
                   await finish(1, 1);
                 }} />
-              : <Session items={items} label={label} onDone={(s, t) => void finish(s, t)} />)}
+              : <Session items={items} label={label} onDone={(s, t) => void finish(s, t)} onItem={(item, v) => { answers.current.push({ item, ok: v.score === 1 }); }} />)}
             {phase === "saving" && <div className="pt-center"><h2>Saving…</h2></div>}
             {phase === "error" && (
               <div className="pt-center">
@@ -89,7 +105,7 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
               </div>
             )}
             {phase === "result" && outcome && raw && (
-              <Result outcome={outcome} raw={raw} isCreate={target.kind === "step" && target.step === 6}
+              <Result outcome={outcome} raw={raw} review={target.kind === "review" ? review : undefined} isCreate={target.kind === "step" && target.step === 6}
                 step={target.kind === "step" ? target.step : 0}
                 onAgain={() => { setRound(round + 1); setOutcome(null); setPhase("play"); }}
                 onClose={() => onClose(true)} />
@@ -104,6 +120,17 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
 
 function Intro({ target, label, onStart }: { target: PlayTarget; label: string; onStart: () => void }) {
   const [open, setOpen] = useState(target.kind === "step" && target.step === 1);
+  if (target.kind === "review") {
+    return (
+      <div className="px-intro">
+        <p className="pt-kicker">Review · {target.items.length} questions</p>
+        <h1>Fix your mistakes</h1>
+        <p className="pt-lede">These are questions you got wrong before. Get one right and it comes back once more in a few days. Get it right again and it's fixed for good.</p>
+        <p className="muted">This is how mistakes turn into things you know. Each question you fix earns a coin.</p>
+        <button type="button" className="btn btn-primary pt-go" onClick={onStart}>Start</button>
+      </div>
+    );
+  }
   if (target.kind === "milestone") {
     return (
       <div className="px-intro">
@@ -144,8 +171,10 @@ function Intro({ target, label, onStart }: { target: PlayTarget; label: string; 
   );
 }
 
-function Result({ outcome, raw, isCreate, step, onAgain, onClose }: { outcome: StepOutcome; raw: { score: number; total: number }; isCreate: boolean; step: number; onAgain: () => void; onClose: () => void }) {
-  const [headline] = useState(() => outcome.passed
+function Result({ outcome, raw, isCreate, step, onAgain, onClose, review }: { outcome: StepOutcome; raw: { score: number; total: number }; isCreate: boolean; step: number; onAgain: () => void; onClose: () => void; review?: ReviewOutcome | null }) {
+  const [headline] = useState(() => review !== undefined
+    ? (raw.score === raw.total ? "All correct." : raw.score >= raw.total / 2 ? "Good progress." : "They'll come back tomorrow.")
+    : outcome.passed
     ? (isCreate ? "Sent and passed." : step === 7 ? "Still there. Nice." : step === 0 ? "Boss beaten." : pick(["Step cleared.", "That's locked in.", "Onto the next one."]))
     : "Not yet. Go again.");
   const lit = outcome.steps_passed ?? 0;
@@ -158,7 +187,14 @@ function Result({ outcome, raw, isCreate, step, onAgain, onClose }: { outcome: S
           : <><motion.strong initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>{fmt(raw.score)}</motion.strong><span>/ {raw.total}</span></>}
       </div>
       <h1>{headline}</h1>
-      {!isCreate && <p className="muted">{outcome.pct}% · you need 80%</p>}
+      {!isCreate && review === undefined && <p className="muted">{outcome.pct}% · you need 80%</p>}
+      {review !== undefined && (
+        <p className="px-next">
+          {review && review.cleared > 0 && <><strong>{review.cleared} fixed for good.</strong> </>}
+          {review && review.advanced - review.cleared > 0 && <><strong>{review.advanced - review.cleared}</strong> will come back once more in 4 days. </>}
+          {raw.total - raw.score > 0 && <>The ones you missed come back <strong>tomorrow</strong>.</>}
+        </p>
+      )}
       {step >= 1 && step <= 6 && (
         <ol className="px-track" aria-label={`${lit} of 6 steps done`}>
           {STEP_NAMES.map((n, k) => (
@@ -190,7 +226,7 @@ function Result({ outcome, raw, isCreate, step, onAgain, onClose }: { outcome: S
         </div>
       )}
       <div className="pt-actions px-result-actions">
-        {!outcome.passed && <button type="button" className="btn btn-primary" onClick={onAgain}>Try again (new order)</button>}
+        {!outcome.passed && review === undefined && <button type="button" className="btn btn-primary" onClick={onAgain}>Try again (new order)</button>}
         <button type="button" className={outcome.passed ? "btn btn-primary" : "btn btn-ghost"} onClick={onClose}>{outcome.passed ? "Continue" : "Back to the skill"}</button>
       </div>
     </div>

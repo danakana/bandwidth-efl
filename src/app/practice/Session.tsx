@@ -5,7 +5,7 @@ import { ItemView, type Verdict } from "./Items";
 import { Icon } from "../../components/Icon";
 
 /** Runs a list of items one at a time with instant feedback, then reports the score. */
-export function Session({ items, label, onDone }: { items: Item[]; label: string; onDone: (score: number, total: number) => void }) {
+export function Session({ items, label, onDone, onItem }: { items: Item[]; label: string; onDone: (score: number, total: number) => void; onItem?: (item: Item, v: Verdict) => void }) {
   const [i, setI] = useState(0);
   const [score, setScore] = useState(0);
   const [verdict, setVerdict] = useState<Verdict | null>(null);
@@ -26,7 +26,7 @@ export function Session({ items, label, onDone }: { items: Item[]; label: string
       <p className="pt-kicker">{label} · {i + 1} of {items.length}</p>
       <AnimatePresence mode="wait">
         <motion.div key={i} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2 }}>
-          <ItemView item={item} onAnswer={(v) => { setVerdict(v); setScore((s) => s + v.score); }} />
+          <ItemView item={item} onAnswer={(v) => { setVerdict(v); setScore((s) => s + v.score); onItem?.(item, v); }} />
         </motion.div>
       </AnimatePresence>
       <AnimatePresence>

@@ -15,6 +15,7 @@ import { ExamsPage } from "./exams/ExamsPage";
 import { useProgress } from "../lib/progress";
 import { BANDS } from "../content/bands";
 import { TeacherNotes } from "./practice/TeacherNotes";
+import { MistakesCard } from "./practice/MistakesCard";
 import "./placement/placement.css";
 import "./map/map.css";
 
@@ -101,6 +102,7 @@ export function StudentHome() {
             </>
           )}
         </section>
+        {start !== null && <MistakesCard es={es} />}
         {start !== null && <TeacherNotes es={es} />}
         {start !== null && <BandMap start={start} />}
         <section className="home-section">
