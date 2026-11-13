@@ -13,6 +13,7 @@ import { LIBRARY, minutesFor } from "../content/library";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../lib/auth";
 import { loadWords } from "../lib/wordsApi";
+import { setsFor } from "../content/vocab";
 
 type Plan = { id: string; title: string; detail: string; minutes: number; href?: string; onClick?: () => void };
 
@@ -25,6 +26,7 @@ export function GoalCard({ start, es, onFixMistakes }: { start: number; es: bool
   const { profile } = useAuth();
   const [due, setDue] = useState(0);
   const [read, setRead] = useState<Set<string>>(new Set());
+  const [labDone, setLabDone] = useState<Set<string> | null>(null);
   const [wordsDue, setWordsDue] = useState(0);
   useEffect(() => {
     let live = true;
@@ -33,6 +35,7 @@ export function GoalCard({ start, es, onFixMistakes }: { start: number; es: bool
   }, [progress?.stats.xp]);
   useEffect(() => {
     let live = true;
+    void supabase.from("vocab_results").select("set_id").eq("passed", true).limit(500).then(({ data }) => { if (live) setLabDone(new Set(((data as { set_id: string }[]) ?? []).map((r) => r.set_id))); });
     void supabase.from("library_reads").select("story_id").limit(500).then(({ data }) => { if (live) setRead(new Set(((data as { story_id: string }[]) ?? []).map((r) => r.story_id))); });
     return () => { live = false; };
   }, [progress?.stats.xp]);
@@ -80,6 +83,8 @@ export function GoalCard({ start, es, onFixMistakes }: { start: number; es: bool
   // Reading at your level, about something you like: input is how a language grows.
   const unread = LIBRARY.filter((s) => s.band === band.id && !read.has(s.id))
     .sort((a, b) => Number(profile?.universes.includes(b.universe)) - Number(profile?.universes.includes(a.universe)))[0];
+  const labSet = labDone ? setsFor(band.id).find((x) => !labDone.has(x.id)) : undefined;
+  if (labSet) plan.push({ id: "lab", title: `Word lab: ${labSet.topic}`, detail: `Ten core ${band.id} words. Learn them, then practise.`, minutes: 6, href: `#app/words/${labSet.id}` });
   if (unread) plan.push({ id: "read", title: `Read: ${unread.title}`, detail: unread.blurb, minutes: minutesFor(unread) + 2, href: `#app/library/${unread.id}` });
   if (Object.values(nodes).some((x) => x.steps_passed > 0)) plan.push({ id: "fun", title: "One arcade game", detail: "Quick review of skills you've already passed, against the clock.", minutes: 2, href: "#app/arcade" });
   const minutes = plan.slice(0, 4).reduce((n, p) => n + p.minutes, 0);

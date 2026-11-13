@@ -1,0 +1,37 @@
+/* Word lab */
+.wl-page, .wl-set { display: grid; gap: var(--s-4); max-width: 880px; }
+.wl-bands { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.wl-band { min-width: 52px; padding: var(--s-2) var(--s-3); border: 2px solid var(--line); border-radius: var(--r-pill); background: var(--white); font: 800 var(--step--1) / 1 var(--font-display); color: var(--ink); cursor: pointer; }
+.wl-band.is-mine { border-color: var(--ink); }
+.wl-band.is-on { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.wl-band:focus-visible { outline: 3px solid var(--focus, #2563eb); outline-offset: 2px; }
+.wl-summary { padding: var(--s-4); border: 2px solid var(--line); border-radius: var(--r-md); background: var(--white); }
+.wl-summary p { margin: var(--s-2) 0 0; }
+.wl-meter { position: relative; height: 12px; border-radius: var(--r-pill); background: var(--paper); border: 2px solid var(--line); overflow: hidden; }
+.wl-meter span { position: absolute; inset: 0 auto 0 0; }
+.wl-meter-review { background: var(--sky-soft, #cfe7ff); }
+.wl-meter-learnt { background: var(--ink); }
+.wl-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--s-3); }
+.wl-card { width: 100%; height: 100%; display: grid; gap: var(--s-1); text-align: left; padding: var(--s-4); border: 2px solid var(--line); border-radius: var(--r-md); background: var(--white); color: var(--ink); cursor: pointer; font: inherit; }
+.wl-card:hover { border-color: var(--ink); }
+.wl-card:focus-visible { outline: 3px solid var(--focus, #2563eb); outline-offset: 2px; }
+.wl-card strong { font: 800 var(--step-1) / 1.2 var(--font-display); }
+.wl-card.is-passed { border-color: var(--leaf, #2f9e58); }
+.wl-num { font-size: var(--step--1); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.wl-preview { color: var(--ink-muted); font-size: var(--step--1); }
+.wl-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: var(--step--1); font-weight: 700; }
+.wl-learn { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-3); }
+.wl-word { padding: var(--s-4); border: 2px solid var(--line); border-radius: var(--r-md); background: var(--white); }
+.wl-word-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
+.wl-word-head strong { font: 800 var(--step-2) / 1.1 var(--font-display); }
+.wl-pos { font-size: var(--step--1); font-style: italic; color: var(--ink-muted); }
+.wl-say { margin-left: auto; }
+.wl-means { margin: var(--s-2) 0 0; font-weight: 600; }
+.wl-ex { margin: var(--s-1) 0 0; color: var(--ink-muted); }
+.wl-bar { height: 8px; border-radius: var(--r-pill); background: var(--paper); border: 2px solid var(--line); overflow: hidden; }
+.wl-bar span { display: block; height: 100%; background: var(--ink); }
+.wl-gap { display: block; margin-top: var(--s-2); font-weight: 600; }
+.wl-listen { display: grid; gap: var(--s-3); justify-items: start; }
+.wl-listen input { width: min(100%, 320px); font-size: var(--step-1); padding: var(--s-2) var(--s-3); border: 2px solid var(--ink); border-radius: var(--r-md); }
+.wl-missed ul { padding-left: 1.2em; }
+.wl-set > .btn-sm { justify-self: start; }
