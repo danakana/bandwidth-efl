@@ -13,11 +13,13 @@ import { ArcadePage } from "./arcade/ArcadePage";
 import { ShopPage } from "./arcade/ShopPage";
 import { ExamsPage } from "./exams/ExamsPage";
 import { LibraryPage } from "./library/LibraryPage";
+import { WordsCard } from "./library/WordsCard";
 import { useProgress } from "../lib/progress";
 import { BANDS } from "../content/bands";
 import { TeacherNotes } from "./practice/TeacherNotes";
 import { MistakesCard } from "./practice/MistakesCard";
 import { GoalCard } from "./GoalCard";
+import { JourneyCard } from "./JourneyCard";
 import "./placement/placement.css";
 import "./map/map.css";
 
@@ -106,6 +108,8 @@ export function StudentHome() {
           )}
         </section>
         {start !== null && <MistakesCard es={es} />}
+        {start !== null && <WordsCard es={es} />}
+        {start !== null && placed !== null && result && <JourneyCard placed={placed} start={start} placedAt={result.attempt.completed_at} onRetake={() => setTesting(true)} />}
         {start !== null && <TeacherNotes es={es} />}
         {start !== null && <BandMap start={start} />}
         <section className="home-section">

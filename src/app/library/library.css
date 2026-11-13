@@ -27,3 +27,11 @@
 .lib-qs > .btn { justify-self: start; }
 .lib-done-box { display: grid; gap: var(--s-2); }
 .lib-done-box .btn { justify-self: start; }
+.lib-save { margin-left: 0.5em; padding: 0 0.5em; border: 1px solid var(--white); border-radius: var(--r-pill); background: transparent; color: var(--white); font: 700 var(--step--1) / 1.6 var(--font-body); cursor: pointer; } .lib-save:disabled { opacity: 0.8; cursor: default; } .lib-save:focus-visible { outline: none; box-shadow: var(--focus); }
+
+/* My words */
+.wd-card { padding: var(--s-5); background: var(--white); border: 2px solid var(--line); border-radius: var(--r-lg, var(--r-md)); }
+.wd-flash { display: grid; gap: var(--s-3); margin-top: var(--s-4); padding: var(--s-5); border: 3px solid var(--ink); border-radius: var(--r-md); background: var(--paper); text-align: center; justify-items: center; }
+.wd-meaning { margin: 0; font: 700 var(--step-1) / 1.4 var(--font-display); }
+.wd-example { margin: 0; font-size: var(--step-0); line-height: 1.6; max-width: 52ch; }
+.wd-word { margin: 0; font: 800 var(--step-3) / 1.1 var(--font-display); color: var(--cerulean-ink, var(--ink)); }

@@ -12,6 +12,7 @@ import { Icon } from "../components/Icon";
 import { LIBRARY, minutesFor } from "../content/library";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../lib/auth";
+import { loadWords } from "../lib/wordsApi";
 
 type Plan = { id: string; title: string; detail: string; minutes: number; href?: string; onClick?: () => void };
 
@@ -24,6 +25,12 @@ export function GoalCard({ start, es, onFixMistakes }: { start: number; es: bool
   const { profile } = useAuth();
   const [due, setDue] = useState(0);
   const [read, setRead] = useState<Set<string>>(new Set());
+  const [wordsDue, setWordsDue] = useState(0);
+  useEffect(() => {
+    let live = true;
+    void loadWords().then((w) => { if (live) setWordsDue(w.filter((x) => !x.learnt_at && x.next_due <= today()).length); });
+    return () => { live = false; };
+  }, [progress?.stats.xp]);
   useEffect(() => {
     let live = true;
     void supabase.from("library_reads").select("story_id").limit(500).then(({ data }) => { if (live) setRead(new Set(((data as { story_id: string }[]) ?? []).map((r) => r.story_id))); });
@@ -58,6 +65,7 @@ export function GoalCard({ start, es, onFixMistakes }: { start: number; es: bool
   // Today's plan: mistakes first (they're the fastest gains), then due checks, then the next new step, then something fun.
   const plan: Plan[] = [];
   if (due > 0) plan.push({ id: "mistakes", title: `Fix ${Math.min(due, 10)} mistakes`, detail: "Questions you got wrong, back at the right time.", minutes: 4, onClick: onFixMistakes });
+  if (wordsDue > 0) plan.push({ id: "words", title: `Review ${Math.min(wordsDue, 15)} of your words`, detail: "Words you saved while reading. Remember them before you look.", minutes: 3, onClick: () => document.getElementById("wd-start")?.click() });
   const check = views.find((x) => x.v === "check");
   if (check) plan.push({ id: "check", title: `Skill check: ${check.n.title}`, detail: "A quick check on a different day makes it stick.", minutes: 2, href: hrefFor(band.id, check.n.tree) });
   const going = views.filter((x) => x.p && x.p.steps_passed > 0 && x.p.steps_passed < 6).sort((a, b) => b.p!.steps_passed - a.p!.steps_passed)[0];

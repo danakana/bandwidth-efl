@@ -7,6 +7,7 @@ import { UNIVERSE_LIST } from "../../content/universes";
 import { LIBRARY, clipsFor, minutesFor, storyById, type Story } from "../../content/library";
 import { ExamAudio } from "../exams/ExamAudio";
 import { Icon } from "../../components/Icon";
+import { saveWord, sentenceWith } from "../../lib/wordsApi";
 import "./library.css";
 
 type Read = { story_id: string; correct: number; total: number; created_at: string };
@@ -87,6 +88,7 @@ export function LibraryPage({ start }: { start: number }) {
 function StoryView({ story, es, onClose }: { story: Story; es: boolean; onClose: (changed: boolean) => void }) {
   const progress = useProgress();
   const [shown, setShown] = useState<string | null>(null);
+  const [saved, setSaved] = useState<Set<string>>(new Set());
   const [picks, setPicks] = useState<Record<number, number>>({});
   const [checked, setChecked] = useState(false);
   const [reward, setReward] = useState<{ xp: number; coins: number; first: boolean } | null>(null);
@@ -125,7 +127,16 @@ function StoryView({ story, es, onClose }: { story: Story; es: boolean; onClose:
               return (
                 <span key={j} className="lib-gloss-wrap">
                   <button type="button" className="lib-gloss" aria-expanded={isOpen} onClick={() => setShown(isOpen ? null : g.word)}>{part}</button>
-                  {isOpen && <span className="lib-gloss-note" role="note">{g.means}{es && g.es && <em lang="es"> ({g.es})</em>}</span>}
+                  {isOpen && (
+                    <span className="lib-gloss-note" role="note">
+                      {g.means}{es && g.es && <em lang="es"> ({g.es})</em>}
+                      <button type="button" className="lib-save" disabled={saved.has(g.word)} onClick={() => {
+                        const w = g.word.split(" / ")[0];
+                        void saveWord({ word: w, meaning: g.means, es: g.es, example: sentenceWith(story.text, w), source: story.id })
+                          .then(() => setSaved(new Set(saved).add(g.word))).catch(() => {});
+                      }}>{saved.has(g.word) ? "Saved" : "+ My words"}</button>
+                    </span>
+                  )}
                 </span>
               );
             })}

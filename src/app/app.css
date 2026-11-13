@@ -183,3 +183,14 @@
   .goal-band { min-width: 52px; height: 52px; }
 }
 .home-hero .goal { margin: var(--s-4) 0 var(--s-5); }
+
+/* Your journey */
+.jr-card { padding: var(--s-5); background: var(--white); border: 2px solid var(--line); border-radius: var(--r-md); }
+.jr-path { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); margin: var(--s-2) 0 var(--s-4); }
+.jr-path .is-now { background: var(--ink); color: var(--white); }
+.jr-stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: var(--s-3); }
+.jr-stats li { display: grid; gap: 2px; padding: var(--s-3); border: 2px solid var(--line); border-radius: var(--r-md); background: var(--paper); }
+.jr-stats strong { font: 800 var(--step-2) / 1 var(--font-display); }
+.jr-stats span { font-size: var(--step--1); color: var(--muted, inherit); }
+.jr-retake { margin-top: var(--s-4); display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; justify-content: space-between; }
+.jr-retake p { margin: 0; max-width: 56ch; }
