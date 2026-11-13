@@ -5,9 +5,11 @@ import { bogotaDay } from "../../content/assessments";
 import { Icon } from "../../components/Icon";
 import { ArcadeGame } from "./ArcadeGame";
 import { GAMES, poolFor, type Game } from "./games";
+import { LevelWorlds } from "./LevelWorlds";
 import "./arcade.css";
+import "./games.css";
 
-export function ArcadePage() {
+export function ArcadePage({ start }: { start: number }) {
   const progress = useProgress();
   const [playing, setPlaying] = useState<Game | null>(null);
   const nodes = progress?.nodes;
@@ -22,10 +24,12 @@ export function ArcadePage() {
       <nav className="crumbs" aria-label="Breadcrumb"><a href="#app">Map</a><span aria-hidden="true">/</span><span aria-current="page">Arcade</span></nav>
       <header className="ar-page-head">
         <p className="pt-kicker">Arcade</p>
-        <h1>Quick games, real review.</h1>
-        <p className="pt-lede">Every question comes from a step you've already passed, so playing keeps your skills fresh.</p>
+        <h1>Play with your English.</h1>
+        <p className="pt-lede">Adventure games use the words and grammar of your band, with levels to unlock and stars to collect. Quick games review the steps you've already passed.</p>
         <p className="ar-cap"><Icon name="coin" size={18} /> Arcade coins today: <strong>{coinsToday} / {ARCADE_DAILY_COINS}</strong></p>
       </header>
+      <LevelWorlds start={start} />
+      <h2 className="ar-sub">Quick games</h2>
       <ul className="ar-games">
         {GAMES.map((g) => {
           const item = ITEMS.find((x) => x.id === `game:${g.id}`)!;

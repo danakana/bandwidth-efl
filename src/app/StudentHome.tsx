@@ -62,7 +62,7 @@ export function StudentHome() {
       <div className="shell">
         <AppHeader />
         <main id="main" className="page shell-main">
-          {route.page === "arcade" ? <ArcadePage /> : route.page === "exams" ? <ExamsPage /> : route.page === "library" ? <LibraryPage start={start} /> : route.page === "words" ? <WordLab start={start} /> : <ShopPage />}
+          {route.page === "arcade" ? <ArcadePage start={start} /> : route.page === "exams" ? <ExamsPage /> : route.page === "library" ? <LibraryPage start={start} /> : route.page === "words" ? <WordLab start={start} /> : <ShopPage />}
         </main>
       </div>
     );
