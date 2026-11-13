@@ -37,7 +37,7 @@ const greet: NodePractice = {
       ch("Which question asks for a city?", ["Where are you from?", "How are you?", "Who are you?"], 0, "where = place."),
       es(ch("Which is correct?", ["I'm fourteen years old.", "I have fourteen years.", "I'm fourteen years."], 0, "be + age (years old)."), "Edad = I'm 14 o I'm 14 years old."),
       ch("'What's your surname?' asks for:", ["your family name", "your first name", "your nickname"], 0, "surname = apellido."),
-      ch("Choose the best answer to 'Where do you live?'", ["In Ibagué, near the centre.", "I'm fine.", "I'm thirteen."], 0, "A place."),
+      ch("Choose the best answer to 'Where do you live?'", ["In Ibagué, near the centre.", "I'm fine, thanks. And you, Lucas?", "I'm thirteen. I'm in seventh grade."], 0, "A place."),
       ch("How do you say '.' in an email?", ["dot", "point", "punto"], 0, ". = dot."),
     ],
     [
@@ -55,10 +55,10 @@ const greet: NodePractice = {
       ord("What's your email address?", "What's + your + email address?"),
     ],
     [
-      ctx("A new classmate: 'Hi! What's your name?'", "Best answer:", ["I'm Ana. What's your name?", "Ana is my.", "Name Ana."], 0, "Answer + ask back."),
+      ctx("A new classmate: 'Hi! What's your name?'", "Best answer:", ["I'm Ana. What's your name?", "Ana is my name. What your name?", "My name Ana. What is you name?"], 0, "Answer + ask back."),
       ctx("Online form: 'Age?'", "Best answer:", ["13", "13 years old have", "I have 13"], 0, "Just the number."),
-      ctx("A visitor: 'Where are you from?'", "Best answer:", ["I'm from Colombia, from Bogotá.", "I am Colombia.", "I'm of Bogotá."], 0, "I'm from …"),
-      ch("Introduce yourself in a video call:", ["Hi everyone! I'm Sara, I'm twelve and I live in Neiva.", "Hi! I Sara, twelve years.", "Hi! I have Sara."], 0, "Full, clear sentences."),
+      ctx("A visitor: 'Where are you from?'", "Best answer:", ["I'm from Colombia, from Bogotá.", "I am Colombia, from the capital.", "I'm of Bogotá, in Colombia."], 0, "I'm from …"),
+      ch("Introduce yourself in a video call:", ["Hi everyone! I'm Sara, I'm twelve and I live in Neiva.", "Hi everyone! I Sara, twelve years and live in Neiva.", "Hi everyone! I have Sara, I have twelve, I live Neiva."], 0, "Full, clear sentences."),
       say("Nice to meet you! Where are you from?", "Friendly tone."),
     ],
   ],
@@ -114,9 +114,9 @@ const likes: NodePractice = {
     ],
     [
       ctx("Friend: 'Do you like reggaetón?'", "You do, a lot. Best answer:", ["Yes, I love it!", "Yes, I love.", "Yes, I like."], 0, "love it (needs it)."),
-      ctx("Friend: 'I love cats. What about you?'", "Best answer:", ["I like them, but I prefer dogs.", "Me too dogs.", "I like, I prefer dog."], 0, "Answer + reason."),
+      ctx("Friend: 'I love cats. What about you?'", "Best answer:", ["I like them, but I prefer dogs.", "I like they, but I prefer the dogs.", "Me too like them, but I prefer dog."], 0, "Answer + reason."),
       ch("Describe your hobbies:", ["I love drawing and I really like skating.", "I love draw and I really like skate.", "I love to drawing."], 0, "love + -ing."),
-      ctx("Your aunt offers you broccoli. You don't like it.", "Polite answer:", ["No, thank you. I don't really like broccoli.", "Puaj, I hate.", "No, broccoli bad."], 0, "Polite and soft."),
+      ctx("Your aunt offers you broccoli. You don't like it.", "Polite answer:", ["No, thank you. I don't really like broccoli.", "No, thanks. Broccoli is bad and I hate it.", "Puaj! No, I hate broccoli. Take it away."], 0, "Polite and soft."),
       say("Do you like football? Yes, I love it!", "love IT: don't forget it."),
     ],
   ],
@@ -144,14 +144,14 @@ const askPolitely: NodePractice = {
   steps: [
     [
       heard(X("03", "notice"), "What sandwich does the speaker want?", ["Ham", "Cheese", "Chicken"], 0, "'A ham sandwich.'"),
-      heard(X("03", "notice"), "What drink does the speaker ask for?", ["A glass of water", "A juice", "A coffee"], 0, "'A glass of water.'"),
+      heard(X("03", "notice"), "What drink does the speaker ask for?", ["A glass of water", "A big glass of orange juice", "A cup of hot coffee with milk"], 0, "'A glass of water.'"),
       heard(X("03", "notice"), "What does the speaker ask for at the end?", ["The bill", "A menu", "More water"], 0, "'Can I have the bill, please?'"),
-      ch("Which is polite?", ["Can I have a juice, please?", "Give me a juice.", "Juice!"], 0, "Can I have …, please?"),
+      ch("Which is polite?", ["Can I have a juice, please?", "Give me a juice now, OK?", "I want a juice. Bring it."], 0, "Can I have …, please?"),
       ch("The waiter gives you the food. He says:", ["Here you are.", "Here are you.", "Thank you."], 0, "Here you are."),
     ],
     [
       es(ch("«¿Me da un agua, por favor?»:", ["Could I have a water, please?", "Give me a water, please.", "Do you give me a water?"], 0, "Could I have …, please?"), "'Give me' suena grosero en inglés. Usa Could / Can I have."),
-      ch("Which is the most polite?", ["Could I have the menu, please?", "Can I have the menu?", "The menu."], 0, "Could + please."),
+      ch("Which is the most polite?", ["Could I have the menu, please?", "Can I have the menu now?", "Give me the menu, OK?"], 0, "Could + please."),
       ch("Someone thanks you. You say:", ["You're welcome.", "Here you are.", "Please."], 0, "You're welcome."),
       ch("Can I ___ a pen, please?", ["borrow", "lend", "give"], 0, "borrow = use and give back."),
       ch("'The bill' in a restaurant is:", ["the paper to pay", "the menu", "the waiter"], 0, "bill = la cuenta."),
@@ -171,10 +171,10 @@ const askPolitely: NodePractice = {
       ord("Could I have some more water, please?", "Could I have + thing + please?"),
     ],
     [
-      ctx("In a café. Waiter: 'What would you like?'", "Best answer:", ["Can I have a hot chocolate, please?", "Give me hot chocolate.", "I want hot chocolate."], 0, "Polite request."),
-      ctx("At a friend's house, dinner.", "You want the bread:", ["Could you pass me the bread, please?", "Bread, bread!", "Give the bread."], 0, "Could you pass me …?"),
+      ctx("In a café. Waiter: 'What would you like?'", "Best answer:", ["Can I have a hot chocolate, please?", "Give me a hot chocolate now.", "I want a hot chocolate. Fast!"], 0, "Polite request."),
+      ctx("At a friend's house, dinner.", "You want the bread:", ["Could you pass me the bread, please?", "Give me the bread, please. Now!", "Bread! Pass the bread to me now."], 0, "Could you pass me …?"),
       ctx("Shop assistant gives you the change.", "You say:", ["Thanks very much!", "You're welcome!", "Here you are!"], 0, "Thanks."),
-      ch("At the end of a meal:", ["Excuse me, could I have the bill, please?", "Bill!", "Give me the bill now."], 0, "Polite."),
+      ch("At the end of a meal:", ["Excuse me, could I have the bill, please?", "Hey! Bill! Give me the bill now, OK?", "Bill, please! I want to pay quickly."], 0, "Polite."),
       say("Excuse me, can I have the bill, please?", "Rising on please."),
     ],
   ],
@@ -210,8 +210,8 @@ const formalInformal: NodePractice = {
     [
       es(ch("You arrive at a party at 8 p.m. You say:", ["Good evening!", "Good night!", "Good morning!"], 0, "Arriving at night → good evening."), "Good night solo para despedirse. Al llegar: Good evening."),
       ch("Mr is for:", ["a man", "a married woman", "a girl"], 0, "Mr = señor."),
-      ch("Which is formal?", ["Goodbye. Have a nice day.", "See ya!", "Bye-bye!"], 0, "Formal goodbye."),
-      ch("'What's up?' means:", ["How are you? / What's new?", "Look up!", "Stand up!"], 0, "Informal hello."),
+      ch("Which is formal?", ["Goodbye. Have a nice day.", "See ya later! Have a good one!", "Bye-bye! See you, my friend!"], 0, "Formal goodbye."),
+      ch("'What's up?' means:", ["How are you? / What's new?", "What's the time, please?", "Look up at the sky!"], 0, "Informal hello."),
       ch("At 3 p.m. you meet your teacher:", ["Good afternoon, Ms Rojas.", "Good morning, Ms Rojas.", "Hey Rojas!"], 0, "Afternoon."),
     ],
     [
@@ -230,8 +230,8 @@ const formalInformal: NodePractice = {
     ],
     [
       ctx("You see your classmate in the corridor.", "Best greeting:", ["Hi Nico! What's up?", "Good morning, Mr Nico.", "Good evening, sir."], 0, "Informal for friends."),
-      ctx("You meet your friend's grandmother.", "Best greeting:", ["Good afternoon. Nice to meet you.", "Hey! What's up?", "Yo!"], 0, "Formal for adults."),
-      ctx("You leave a friend's house at 10 p.m.", "You say:", ["Good night! See you tomorrow.", "Good evening!", "Good morning!"], 0, "Leaving at night → good night."),
+      ctx("You meet your friend's grandmother.", "Best greeting:", ["Good afternoon. Nice to meet you.", "Hey! What's up? How's it going?", "Yo! What's up, man? All good?"], 0, "Formal for adults."),
+      ctx("You leave a friend's house at 10 p.m.", "You say:", ["Good night! See you tomorrow.", "Good evening! See you tomorrow.", "Good morning! See you tomorrow."], 0, "Leaving at night → good night."),
       ch("Email to a teacher starts:", ["Dear Mr Díaz,", "Hey Díaz!", "What's up teacher,"], 0, "Formal: Dear Mr …"),
       say("Hi! What's up? See you later!", "Relaxed, friendly tone."),
     ],
@@ -269,7 +269,7 @@ const pleaseThanks: NodePractice = {
       es(ch("Your mum gives you dinner. In English it's normal to say:", ["Thanks, Mum!", "Nothing; it's family.", "Please, Mum!"], 0, "Thanks even with family."), "En inglés se agradece incluso en familia: Thanks, Mum!"),
       ch("Someone says 'Thank you!'. You can answer:", ["No problem!", "Please!", "Here you are!"], 0, "No problem / You're welcome."),
       ch("'Thanks a lot' means:", ["Thank you very much", "Too many things", "A lot of things, please"], 0, "Strong thanks."),
-      ch("Which request is better?", ["Can you open the door, please?", "Open the door.", "Door!"], 0, "Can you …, please?"),
+      ch("Which request is better?", ["Can you open the door, please?", "Open the door now. Quickly!", "Door! Open it for me, OK?"], 0, "Can you …, please?"),
       ch("When do you say please?", ["When you ask for something", "When you say goodbye", "When you are sorry"], 0, "Requests."),
     ],
     [
@@ -288,8 +288,8 @@ const pleaseThanks: NodePractice = {
     ],
     [
       ctx("The bus driver tells you your stop.", "You say:", ["Thank you!", "Please!", "Nothing."], 0, "Thank the driver."),
-      ctx("A classmate lends you a charger.", "Best thing to say:", ["Thanks a lot! I'll give it back soon.", "Ok.", "Give me."], 0, "Thanks + promise."),
-      ctx("At the cinema counter.", "Best order:", ["Two popcorns and a soda, please.", "Two popcorns and a soda.", "I want two popcorns."], 0, "please."),
+      ctx("A classmate lends you a charger.", "Best thing to say:", ["Thanks a lot! I'll give it back soon.", "OK. Give me it. I need it now.", "Thanks. I keep it for a week, OK?"], 0, "Thanks + promise."),
+      ctx("At the cinema counter.", "Best order:", ["Two popcorns and a soda, please.", "I want two popcorn and soda now.", "Give me two popcorns and a soda."], 0, "please."),
       ctx("Your friend says 'Thanks for helping me!'", "Best answer:", ["No problem! Any time.", "Please!", "You're welcomed!"], 0, "No problem."),
       say("Can I have two tickets, please? Thanks a lot!", "Smile in your voice."),
     ],
@@ -317,7 +317,7 @@ const teacher: NodePractice = {
   steps: [
     [
       heard(X("06", "notice"), "What does the speaker call Ms López?", ["Ms López", "Teacher", "Miss Ana"], 0, "'Excuse me, Ms López.'"),
-      heard(X("06", "notice"), "What does the speaker say to Mr Gómez?", ["Sorry, I don't understand", "Thank you, sir", "Good afternoon"], 0, "'Sorry, Mr Gómez, I don't understand.'"),
+      heard(X("06", "notice"), "What does the speaker say to Mr Gómez?", ["Sorry, I don't understand", "Thank you very much, sir", "Good afternoon, Mr Gómez"], 0, "'Sorry, Mr Gómez, I don't understand.'"),
       heard(X("06", "notice"), "Which words are used alone for teachers?", ["Miss and sir", "Teacher and profe", "Mr and Mrs"], 0, "'Thank you, Miss.' 'Good morning, sir.'"),
       ch("Your teacher is Carlos Gómez. You call him:", ["Mr Gómez", "Mr Carlos", "Teacher"], 0, "Mr + surname."),
       ch("Your teacher is Laura Pérez. You call her:", ["Ms Pérez", "Ms Laura", "Teacher Laura"], 0, "Ms + surname."),
@@ -344,7 +344,7 @@ const teacher: NodePractice = {
       ord("Excuse me, Mrs Torres, can I open the window?", "Excuse me + title + surname."),
     ],
     [
-      ctx("Your English teacher is Andrea Ruiz.", "You need help. Best:", ["Excuse me, Ms Ruiz, can you help me?", "Teacher! Help!", "Ms Andrea, help me."], 0, "Ms + surname."),
+      ctx("Your English teacher is Andrea Ruiz.", "You need help. Best:", ["Excuse me, Ms Ruiz, can you help me?", "Teacher! Teacher! Help me now!", "Ms Andrea Ruiz, you help me?"], 0, "Ms + surname."),
       ctx("You write an email to your science teacher, Pablo Díaz.", "Best start:", ["Dear Mr Díaz,", "Dear Teacher Pablo,", "Hi Profe,"], 0, "Dear Mr + surname."),
       ctx("Exchange student in London. Your teacher is a man.", "You finish the test. You say:", ["Sir, I've finished.", "Teacher, I've finished.", "Mister, I finished."], 0, "Sir alone."),
       ctx("New teacher: 'Hi, I'm Mr Pinto.'", "Next day you say:", ["Good morning, Mr Pinto!", "Good morning, Teacher!", "Good morning, Pinto!"], 0, "Mr Pinto."),

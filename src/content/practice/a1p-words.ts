@@ -60,7 +60,7 @@ const numbers: NodePractice = {
     ],
     [
       ctx("In a shop: 'How much are these socks?'", "Best answer:", ["They're eight thousand pesos.", "They're eight thousand pesos old.", "It's eight o'clock."], 0, "Price."),
-      ctx("Friend: 'When's your birthday?'", "Best answer:", ["It's on the fourth of July.", "It's on July four.", "It's four July of."], 0, "on the fourth of July."),
+      ctx("Friend: 'When's your birthday?'", "Best answer:", ["It's on the fourth of July.", "It's on July four, in summer.", "It's four July of, my birthday."], 0, "on the fourth of July."),
       ctx("Someone asks: 'What time is it?' It's 9:15.", "Best answer:", ["It's a quarter past nine.", "It's a quarter to nine.", "It's nine and fifteen minutes past."], 0, "9:15 = a quarter past nine."),
       ch("Give your phone number:", ["It's three one five, two four eight…", "It's three hundred fifteen million…", "Is number three."], 0, "Say each digit."),
       say("My birthday is on the twenty-first of December.", "twenty-FIRST."),
@@ -117,7 +117,7 @@ const family: NodePractice = {
       ord("My cousin has curly brown hair.", "curly (type) + brown (colour) + hair."),
     ],
     [
-      ctx("Friend: 'What does your sister look like?'", "Best answer:", ["She's short and has long dark hair.", "She likes music.", "She is very kind person."], 0, "look like = appearance."),
+      ctx("Friend: 'What does your sister look like?'", "Best answer:", ["She's short and has long dark hair.", "She likes music and dancing a lot.", "She is very kind person with long hair."], 0, "look like = appearance."),
       ch("Describe your favourite footballer:", ["He's tall and has short dark hair.", "He's tall and he has hair short.", "He is short hairs."], 0, "has short dark hair."),
       ctx("New friend: 'Have you got any cousins?'", "Best answer:", ["Yes, I have five cousins.", "Yes, I have five parents.", "Yes, I'm five cousins."], 0, "cousins."),
       ch("Introduce your family:", ["There are four people: my parents, my sister and me.", "There are four parents and me.", "There are four relatives: my parents and me."], 0, "parents = 2 people."),
@@ -175,8 +175,8 @@ const homeSchool: NodePractice = {
       ord("Can I borrow your ruler, please?", "Can I borrow + object?"),
     ],
     [
-      ctx("A classmate: 'What's your favourite subject?'", "Best answer:", ["Science. I love experiments!", "My ruler.", "The kitchen."], 0, "A subject."),
-      ch("Describe your house:", ["It has three bedrooms, a big kitchen and a small garden.", "It has three beds-rooms.", "It has a big cook room."], 0, "bedrooms · kitchen."),
+      ctx("A classmate: 'What's your favourite subject?'", "Best answer:", ["Science. I love experiments!", "My ruler. I love my ruler!", "The kitchen. I love cooking!"], 0, "A subject."),
+      ch("Describe your house:", ["It has three bedrooms, a big kitchen and a small garden.", "It has three beds-rooms, a big kitchen and a small garden.", "It has three bedrooms, a big cook room and a small garden."], 0, "bedrooms · kitchen."),
       ctx("You forgot your eraser.", "Ask a friend:", ["Can I borrow your rubber, please?", "Can I borrow your eraser of pencil?", "Give me goma."], 0, "rubber = eraser."),
       ch("Tell your timetable:", ["On Monday I have English, maths and PE.", "On Monday I have the English, the maths.", "On Monday I have a English."], 0, "No article with subjects."),
       say("Where's my pencil case? It's in my backpack.", "PENcil case."),
@@ -206,7 +206,7 @@ const foodRoutine: NodePractice = {
     [
       heard(X("04", "notice"), "What time does the speaker wake up?", ["At six", "At seven", "At ten"], 0, "'I wake up at six.'"),
       heard(X("04", "notice"), "What does the speaker drink for breakfast?", ["Hot chocolate", "Coffee", "Juice"], 0, "'Arepas, eggs and hot chocolate.'"),
-      heard(X("04", "notice"), "What is for lunch?", ["Rice, chicken and salad", "Arepas and eggs", "Fish and chips"], 0, "'Rice, chicken and salad.'"),
+      heard(X("04", "notice"), "What is for lunch?", ["Rice, chicken and salad", "Arepas with eggs and cheese", "Fish and chips with salad"], 0, "'Rice, chicken and salad.'"),
       ch("The first meal of the day is:", ["breakfast", "lunch", "dinner"], 0, "breakfast."),
       ch("Before school, I ___ my teeth.", ["brush", "wash up", "make"], 0, "brush your teeth."),
     ],
@@ -233,8 +233,8 @@ const foodRoutine: NodePractice = {
     ],
     [
       ctx("Friend: 'What do you have for breakfast?'", "Best answer:", ["Usually eggs, bread and juice.", "Usually I take breakfast.", "At seven o'clock."], 0, "Food answer."),
-      ch("Describe your morning:", ["I wake up at six, have a shower and have breakfast.", "I wake me up at six.", "I take a breakfast at six."], 0, "wake up · have breakfast."),
-      ctx("In a café: 'What would you like?'", "Best answer:", ["A chicken sandwich and an orange juice, please.", "Give me chicken.", "I want a chicken."], 0, "Polite order."),
+      ch("Describe your morning:", ["I wake up at six, have a shower and have breakfast.", "I wake me up at six, have a shower and have breakfast.", "I wake up at six, take a shower and take a breakfast."], 0, "wake up · have breakfast."),
+      ctx("In a café: 'What would you like?'", "Best answer:", ["A chicken sandwich and an orange juice, please.", "Give me a chicken sandwich and orange juice.", "I want a chicken and an orange juice, please."], 0, "Polite order."),
       ch("Talk about a healthy diet:", ["I eat a lot of fruit and vegetables.", "I eat much fruits and vegetable.", "I eat a lot of fruit and vegetable."], 0, "fruit (no s) · vegetables (s)."),
       say("I have rice, chicken and salad for lunch.", "Lists: up, up, down at the end."),
     ],
@@ -291,8 +291,8 @@ const cityWeather: NodePractice = {
     [
       ctx("Friend: 'What's the weather like in Bogotá today?'", "Best answer:", ["It's cloudy and a bit cold.", "Is cloudy.", "The weather is cloud."], 0, "It's + adjective."),
       ctx("A tourist: 'Where can I buy medicine?'", "Best answer:", ["There's a pharmacy next to the bank.", "There's a bakery next to the bank.", "In the library."], 0, "medicine → pharmacy."),
-      ch("Describe your clothes for a party:", ["I'm wearing a blue dress and white trainers.", "I'm wearing a dress blue.", "I'm wearing blues jeans."], 0, "Colour before noun."),
-      ch("Plan a sunny day:", ["It's sunny! Let's go to the park.", "It's sun! Let's go.", "Is sunny! Go park."], 0, "It's sunny · Let's go."),
+      ch("Describe your clothes for a party:", ["I'm wearing a blue dress and white trainers.", "I'm wearing a dress blue and white trainers.", "I'm wearing a blue dress and whites trainers."], 0, "Colour before noun."),
+      ch("Plan a sunny day:", ["It's sunny! Let's go to the park.", "It's sun! Let's go to the park.", "Is sunny! Let's go at the park."], 0, "It's sunny · Let's go."),
       say("It's rainy, so take an umbrella.", "an umbrella: link the n."),
     ],
   ],
@@ -319,7 +319,7 @@ const verbNoun: NodePractice = {
   es: "En español decimos «hacer» para todo, pero en inglés do homework y make a cake. Y «tomar una foto» = take a photo.",
   steps: [
     [
-      heard(X("06", "notice"), "What does the speaker do every morning?", ["Take a shower and have breakfast", "Do exercise", "Make dinner"], 0, "'I take a shower and have breakfast.'"),
+      heard(X("06", "notice"), "What does the speaker do every morning?", ["Take a shower and have breakfast", "Do some exercise in the park", "Make dinner for the family"], 0, "'I take a shower and have breakfast.'"),
       heard(X("06", "notice"), "What do they take for the project?", ["Photos", "The bus", "Exercise"], 0, "'Take photos for our project.'"),
       heard(X("06", "notice"), "Who makes dinner?", ["The mum", "The speaker", "The teacher"], 0, "'My mum makes dinner.'"),
       ch("I ___ my homework after school.", ["do", "make", "take"], 0, "do homework."),
@@ -347,7 +347,7 @@ const verbNoun: NodePractice = {
       ord("Do you play any sports?", "play + sports."),
     ],
     [
-      ctx("Friend: 'What do you do after school?'", "Best answer:", ["I do my homework and play football.", "I make my homework.", "I take football."], 0, "do homework · play football."),
+      ctx("Friend: 'What do you do after school?'", "Best answer:", ["I do my homework and play football.", "I make my homework and play football.", "I do my homework and take football."], 0, "do homework · play football."),
       ch("At a party:", ["We're having so much fun!", "We're making so much fun!", "We're doing so much fun!"], 0, "have fun."),
       ch("Explain a mistake:", ["Sorry, I made a mistake.", "Sorry, I did a mistake.", "Sorry, I had a mistake."], 0, "make a mistake."),
       ch("Help at home:", ["I make my bed and do the dishes.", "I do my bed and make the dishes.", "I take my bed."], 0, "make the bed · do the dishes."),
@@ -407,7 +407,7 @@ const literalPhrasal: NodePractice = {
     [
       ctx("You go into a cold house.", "Your mum says:", ["Put on a sweater.", "Take off a sweater.", "Turn off a sweater."], 0, "Cold → put on."),
       ctx("Visitors arrive at your door.", "Best thing to say:", ["Hi! Come in, please.", "Hi! Go out, please.", "Hi! Get in out."], 0, "come in."),
-      ch("Leaving the classroom, the teacher says:", ["Turn off the lights, please.", "Open off the lights.", "Close the lights."], 0, "turn off."),
+      ch("Leaving the classroom, the teacher says:", ["Turn off the lights, please.", "Open off the lights, please.", "Close the lights, please."], 0, "turn off."),
       ch("Your little brother's toys are on the floor:", ["Pick up your toys, please.", "Pick your toys up the floor.", "Take on your toys."], 0, "pick up."),
       say("Please take off your shoes and come in.", "take OFF, come IN."),
     ],
@@ -435,7 +435,7 @@ const chunks: NodePractice = {
     [
       heard(X("08", "notice"), "What is the answer to 'How are you?'", ["I'm fine, thanks", "Nice to meet you", "You're welcome"], 0, "'I'm fine, thanks.'"),
       heard(X("08", "notice"), "What is the answer to 'Thank you so much'?", ["You're welcome", "See you later", "Not bad"], 0, "'You're welcome.'"),
-      heard(X("08", "notice"), "Which phrase asks someone to say it again?", ["Can you repeat that, please?", "Have a nice day!", "Excuse me"], 0, "repeat = say again."),
+      heard(X("08", "notice"), "Which phrase asks someone to say it again?", ["Can you repeat that, please?", "Have a nice day, everyone!", "Excuse me, where is it?"], 0, "repeat = say again."),
       ch("You meet someone new. You say:", ["Nice to meet you.", "See you later.", "You're welcome."], 0, "First meeting."),
       ch("You leave school. You say to a friend:", ["See you tomorrow!", "Nice to meet you!", "Excuse me!"], 0, "Leaving."),
     ],
@@ -461,8 +461,8 @@ const chunks: NodePractice = {
       ord("Can you speak more slowly, please?", "Can you + verb …, please?"),
     ],
     [
-      ctx("A new classmate: 'Hi, I'm Valeria.'", "Best answer:", ["Hi, Valeria! I'm Juan. Nice to meet you.", "Hi! You're welcome.", "Hi! See you later."], 0, "Introduce + nice to meet you."),
-      ctx("The teacher speaks very fast.", "Best thing to say:", ["Sorry, can you repeat that, please?", "What?!", "Repeat!"], 0, "Polite request."),
+      ctx("A new classmate: 'Hi, I'm Valeria.'", "Best answer:", ["Hi, Valeria! I'm Juan. Nice to meet you.", "Hi, Valeria! I'm Juan. You're welcome.", "Hi, Valeria! I'm Juan. See you later."], 0, "Introduce + nice to meet you."),
+      ctx("The teacher speaks very fast.", "Best thing to say:", ["Sorry, can you repeat that, please?", "What?! I don't understand you!", "Repeat! Say it again, now!"], 0, "Polite request."),
       ctx("A friend helps you with homework.", "You say:", ["Thanks so much!", "You're welcome!", "Excuse me!"], 0, "Thanks."),
       ctx("Friday afternoon, you leave a shop.", "The shop assistant says 'Have a nice weekend!'. You answer:", ["Thanks, you too!", "You're welcome!", "Nice to meet you!"], 0, "You too."),
       say("Excuse me, can you help me, please?", "Polite and soft."),

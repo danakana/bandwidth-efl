@@ -24,16 +24,16 @@ const trends: NodePractice = {
   steps: [
     [
       heard(A("01", "notice"), "What happened to the number of online students over ten years?", ["It rose sharply.", "It fell slightly.", "It stayed the same."], 0, "'Has risen sharply' = gone up a lot."),
-      heard(A("01", "notice"), "What has happened since the pandemic?", ["The number has levelled off.", "It has soared again.", "It has plunged."], 0, "Level off = stop rising or falling and stay stable."),
+      heard(A("01", "notice"), "What has happened since the pandemic?", ["The number has levelled off.", "It has soared again.", "It has plunged suddenly."], 0, "Level off = stop rising or falling and stay stable."),
       ch("Which verb means 'rise very fast, a lot'?", ["soar", "level off", "decline"], 0, "Soar = go up quickly and a lot, like a bird."),
       ch("Which adverb means 'a little'?", ["slightly", "dramatically", "sharply"], 0, "Slightly = a small amount."),
-      ch("'Inequality' is about…", ["unfair differences between people or groups", "a scientific discovery", "a kind of job"], 0, "In-equal-ity: not equal."),
+      ch("'Inequality' is about…", ["unfair differences between people or groups", "a new scientific discovery about people", "a kind of job or profession"], 0, "In-equal-ity: not equal."),
     ],
     [
       ctx("Prices fluctuated throughout the year.", "This means prices…", ["went up and down", "only went up", "didn't change"], 0, "Fluctuate = change up and down repeatedly."),
       ch("Which pair has the same meaning?", ["plunge / fall dramatically", "soar / fall slowly", "level off / increase"], 0, "Plunge = a sudden, big fall."),
       ctx("Scientists made a breakthrough in cancer research.", "This means…", ["they made an important discovery", "they failed completely", "they stopped the research"], 0, "A breakthrough = a big step forward."),
-      ch("'Consent' means…", ["permission or agreement", "a disagreement", "a payment"], 0, "Consent = saying yes, giving permission."),
+      ch("'Consent' means…", ["permission or agreement", "a disagreement between people", "a payment for a service"], 0, "Consent = saying yes, giving permission."),
       ch("Which is a noun phrase for a trend?", ["a steady increase in", "increase steadily in", "steady increasing"], 0, "a / an + adjective + noun + in."),
     ],
     [
@@ -53,8 +53,8 @@ const trends: NodePractice = {
     [
       ch("Sales go from 100 to 105. Best description?", ["Sales rose slightly.", "Sales soared.", "Sales plunged."], 0, "5% is a small change."),
       ch("Users go from 1,000 to 50,000 in one month. Best description?", ["Users increased a bit.", "The number of users soared.", "Users fluctuated."], 1, "Huge and fast → soar."),
-      ch("Formal report. Best sentence?", ["The number of students went up a lot.", "There was a significant increase in the number of students.", "Students went way up."], 1, "Noun phrase + precise adjective sounds formal."),
-      ch("Which is the most precise?", ["Things changed.", "Prices rose gradually over five years.", "Prices did stuff."], 1, "Verb + adverb + time = precise."),
+      ch("Formal report. Best sentence?", ["The number of students went up a lot this year.", "There was a significant increase in the number of students.", "Students went way up, like, a lot more than before."], 1, "Noun phrase + precise adjective sounds formal."),
+      ch("Which is the most precise?", ["Things changed over five years.", "Prices rose gradually over five years.", "Prices did stuff over the years."], 1, "Verb + adverb + time = precise."),
       say("There has been a sharp rise in the cost of living.", "Stress: SHARP RISE, COST of LIVing."),
     ],
   ],
@@ -81,7 +81,7 @@ const loseVery: NodePractice = {
   pattern: ["very tired → exhausted · very hungry → starving · very cold → freezing", "very angry → furious · very happy → delighted · very scared → terrified", "very big → enormous · very small → tiny · very good → excellent, superb", "Extreme adjectives take 'absolutely', not 'very': absolutely furious"],
   steps: [
     [
-      heard(A("02", "notice"), "How did the speaker feel after the trip?", ["Very tired and very hungry", "A bit tired", "Happy and relaxed"], 0, "Exhausted = very tired. Starving = very hungry."),
+      heard(A("02", "notice"), "How did the speaker feel after the trip?", ["Very tired and very hungry", "A bit tired after the long trip", "Happy and relaxed after the trip"], 0, "Exhausted = very tired. Starving = very hungry."),
       heard(A("02", "notice"), "How did the speaker's mum feel?", ["Very angry", "Very scared", "Very happy"], 0, "Furious = very angry."),
       ch("very cold →", ["freezing", "boiling", "chilly"], 0, "Freezing = extremely cold. Chilly is only a bit cold."),
       ch("very small →", ["tiny", "enormous", "huge"], 0, "Tiny = very small."),
@@ -91,7 +91,7 @@ const loseVery: NodePractice = {
       ch("'Delighted' means…", ["very happy", "very sad", "very surprised"], 0, "Delighted = very pleased."),
       ch("Which is stronger?", ["chilly", "freezing"], 1, "Chilly = a little cold. Freezing = extremely cold."),
       ctx("The concert was superb.", "This means the concert was…", ["excellent", "okay", "bad"], 0, "Superb = excellent."),
-      ch("Why is 'very enormous' wrong?", ["'Enormous' already means very big; use 'absolutely' or 'really'.", "'Enormous' is a noun.", "It's correct."], 0, "You can't make an extreme word 'more extreme' with very."),
+      ch("Why is 'very enormous' wrong?", ["'Enormous' already means very big; use 'absolutely' or 'really'.", "'Enormous' is a noun, not an adjective, so 'very' can't go with it.", "It's correct; 'very' makes it stronger."], 0, "You can't make an extreme word 'more extreme' with very."),
       ch("Which word means 'very important'?", ["crucial", "trivial", "useful"], 0, "Crucial = extremely important. Trivial = not important."),
     ],
     [
@@ -146,7 +146,7 @@ const colloc: NodePractice = {
       ch("Which verb goes with 'a threat' (= be dangerous)?", ["pose", "put", "give"], 0, "pose a threat."),
     ],
     [
-      ctx("We drew the conclusion that the plan wouldn't work.", "This means…", ["we decided, from the evidence, that it wouldn't work", "we painted a picture", "we ended the plan early"], 0, "Draw a conclusion = decide something from evidence."),
+      ctx("We drew the conclusion that the plan wouldn't work.", "This means…", ["we decided, from the evidence, that it wouldn't work", "we painted a picture of the plan", "we ended the plan early, before we finished"], 0, "Draw a conclusion = decide something from evidence."),
       ctx("I'm fully aware of the risks.", "This means…", ["I know the risks completely.", "I'm a little worried.", "I don't know the risks."], 0, "Fully aware = completely conscious of something."),
       ch("'Bitterly disappointed' means…", ["extremely disappointed", "slightly disappointed", "disappointed about food"], 0, "Bitterly = very strongly (for negative feelings)."),
       ch("Which is NOT a natural collocation?", ["make a decision", "do a decision", "reach a decision"], 1, "Make / reach a decision. Never 'do'."),
@@ -167,10 +167,10 @@ const colloc: NodePractice = {
       fix(["The fans were", "bitterly disappointing", "after the loss."], 1, ["bitterly disappointed"], "People feel disappointed (-ed). A result is disappointing (-ing)."),
     ],
     [
-      ch("Formal essay. Best sentence?", ["Climate change is a really big danger.", "Climate change poses a serious threat to coastal cities.", "Climate change makes a big threat."], 1, "pose a threat = formal and precise."),
+      ch("Formal essay. Best sentence?", ["Climate change is a really big danger for cities.", "Climate change poses a serious threat to coastal cities.", "Climate change makes a big threat to cities."], 1, "pose a threat = formal and precise."),
       ch("Texting a friend. Most natural?", ["It is highly unlikely that I shall attend.", "Nah, I probably won't make it.", "I am fully aware I cannot go."], 1, "Formal collocations sound strange in a casual text."),
       ch("Which sounds most fluent?", ["The method was effective a lot.", "The method proved highly effective.", "The method was strongly effective."], 1, "highly effective."),
-      ch("Reporting a decision formally.", ["They did an agreement.", "They reached an agreement after three days of talks.", "They got agree."], 1, "reach an agreement."),
+      ch("Reporting a decision formally.", ["They did an agreement after three days of talks.", "They reached an agreement after three days of talks.", "They got agree after three days of talks."], 1, "reach an agreement."),
       say("It's highly unlikely that the match will be cancelled.", "Stress: HIGHly unLIKEly."),
     ],
   ],
@@ -198,12 +198,12 @@ const phrasal: NodePractice = {
     [
       heard(A("04", "notice"), "What are the police doing?", ["Investigating the incident", "Ignoring the incident", "Closing the case"], 0, "Look into = investigate."),
       heard(A("04", "notice"), "What does the speaker think of the new mall?", ["It wasn't as good as people said.", "It was better than expected.", "It was too small."], 0, "Didn't live up to the hype = wasn't as good as people said."),
-      ch("'Rule out' means…", ["exclude a possibility", "make a rule", "go outside"], 0, "They haven't ruled out an accident = an accident is still possible."),
+      ch("'Rule out' means…", ["exclude a possibility", "make a new rule", "go outside"], 0, "They haven't ruled out an accident = an accident is still possible."),
       ch("'Put up with' means…", ["tolerate", "build", "put something on a shelf"], 0, "I can't put up with the noise = I can't tolerate it."),
       ch("Which phrasal verb means 'cause a change'?", ["bring about", "stand out", "look into"], 0, "bring about change."),
     ],
     [
-      ctx("Her design really stood out from the others.", "This means her design…", ["was noticeably different or better", "was outside the room", "was worse"], 0, "Stand out = be easy to notice."),
+      ctx("Her design really stood out from the others.", "This means her design…", ["was noticeably different or better", "was outside the room during the show", "was worse than the others"], 0, "Stand out = be easy to notice."),
       ctx("Teenagers account for 40% of the app's users.", "This means teenagers…", ["make up 40% of users", "explain the app", "pay 40%"], 0, "Account for = form a part of."),
       ctx("How do you account for the drop in sales?", "This asks…", ["How do you explain it?", "How do you count it?", "How do you fix it?"], 0, "Account for = explain."),
       ch("The most formal equivalent of 'look into'?", ["investigate", "see", "watch"], 0, "look into → investigate."),
@@ -225,8 +225,8 @@ const phrasal: NodePractice = {
     ],
     [
       ch("Very formal report. Best verb?", ["The committee will look into the matter.", "The committee will investigate the matter.", "The committee will check out the matter."], 1, "In very formal writing, the one-word verb sounds best. 'Look into' is fine in neutral English."),
-      ch("In a debate, you won't consider a possibility.", ["I'd rule that out completely.", "I'd put that up.", "I'd stand that out."], 0, "rule something out."),
-      ch("Which sentence argues best?", ["Phones are bad.", "Banning phones won't bring about better grades on its own.", "Phones bring about."], 1, "A precise claim with a phrasal verb and a condition."),
+      ch("In a debate, you won't consider a possibility.", ["I'd rule that out completely.", "I'd put that up completely.", "I'd stand that out completely."], 0, "rule something out."),
+      ch("Which sentence argues best?", ["Phones are bad for grades, so the school should ban them now.", "Banning phones won't bring about better grades on its own.", "Phones bring about bad grades. Ban."], 1, "A precise claim with a phrasal verb and a condition."),
       ch("Which is most natural in conversation?", ["I can't tolerate this heat.", "I can't put up with this heat."], 1, "Phrasal verbs are very common in everyday speech."),
       say("I don't think the new rules will bring about any real change.", "Link: bring-a-bout."),
     ],
@@ -255,15 +255,15 @@ const idioms: NodePractice = {
       heard(A("05", "notice"), "What's the speaker's opinion of the new uniform?", ["Undecided", "Strongly for it", "Strongly against it"], 0, "On the fence = undecided."),
       heard(A("05", "notice"), "What does the speaker think about the twenty new trees?", ["Not nearly enough", "A great solution", "Too many"], 0, "A drop in the ocean = far too small to make a difference."),
       ch("'On the fence' means…", ["undecided", "angry", "outside"], 0, "Sitting on the fence: not on either side."),
-      ch("'Take it with a pinch of salt' means…", ["don't completely believe it", "add flavour", "agree completely"], 0, "Be a little sceptical."),
-      ch("'The tip of the iceberg' means…", ["a small part of a much bigger problem", "the best part", "the end of a problem"], 0, "Most of an iceberg is hidden under water."),
+      ch("'Take it with a pinch of salt' means…", ["don't completely believe it", "add flavour to it", "agree with it completely"], 0, "Be a little sceptical."),
+      ch("'The tip of the iceberg' means…", ["a small part of a much bigger problem", "the best and most beautiful part of something", "the end of a problem"], 0, "Most of an iceberg is hidden under water."),
     ],
     [
-      ctx("Social media is a double-edged sword.", "This means social media…", ["has both good and bad effects", "is very sharp", "is only dangerous"], 0, "A sword that cuts both ways."),
-      ctx("Let me play devil's advocate for a moment.", "The speaker will…", ["argue the other side to test the idea", "agree with everyone", "tell a scary story"], 0, "They might not believe it; they're testing the argument."),
+      ctx("Social media is a double-edged sword.", "This means social media…", ["has both good and bad effects", "is very sharp and fast", "is only dangerous for people"], 0, "A sword that cuts both ways."),
+      ctx("Let me play devil's advocate for a moment.", "The speaker will…", ["argue the other side to test the idea", "agree with everyone in the room", "tell a scary story about devils"], 0, "They might not believe it; they're testing the argument."),
       ch("'Donating one euro to pay off the national debt is…'", ["a drop in the ocean", "on the fence", "a double-edged sword"], 0, "Far too small to matter."),
-      ch("Where are idioms like these most appropriate?", ["Conversations, debates and informal writing", "Formal academic essays", "Legal contracts"], 0, "They sound too casual for formal writing."),
-      ctx("The cheating scandal is just the tip of the iceberg.", "This suggests…", ["there are probably many more problems", "it's the most serious part", "it's over now"], 0, "What we see is only a small part."),
+      ch("Where are idioms like these most appropriate?", ["Conversations, debates and informal writing", "Formal academic essays and reports", "Legal contracts and laws"], 0, "They sound too casual for formal writing."),
+      ctx("The cheating scandal is just the tip of the iceberg.", "This suggests…", ["there are probably many more problems", "it's the most serious part of the problem", "it's over now and nothing else will happen"], 0, "What we see is only a small part."),
     ],
     [
       gap("I can't decide; I'm still on the", ".", ["fence"], "on the fence."),
@@ -280,7 +280,7 @@ const idioms: NodePractice = {
       fix(["Let me", "play the devil's lawyer", "for a second."], 1, ["play devil's advocate", "play the devil's advocate"], "play devil's advocate."),
     ],
     [
-      ch("Formal university essay. Best sentence?", ["Recycling is just a drop in the ocean, lol.", "Individual recycling has a limited impact on global emissions.", "Recycling is the tip of the iceberg of stuff."], 1, "Formal essays need plain, precise language, not idioms."),
+      ch("Formal university essay. Best sentence?", ["Recycling is just a drop in the ocean, lol, honestly.", "Individual recycling has a limited impact on global emissions.", "Recycling is the tip of the iceberg of stuff we do."], 1, "Formal essays need plain, precise language, not idioms."),
       ch("In a class debate, you can't decide.", ["Honestly, I'm on the fence about this.", "I am the fence.", "I'm sitting on a fence about it."], 0, "Natural and correct."),
       ch("A friend believes a celebrity rumour. Best advice?", ["Take it with a pinch of salt.", "Take it with a drop in the ocean.", "Put it on the fence."], 0, "Don't believe it completely."),
       ch("AI in schools helps learning but makes cheating easier. Best idiom?", ["a double-edged sword", "the tip of the iceberg", "a pinch of salt"], 0, "Good and bad at once."),

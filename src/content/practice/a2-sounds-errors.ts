@@ -40,7 +40,7 @@ const ed: NodePractice = {
       ch("'needed' ends with …", ["/ɪd/", "/t/", "/d/"], 0, "After d → /ɪd/."),
       ch("'cooked' ends with …", ["/t/", "/ɪd/", "/d/"], 0, "After k → /t/."),
       ch("'played' ends with …", ["/d/", "/t/", "/ɪd/"], 0, "After a vowel sound → /d/."),
-      es(ctx("A student says 'walk-ed' with two syllables.", "What's the problem?", ["'walked' has only one syllable: /wɔːkt/.", "Nothing.", "It should be 'walk-id-ed'."], 0, "Only /ɪd/ adds a syllable."), "'walked' suena «uokt», sin 'e'."),
+      es(ctx("A student says 'walk-ed' with two syllables.", "What's the problem?", ["'walked' has only one syllable: /wɔːkt/.", "Nothing. It's correct with two syllables.", "It should be 'walk-id-ed', three syllables."], 0, "Only /ɪd/ adds a syllable."), "'walked' suena «uokt», sin 'e'."),
       ch("Which group all sound /t/?", ["walked, watched, cooked", "wanted, needed, visited", "played, lived, cleaned"], 0, "Voiceless sounds → /t/."),
     ],
     [
@@ -61,7 +61,7 @@ const ed: NodePractice = {
       ch("You tell a story out loud. Which sounds best?", ["I /wɔːkt/ home and /kʊkt/ dinner.", "I walk-ed home and cook-ed dinner.", "I walk home and cook dinner yesterday."], 0, "Natural -ed sounds."),
       ch("Which sentence has three different -ed sounds?", ["I wanted, played and watched.", "I walked, watched and cooked.", "I needed, wanted and visited."], 0, "/ɪd/, /d/, /t/."),
       ctx("Your friend can't hear the past in your sentence 'I watch a film yesterday'.", "Best fix:", ["Say 'watched' with a clear /t/.", "Say 'watch-ed' with two syllables.", "Say it louder."], 0, "Clear /t/."),
-      ch("Which is the best tip?", ["Add a syllable only after t or d.", "Always add a syllable.", "Never pronounce -ed."], 0, "The key rule."),
+      ch("Which is the best tip?", ["Add a syllable only after t or d.", "Always add a syllable to every -ed verb.", "Never pronounce the -ed at the end."], 0, "The key rule."),
       say("I needed money, so I visited my aunt.", "Two /ɪd/ endings."),
     ],
   ],
@@ -118,7 +118,7 @@ const stress: NodePractice = {
       ch("You want to be understood at a hotel reception. Say:", ["I'd like a room in this hoTEL.", "I'd like a room in this HOtel.", "Both are perfect."], 0, "hoTEL."),
       ch("Which sentence has natural stress?", ["The DOCtor is HAPpy toDAY.", "The docTOR is hapPY TOday.", "THE doctor IS happy."], 0, "Correct word stress."),
       ctx("Your friend asks: 'When did the film beGIN?'", "Best answer with good stress:", ["It began two hours aGO.", "It began two hours Ago.", "It BEgan two HOURS ago."], 0, "aGO."),
-      ch("Which tip helps most?", ["Make the stressed syllable longer and louder.", "Say every syllable the same.", "Stress the last letter."], 0, "Stress = length + volume."),
+      ch("Which tip helps most?", ["Make the stressed syllable longer and louder.", "Say every syllable the same way.", "Stress the last letter of the word."], 0, "Stress = length + volume."),
       say("The doctor is at the hotel today.", "DOCtor, hoTEL, toDAY."),
     ],
   ],
@@ -151,11 +151,11 @@ const doublePast: NodePractice = {
       ch("Which word shows the past in 'Did you go'?", ["Did", "go", "you"], 0, "'did' carries the past."),
     ],
     [
-      es(ch("Why is 'I didn't went' wrong?", ["'didn't' already shows the past; use 'go'.", "It needs 'goed'.", "It's correct."], 0, "One past is enough."), "Con 'didn't' el verbo va en forma base: I didn't go."),
+      es(ch("Why is 'I didn't went' wrong?", ["'didn't' already shows the past; use 'go'.", "It needs 'goed' to show the past.", "It's correct: 'went' and 'didn't' are both past."], 0, "One past is enough."), "Con 'didn't' el verbo va en forma base: I didn't go."),
       ch("'She ___ like the film.'", ["didn't", "didn't liked", "not liked"], 0, "didn't + like."),
       ch("'Did they ___ the bus?'", ["catch", "caught", "catched"], 0, "Did + base verb."),
       ctx("Positive: 'He ate pizza.'", "Negative:", ["He didn't eat pizza.", "He didn't ate pizza.", "He not ate pizza."], 0, "didn't + eat."),
-      ch("Which sentence is positive past?", ["We went to the beach.", "We didn't go.", "Did we go?"], 0, "Positive uses went."),
+      ch("Which sentence is positive past?", ["We went to the beach.", "We didn't go to the beach.", "Did we go to the beach?"], 0, "Positive uses went."),
     ],
     [
       gap("Did you", "your homework? (do)", ["do"], "Did + base verb."),
@@ -209,7 +209,7 @@ const doubleComp: NodePractice = {
       ch("Which is correct?", ["more interesting", "interestinger", "more interestinger"], 0, "Long → more only."),
     ],
     [
-      es(ch("Why is 'more better' wrong?", ["'better' already means 'more good'.", "It needs 'most'.", "It's correct."], 0, "Irregular comparative."), "'better' ya significa «mejor»; no le pongas 'more'."),
+      es(ch("Why is 'more better' wrong?", ["'better' already means 'more good'.", "It needs 'most' instead of 'more'.", "It's correct: 'more' makes it stronger."], 0, "Irregular comparative."), "'better' ya significa «mejor»; no le pongas 'more'."),
       ch("'This test was ___ than the last one.'", ["easier", "more easier", "more easy"], 0, "easy → easier."),
       ch("'She's ___ person in my class.'", ["the funniest", "the most funniest", "the more funny"], 0, "funny → the funniest."),
       ctx("Mount Everest vs. Monserrate.", "Best sentence:", ["Everest is higher than Monserrate.", "Everest is more higher than Monserrate.", "Everest is more high."], 0, "high → higher."),
@@ -232,7 +232,7 @@ const doubleComp: NodePractice = {
     [
       ch("You compare two phones for a friend. Best:", ["This one is cheaper and faster than that one.", "This one is more cheaper and more faster.", "This one is most cheap."], 0, "Simple comparatives."),
       ch("You describe your best day. Best:", ["It was the best day of my life!", "It was the most best day!", "It was the more good day."], 0, "the best."),
-      ctx("A friend says: 'My dog is more bigger than yours.'", "Best correction:", ["You mean 'bigger', without 'more'.", "Say 'most bigger'.", "It's correct."], 0, "One form only."),
+      ctx("A friend says: 'My dog is more bigger than yours.'", "Best correction:", ["You mean 'bigger', without 'more'.", "Say 'most bigger' instead.", "It's correct; 'more' is fine."], 0, "One form only."),
       ch("Which is most natural?", ["Math is harder than English for me.", "Math is more harder than English.", "Math is most hard."], 0, "hard → harder."),
       say("Pizza is better than salad, but salad is healthier.", "No 'more'."),
     ],
@@ -267,7 +267,7 @@ const uncountPlural: NodePractice = {
       ch("Which is correct?", ["some advice", "an advice", "advices"], 0, "advice = uncountable."),
     ],
     [
-      es(ch("Why is 'I have many homeworks' wrong?", ["'homework' is uncountable: a lot of homework.", "It needs 'much homeworks'.", "It's correct."], 0, "No -s."), "'homework' no tiene plural: a lot of homework."),
+      es(ch("Why is 'I have many homeworks' wrong?", ["'homework' is uncountable: a lot of homework.", "It needs 'much homeworks' instead.", "It's correct: 'many' is for things."], 0, "No -s."), "'homework' no tiene plural: a lot of homework."),
       ch("'My hair ___ long.'", ["is", "are"], 0, "hair = uncountable → is."),
       ch("'The news ___ good today.'", ["is", "are"], 0, "news = singular."),
       ctx("You want one suggestion from your teacher.", "Best phrase:", ["Can you give me a piece of advice?", "Can you give me an advice?", "Can you give me one advices?"], 0, "a piece of advice."),
@@ -290,7 +290,7 @@ const uncountPlural: NodePractice = {
     [
       ch("At a tourist office. Best:", ["Could I have some information about museums?", "Could I have informations about museums?", "Could I have an information?"], 0, "some information."),
       ch("Your friend has a problem. Best offer:", ["Can I give you some advice?", "Can I give you an advice?", "Can I give you advices?"], 0, "some advice."),
-      ctx("Your teacher asks why you're tired.", "Best answer:", ["I had a lot of homework last night.", "I had a lot of homeworks.", "I had many homework."], 0, "a lot of homework."),
+      ctx("Your teacher asks why you're tired.", "Best answer:", ["I had a lot of homework last night.", "I had a lot of homeworks last night.", "I had many homework last night."], 0, "a lot of homework."),
       ch("Which sentence sounds natural?", ["The news is on at eight.", "The news are on at eight.", "The new is on at eight."], 0, "news = singular."),
       say("Can you give me some advice about my homework?", "No -s on advice or homework."),
     ],
@@ -342,7 +342,7 @@ const falseFriends: NodePractice = {
       fix(["I bought this book at the", "library", "for 40,000 pesos."], 1, ["bookshop"], "You buy at a bookshop."),
       fix(["Please put your homework in the blue", "carpet", "."], 1, ["folder"], "folder = carpeta."),
       ch("Which is correct?", ["My brother is very sensitive; he cries at films.", "My brother is very sensible; he cries at films.", "My brother is actual."], 0, "sensitive."),
-      ch("Which is wrong?", ["Actually I live in Cali (meaning 'now').", "Currently I live in Cali.", "I live in Cali now."], 0, "actually ≠ currently."),
+      ch("Which is wrong?", ["Actually I live in Cali (meaning 'now').", "Currently I live in Cali, with my aunt.", "I live in Cali now, with my aunt."], 0, "actually ≠ currently."),
     ],
     [
       ch("You forgot your lines in the school play. You say:", ["I was so embarrassed!", "I was so pregnant!", "I was so sensible!"], 0, "embarrassed."),
@@ -381,7 +381,7 @@ const explainMe: NodePractice = {
       ch("Which is correct?", ["I go home.", "I go to home.", "I go at home."], 0, "go home."),
     ],
     [
-      es(ch("Why is 'Explain me the rule' wrong?", ["'explain' needs 'to' before the person.", "'rule' is wrong.", "It's correct."], 0, "Explain the rule to me."), "En inglés: 'Explain the rule to me', no 'Explain me'."),
+      es(ch("Why is 'Explain me the rule' wrong?", ["'explain' needs 'to' before the person.", "'rule' is the wrong word for this.", "It's correct: 'explain me' is fine."], 0, "Explain the rule to me."), "En inglés: 'Explain the rule to me', no 'Explain me'."),
       ch("'I'm ___ home today.' (location)", ["at", "to", "in to"], 0, "be at home."),
       ch("'What time did you get ___?'", ["home", "to home", "at home"], 0, "get home."),
       ctx("You don't understand the exercise.", "Best question to your teacher:", ["Could you explain it to me, please?", "Could you explain me, please?", "Explain me!"], 0, "explain it to me."),
@@ -402,9 +402,9 @@ const explainMe: NodePractice = {
       ch("Which is wrong?", ["I came to home late.", "I came home late.", "I was at home all day."], 0, "come home."),
     ],
     [
-      ch("You're confused in maths class. Best:", ["Excuse me, could you explain this to me again?", "Explain me again!", "Me explain."], 0, "Polite + correct."),
+      ch("You're confused in maths class. Best:", ["Excuse me, could you explain this to me again?", "Excuse me, explain me this again, please.", "Me explain this again, teacher, please."], 0, "Polite + correct."),
       ch("Your mum asks when you'll be back. Best:", ["I'll be home at seven.", "I'll be to home at seven.", "I'll go to home at seven."], 0, "be home."),
-      ctx("A friend asks why you weren't at the party.", "Best answer:", ["I stayed at home because I was ill.", "I stayed to home.", "I stayed in home."], 0, "stay at home."),
+      ctx("A friend asks why you weren't at the party.", "Best answer:", ["I stayed at home because I was ill.", "I stayed to home because I was ill.", "I stayed in home because I was ill."], 0, "stay at home."),
       ch("Which sentence is natural?", ["Can you explain the rules to my brother?", "Can you explain my brother the rules?", "Explain my brother rules."], 0, "explain + to + person."),
       say("After school, I go home and do my homework.", "go HOME (no 'to')."),
     ],

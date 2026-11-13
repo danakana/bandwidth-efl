@@ -54,7 +54,7 @@ const feelings: NodePractice = {
     ],
     [
       ch("You describe your best friend for a school magazine. Best sentence:", ["She's funny, kind and very honest.", "She's funning, kindly and honestly.", "She's bored and boring."], 0, "Personality adjectives."),
-      ch("Your teacher asks how the trip was. Best answer:", ["It was amazing! I was really surprised by the museum.", "It was amazed! I was surprising.", "It was bored."], 0, "-ing for the trip, -ed for you."),
+      ch("Your teacher asks how the trip was. Best answer:", ["It was amazing! I was really surprised by the museum.", "It was amazed! I was really surprising by the museum.", "It was bored. I was really boring at the museum."], 0, "-ing for the trip, -ed for you."),
       ctx("A new student hardly talks in class.", "Kindest description:", ["He's a bit shy.", "He's rude.", "He's boring."], 0, "shy = quiet with new people."),
       ch("Which sentence is natural?", ["I'm interested in music.", "I'm interesting in music.", "I'm interest in music."], 0, "interested in."),
       say("The game was exciting, but I was tired.", "Clear -ing and -ed endings."),
@@ -86,7 +86,7 @@ const topics: NodePractice = {
     [
       heard(X("02", "notice"), "What do they recycle at school?", ["Paper and plastic", "Glass and metal", "Food"], 0, "'we recycle paper and plastic'."),
       heard(X("02", "notice"), "What does the speaker check every morning?", ["The news online", "The timetable", "The weather"], 0, "'Every morning I check the news online.'"),
-      heard(X("02", "notice"), "What does the speaker want to do next year?", ["Take an online course in design", "Pass a maths exam", "Change school"], 0, "'take an online course in design'."),
+      heard(X("02", "notice"), "What does the speaker want to do next year?", ["Take an online course in design", "Pass a difficult maths exam", "Change to a new school"], 0, "'take an online course in design'."),
       ch("Which word is about the environment?", ["pollution", "timetable", "download"], 0, "pollution = contaminación."),
       ch("Which word is about the internet?", ["website", "uniform", "rubbish"], 0, "website = página web."),
     ],
@@ -210,7 +210,7 @@ const phrasal: NodePractice = {
       ch("Which is correct?", ["Turn it off.", "Turn off it.", "Turn it of."], 0, "Pronoun in the middle."),
       ch("Which is correct?", ["I'm looking for my keys.", "I'm looking my keys for.", "I'm looking for them keys."], 0, "look for doesn't separate."),
       es(ch("'Put on your jacket' means …", ["Wear your jacket.", "Take off your jacket.", "Buy a jacket."], 0, "put on = start wearing."), "put on = ponerse (ropa)."),
-      ctx("Your clothes are on the floor. Mum says: 'Pick them up!'", "What should you do?", ["Take the clothes from the floor.", "Wear the clothes.", "Look for new clothes."], 0, "pick up = take from the floor."),
+      ctx("Your clothes are on the floor. Mum says: 'Pick them up!'", "What should you do?", ["Take the clothes from the floor.", "Wear the clothes from the floor.", "Look for some new clothes."], 0, "pick up = take from the floor."),
       ch("Which can separate?", ["turn off", "look after", "look for"], 0, "Turn the TV off."),
     ],
     [
@@ -283,12 +283,12 @@ const idioms: NodePractice = {
       fix(["It's raining", "dogs and cats", "outside."], 1, ["cats and dogs"], "Fixed order: cats and dogs."),
       es(fix(["I can't go out.", "I'm under the rain", "today."], 1, ["I'm under the weather", "I'm feeling under the weather"], "under the weather = a bit ill."), "El modismo es 'under the weather' (no 'rain')."),
       ch("Which is correct?", ["Exams are next week, so I'm hitting the books.", "Exams are next week, so I'm breaking a leg.", "Exams are next week, so I'm a piece of cake."], 0, "hit the books = study."),
-      ch("Which is wrong?", ["Break a leg on your bike ride! Be careful.", "Break a leg in your concert!", "Break a leg tonight!"], 0, "Break a leg is for shows and tests, not dangerous activities."),
+      ch("Which is wrong?", ["Break a leg on your bike ride! Be careful.", "Break a leg in your concert tonight!", "Break a leg tonight on stage!"], 0, "Break a leg is for shows and tests, not dangerous activities."),
     ],
     [
       ch("Your friend asks if the homework was hard. It was very easy. You say:", ["No, it was a piece of cake.", "No, it was raining cats and dogs.", "No, break a leg."], 0, "piece of cake = easy."),
       ch("Your sister has a piano exam. Best message:", ["Break a leg!", "Under the weather!", "Hit the books!"], 0, "Good luck!"),
-      ctx("Your teacher asks why you're absent from football practice.", "Best answer:", ["I'm a bit under the weather.", "I'm a piece of cake.", "I'm breaking a leg."], 0, "a bit ill."),
+      ctx("Your teacher asks why you're absent from football practice.", "Best answer:", ["I'm a bit under the weather.", "I'm a piece of cake today.", "I'm breaking a leg today."], 0, "a bit ill."),
       ch("Which sounds natural in a text?", ["It's raining cats and dogs here!", "It's raining dogs and cats here!", "It's cats and dogs raining here!"], 0, "Fixed phrase."),
       say("Don't worry, it's a piece of cake.", "Relaxed and confident."),
     ],

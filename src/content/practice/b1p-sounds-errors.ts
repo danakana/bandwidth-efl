@@ -31,8 +31,8 @@ const contrastive: NodePractice = {
       ch("'I said TUESDAY, not Thursday.' Why is Tuesday stressed?", ["It corrects the day.", "It's the first word.", "Days are always stressed."], 0, "Contrastive stress."),
     ],
     [
-      ch("'I didn't take YOUR bike.' The speaker means…", ["I took someone else's bike.", "I didn't take any bike.", "I borrowed your bike."], 0, "Stress on YOUR."),
-      ch("'I didn't TAKE your bike.' The speaker means…", ["I did something else with it, like borrow or fix it.", "I took someone else's bike.", "I took it."], 0, "Stress on TAKE."),
+      ch("'I didn't take YOUR bike.' The speaker means…", ["I took someone else's bike, not yours.", "I didn't take any bike.", "I borrowed your bike."], 0, "Stress on YOUR."),
+      ch("'I didn't TAKE your bike.' The speaker means…", ["I did something else with it, like borrow or fix it.", "I took someone else's bike.", "I took your bike yesterday."], 0, "Stress on TAKE."),
       ctx("Waiter: 'One coffee?' You: 'No, TWO coffees.'", "Why stress TWO?", ["To correct the number", "Because coffee is important", "To sound angry"], 0, "Correction."),
       ch("How do we make a word stressed?", ["Louder, longer and higher", "Quieter and faster", "Whispering it"], 0, "Features of stress."),
       ch("In Spanish we often change word order for contrast. In English we usually…", ["change the stress", "change the tense", "add more words"], 0, "Stress does the work."),
@@ -49,11 +49,11 @@ const contrastive: NodePractice = {
       ch("You want to say it was your SISTER who broke the window, not you. Which is right?", ["My SISTER broke the window.", "My sister broke the WINDOW.", "My sister BROKE the window."], 0, "Stress the person."),
       ch("Waiter: 'A cheese pizza?' You wanted chicken. Which is right?", ["No, a CHICKEN pizza.", "No, a chicken PIZZA.", "NO, a chicken pizza."], 0, "Stress the corrected type."),
       ch("You ordered a big pizza and got a small one. Which stress is right?", ["I asked for a BIG pizza, not a SMALL one.", "I ASKED for a big pizza, not a small one.", "I asked for a big PIZZA, not a small one."], 0, "Stress both parts of the contrast: BIG … SMALL."),
-      ch("A student stresses every word equally when correcting a friend. The problem is…", ["The listener doesn't know which part is the correction.", "It's too short.", "The grammar is wrong."], 0, "Stress shows meaning."),
+      ch("A student stresses every word equally when correcting a friend. The problem is…", ["The listener doesn't know which part is the correction.", "It's much too short for anyone to understand.", "The grammar of the sentence is wrong."], 0, "Stress shows meaning."),
     ],
     [
       ch("You're on the phone booking a table. They wrote 'four people'. You need six.", ["No, sorry, SIX people, not four.", "No, sorry, six PEOPLE, not four.", "NO, sorry, six people."], 0, "Stress the number."),
-      ch("Best way to correct a teacher politely?", ["Sorry, I think it's PAGE twenty, not page twelve.", "You're WRONG, it's page twenty.", "Page twenty."], 0, "Polite + clear stress."),
+      ch("Best way to correct a teacher politely?", ["Sorry, I think it's PAGE twenty, not page twelve.", "You're WRONG, it's page twenty, not twelve.", "Page twenty. Not twelve. Twenty."], 0, "Polite + clear stress."),
       ctx("Your mum says: 'You ate ALL the cake?'", "What is she surprised about?", ["The amount: all of it", "That it was cake", "That you ate"], 0, "Stress shows her focus."),
       say("It's at Ana's house, not Laura's.", "Stress ANA'S and LAURA'S."),
       say("I wanted a CHICKEN sandwich, not a cheese one.", "Stress CHICKEN and CHEESE."),
@@ -88,10 +88,10 @@ const stressShift: NodePractice = {
       ch("Which is correct?", ["ecoNOMic", "ECOnomic", "economIC"], 0, "Before -ic."),
     ],
     [
-      ch("With -ic, the stress usually falls…", ["on the syllable just before -ic", "on the first syllable", "on -ic"], 0, "Rule."),
+      ch("With -ic, the stress usually falls…", ["on the syllable just before -ic", "on the first syllable of the word", "on the -ic part at the end"], 0, "Rule."),
       ch("Where is the stress in 'electricity'?", ["electRICity", "ELECtricity", "electriCIty"], 0, "Before -ity."),
-      ctx("A student says 'PHOtographer' with stress on the first syllable.", "What's the problem?", ["The stress should be on TO: phoTOgrapher.", "Nothing.", "It should be photoGRAPHer."], 0, "Stress shift."),
-      ch("Why is wrong stress a problem?", ["It can make a word hard to understand.", "It changes the spelling.", "It's never a problem."], 0, "Intelligibility."),
+      ctx("A student says 'PHOtographer' with stress on the first syllable.", "What's the problem?", ["The stress should be on TO: phoTOgrapher.", "Nothing. It's correct like that.", "It should be photoGRAPHer."], 0, "Stress shift."),
+      ch("Why is wrong stress a problem?", ["It can make a word hard to understand.", "It changes the spelling of the word.", "It's never a problem in English."], 0, "Intelligibility."),
       ch("Which pair shows the same stress pattern?", ["photoGRAPHic / ecoNOMic", "PHOtograph / phoTOgrapher", "PERson / persoNALity"], 0, "Both before -ic."),
     ],
     [
@@ -111,7 +111,7 @@ const stressShift: NodePractice = {
     [
       ch("You're presenting your hobby. Which is correct?", ["I love photography: I'm a phoTOgrapher.", "I love PHOtography: I'm a PHOtographer.", "I love photoGRAphy."], 0, "phoTOgraphy, phoTOgrapher."),
       ch("Best pronunciation for a debate?", ["The ecoNOMic situation is difficult.", "The ECOnomic situation is difficult.", "The economIC situation is difficult."], 0, "ecoNOMic."),
-      ctx("You learn the new word 'electricity'.", "Best study habit?", ["Learn the stress (electRICity) together with the spelling.", "Only learn the spelling.", "Guess the stress."], 0, "Learn stress with new words."),
+      ctx("You learn the new word 'electricity'.", "Best study habit?", ["Learn the stress (electRICity) together with the spelling.", "Only learn the spelling of each new word.", "Guess the stress when you speak."], 0, "Learn stress with new words."),
       say("Her personality is amazing.", "persoNALity: stress NAL."),
       say("The photographic exhibition was fantastic.", "photoGRAPHic, exhiBItion, fanTAStic."),
     ],
@@ -139,8 +139,8 @@ const usedToErr: NodePractice = {
   steps: [
     [
       heard(E("01", "notice"), "Where does the speaker live now?", ["On the coast", "In the mountains", "In a cold city"], 0, "'I moved to the coast last year.'"),
-      heard(E("01", "notice"), "What is normal for them now?", ["Living there and swimming every morning", "Cold weather", "Eating no fish"], 0, "'I'm used to living here… swimming every morning'."),
-      heard(E("01", "notice"), "What are they still getting used to?", ["Eating fish every day", "Swimming", "The cold"], 0, "'I'm getting used to eating fish every day.'"),
+      heard(E("01", "notice"), "What is normal for them now?", ["Living there and swimming every morning", "The cold weather in winter, with lots of rain", "Eating no fish at all"], 0, "'I'm used to living here… swimming every morning'."),
+      heard(E("01", "notice"), "What are they still getting used to?", ["Eating fish every day", "Swimming every morning", "The cold weather"], 0, "'I'm getting used to eating fish every day.'"),
       ch("Which is correct?", ["I'm used to waking up early.", "I'm used to wake up early.", "I'm use to wake up early."], 0, "be used to + -ing."),
       ch("In 'be used to', 'to' is…", ["a preposition", "part of the infinitive", "a mistake"], 0, "Followed by -ing or a noun."),
     ],
@@ -168,8 +168,8 @@ const usedToErr: NodePractice = {
     [
       ch("Best sentence for an email to an exchange student?", ["Don't worry, you'll get used to speaking English quickly.", "Don't worry, you'll get used to speak English.", "Don't worry, you used to speak English."], 0, "get used to + -ing."),
       ch("Best sentence about your daily routine?", ["I'm used to walking to school.", "I'm used to walk to school.", "I'm use walking to school."], 0, "be used to + -ing."),
-      ctx("Your new classmate says: 'I'm used to study in silence.'", "Kindest correction?", ["Oh, you mean you're used to studying in silence? Me too!", "That's wrong.", "Say 'study'."], 0, "Gentle recast."),
-      ch("Which shows a change in progress?", ["I'm getting used to cooking for myself.", "I used to cook for myself.", "I'm used to cook for myself."], 0, "get used to + -ing."),
+      ctx("Your new classmate says: 'I'm used to study in silence.'", "Kindest correction?", ["Oh, you mean you're used to studying in silence? Me too!", "That's wrong. You need to say 'study', not 'studying'.", "Say 'study'. 'Studying' is a mistake here."], 0, "Gentle recast."),
+      ch("Which shows a change in progress?", ["I'm getting used to cooking for myself.", "I used to cook for myself every day.", "I'm used to cook for myself."], 0, "get used to + -ing."),
       say("I'm getting used to living in a new city.", "Stress GETting, LIVing and NEW."),
     ],
   ],
@@ -196,15 +196,15 @@ const indirectErr: NodePractice = {
   steps: [
     [
       heard(E("02", "notice"), "What is the speaker looking for?", ["The station", "A hotel", "A shop"], 0, "'can you tell me where the station is?'"),
-      heard(E("02", "notice"), "What do they want to know about the train?", ["What time the next one leaves", "How fast it is", "Where it goes"], 0, "'do you know what time the next train leaves?'"),
+      heard(E("02", "notice"), "What do they want to know about the train?", ["What time the next one leaves", "How fast it goes to the city", "Where it goes after the city"], 0, "'do you know what time the next train leaves?'"),
       heard(E("02", "notice"), "What else would they like to know?", ["How much a ticket costs", "Where to sit", "If there's Wi-Fi"], 0, "'how much a ticket costs'."),
       ch("Which is correct?", ["Can you tell me where the station is?", "Can you tell me where is the station?", "Can you tell me where does the station is?"], 0, "Statement order."),
       ch("Which is correct?", ["Do you know what time the train leaves?", "Do you know what time does the train leave?", "Do you know what time leaves the train?"], 0, "No 'does'."),
     ],
     [
-      ch("Why do Spanish speakers say 'where is it' in indirect questions?", ["Spanish keeps question order (dónde está).", "It's correct English.", "It's more polite."], 0, "Transfer from Spanish."),
+      ch("Why do Spanish speakers say 'where is it' in indirect questions?", ["Spanish keeps question order (dónde está).", "It's correct in American English.", "It sounds more polite that way."], 0, "Transfer from Spanish."),
       ch("In an indirect question, the subject comes…", ["before the verb", "after the verb", "at the end"], 0, "Statement order."),
-      ctx("'Could you tell me how much does it cost?'", "What's the mistake?", ["'does' shouldn't be there: how much it costs", "'how much' is wrong", "There's no mistake"], 0, "No auxiliary do/does."),
+      ctx("'Could you tell me how much does it cost?'", "What's the mistake?", ["'does' shouldn't be there: how much it costs", "'how much' is the wrong question word", "There's no mistake in it"], 0, "No auxiliary do/does."),
       ch("'Where are the toilets?' → Do you know…", ["where the toilets are?", "where are the toilets?", "where the toilets?"], 0, "Statement order."),
       ch("'When did she leave?' → I'd like to know…", ["when she left.", "when did she leave.", "when she did leave."], 0, "Past: left, no did."),
     ],
@@ -225,8 +225,8 @@ const indirectErr: NodePractice = {
     [
       ch("Best question at a train station?", ["Excuse me, do you know which platform the train to Cali leaves from?", "Excuse me, which platform does leave the train to Cali?", "Platform Cali where?"], 0, "Correct indirect question."),
       ch("Best question in an email to a school?", ["Could you tell me when the next course starts?", "Could you tell me when does the next course start?", "When starts the course?"], 0, "Correct order."),
-      ctx("Your friend writes: 'Do you know where is the party?'", "Kind correction?", ["You mean 'Do you know where the party is?' I think it's at Sara's!", "Wrong order, try again.", "Party is where?"], 0, "Gentle recast."),
-      ch("Which is the most polite AND correct?", ["Sorry to bother you, could you tell me where the nearest pharmacy is?", "Sorry, where is the nearest pharmacy is?", "Tell me where is the pharmacy."], 0, "Polite + correct."),
+      ctx("Your friend writes: 'Do you know where is the party?'", "Kind correction?", ["You mean 'Do you know where the party is?' I think it's at Sara's!", "Wrong order. Try again: 'Do you know where the party is?'", "Party is where? I don't understand your question."], 0, "Gentle recast."),
+      ch("Which is the most polite AND correct?", ["Sorry to bother you, could you tell me where the nearest pharmacy is?", "Sorry to bother you, where is the nearest pharmacy is?", "Tell me where is the nearest pharmacy, please."], 0, "Polite + correct."),
       say("Do you know what time the next train leaves?", "Statement order; rising tone at the end."),
     ],
   ],
@@ -253,14 +253,14 @@ const sayTell: NodePractice = {
     [
       heard(E("03", "notice"), "What did the friend tell the speaker?", ["A secret", "A joke", "A lie"], 0, "'My friend told me a secret yesterday.'"),
       heard(E("03", "notice"), "What did the friend ask the speaker not to do?", ["Tell anyone", "Go to Spain", "Call her mum"], 0, "'She told me not to tell anyone.'"),
-      heard(E("03", "notice"), "How did everyone find out?", ["The friend's mum told the speaker's mum.", "The speaker told everyone.", "It was on social media."], 0, "'her mum said the same thing to my mum'."),
+      heard(E("03", "notice"), "How did everyone find out?", ["The friend's mum told the speaker's mum.", "The speaker told everyone at school.", "It was on social media."], 0, "'her mum said the same thing to my mum'."),
       ch("Which is correct?", ["She told me a secret.", "She said me a secret.", "She told a secret me."], 0, "tell + person + thing."),
       ch("Which is correct?", ["He said that he was tired.", "He said me that he was tired.", "He told that he was tired."], 0, "say + that (no person)."),
     ],
     [
       ch("What's the main grammar difference?", ["'Tell' needs a person; 'say' doesn't.", "'Say' needs a person; 'tell' doesn't.", "No difference."], 0, "tell someone; say something."),
       ch("How can you add a person after 'say'?", ["With 'to': said hello to me", "Directly: said me hello", "You can't"], 0, "say … to someone."),
-      ctx("'Tell me the truth!'", "Why 'tell' here?", ["It's a fixed expression: tell the truth.", "Because of 'me' only.", "Both are wrong."], 0, "Fixed expression."),
+      ctx("'Tell me the truth!'", "Why 'tell' here?", ["It's a fixed expression: tell the truth.", "Because the next word is 'me'.", "Both 'tell' and 'say' are wrong."], 0, "Fixed expression."),
       ch("Which is a fixed expression with 'say'?", ["say goodbye", "say a story", "say the truth"], 0, "say goodbye."),
       ch("Which is a fixed expression with 'tell'?", ["tell a joke", "tell hello", "tell sorry"], 0, "tell a joke."),
     ],
@@ -279,9 +279,9 @@ const sayTell: NodePractice = {
       ch("Which is wrong?", ["Don't say lies!", "Don't tell lies!", "Always tell the truth."], 0, "tell a lie."),
     ],
     [
-      ch("Best way to report what your friend said?", ["Sara told me that she's coming to the party.", "Sara said me that she's coming.", "Sara told that she's coming."], 0, "tell + person + that."),
+      ch("Best way to report what your friend said?", ["Sara told me that she's coming to the party.", "Sara said me that she's coming to the party.", "Sara told that she's coming to the party."], 0, "tell + person + that."),
       ch("Best sentence for a story?", ["My grandfather told us a story about a ghost.", "My grandfather said us a story.", "My grandfather said a story to us about."], 0, "tell + person + story."),
-      ctx("A classmate writes: 'The teacher said us the homework.'", "Kind correction?", ["You mean 'The teacher told us the homework'?", "No.", "Say it again."], 0, "Gentle recast."),
+      ctx("A classmate writes: 'The teacher said us the homework.'", "Kind correction?", ["You mean 'The teacher told us the homework'?", "No. That's wrong. Try again, please.", "Say it again, please."], 0, "Gentle recast."),
       ch("Which sentence is correct and polite?", ["Could you tell me what you said to the teacher?", "Could you say me what you told to the teacher?", "Tell me what you told."], 0, "Correct use of both."),
       say("He said sorry and told me the truth.", "Stress SORry and TRUTH."),
     ],

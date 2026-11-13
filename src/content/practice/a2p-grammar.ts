@@ -39,10 +39,10 @@ const everNever: NodePractice = {
     ],
     [
       ch("'I've just eaten.' When did I eat?", ["A moment ago", "Last year", "Tomorrow"], 0, "just = a very short time ago.", ),
-      es(ch("'I haven't done my homework yet.' What does it mean?", ["I'm going to do it, but not now.", "I did it yesterday.", "I never do homework."], 0, "yet = we expect it to happen."), "'yet' en negativo = todavía no."),
-      ch("Where does 'already' usually go?", ["Between have and the participle", "At the end", "At the start"], 0, "I've already finished."),
+      es(ch("'I haven't done my homework yet.' What does it mean?", ["I'm going to do it, but not now.", "I did it yesterday after school.", "I never do my homework at all."], 0, "yet = we expect it to happen."), "'yet' en negativo = todavía no."),
+      ch("Where does 'already' usually go?", ["Between have and the participle", "At the end of the sentence", "At the start of the sentence"], 0, "I've already finished."),
       ch("Where does 'yet' usually go?", ["At the end", "Between have and the participle", "Before the subject"], 0, "Have you finished yet?"),
-      ctx("Your friend says: 'I've never eaten sushi.'", "Has your friend tried sushi?", ["No, not in his life", "Yes, once", "Yes, today"], 0, "never = not at any time."),
+      ctx("Your friend says: 'I've never eaten sushi.'", "Has your friend tried sushi?", ["No, not in his life", "Yes, once, at a restaurant", "Yes, today, for lunch"], 0, "never = not at any time."),
     ],
     [
       gap("Have you", "been to Medellín?", ["ever"], "Have you ever + participle?"),
@@ -91,7 +91,7 @@ const ppVsPast: NodePractice = {
     [
       heard(X("02", "notice"), "How many times has the speaker visited Cartagena?", ["Three", "Two", "One"], 0, "'I've visited Cartagena three times.'"),
       heard(X("02", "notice"), "When was the first visit?", ["In 2019", "Last year", "Last month"], 0, "'The first time, I went … in 2019.'"),
-      heard(X("02", "notice"), "Where did they stay last year?", ["In a small hotel near the beach", "With grandparents", "In a big apartment"], 0, "'we stayed in a small hotel near the beach'."),
+      heard(X("02", "notice"), "Where did they stay last year?", ["In a small hotel near the beach", "With their grandparents in Cali", "In a big apartment in the city"], 0, "'we stayed in a small hotel near the beach'."),
       ch("'I went there last year.' Which tense?", ["Past simple", "Present perfect", "Present simple"], 0, "last year → past simple."),
       ch("'I've eaten a lot of fish there.' Do we know when?", ["No", "Yes, yesterday", "Yes, in 2019"], 0, "Present perfect: time is not important."),
     ],
@@ -99,7 +99,7 @@ const ppVsPast: NodePractice = {
       ch("Which time word goes with the past simple?", ["yesterday", "ever", "yet"], 0, "yesterday = finished time."),
       ch("Which time word goes with the present perfect?", ["never", "last week", "ago"], 0, "never = in my life."),
       ctx("A: Have you ever been to a concert? B: Yes, I have.", "What is A's next question?", ["When did you go?", "When have you gone?", "When do you go?"], 0, "Ask for details with the past simple."),
-      es(ch("Why is 'I have seen him yesterday' wrong?", ["'Yesterday' needs the past simple.", "'Seen' is wrong.", "It needs 'ever'."], 0, "Finished time → past simple: I saw him yesterday."), "Con 'yesterday' nunca uses 'have': I saw him yesterday."),
+      es(ch("Why is 'I have seen him yesterday' wrong?", ["'Yesterday' needs the past simple.", "'Seen' is the wrong form of 'see'.", "It needs 'ever' before 'seen'."], 0, "Finished time → past simple: I saw him yesterday."), "Con 'yesterday' nunca uses 'have': I saw him yesterday."),
       ch("Which is about a life experience?", ["I've climbed a volcano.", "I climbed a volcano in May.", "I climb every Sunday."], 0, "No time → experience."),
     ],
     [
@@ -118,7 +118,7 @@ const ppVsPast: NodePractice = {
     ],
     [
       ch("You want to tell your friend about a trip in 2020. Best start:", ["I went to Peru in 2020.", "I've gone to Peru in 2020.", "I go to Peru in 2020."], 0, "in 2020 → past simple."),
-      ch("Best way to start a conversation about films:", ["Have you seen the new Spider-Man film?", "Did you saw the new film?", "Do you seen the new film?"], 0, "Present perfect opens the topic."),
+      ch("Best way to start a conversation about films:", ["Have you seen the new Spider-Man film?", "Did you saw the new Spider-Man film?", "Do you seen the new Spider-Man film?"], 0, "Present perfect opens the topic."),
       ctx("A: Have you finished the book? B: Yes, I ___ it on Sunday.", "Best word:", ["finished", "have finished", "finish"], 0, "on Sunday → past simple."),
       ch("Which mini-dialogue is natural?", ["Have you been to Cali? Yes, I went last year.", "Did you go to Cali? Yes, I've gone last year.", "Do you go to Cali? Yes, I've went."], 0, "Present perfect → past simple."),
       say("I've been to Cali. I went there last year.", "Two tenses: I've BEEN … I WENT …"),
@@ -148,8 +148,8 @@ const pastCont: NodePractice = {
   steps: [
     [
       heard(X("03", "notice"), "What was the speaker doing when it started to rain?", ["Walking home", "Waiting for the bus", "Playing football"], 0, "'I was walking home when it started to rain.'"),
-      heard(X("03", "notice"), "What happened while the speaker was running?", ["They dropped their phone.", "They fell over.", "The bus left."], 0, "'While I was running … I dropped my phone.'"),
-      heard(X("03", "notice"), "Who picked up the phone?", ["A girl at the bus stop", "The bus driver", "A friend"], 0, "'she picked it up for me'."),
+      heard(X("03", "notice"), "What happened while the speaker was running?", ["They dropped their phone.", "They fell over on the wet street.", "The bus left without them."], 0, "'While I was running … I dropped my phone.'"),
+      heard(X("03", "notice"), "Who picked up the phone?", ["A girl at the bus stop", "The bus driver, who stopped the bus", "A friend from school"], 0, "'she picked it up for me'."),
       ch("Which is the past continuous?", ["was walking", "walked", "walks"], 0, "was + -ing."),
       ch("In 'I was walking when it started to rain', which action is longer?", ["walking", "started to rain", "Both the same"], 0, "Past continuous = the longer background action."),
     ],
@@ -205,18 +205,18 @@ const firstCond: NodePractice = {
   es: "Es como «si llueve, nos quedaremos en casa». Igual que en español, después de 'if' va el presente: If it rains, no 'If it will rain'.",
   steps: [
     [
-      heard(X("04", "notice"), "What will they do if it rains?", ["Stay at home and watch a film", "Go to the park", "Make pizza"], 0, "'If it rains … we will stay at home and watch a film.'"),
+      heard(X("04", "notice"), "What will they do if it rains?", ["Stay at home and watch a film", "Go to the park with umbrellas", "Make pizza with their family"], 0, "'If it rains … we will stay at home and watch a film.'"),
       heard(X("04", "notice"), "What will they do if it's sunny?", ["Go to the park", "Watch a film", "Go swimming"], 0, "'If it's sunny, we'll go to the park.'"),
-      heard(X("04", "notice"), "What does the speaker promise?", ["Pizza, if you finish your homework", "A film tomorrow", "A trip to the beach"], 0, "'if you finish your homework, I'll make pizza!'"),
+      heard(X("04", "notice"), "What does the speaker promise?", ["Pizza, if you finish your homework", "A film tomorrow if you're good", "A trip to the beach on Sunday"], 0, "'if you finish your homework, I'll make pizza!'"),
       ch("Which is a first conditional?", ["If you study, you'll pass.", "If you studied, you'd pass.", "You study, you pass."], 0, "If + present, will + verb."),
       ch("Which part uses 'will'?", ["The result", "The if-part", "Both"], 0, "If it rains (present), we'll stay (will)."),
     ],
     [
-      ch("'If I see Ana, I'll tell her.' Is this possible in the future?", ["Yes, it's a real possibility.", "No, it's imaginary.", "It's about the past."], 0, "First conditional = real future possibility."),
+      ch("'If I see Ana, I'll tell her.' Is this possible in the future?", ["Yes, it's a real possibility.", "No, it's only imaginary.", "It's about something in the past."], 0, "First conditional = real future possibility."),
       ch("Which verb goes after 'if'?", ["Present simple", "will", "Past simple"], 0, "If it rains …"),
       es(ch("'Unless you hurry, you'll miss the bus.' This means:", ["If you don't hurry, you'll miss the bus.", "If you hurry, you'll miss the bus.", "You will hurry."], 0, "unless = if not."), "unless = a menos que / si no."),
       ctx("Mum: 'If you don't tidy your room, you won't go out.'", "What happens if you don't tidy?", ["You can't go out.", "You can go out.", "Mum will tidy it."], 0, "won't = will not."),
-      ch("Where is the comma?", ["After the if-part when it comes first", "Always before 'if'", "Never"], 0, "If it rains, we'll stay. / We'll stay if it rains."),
+      ch("Where is the comma?", ["After the if-part when it comes first", "Always before the word 'if', in every sentence", "Never, in any if-sentence"], 0, "If it rains, we'll stay. / We'll stay if it rains."),
     ],
     [
       gap("If you", "late, the teacher will be angry. (be)", ["are"], "If + present simple."),
@@ -234,7 +234,7 @@ const firstCond: NodePractice = {
     ],
     [
       ch("Your little brother wants to touch the hot pan. You say:", ["If you touch it, you'll burn your hand!", "If you touched it, you'd burn.", "You touch it, you burn yesterday."], 0, "A real danger now → first conditional."),
-      ch("Best way to make a promise to a friend:", ["If you help me with maths, I'll help you with English.", "If you will help me, I help you.", "You help me, I helped you."], 0, "If + present, will + verb."),
+      ch("Best way to make a promise to a friend:", ["If you help me with maths, I'll help you with English.", "If you will help me with maths, I help you with English.", "You help me with maths, I helped you with English."], 0, "If + present, will + verb."),
       ctx("Your friend is nervous about an exam.", "Best encouragement:", ["If you study tonight, you'll be fine.", "If you studied, you were fine.", "If you will study, you are fine."], 0, "Real future possibility."),
       ch("Which sounds most natural?", ["I'll call you if I'm late.", "I call you if I will be late.", "I'll calling you if I late."], 0, "Result first, no comma."),
       say("If you finish your homework, I'll make pizza.", "Stress the key words: FINISH … PIZZA."),
@@ -263,7 +263,7 @@ const relatives: NodePractice = {
   es: "who = que (personas), which = que (cosas), that = que (los dos), where = donde. En inglés no repitas el sujeto: «the girl who sits», no «the girl who she sits».",
   steps: [
     [
-      heard(X("05", "notice"), "Who is Sofía?", ["The girl who sits next to the speaker in maths", "The speaker's sister", "The café owner"], 0, "'She's the girl who sits next to me in maths.'"),
+      heard(X("05", "notice"), "Who is Sofía?", ["The girl who sits next to the speaker in maths", "The speaker's older sister, who studies maths", "The owner of the café next to the school"], 0, "'She's the girl who sits next to me in maths.'"),
       heard(X("05", "notice"), "What happens at the café?", ["They meet after school.", "They study maths.", "They buy books."], 0, "'the café where we meet after school'."),
       heard(X("05", "notice"), "What kind of cake do they share?", ["Chocolate", "Vanilla", "Lemon"], 0, "'It's chocolate, of course!'"),
       ch("Which word is for places?", ["where", "who", "which"], 0, "the café where we meet."),
@@ -293,7 +293,7 @@ const relatives: NodePractice = {
     [
       ch("You describe your best friend. Best sentence:", ["She's a person who always makes me laugh.", "She's a person which always make me laugh.", "She's a person where makes me laugh."], 0, "who + present simple."),
       ch("You show a photo of your town. Best caption:", ["This is the river where we swim in summer.", "This is the river which we swim in summer there.", "This is the river who we swim."], 0, "Place → where."),
-      ctx("You can't remember the word 'scissors'.", "Best way to explain:", ["It's a thing which you use to cut paper.", "It's a person who cuts.", "It's a place where paper."], 0, "Describe with 'which'."),
+      ctx("You can't remember the word 'scissors'.", "Best way to explain:", ["It's a thing which you use to cut paper.", "It's a person who you use to cut paper.", "It's a place where you cut the paper."], 0, "Describe with 'which'."),
       ch("Which description is clearest?", ["He's the boy who lives next door.", "He's the boy lives next door who.", "He's the boy which next door."], 0, "noun + who + verb."),
       say("She's the girl who sits next to me.", "Weak 'who': the GIRL who SITS."),
     ],
@@ -328,10 +328,10 @@ const usedTo: NodePractice = {
       ch("Which is the negative?", ["didn't use to", "didn't used to", "not used to"], 0, "didn't + use to."),
     ],
     [
-      ch("'used to' talks about …", ["past habits that are not true now", "future plans", "things happening now"], 0, "Past only."),
+      ch("'used to' talks about …", ["past habits that are not true now", "future plans for next year", "things happening right now"], 0, "Past only."),
       ch("Which is a question?", ["Did you use to have long hair?", "Did you used to have long hair?", "Used you to have long hair?"], 0, "Did … use to …?"),
-      es(ch("'I use to get up at 6.' Why is it wrong?", ["For the present, say 'I usually get up at 6.'", "It needs 'did'.", "It's correct."], 0, "used to is only for the past."), "Para el presente usa 'usually' (normalmente), no 'use to'."),
-      ctx("Grandpa: 'We used to walk two hours to school.'", "What does Grandpa mean?", ["He walked to school regularly in the past.", "He walks to school now.", "He will walk tomorrow."], 0, "Repeated past habit."),
+      es(ch("'I use to get up at 6.' Why is it wrong?", ["For the present, say 'I usually get up at 6.'", "It needs 'did' before 'use', like a question.", "It's correct for present habits."], 0, "used to is only for the past."), "Para el presente usa 'usually' (normalmente), no 'use to'."),
+      ctx("Grandpa: 'We used to walk two hours to school.'", "What does Grandpa mean?", ["He walked to school regularly in the past.", "He walks to school every day now.", "He will walk to school tomorrow."], 0, "Repeated past habit."),
       ch("Which can follow 'used to'?", ["live", "living", "lived"], 0, "used to + base verb."),
     ],
     [
@@ -346,7 +346,7 @@ const usedTo: NodePractice = {
       fix(["I", "didn't used to", "like fish."], 1, ["didn't use to"], "After didn't, no d."),
       fix(["We used to", "going", "to the beach."], 1, ["go"], "used to + base verb."),
       ch("Which is correct?", ["Did you use to play football?", "Did you used to play football?", "Do you used to play football?"], 0, "Did + use to."),
-      ch("Which is wrong?", ["I use to wake up early every day.", "I usually wake up early.", "I used to wake up early."], 0, "Present habit → usually."),
+      ch("Which is wrong?", ["I use to wake up early every day.", "I usually wake up early every day.", "I used to wake up early as a child."], 0, "Present habit → usually."),
     ],
     [
       ch("You show an old photo of yourself with long hair. You say:", ["I used to have long hair!", "I use to have long hair!", "I am used to have long hair!"], 0, "Past state, not now."),
@@ -387,7 +387,7 @@ const mightToo: NodePractice = {
     ],
     [
       ch("Which means 'maybe I will go'?", ["I might go.", "I must go.", "I go."], 0, "might = possibility."),
-      es(ch("'This bag is too heavy.' What does it mean?", ["I can't carry it easily.", "It's light.", "It's perfect."], 0, "too = more than is good."), "too = demasiado (problema)."),
+      es(ch("'This bag is too heavy.' What does it mean?", ["I can't carry it easily.", "It's very light and easy to carry.", "It's perfect for the trip."], 0, "too = more than is good."), "too = demasiado (problema)."),
       ch("'She's tall enough to reach the shelf.' Can she reach it?", ["Yes", "No", "Maybe"], 0, "enough = the right amount."),
       ctx("The shirt costs 300,000 pesos. You have 100,000.", "What do you say?", ["It's too expensive.", "It's expensive enough.", "It's too cheap."], 0, "More than you can pay → too."),
       ch("Which follows 'might'?", ["go", "to go", "going"], 0, "might + base verb."),

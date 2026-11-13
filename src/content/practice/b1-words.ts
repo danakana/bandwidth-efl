@@ -27,11 +27,11 @@ const lifestyle: NodePractice = {
   pattern: ["get along with · argue about · fall out with · make up", "a balanced diet · stay fit · get enough sleep · recover from", "jet lag · a delayed flight · go sightseeing · a souvenir · book a hotel", "Learn words in phrases"],
   steps: [
     [
-      heard(X("01", "notice"), "How does the speaker get on with her sister?", ["Really well, but they sometimes argue", "Badly", "They never talk"], 0, "'I get along really well with my sister, but we sometimes argue'."),
+      heard(X("01", "notice"), "How does the speaker get on with her sister?", ["Really well, but they sometimes argue", "Badly; they argue every day", "They never talk to each other"], 0, "'I get along really well with my sister, but we sometimes argue'."),
       heard(X("01", "notice"), "What are they arguing about?", ["Clothes", "Music", "Homework"], 0, "'argue about clothes'."),
       heard(X("01", "notice"), "What problem did the speaker have in Spain?", ["Jet lag for three days", "A lost suitcase", "A delayed flight"], 0, "'I had terrible jet lag for three days!'"),
-      ch("'Jet lag' is…", ["tiredness after a long flight", "a broken plane", "a type of bag"], 0, "Definition."),
-      ch("'A balanced diet' means…", ["eating different kinds of healthy food", "eating only fruit", "not eating"], 0, "Variety and health."),
+      ch("'Jet lag' is…", ["tiredness after a long flight", "a plane that is broken", "a type of travel bag"], 0, "Definition."),
+      ch("'A balanced diet' means…", ["eating different kinds of healthy food", "eating only fruit and vegetables", "not eating anything at night"], 0, "Variety and health."),
     ],
     [
       ch("Two friends had a fight, then became friends again. They…", ["made up", "fell out", "got along"], 0, "make up = become friends again."),
@@ -55,8 +55,8 @@ const lifestyle: NodePractice = {
       ch("Which is wrong?", ["I had jet leg after the trip.", "I had jet lag after the trip.", "The jet lag was terrible."], 0, "Spelling: jet lag."),
     ],
     [
-      ch("A friend is always tired and stressed. Best advice?", ["You should get enough sleep and stay fit.", "You should book a souvenir.", "You should fall out."], 0, "Health phrases."),
-      ch("Best way to describe your relationship with your parents?", ["I get along well with them, but we sometimes argue about my phone.", "I get along good them, but argue for phone.", "I fall out with them every day, it's fine."], 0, "Natural and accurate."),
+      ch("A friend is always tired and stressed. Best advice?", ["You should get enough sleep and stay fit.", "You should book a souvenir for yourself.", "You should fall out with your friends."], 0, "Health phrases."),
+      ch("Best way to describe your relationship with your parents?", ["I get along well with them, but we sometimes argue about my phone.", "I get along good them, but we argue for my phone sometimes.", "I fall out with them every day, but it's fine and normal."], 0, "Natural and accurate."),
       ctx("Writing a postcard from a holiday.", "Best sentence?", ["We went sightseeing and bought lots of souvenirs.", "We did sightseeing and made souvenirs.", "We sightsaw and souvenired."], 0, "Correct collocations."),
       ch("Your friends had a fight and are friends again. You say:", ["I'm glad you made up!", "I'm glad you fell out!", "I'm glad you got jet lag!"], 0, "make up."),
       say("I had terrible jet lag after the flight.", "Stress TERrible, JET LAG and FLIGHT."),
@@ -86,14 +86,14 @@ const scienceArtsWork: NodePractice = {
       heard(X("02", "notice"), "What did the device measure?", ["Air quality", "Temperature", "Noise"], 0, "'a new device that measures air quality'."),
       heard(X("02", "notice"), "Where did they go after science class?", ["An art exhibition", "A concert", "A museum shop"], 0, "'we went to an art exhibition'."),
       heard(X("02", "notice"), "What does the cousin have on Monday?", ["A job interview", "An exam", "A performance"], 0, "'a job interview on Monday'."),
-      ch("A 'salary' is…", ["money you get for your job", "a type of salad", "a job interview"], 0, "Definition."),
-      ch("An 'exhibition' is…", ["a show of art or objects", "a science test", "a sports match"], 0, "Definition."),
+      ch("A 'salary' is…", ["money you get for your job", "a type of salad with fruit", "a job interview at a company"], 0, "Definition."),
+      ch("An 'exhibition' is…", ["a show of art or objects", "a science test at school", "a sports match in a stadium"], 0, "Definition."),
     ],
     [
       ch("Which verb goes with 'an experiment'?", ["do", "make", "play"], 0, "do an experiment."),
       ch("The people who watch a show are the…", ["audience", "salary", "device"], 0, "audience."),
-      ctx("'She applied for a job at a design company.'", "This means…", ["She asked to be considered for the job.", "She got the job.", "She left the job."], 0, "apply for = ask formally."),
-      ch("'A career' is…", ["the jobs you do over your working life", "a university degree", "a car race"], 0, "False friend: career ≠ carrera (degree)."),
+      ctx("'She applied for a job at a design company.'", "This means…", ["She asked to be considered for the job.", "She got the job last week at the company.", "She left the job last week."], 0, "apply for = ask formally."),
+      ch("'A career' is…", ["the jobs you do over your working life", "a university degree in business", "a car race on a long track"], 0, "False friend: career ≠ carrera (degree)."),
       ch("Which is a device?", ["a smartwatch", "an audience", "a salary"], 0, "A small machine."),
     ],
     [
@@ -111,8 +111,8 @@ const scienceArtsWork: NodePractice = {
       ch("Which is wrong?", ["I'm studying a career in medicine.", "I'm studying medicine.", "I want a career in medicine."], 0, "career ≠ degree; say 'studying medicine'."),
     ],
     [
-      ch("Best sentence for a job application?", ["I would like to apply for the position of assistant.", "I want the job, give it.", "I apply the job, thank."], 0, "Formal and correct."),
-      ch("Best description of a school science project?", ["We did research and developed a device to save water.", "We made research and invented a water.", "We did a device of research."], 0, "Correct collocations."),
+      ch("Best sentence for a job application?", ["I would like to apply for the position of assistant.", "I want the job, give it to me, please, thank you.", "I apply the job of assistant, thank you."], 0, "Formal and correct."),
+      ch("Best description of a school science project?", ["We did research and developed a device to save water.", "We made research and invented a water to save.", "We did a device of research about water."], 0, "Correct collocations."),
       ctx("Describing a visit to a museum.", "Best sentence?", ["The exhibition had sculptures by Colombian artists.", "The exhibition had salaries by Colombian artists.", "The audience had sculptures of the exhibition."], 0, "Accurate vocabulary."),
       ch("Your cousin wants to work with computers all her life. She wants…", ["a career in technology", "a salary in technology", "an exhibition in technology"], 0, "career."),
       say("I'm saving money to buy a new device.", "Stress SAVing, MONey and deVICE."),
@@ -148,7 +148,7 @@ const affixes: NodePractice = {
     [
       ch("What does '-ful' usually mean?", ["full of / with", "without", "again"], 0, "useful, careful."),
       ch("Which is a noun?", ["agreement", "agree", "agreeable"], 0, "-ment makes a noun."),
-      ctx("'It's impossible to finish in one hour.'", "Why 'im-' and not 'un-'?", ["im- comes before words starting with p or m", "un- is always wrong", "It's a spelling mistake"], 0, "impossible, impatient, immature."),
+      ctx("'It's impossible to finish in one hour.'", "Why 'im-' and not 'un-'?", ["im- comes before words starting with p or m", "un- is always wrong with these words", "It's a spelling mistake, not a rule"], 0, "impossible, impatient, immature."),
       ch("The opposite of 'agree' is…", ["disagree", "unagree", "inagree"], 0, "dis- with verbs."),
       ch("Which word means 'full of danger'?", ["dangerous", "dangerless", "dangerful"], 0, "-ous."),
     ],
@@ -195,7 +195,7 @@ const studyWork: NodePractice = {
   pattern: ["make: progress · a mistake · an effort · a decision", "take: part in · notes · an exam · a break", "do: homework · research · your best", "pay attention · reach / achieve a goal · get a good grade"],
   steps: [
     [
-      heard(X("04", "notice"), "What has the speaker made this year?", ["A lot of progress in English", "A lot of mistakes", "A new friend"], 0, "'I've made a lot of progress in English.'"),
+      heard(X("04", "notice"), "What has the speaker made this year?", ["A lot of progress in English", "A lot of mistakes in English", "A new friend at school"], 0, "'I've made a lot of progress in English.'"),
       heard(X("04", "notice"), "What did the speaker take part in?", ["The school debate", "A football match", "A concert"], 0, "'I took part in the school debate'."),
       heard(X("04", "notice"), "When did they reach their goal?", ["In June", "In March", "Last week"], 0, "'I reached my goal in June.'"),
       ch("Which verb goes with 'progress'?", ["make", "do", "take"], 0, "make progress."),
@@ -204,7 +204,7 @@ const studyWork: NodePractice = {
     [
       ch("'Take part in' means…", ["participate in", "break into pieces", "take a photo"], 0, "Participate."),
       ch("Which is correct?", ["do research", "make research", "take research"], 0, "do research."),
-      ctx("Your teacher says: 'Please take notes during the video.'", "You should…", ["write down important information", "take the video home", "stop listening"], 0, "take notes = write."),
+      ctx("Your teacher says: 'Please take notes during the video.'", "You should…", ["write down important information", "take the video home with you", "stop listening after a minute"], 0, "take notes = write."),
       ch("Which is a common learner mistake?", ["make homework", "do homework", "do your best"], 0, "Say do homework."),
       ch("'I reached my goal' means…", ["I achieved what I wanted.", "I touched a football goal.", "I started a goal."], 0, "reach = achieve."),
     ],
@@ -252,7 +252,7 @@ const phrasal: NodePractice = {
   steps: [
     [
       heard(X("05", "notice"), "What does the speaker keep putting off?", ["Homework", "Going to the gym", "Calling a friend"], 0, "'I keep putting off my homework.'"),
-      heard(X("05", "notice"), "What did the friend come up with?", ["A great idea for their project", "A new game", "A song"], 0, "'came up with a great idea for our project'."),
+      heard(X("05", "notice"), "What did the friend come up with?", ["A great idea for their project", "A new game to play together", "A song for the school show"], 0, "'came up with a great idea for our project'."),
       heard(X("05", "notice"), "How was the party in the end?", ["Really fun", "Boring", "Cancelled"], 0, "'The party turned out to be really fun'."),
       ch("'Put off' means…", ["delay", "turn off", "put on clothes"], 0, "Postpone."),
       ch("'Get over a cold' means…", ["recover from it", "catch it", "jump over it"], 0, "Recover."),
@@ -280,7 +280,7 @@ const phrasal: NodePractice = {
     ],
     [
       ch("Best ending for an email to a pen pal?", ["I'm looking forward to hearing from you.", "I'm looking forward to hear from you.", "I look forward hearing you."], 0, "Classic, correct ending."),
-      ch("Your friend is sad after a breakup. Kind message?", ["You'll get over it soon. I'm here for you.", "You'll get on it soon.", "You'll put it off soon."], 0, "get over."),
+      ch("Your friend is sad after a breakup. Kind message?", ["You'll get over it soon. I'm here for you.", "You'll get on it soon. I'm here for you.", "You'll put it off soon. I'm here for you."], 0, "get over."),
       ctx("Your team needs an idea for a project.", "Best thing to say?", ["Let's come up with three ideas and vote.", "Let's come with up three ideas.", "Let's bring up three ideas off."], 0, "come up with."),
       ch("Your teacher sees you stop talking during a presentation. She says…", ["Please carry on.", "Please carry off.", "Please put on."], 0, "carry on = continue."),
       say("I keep putting off my homework.", "Stress KEEP, PUTting OFF and HOMEwork."),
@@ -315,7 +315,7 @@ const idioms: NodePractice = {
     ],
     [
       ch("'The test was a piece of cake' means…", ["It was very easy.", "There was cake.", "It was very hard."], 0, "Easy."),
-      ch("When should you use idioms?", ["In informal conversation and messages", "In every formal essay", "Never"], 0, "Mostly informal."),
+      ch("When should you use idioms?", ["In informal conversation and messages", "In every formal essay you write", "Never, because they're too difficult"], 0, "Mostly informal."),
       ctx("At a party, someone tells a joke to start a conversation with strangers.", "They are…", ["breaking the ice", "hitting the books", "under the weather"], 0, "break the ice."),
       ch("'Those trainers cost an arm and a leg' means…", ["They were very expensive.", "They hurt my legs.", "They were cheap."], 0, "Expensive."),
       ch("Why can't you say 'a piece of bread' for 'very easy'?", ["Idioms have fixed words.", "Bread is harder.", "It's American English."], 0, "Fixed expressions."),
@@ -336,8 +336,8 @@ const idioms: NodePractice = {
     ],
     [
       ch("Your friend invites you to a heavy metal concert, which you don't like. Polite reply?", ["Thanks, but metal isn't really my cup of tea.", "Metal is horrible and you're horrible.", "Metal is my cup of coffee."], 0, "Polite refusal."),
-      ch("Best message to your teacher if you're ill?", ["I'm sorry, I'm not feeling well today.", "I'm under the weather, mate!", "I'm a piece of cake today."], 0, "Formal context: avoid idioms."),
-      ctx("First day at a new school, nobody is talking.", "Best way to break the ice?", ["Hi! I'm new. What's the best thing about this school?", "Silence.", "I'm under the weather."], 0, "Start a friendly conversation."),
+      ch("Best message to your teacher if you're ill?", ["I'm sorry, I'm not feeling well today.", "I'm under the weather, mate! No class!", "I'm a piece of cake today, sorry."], 0, "Formal context: avoid idioms."),
+      ctx("First day at a new school, nobody is talking.", "Best way to break the ice?", ["Hi! I'm new. What's the best thing about this school?", "Silence. Wait for someone else to talk to you first.", "I'm under the weather. Who are you?"], 0, "Start a friendly conversation."),
       ch("Which idiom fits? 'Exams start Monday, so this weekend I'll…'", ["hit the books", "break the ice", "cost an arm and a leg"], 0, "Study hard."),
       say("That phone costs an arm and a leg!", "Stress COSTS, ARM and LEG."),
     ],
@@ -371,9 +371,9 @@ const discourse: NodePractice = {
     ],
     [
       ch("Which chunk introduces a problem?", ["The thing is…", "By the way…", "Anyway…"], 0, "The thing is, I'm busy."),
-      ch("'Anyway' is often used to…", ["go back to the main topic", "start a story", "say thank you"], 0, "Topic shift."),
-      ctx("'I'd love to come. The thing is, I have an exam the next day.'", "The speaker is…", ["politely explaining why they can't come", "saying yes", "asking a question"], 0, "Soft refusal."),
-      ch("Which adds a new, unrelated point?", ["By the way, I saw Ana yesterday.", "Anyway, as I was saying…", "To be honest, I agree."], 0, "By the way."),
+      ch("'Anyway' is often used to…", ["go back to the main topic", "start a new story from the beginning", "say thank you at the end"], 0, "Topic shift."),
+      ctx("'I'd love to come. The thing is, I have an exam the next day.'", "The speaker is…", ["politely explaining why they can't come", "saying yes to the invitation", "asking a question about the plan"], 0, "Soft refusal."),
+      ch("Which adds a new, unrelated point?", ["By the way, I saw Ana yesterday.", "Anyway, as I was saying about the trip…", "To be honest, I agree with you."], 0, "By the way."),
       ch("Why are these chunks useful?", ["They organise your speech and give you time to think.", "They make sentences longer for no reason.", "They are only for exams."], 0, "Fluency."),
     ],
     [
@@ -388,13 +388,13 @@ const discourse: NodePractice = {
       fix(["On second", "thinks,", "let's go by bus."], 1, ["thoughts,"], "On second thoughts."),
       fix(["The thing are,", "I don't have any money."], 0, ["The thing is,"], "Fixed: The thing is."),
       ch("Which is used correctly?", ["By the way, have you seen my keys?", "By the way, so the end.", "By the way to be honest anyway."], 0, "Adds a new point."),
-      ch("Which sounds wrong?", ["Anyway, I think yes, on second thoughts by the way.", "Anyway, let's get back to the plan.", "Anyway, what time is the match?"], 0, "Too many chunks together."),
+      ch("Which sounds wrong?", ["Anyway, I think yes, on second thoughts by the way.", "Anyway, let's get back to the plan for Saturday.", "Anyway, what time is the match?"], 0, "Too many chunks together."),
     ],
     [
-      ch("Your friend asks to borrow money and you can't. Best answer?", ["I'd like to help. The thing is, I'm saving for a trip.", "No.", "Money? Anyway. By the way."], 0, "Soft and clear."),
-      ch("Best way to give an honest opinion about a friend's new haircut you don't love?", ["To be honest, I preferred it longer, but it looks fresh.", "It's horrible.", "Anyway, haircut."], 0, "Honest but kind."),
-      ctx("In a group chat, the conversation went off topic.", "Best way to return to the plan?", ["Anyway, what time are we meeting?", "Actually by the way…", "The thing is, anyway."], 0, "Anyway = back to the point."),
-      ch("You were going to order pizza but decide on tacos. You say:", ["Actually, on second thoughts, I'll have the tacos.", "To be honest, pizza tacos.", "By the way, tacos."], 0, "Change of mind."),
+      ch("Your friend asks to borrow money and you can't. Best answer?", ["I'd like to help. The thing is, I'm saving for a trip.", "No. I don't have money for you. Sorry, ask someone else.", "Money? Anyway. By the way, I'm saving."], 0, "Soft and clear."),
+      ch("Best way to give an honest opinion about a friend's new haircut you don't love?", ["To be honest, I preferred it longer, but it looks fresh.", "It's horrible. You should change it back immediately.", "Anyway, haircut. It looks different."], 0, "Honest but kind."),
+      ctx("In a group chat, the conversation went off topic.", "Best way to return to the plan?", ["Anyway, what time are we meeting?", "Actually by the way, what time…", "The thing is, anyway, the time…"], 0, "Anyway = back to the point."),
+      ch("You were going to order pizza but decide on tacos. You say:", ["Actually, on second thoughts, I'll have the tacos.", "To be honest, pizza or tacos, I'll have tacos.", "By the way, I'll have the tacos instead."], 0, "Change of mind."),
       say("The thing is, I don't have time this week.", "Stress THING and TIME."),
     ],
   ],

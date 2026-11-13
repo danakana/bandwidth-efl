@@ -35,13 +35,13 @@ const third: NodePractice = {
       heard(X("01", "notice"), "What happened because they missed the bus?", ["They were late for their exam.", "They walked to the beach.", "They stayed at home."], 0, "'I wouldn't have been late for my exam.'"),
       heard(X("01", "notice"), "What will they do next time?", ["Set two alarms", "Take a taxi", "Sleep at school"], 0, "'Next time, I'm setting two alarms.'"),
       ch("'If I had left earlier, I wouldn't have missed the bus.' Did the speaker leave early?", ["No", "Yes", "We don't know"], 0, "Third conditional = the opposite of what happened."),
-      ch("Which form is the third conditional?", ["If I had known, I would have come.", "If I know, I will come.", "If I knew, I would come."], 0, "had + past participle, would have + past participle."),
+      ch("Which form is the third conditional?", ["If I had known, I would have come.", "If I know, I will come to the party.", "If I knew, I would come."], 0, "had + past participle, would have + past participle."),
     ],
     [
       ch("When do we use the third conditional?", ["To imagine a different past", "To talk about future plans", "To give instructions"], 0, "Unreal past situations."),
-      ch("'If she had asked me, I would have helped.' What really happened?", ["She didn't ask, so I didn't help.", "She asked, and I helped.", "She will ask tomorrow."], 0, "Opposite of reality."),
+      ch("'If she had asked me, I would have helped.' What really happened?", ["She didn't ask, so I didn't help.", "She asked, and I helped her.", "She will ask me tomorrow."], 0, "Opposite of reality."),
       ctx("Your friend says: 'If I'd seen the message, I'd have replied.'", "What does 'I'd' mean in each part?", ["I had … I would", "I would … I had", "I did … I do"], 0, "If I had seen…, I would have replied."),
-      ch("Which sentence is a regret?", ["If I had studied, I would have passed.", "If I study, I will pass.", "I study every day."], 0, "Regret about the past."),
+      ch("Which sentence is a regret?", ["If I had studied, I would have passed.", "If I study, I will pass.", "I study every day after school."], 0, "Regret about the past."),
       ch("Which order is also correct?", ["I would have come if you had invited me.", "I had come if you would invite me.", "I come if you had invited me."], 0, "Result first, no comma."),
     ],
     [
@@ -59,9 +59,9 @@ const third: NodePractice = {
       ch("Which is wrong?", ["If I would have seen you, I would have said hello.", "If I had seen you, I would have said hello.", "I would have said hello if I had seen you."], 0, "No 'would' in the if-part."),
     ],
     [
-      ch("Your friend failed a test because she didn't study. What can you say kindly?", ["If you'd had more time, you would have done better.", "If you study, you pass.", "You didn't study. Bad."], 0, "Third conditional for a kind comment on the past."),
-      ch("Best apology for missing a friend's party?", ["If I'd known it was so important, I would have come.", "If I know, I come.", "I didn't come because no."], 0, "Explains and apologises."),
-      ctx("You're writing a story about a lucky escape.", "Best final sentence?", ["If we had taken that road, we would never have come home.", "If we take that road, we never come home.", "We took a different road, so yes."], 0, "Dramatic third conditional."),
+      ch("Your friend failed a test because she didn't study. What can you say kindly?", ["If you'd had more time, you would have done better.", "If you study, you pass. You didn't study, so you failed.", "You didn't study. Bad. Next time, study more."], 0, "Third conditional for a kind comment on the past."),
+      ch("Best apology for missing a friend's party?", ["If I'd known it was so important, I would have come.", "If I know it's important, I come next time.", "I didn't come because no. Sorry about that."], 0, "Explains and apologises."),
+      ctx("You're writing a story about a lucky escape.", "Best final sentence?", ["If we had taken that road, we would never have come home.", "If we take that road, we never come home again.", "We took a different road, so yes, we came home."], 0, "Dramatic third conditional."),
       ch("Which sounds most natural in conversation?", ["If I'd known, I'd have brought snacks.", "If I had had knowledge, I would have had the snacks brought.", "Had I knowledge, snacks."], 0, "Short forms in speech."),
       say("If I'd left earlier, I wouldn't have missed the bus.", "Stress LEFT, EARlier and MISSED."),
     ],
@@ -88,16 +88,16 @@ const passive: NodePractice = {
   steps: [
     [
       heard(X("02", "notice"), "How much does the app cost?", ["It's free.", "Five dollars", "It's not said."], 0, "'can be downloaded for free'."),
-      heard(X("02", "notice"), "What has happened to the app?", ["It has been updated with fifty new levels.", "It has been deleted.", "It has been sold."], 0, "'It has been updated with fifty new levels.'"),
+      heard(X("02", "notice"), "What has happened to the app?", ["It has been updated with fifty new levels.", "It has been deleted from the store.", "It has been sold to a new company."], 0, "'It has been updated with fifty new levels.'"),
       heard(X("02", "notice"), "What will happen next month?", ["More levels will be added.", "The app will close.", "Progress will be deleted."], 0, "'more levels will be added next month'."),
       ch("'It can be downloaded' is…", ["passive with a modal", "active future", "past simple"], 0, "modal + be + past participle."),
-      ch("'Your progress has been saved' is…", ["present perfect passive", "future passive", "active"], 0, "has been + past participle."),
+      ch("'Your progress has been saved' is…", ["present perfect passive", "future simple passive", "an active sentence"], 0, "has been + past participle."),
     ],
     [
-      ch("Why use the passive in 'Phones must be switched off'?", ["The action is important, not who does it.", "Because phones are people.", "It's the past."], 0, "Focus on the action."),
+      ch("Why use the passive in 'Phones must be switched off'?", ["The action is important, not who does it.", "Because phones are people too, in the sentence.", "Because it's in the past."], 0, "Focus on the action."),
       ch("Which is passive?", ["The results have been published.", "They have published the results.", "They publish the results."], 0, "have been + past participle."),
       ctx("A sign in a museum: 'Photos may not be taken.'", "This means…", ["You can't take photos.", "You must take photos.", "Photos are free."], 0, "may not be + past participle = not allowed."),
-      ch("When do we add 'by' + person?", ["When the person is important or interesting", "Always", "Never"], 0, "The song was written by my cousin."),
+      ch("When do we add 'by' + person?", ["When the person is important or interesting", "Always, in every passive sentence you write", "Never; it's not correct English"], 0, "The song was written by my cousin."),
       ch("'More levels will be added' means…", ["Someone will add more levels.", "More levels added themselves.", "Levels were added yesterday."], 0, "Future passive."),
     ],
     [
@@ -115,7 +115,7 @@ const passive: NodePractice = {
       ch("Which is wrong?", ["The cake has been eated.", "The cake has been eaten.", "Someone has eaten the cake."], 0, "Past participle: eaten."),
     ],
     [
-      ch("Best sentence for a school notice?", ["Bags must be left outside the exam room.", "You leave bags outside, OK?", "Bags leaving outside."], 0, "Formal notices often use the passive."),
+      ch("Best sentence for a school notice?", ["Bags must be left outside the exam room.", "You leave your bags outside the exam room, OK?", "Bags leaving outside the exam room, please."], 0, "Formal notices often use the passive."),
       ch("Best news headline sentence?", ["A new park will be opened next month.", "Someone will open a park next month, maybe.", "Park open next month will."], 0, "Passive, clear."),
       ctx("Your friend asks who painted the mural. You know: it was a famous artist.", "Best answer?", ["It was painted by Ana Ríos.", "It was painted.", "It has painted Ana Ríos."], 0, "Add 'by' when the person matters."),
       ch("In a recipe, which sounds most natural?", ["The onions should be cooked slowly.", "The onions should cook by you slowly.", "Onions cooked should be."], 0, "Passive with should."),
@@ -143,9 +143,9 @@ const causative: NodePractice = {
   pattern: ["have / get + object + past participle", "I'm getting my phone repaired. (someone repairs it for me)", "I had my hair cut. · We're having the kitchen painted.", "Word order: have + THING + past participle", "Compare: I repaired my phone. (I did it myself)"],
   steps: [
     [
-      heard(X("03", "notice"), "Who will repair the phone?", ["Someone else, a repair person", "The speaker", "The speaker's parents"], 0, "'I'm getting my phone repaired.'"),
+      heard(X("03", "notice"), "Who will repair the phone?", ["Someone else, a repair person", "The speaker, at home tonight", "The speaker's parents"], 0, "'I'm getting my phone repaired.'"),
       heard(X("03", "notice"), "What is happening on Wednesday?", ["A haircut", "A party", "A test"], 0, "'I'm having my hair cut.'"),
-      heard(X("03", "notice"), "Why are they eating pizza on the sofa on Friday?", ["The kitchen is being painted.", "It's a birthday.", "The phone is broken."], 0, "'my parents are having the kitchen painted'."),
+      heard(X("03", "notice"), "Why are they eating pizza on the sofa on Friday?", ["The kitchen is being painted.", "It's a birthday party for the family.", "The phone is broken, so they can't order."], 0, "'my parents are having the kitchen painted'."),
       ch("'I had my hair cut.' Who cut the hair?", ["A hairdresser", "Me", "My friend, maybe me"], 0, "have something done = someone else does it."),
       ch("Which sentence means you did it yourself?", ["I painted my room.", "I had my room painted.", "I got my room painted."], 0, "No have/get + past participle."),
     ],
@@ -154,7 +154,7 @@ const causative: NodePractice = {
       ch("'We need to get the car washed.' This means…", ["Someone needs to wash it for us.", "We need to wash it ourselves.", "The car is clean."], 0, "Service by someone else."),
       ctx("Mum says: 'I'm having my eyes tested tomorrow.'", "Where is she going?", ["To an optician", "To school", "To the gym"], 0, "Someone tests her eyes."),
       ch("Which word order is correct?", ["I had my bike fixed.", "I had fixed my bike.", "I fixed had my bike."], 0, "have + object + past participle."),
-      ch("'I had fixed my bike' means…", ["I fixed it myself (past perfect).", "Someone fixed it for me.", "I will fix it."], 0, "Word order changes the meaning."),
+      ch("'I had fixed my bike' means…", ["I fixed it myself (past perfect).", "Someone else fixed it for me.", "I will fix it tomorrow."], 0, "Word order changes the meaning."),
     ],
     [
       gap("I'm getting my laptop", "this week. The screen is broken.", ["repaired", "fixed"], "get + object + past participle."),
@@ -172,7 +172,7 @@ const causative: NodePractice = {
     ],
     [
       ch("Your phone screen is broken. What do you tell your friend?", ["I'm getting it fixed tomorrow.", "I'm fixing it tomorrow (but I can't fix phones).", "I'm fixed it tomorrow."], 0, "Someone else will fix it."),
-      ch("Best sentence for a story about getting ready for a party?", ["She had her hair done and her nails painted.", "She did her hair done.", "She had done her hair painted."], 0, "Natural causative."),
+      ch("Best sentence for a story about getting ready for a party?", ["She had her hair done and her nails painted.", "She did her hair done and her nails painted.", "She had done her hair painted and her nails."], 0, "Natural causative."),
       ctx("Your friend proudly says: 'I painted my room myself!'", "Why not 'I had my room painted'?", ["Because she did it herself", "Because it's the past", "Both mean the same"], 0, "Causative = someone else did it."),
       ch("Most natural way to explain why you're late?", ["Sorry, I was getting my glasses fixed.", "Sorry, I was fixing my glasses by an optician.", "Sorry, my glasses got fix."], 0, "Natural causative."),
       say("We're having the kitchen painted this week.", "Stress KITchen and PAINTed."),
@@ -201,15 +201,15 @@ const usedTo: NodePractice = {
     [
       heard(X("04", "notice"), "Where did the speaker live as a child?", ["In a small town", "In Bogotá", "In another country"], 0, "'I used to live in a small town.'"),
       heard(X("04", "notice"), "How did they feel about the noise at first?", ["It was terrible.", "They loved it.", "They didn't notice it."], 0, "'at first the noise was terrible'."),
-      heard(X("04", "notice"), "What is normal for them now?", ["The traffic and waking up at five", "Living in a small town", "Quiet nights"], 0, "'I'm used to the traffic… used to waking up at five'."),
+      heard(X("04", "notice"), "What is normal for them now?", ["The traffic and waking up at five", "Living in a small, quiet town", "Quiet nights with no traffic"], 0, "'I'm used to the traffic… used to waking up at five'."),
       ch("'I used to live in a small town.' Do they live there now?", ["No", "Yes", "Maybe"], 0, "Past habit, not true now."),
       ch("'I'm getting used to the noise' means…", ["It's becoming normal for me.", "It's always been normal.", "I used to like the noise."], 0, "get used to = process."),
     ],
     [
       ch("Which talks about a past habit?", ["I used to play the piano.", "I'm used to playing the piano.", "I'm getting used to playing the piano."], 0, "used to + base verb."),
       ch("After 'be used to', we use…", ["-ing or a noun", "the base verb", "the past simple"], 0, "I'm used to cooking / the cold."),
-      ctx("A new student says: 'I'm not used to the food here yet.'", "This means…", ["The food still feels strange to her.", "She used to eat this food.", "She hates all food."], 0, "not used to = not normal yet."),
-      ch("'I didn't use to like coffee' means…", ["In the past, I didn't like coffee (now I do).", "I never like coffee.", "I'm getting used to coffee."], 0, "Negative: didn't use to."),
+      ctx("A new student says: 'I'm not used to the food here yet.'", "This means…", ["The food still feels strange to her.", "She used to eat this food as a child.", "She hates all the food in the country."], 0, "not used to = not normal yet."),
+      ch("'I didn't use to like coffee' means…", ["In the past, I didn't like coffee (now I do).", "I never like coffee, in the past or now.", "I'm getting used to coffee these days."], 0, "Negative: didn't use to."),
       ch("Which shows a change happening now?", ["I'm getting used to my new school.", "I used to go to a different school.", "I'm used to my school."], 0, "get used to = change in progress."),
     ],
     [
@@ -227,7 +227,7 @@ const usedTo: NodePractice = {
       ch("Which is wrong?", ["I'm used to drive on the left.", "I'm used to driving on the left.", "I used to drive on the left."], 0, "be used to + -ing."),
     ],
     [
-      ch("You moved to a cold city a month ago. Best sentence?", ["I'm slowly getting used to the cold.", "I used to the cold.", "I'm used to be cold."], 0, "Change in progress."),
+      ch("You moved to a cold city a month ago. Best sentence?", ["I'm slowly getting used to the cold.", "I used to the cold now, after a month.", "I'm used to be cold in this city."], 0, "Change in progress."),
       ch("Best sentence in a story about your childhood?", ["We used to climb the mango tree behind our house.", "We are used to climb the tree.", "We get used to climbing the tree yesterday."], 0, "Past habit."),
       ctx("Your friend complains about early classes. You've had them for years.", "What do you say?", ["Don't worry, I'm used to it now.", "I used to it.", "I'm getting used to early classes since ten years."], 0, "Normal for you now."),
       ch("Which is a natural question?", ["Did you use to have long hair?", "Did you used to having long hair?", "Were you used to have long hair?"], 0, "Did … use to + base verb?"),
@@ -258,13 +258,13 @@ const reported: NodePractice = {
   steps: [
     [
       heard(X("05", "notice"), "What did the guide tell the students to do?", ["Stay together", "Take photos", "Go home"], 0, "'She told us to stay together.'"),
-      heard(X("05", "notice"), "What did she ask them not to do?", ["Touch the paintings", "Talk", "Eat"], 0, "'She asked us not to touch the paintings.'"),
-      heard(X("05", "notice"), "Why did she speak to Leo?", ["He was filming everything.", "He was lost.", "He was hungry."], 0, "'she told my friend Leo to put his phone away'."),
+      heard(X("05", "notice"), "What did she ask them not to do?", ["Touch the paintings", "Talk during the tour", "Eat in the museum"], 0, "'She asked us not to touch the paintings.'"),
+      heard(X("05", "notice"), "Why did she speak to Leo?", ["He was filming everything.", "He was lost in the museum.", "He was hungry and eating."], 0, "'she told my friend Leo to put his phone away'."),
       ch("'Please close the door,' she said. → She asked me…", ["to close the door.", "close the door.", "that I closed the door."], 0, "ask + person + to + verb."),
       ch("'Don't run!' → He told us…", ["not to run.", "to not running.", "don't run."], 0, "not to + base verb."),
     ],
     [
-      ch("Which is the difference between 'tell' and 'ask' here?", ["'Tell' is an order; 'ask' is a polite request.", "They mean exactly the same.", "'Ask' is only for questions."], 0, "Order vs request."),
+      ch("Which is the difference between 'tell' and 'ask' here?", ["'Tell' is an order; 'ask' is a polite request.", "They mean exactly the same thing here.", "'Ask' is only used for questions."], 0, "Order vs request."),
       ch("Where does 'not' go in a negative reported command?", ["Before 'to'", "After 'to'", "At the end"], 0, "told me not to go."),
       ctx("Teacher: 'Remember to bring your books!'", "Reported:", ["She reminded us to bring our books.", "She reminded us bring our books.", "She reminded that we bring our books."], 0, "remind + person + to."),
       ch("'Be careful!' → My mum…", ["told me to be careful.", "told to me be careful.", "said me to be careful."], 0, "tell + person + to."),
@@ -286,7 +286,7 @@ const reported: NodePractice = {
     ],
     [
       ch("Your friend missed the meeting. How do you report the coach's message?", ["The coach told us to arrive at seven.", "The coach told arrive seven.", "The coach said us arriving at seven."], 0, "Clear reported command."),
-      ch("Most polite way to report a request from your teacher?", ["She asked us to hand in the essays on Friday.", "She ordered us hand essays.", "She told that essays Friday."], 0, "ask = polite request."),
+      ch("Most polite way to report a request from your teacher?", ["She asked us to hand in the essays on Friday.", "She ordered us hand in the essays on Friday.", "She told that essays are on Friday."], 0, "ask = polite request."),
       ctx("Your little brother says: 'Mum told me not to eat the cake.'", "What did Mum say?", ["'Don't eat the cake.'", "'Eat the cake.'", "'Did you eat the cake?'"], 0, "Negative command."),
       ch("Which sentence reports a warning?", ["The guide warned us not to swim there.", "The guide warned us swimming there.", "The guide warned to swim there."], 0, "warn + person + not to."),
       say("The guide told us to stay together.", "Stress GUIDE, STAY and toGETHer."),
@@ -314,17 +314,17 @@ const changeMeaning: NodePractice = {
   pattern: ["stop + -ing = finish doing: I stopped buying energy drinks.", "stop + to = stop in order to: I stopped to buy water.", "remember / forget + -ing = a memory of the past", "remember / forget + to = a task (not forget)", "try + -ing = an experiment · try + to = make an effort"],
   steps: [
     [
-      heard(X("06", "notice"), "What did the speaker stop doing last year?", ["Buying energy drinks", "Running", "Sleeping"], 0, "'I stopped buying energy drinks'."),
+      heard(X("06", "notice"), "What did the speaker stop doing last year?", ["Buying energy drinks", "Running in the mornings", "Sleeping late on Saturdays"], 0, "'I stopped buying energy drinks'."),
       heard(X("06", "notice"), "Why did they stop on their run yesterday?", ["To buy water", "Because they were tired", "To call the coach"], 0, "'I stopped to buy water'."),
-      heard(X("06", "notice"), "What must they remember to do today?", ["Send the coach the photos", "Run a race", "Buy water"], 0, "'I must remember to send my coach the photos.'"),
-      ch("'I stopped to buy water' means…", ["I stopped running in order to buy water.", "I don't buy water any more.", "I forgot to buy water."], 0, "stop + to = purpose."),
+      heard(X("06", "notice"), "What must they remember to do today?", ["Send the coach the photos", "Run a race in the park", "Buy some water for the team"], 0, "'I must remember to send my coach the photos.'"),
+      ch("'I stopped to buy water' means…", ["I stopped running in order to buy water.", "I don't buy water any more, I stopped.", "I forgot to buy water."], 0, "stop + to = purpose."),
       ch("'I remember running my first race' is about…", ["a memory from the past", "a task for today", "a future plan"], 0, "remember + -ing = memory."),
     ],
     [
       ch("'I stopped eating meat' means…", ["I don't eat meat any more.", "I stopped in order to eat meat.", "I'm eating meat now."], 0, "stop + -ing = finish a habit."),
-      ch("'Remember to lock the door' is…", ["a reminder about a task", "a memory", "a question"], 0, "remember + to = don't forget."),
+      ch("'Remember to lock the door' is…", ["a reminder about a task", "a memory from the past", "a question about the door"], 0, "remember + to = don't forget."),
       ctx("Your friend says: 'I'll never forget seeing the ocean for the first time.'", "This is about…", ["a special memory", "a task he must do", "something he wants to try"], 0, "forget + -ing = memory."),
-      ch("'Try turning it off and on again' means…", ["Do this as an experiment to see if it works.", "Make a big effort.", "Stop doing it."], 0, "try + -ing = experiment."),
+      ch("'Try turning it off and on again' means…", ["Do this as an experiment to see if it works.", "Make a really big effort with the phone.", "Stop doing it completely."], 0, "try + -ing = experiment."),
       ch("'I tried to lift the box, but it was too heavy' means…", ["I made an effort but failed.", "I lifted it as an experiment.", "I didn't want to lift it."], 0, "try + to = effort."),
     ],
     [
@@ -372,9 +372,9 @@ const indirect: NodePractice = {
     [
       heard(X("07", "notice"), "What is the speaker looking for?", ["The library", "The bus station", "A café"], 0, "'could you tell me where the library is?'"),
       heard(X("07", "notice"), "What does the speaker want to know about Saturdays?", ["If it's open", "If it's free", "If it's busy"], 0, "'do you know if it's open on Saturdays?'"),
-      heard(X("07", "notice"), "What else are they wondering?", ["Whether students can borrow laptops", "Where to buy books", "When classes start"], 0, "'I was also wondering whether students can borrow laptops there.'"),
-      ch("Which is an indirect question?", ["Could you tell me where the station is?", "Where is the station?", "Where the station is?"], 0, "Polite phrase + statement word order."),
-      ch("In 'Do you know if it's open?', 'if' is used because…", ["the original is a yes/no question", "it's a condition", "it's the past"], 0, "Is it open? → if it's open."),
+      heard(X("07", "notice"), "What else are they wondering?", ["Whether students can borrow laptops", "Where to buy the course books", "When the classes start next term"], 0, "'I was also wondering whether students can borrow laptops there.'"),
+      ch("Which is an indirect question?", ["Could you tell me where the station is?", "Where is the station, please, can you tell me?", "Where the station is, please?"], 0, "Polite phrase + statement word order."),
+      ch("In 'Do you know if it's open?', 'if' is used because…", ["the original is a yes/no question", "it's a condition, like 'if it rains'", "the question is about the past"], 0, "Is it open? → if it's open."),
     ],
     [
       ch("Why use indirect questions?", ["They are more polite.", "They are shorter.", "They are only for writing."], 0, "Politeness."),
@@ -398,8 +398,8 @@ const indirect: NodePractice = {
       ch("Which is wrong?", ["Could you tell me what is your name?", "Could you tell me what your name is?", "What's your name?"], 0, "Indirect: what your name is."),
     ],
     [
-      ch("You're asking a stranger for directions. Best question?", ["Excuse me, do you know where the metro station is?", "Where metro?", "Tell me where is the metro."], 0, "Polite and correct."),
-      ch("Most polite email to a teacher?", ["I was wondering if you could explain the homework again.", "Explain the homework again.", "What is the homework, explain."], 0, "Indirect = polite."),
+      ch("You're asking a stranger for directions. Best question?", ["Excuse me, do you know where the metro station is?", "Excuse me, where is it the metro station?", "Tell me where is the metro, please."], 0, "Polite and correct."),
+      ch("Most polite email to a teacher?", ["I was wondering if you could explain the homework again.", "Explain the homework again to me, please, I didn't get it.", "What is the homework? Explain it again."], 0, "Indirect = polite."),
       ctx("At a hotel reception, you want to know the Wi-Fi password.", "Best question?", ["Could you tell me what the Wi-Fi password is?", "Could you tell me what is the Wi-Fi password is?", "Wi-Fi password, what is?"], 0, "Correct indirect question."),
       ch("Which is best for a quick question to a close friend?", ["Where's the party?", "I was wondering whether you might possibly know where the party might be?", "Could you kindly inform me of the party's location?"], 0, "Direct is fine with friends."),
       say("Could you tell me how much this jacket costs?", "Polite tone, rising at the end."),
@@ -426,16 +426,16 @@ const future: NodePractice = {
   pattern: ["will be + -ing = in progress at a future time: This time tomorrow I'll be flying.", "will have + past participle = finished before a future time: By June I'll have finished.", "Time phrases: this time tomorrow, at 8 p.m. on Friday · by Friday, by the end of the year", "Negative: I won't be working. · I won't have finished."],
   steps: [
     [
-      heard(X("08", "notice"), "What will the speaker be doing this time tomorrow?", ["Flying to Cartagena", "Diving", "Studying"], 0, "'This time tomorrow, I'll be flying to Cartagena.'"),
-      heard(X("08", "notice"), "What will they have done by Friday?", ["Met everyone in their group", "Finished the course", "Flown home"], 0, "'By Friday, I'll have met everyone in my group.'"),
+      heard(X("08", "notice"), "What will the speaker be doing this time tomorrow?", ["Flying to Cartagena", "Diving off the coast near Cartagena", "Studying for the exam at home"], 0, "'This time tomorrow, I'll be flying to Cartagena.'"),
+      heard(X("08", "notice"), "What will they have done by Friday?", ["Met everyone in their group", "Finished the whole course", "Flown home to their family"], 0, "'By Friday, I'll have met everyone in my group.'"),
       heard(X("08", "notice"), "What will they have finished by the end of July?", ["A diving course", "Their exams", "A book"], 0, "'I'll have finished my first diving course.'"),
       ch("'I'll be flying' is…", ["future continuous", "future perfect", "present continuous"], 0, "will be + -ing."),
-      ch("'By June, I'll have finished' means…", ["It will be finished before or in June.", "I'll start in June.", "I finished last June."], 0, "by = not later than."),
+      ch("'By June, I'll have finished' means…", ["It will be finished before or in June.", "I'll start working on it in June.", "I finished it last June."], 0, "by = not later than."),
     ],
     [
       ch("Which describes an action in progress at a future time?", ["At 9 p.m. I'll be watching the match.", "By 9 p.m. I'll have watched the match.", "I watched the match at 9 p.m."], 0, "will be + -ing."),
       ch("What does 'by' mean in 'by Friday'?", ["not later than Friday", "near Friday", "because of Friday"], 0, "Deadline."),
-      ctx("'Don't call me at eight. I'll be having dinner.'", "Why the future continuous?", ["Dinner will be in progress at eight.", "Dinner will be finished.", "It's a past habit."], 0, "In progress at that time."),
+      ctx("'Don't call me at eight. I'll be having dinner.'", "Why the future continuous?", ["Dinner will be in progress at eight.", "Dinner will be finished by eight.", "It's a habit from the past."], 0, "In progress at that time."),
       ch("'By the time you arrive, we'll have eaten.' When do we eat?", ["Before you arrive", "After you arrive", "When you arrive"], 0, "Finished before."),
       ch("Which is the negative future perfect?", ["I won't have finished by Monday.", "I won't be finish by Monday.", "I haven't finish by Monday."], 0, "won't have + past participle."),
     ],
@@ -455,7 +455,7 @@ const future: NodePractice = {
     ],
     [
       ch("Your friend wants to call you during your exam tomorrow at ten. You say…", ["I'll be doing my exam then.", "I'll have done my exam then.", "I do my exam then."], 0, "In progress."),
-      ch("Best sentence for a goal-setting post?", ["By December, I'll have saved enough for a new bike.", "By December, I'll be save a bike.", "December, I save bike."], 0, "Future perfect for goals."),
+      ch("Best sentence for a goal-setting post?", ["By December, I'll have saved enough for a new bike.", "By December, I'll be save enough for a new bike.", "December, I save money and buy bike."], 0, "Future perfect for goals."),
       ctx("You're writing a postcard about your plans.", "Best sentence?", ["When you read this, I'll be swimming in the Caribbean!", "When you read this, I swim in the Caribbean yesterday!", "When you read this, I'll have swim."], 0, "Future continuous for an imagined moment."),
       ch("Which sounds most natural in a plan?", ["By the time the party starts, we'll have decorated everything.", "By the time the party starts, we'll be decorated everything.", "The party starts, we decorated."], 0, "Finished before."),
       say("By Friday, I'll have met everyone in my group.", "Stress FRIday, MET and GROUP."),
@@ -487,7 +487,7 @@ const soSuch: NodePractice = {
       heard(X("09", "notice"), "Why did the sister cry?", ["The ending was so sad.", "The film was too long.", "She lost her ticket."], 0, "'The ending was so sad that my sister cried.'"),
       heard(X("09", "notice"), "What do we learn about the director?", ["Their first film won an award.", "They are very old.", "They are the speaker's brother."], 0, "'The director, whose first film won an award…'"),
       ch("'such a good film' uses such because…", ["it's followed by a/an + adjective + noun", "it's followed only by an adjective", "it's a question"], 0, "such + a + adjective + noun."),
-      ch("'whose' shows…", ["possession (his/her/their)", "a place", "a time"], 0, "whose = possession."),
+      ch("'whose' shows…", ["possession (his/her/their)", "a place, like 'where'", "a time, like 'when'"], 0, "whose = possession."),
     ],
     [
       ch("Which is correct?", ["It was so cold that we stayed home.", "It was such cold that we stayed home.", "It was so a cold day that we stayed home."], 0, "so + adjective."),
@@ -511,9 +511,9 @@ const soSuch: NodePractice = {
       ch("Which is wrong?", ["I know a boy who his sister is a singer.", "I know a boy whose sister is a singer.", "I know a boy. His sister is a singer."], 0, "Use whose, not who his."),
     ],
     [
-      ch("Best sentence for a film review?", ["The story was so exciting that I forgot to eat my popcorn.", "The story was such exciting that I forgot.", "Story exciting so popcorn."], 0, "so + adjective + that."),
+      ch("Best sentence for a film review?", ["The story was so exciting that I forgot to eat my popcorn.", "The story was such exciting that I forgot to eat my popcorn.", "Story was so exciting so I forgot eating my popcorn."], 0, "so + adjective + that."),
       ch("Best sentence to describe a great trip?", ["We had such a great time that we didn't want to leave.", "We had so a great time that we didn't leave.", "We had such great time leave."], 0, "such + a + adjective + noun."),
-      ctx("You're introducing a classmate in a presentation.", "Best sentence?", ["This is Camila, whose drawings won the school prize.", "This is Camila, who her drawings won.", "This is Camila, which drawings won."], 0, "whose for possession."),
+      ctx("You're introducing a classmate in a presentation.", "Best sentence?", ["This is Camila, whose drawings won the school prize.", "This is Camila, who her drawings won the school prize.", "This is Camila, which drawings won the school prize."], 0, "whose for possession."),
       ch("Which is most natural in a story?", ["It was such a dark night that we couldn't see the path.", "It was so a dark night that we couldn't see.", "The night was such dark."], 0, "such a dark night."),
       say("It was such a good film that I watched it twice.", "Stress SUCH, GOOD and TWICE."),
     ],

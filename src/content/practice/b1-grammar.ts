@@ -33,7 +33,7 @@ const ppc: NodePractice = {
     [
       heard(X("01", "notice"), "How long has Laura been learning English?", ["For five years", "Since she was ten", "For one month"], 0, "'I've been learning English for five years.'"),
       heard(X("01", "notice"), "Since when has she played the guitar?", ["Since she was ten", "For five years", "Since last month"], 0, "'since I was ten'."),
-      heard(X("01", "notice"), "Why is she tired?", ["She has been studying all morning.", "She played a concert.", "She didn't sleep."], 0, "'I've been studying all morning!'"),
+      heard(X("01", "notice"), "Why is she tired?", ["She has been studying all morning.", "She played a long concert last night.", "She didn't sleep at all last night."], 0, "'I've been studying all morning!'"),
       ch("'I've been learning English for five years.' Is she still learning?", ["Yes", "No", "We don't know"], 0, "The activity continues now."),
       ch("Which is the present perfect continuous?", ["She has been working.", "She is working.", "She worked."], 0, "has + been + -ing."),
     ],
@@ -41,8 +41,8 @@ const ppc: NodePractice = {
       ch("'for' or 'since'? ___ 2019", ["since", "for"], 0, "since + a starting point."),
       ch("'for' or 'since'? ___ three hours", ["for", "since"], 0, "for + a length of time."),
       ctx("Your mum sees your red eyes and you say: 'I've been watching videos.'", "What does this explain?", ["Why your eyes look tired now", "What you will do later", "A video from last year"], 0, "A recent activity with a result now."),
-      ch("Which question asks about duration?", ["How long have you been waiting?", "When did you wait?", "Do you wait?"], 0, "How long have you been + -ing?"),
-      ch("Why 'I've been running' and not 'I run'?", ["It explains why I'm hot and tired right now.", "It's a habit every day.", "It's in the future."], 0, "Recent activity, visible result."),
+      ch("Which question asks about duration?", ["How long have you been waiting?", "When did you start to wait?", "Do you wait here every day?"], 0, "How long have you been + -ing?"),
+      ch("Why 'I've been running' and not 'I run'?", ["It explains why I'm hot and tired right now.", "It's a habit I do every day after school.", "It's an action in the future."], 0, "Recent activity, visible result."),
     ],
     [
       gap("We have", "waiting for the bus for twenty minutes.", ["been"], "have been + -ing."),
@@ -61,7 +61,7 @@ const ppc: NodePractice = {
     [
       ch("Your friend is very late. What do you text?", ["I've been waiting for half an hour!", "I wait for half an hour!", "I waited half an hour tomorrow!"], 0, "Duration up to now."),
       ch("Best answer to 'Why are your hands dirty?'", ["I've been fixing my bike.", "I fix my bike every year.", "I will fix my bike."], 0, "Recent activity, visible result."),
-      ctx("A new classmate asks: 'How long have you been studying here?'", "Best answer?", ["For three years. Since sixth grade.", "Three years ago.", "I study here tomorrow."], 0, "for / since answer."),
+      ctx("A new classmate asks: 'How long have you been studying here?'", "Best answer?", ["For three years. Since sixth grade.", "Three years ago. In sixth grade.", "I study here tomorrow, since three years."], 0, "for / since answer."),
       ch("Which sentence is about a finished action, not an ongoing one?", ["I finished the book yesterday.", "I've been reading for an hour.", "She's been playing since nine."], 0, "Past simple for finished time."),
       say("How long have you been playing the guitar?", "Rising-falling question: How LONG have you been PLAYing?"),
     ],
@@ -90,15 +90,15 @@ const pastPerfect: NodePractice = {
     [
       heard(X("02", "notice"), "What happened before the speaker arrived?", ["The film started.", "The cinema closed.", "Their friends left."], 0, "'the film had already started'."),
       heard(X("02", "notice"), "What happened to the popcorn?", ["The friends had eaten it all.", "The speaker dropped it.", "It was too expensive."], 0, "'they had eaten it all!'"),
-      heard(X("02", "notice"), "Why couldn't the speaker call the friends?", ["They had forgotten their phone at home.", "There was no signal.", "The friends didn't answer."], 0, "'I had forgotten my phone at home'."),
+      heard(X("02", "notice"), "Why couldn't the speaker call the friends?", ["They had forgotten their phone at home.", "There was no signal in the mountains.", "The friends didn't answer the phone."], 0, "'I had forgotten my phone at home'."),
       ch("'When I arrived, the film had started.' What happened first?", ["The film started.", "I arrived.", "Both at the same time."], 0, "Past perfect = earlier."),
       ch("Which is the past perfect?", ["had eaten", "has eaten", "was eating"], 0, "had + past participle."),
     ],
     [
-      ch("Why use the past perfect in a story?", ["To show which past action happened first", "To talk about the future", "To make a question"], 0, "Order of past events."),
+      ch("Why use the past perfect in a story?", ["To show which past action happened first", "To talk about plans in the future", "To make a question in the past"], 0, "Order of past events."),
       ch("'When we got to the station, the train had left.' Did they catch it?", ["No", "Yes", "Maybe"], 0, "It left before they arrived."),
       ctx("Two sentences: A) 'When I got home, my brother cooked dinner.' B) 'When I got home, my brother had cooked dinner.'", "In which one was dinner ready when I arrived?", ["B", "A", "Both"], 0, "had cooked = finished before."),
-      ch("'I had never seen the sea before that trip.' This means…", ["The trip was the first time I saw the sea.", "I saw the sea many times.", "I will see the sea."], 0, "Experience before a past moment."),
+      ch("'I had never seen the sea before that trip.' This means…", ["The trip was the first time I saw the sea.", "I saw the sea many times before the trip.", "I will see the sea on the next trip."], 0, "Experience before a past moment."),
       ch("Which word often goes with the past perfect?", ["already", "tomorrow", "now"], 0, "had already started."),
     ],
     [
@@ -116,10 +116,10 @@ const pastPerfect: NodePractice = {
       ch("Which is wrong?", ["I had visit Cartagena before.", "I had visited Cartagena before.", "I'd visited Cartagena before."], 0, "had + visited."),
     ],
     [
-      ch("Best sentence to start a mystery story?", ["When the police arrived, the thief had already escaped.", "When the police arrive, the thief escapes.", "The police arrived. The thief escaped. OK."], 0, "Clear order, more drama."),
+      ch("Best sentence to start a mystery story?", ["When the police arrived, the thief had already escaped.", "When the police arrive, the thief escapes from the house.", "The police arrived. The thief escaped. OK, the end."], 0, "Clear order, more drama."),
       ch("Your friend asks why you missed the bus. Best answer?", ["It had left when I got there.", "It leaves when I get there.", "It has left when I got there."], 0, "Past perfect for the earlier event."),
       ctx("You're telling a story about your first concert.", "Which sentence sounds most natural?", ["I had never been to a concert before, so I was nervous.", "I never have been to a concert before, so I am nervous.", "I had never be to a concert."], 0, "Experience before a past moment."),
-      ch("When is the past perfect not necessary?", ["When 'before' or 'after' already shows the order", "Never", "In every past sentence"], 0, "'I ate after I arrived' is clear without it."),
+      ch("When is the past perfect not necessary?", ["When 'before' or 'after' already shows the order", "Never; it's always necessary in English stories.", "In every sentence about the past"], 0, "'I ate after I arrived' is clear without it."),
       say("I'd forgotten my phone, so I couldn't call you.", "Short form: I'd forGOTten."),
     ],
   ],
@@ -144,7 +144,7 @@ const second: NodePractice = {
   pattern: ["If + past simple, would + base verb", "If I had more time, I'd learn to cook.", "If I were you, I'd talk to her. (advice)", "Result first: I'd travel if I had money.", "First conditional (real): If it rains, I'll stay home."],
   steps: [
     [
-      heard(X("03", "notice"), "What would the speaker do with a million followers?", ["Make videos about science", "Buy a house", "Travel the world"], 0, "'I would make videos about science.'"),
+      heard(X("03", "notice"), "What would the speaker do with a million followers?", ["Make videos about science", "Buy a big house for the family", "Travel around the world for a year"], 0, "'I would make videos about science.'"),
       heard(X("03", "notice"), "Where would the speaker go surfing?", ["If they lived by the sea", "In Bogotá", "On holiday next year"], 0, "'If I lived by the sea, I'd go surfing.'"),
       heard(X("03", "notice"), "Who would the speaker meet?", ["The first woman in space", "A famous footballer", "Their favourite singer"], 0, "'I'd meet the first woman in space.'"),
       ch("'If I had a million followers…' Does the speaker have them?", ["No", "Yes", "Next week"], 0, "Second conditional = not real now."),
@@ -203,14 +203,14 @@ const passive: NodePractice = {
     [
       heard(X("04", "notice"), "When was the game released?", ["In 2017", "In 2007", "Last year"], 0, "'This game was released in 2017.'"),
       heard(X("04", "notice"), "Who made the game?", ["A small team in Canada", "A big company in Japan", "One student"], 0, "'It was made by a small team in Canada.'"),
-      heard(X("04", "notice"), "How many countries is it sold in?", ["More than fifty", "Five", "Fifteen"], 0, "'sold in more than fifty countries'."),
+      heard(X("04", "notice"), "How many countries is it sold in?", ["More than fifty", "About five", "About fifteen"], 0, "'sold in more than fifty countries'."),
       ch("'The game was released in 2017.' This sentence is…", ["passive", "active", "a question"], 0, "was + past participle."),
       ch("Which is present passive?", ["It is played by millions.", "Millions play it.", "It was played by millions."], 0, "is + past participle."),
     ],
     [
       ch("Why use the passive in 'My bike was stolen'?", ["We don't know who did it.", "It's in the future.", "The bike did something."], 0, "Unknown person."),
       ch("In 'It was made by a small team', 'by' shows…", ["who did the action", "where it happened", "when it happened"], 0, "by + agent."),
-      ctx("A history text says: 'The city was founded in 1538.'", "Why passive here?", ["The action and date matter more than the people", "Because it's a question", "Because the city founded itself"], 0, "Focus on the event."),
+      ctx("A history text says: 'The city was founded in 1538.'", "Why passive here?", ["The action and date matter more than the people", "Because the sentence is a question about the date", "Because the city founded itself"], 0, "Focus on the event."),
       ch("Which sentence is active?", ["A small team made the game.", "The game was made by a small team.", "The game is made in Canada."], 0, "Subject does the action."),
       ch("Which is past passive?", ["were built", "are built", "built"], 0, "were + past participle."),
     ],
@@ -259,12 +259,12 @@ const reported: NodePractice = {
     [
       heard(X("05", "notice"), "Where did the new student say she was from?", ["Medellín", "Cali", "Bogotá"], 0, "'She said she was from Medellín.'"),
       heard(X("05", "notice"), "What did she say she liked?", ["Basketball", "Football", "Music"], 0, "'She said she liked basketball.'"),
-      heard(X("05", "notice"), "What did she ask?", ["Where the speaker lived and if they wanted to play", "What time it was", "If the speaker had a dog"], 0, "'she asked me where I lived, and she asked if I wanted to play'."),
+      heard(X("05", "notice"), "What did she ask?", ["Where the speaker lived and if they wanted to play", "What time the class started that day at school", "If the speaker had a dog at home"], 0, "'she asked me where I lived, and she asked if I wanted to play'."),
       ch("'I'm tired,' said Ana. In reported speech:", ["Ana said she was tired.", "Ana said I'm tired.", "Ana said she is tire."], 0, "am → was; I → she."),
       ch("Which is a reported question?", ["He asked where I lived.", "He asked where do I live?", "Where do you live?"], 0, "Normal word order, no question mark."),
     ],
     [
-      ch("Why does 'like' change to 'liked' in reported speech?", ["The verb moves one step back in time.", "Because it's a question.", "Because of 'she'."], 0, "Backshift."),
+      ch("Why does 'like' change to 'liked' in reported speech?", ["The verb moves one step back in time.", "Because the sentence is a question.", "Because the subject is 'she'."], 0, "Backshift."),
       ch("'Do you play the piano?' → He asked…", ["if I played the piano.", "do I play the piano.", "that I played the piano?"], 0, "Yes/no question → if."),
       ctx("Your teacher said: 'The test is on Friday.'", "How do you tell your friend?", ["She said the test was on Friday.", "She said the test is Friday?", "She told the test was on Friday."], 0, "said + was."),
       ch("Which is correct?", ["She told me she was busy.", "She said me she was busy.", "She told she was busy."], 0, "tell + person; say + no person."),
@@ -318,14 +318,14 @@ const deduction: NodePractice = {
       heard(X("06", "notice"), "What does the speaker think about Pablo's parents?", ["They might be out.", "They must be at home.", "They can't be out."], 0, "'his parents might be out'."),
       heard(X("06", "notice"), "Why can't it be Pablo's dog?", ["Pablo doesn't have a dog.", "The dog is too big.", "The dog is asleep."], 0, "'Pablo doesn't have a dog!'"),
       ch("'He must be at home' means the speaker is…", ["almost sure", "not sure at all", "sure it's false"], 0, "must = strong deduction."),
-      ch("'That can't be true' means…", ["I'm almost sure it's false.", "It's not allowed.", "It might be true."], 0, "can't = strong negative deduction."),
+      ch("'That can't be true' means…", ["I'm almost sure it's false.", "It's not allowed to happen.", "It might be true, maybe."], 0, "can't = strong negative deduction."),
     ],
     [
       ch("Which shows the least certainty?", ["She might be at the gym.", "She must be at the gym.", "She can't be at the gym."], 0, "might = possible."),
       ch("Your friend hasn't eaten all day. You say:", ["You must be hungry!", "You can't be hungry!", "You mustn't be hungry!"], 0, "Logical conclusion: must."),
       ctx("Someone says: 'That's Lionel Messi at the bus stop in Tunja!'", "Best reaction?", ["It can't be him!", "It must be him!", "It mustn't be him!"], 0, "Very unlikely → can't."),
       ch("Why is 'He mustn't be at home' wrong for deduction?", ["mustn't means 'not allowed'", "mustn't is always correct", "It's a question"], 0, "Use can't for negative deduction."),
-      ch("'She must be sleeping.' This is about…", ["an action happening now", "a habit", "the past"], 0, "must be + -ing."),
+      ch("'She must be sleeping.' This is about…", ["an action happening now", "a habit she has every day", "an action in the past"], 0, "must be + -ing."),
     ],
     [
       gap("He's been running for an hour. He", "be tired.", ["must"], "Logical conclusion."),
@@ -373,13 +373,13 @@ const relatives: NodePractice = {
   steps: [
     [
       heard(X("07", "notice"), "Where does the cousin live?", ["In Cali", "In Medellín", "In Bogotá"], 0, "'My cousin, who lives in Cali, is a DJ.'"),
-      heard(X("07", "notice"), "What kind of songs does he play?", ["Mostly salsa and reggaeton", "Rock and pop", "Classical music"], 0, "'The songs that he plays are mostly salsa and reggaeton.'"),
+      heard(X("07", "notice"), "What kind of songs does he play?", ["Mostly salsa and reggaeton", "Mostly rock and pop songs", "Classical music and jazz"], 0, "'The songs that he plays are mostly salsa and reggaeton.'"),
       heard(X("07", "notice"), "What does his sister do?", ["She's a doctor.", "She's a DJ.", "She's a teacher."], 0, "'His sister, who is a doctor…'"),
       ch("'My cousin, who lives in Cali, is a DJ.' The part between commas is…", ["extra information", "information to say which cousin", "a question"], 0, "Non-defining = extra."),
       ch("Which word do we use for places?", ["where", "who", "which"], 0, "The club where he works."),
     ],
     [
-      ch("'The students who passed got a prize.' Did all students get a prize?", ["No, only those who passed", "Yes, all of them", "We don't know"], 0, "Defining clause identifies which students."),
+      ch("'The students who passed got a prize.' Did all students get a prize?", ["No, only those who passed", "Yes, all of the students", "We don't know from the sentence"], 0, "Defining clause identifies which students."),
       ch("Which can use 'that'?", ["The phone that I bought is great.", "My phone, that I bought last year, is great.", "Both"], 0, "No 'that' in non-defining clauses."),
       ctx("A) 'My brother who lives in Spain is a chef.' B) 'My brother, who lives in Spain, is a chef.'", "Which suggests you have only one brother?", ["B", "A", "Both"], 0, "Commas = extra info about the only brother."),
       ch("Which word shows possession?", ["whose", "who", "which"], 0, "The girl whose phone broke."),
@@ -429,7 +429,7 @@ const wishTags: NodePractice = {
   pattern: ["wish + past simple = I want the present to be different", "I wish I had more time. I wish I lived by the sea.", "I wish I were / was taller.", "Positive → negative tag: It's late, isn't it?", "Negative → positive tag: You can't swim, can you?", "Past simple: You finished it, didn't you?"],
   steps: [
     [
-      heard(X("08", "notice"), "What does the speaker wish?", ["To have more time for homework", "To be taller", "To live by the sea"], 0, "'I wish I had more time for my homework.'"),
+      heard(X("08", "notice"), "What does the speaker wish?", ["To have more time for homework", "To be taller than his brother", "To live by the sea one day"], 0, "'I wish I had more time for my homework.'"),
       heard(X("08", "notice"), "Who is more organised?", ["The friend", "The speaker", "Nobody"], 0, "'I wish I was as organised as you.'"),
       heard(X("08", "notice"), "What does the speaker want from the friend?", ["Help", "Money", "A game"], 0, "'You can help me, can't you?'"),
       ch("'I wish I had more time.' Does the speaker have enough time?", ["No", "Yes", "Tomorrow"], 0, "wish + past = the opposite of now."),
@@ -439,7 +439,7 @@ const wishTags: NodePractice = {
       ch("'I wish I lived by the sea.' The verb 'lived' refers to…", ["now (imaginary)", "the past", "the future"], 0, "Past form, present meaning."),
       ch("Which tag is correct? 'You like pizza, ___?'", ["don't you", "do you", "isn't it"], 0, "Positive → negative; do."),
       ctx("'You haven't finished, have you?'", "Is the sentence positive or negative?", ["Negative, so the tag is positive", "Positive, so the tag is negative", "It's a statement only"], 0, "Negative → positive tag."),
-      ch("When the voice falls on the tag, the speaker…", ["is checking something they believe", "really doesn't know", "is angry"], 0, "Falling = checking."),
+      ch("When the voice falls on the tag, the speaker…", ["is checking something they believe", "really doesn't know the answer", "is angry with the listener"], 0, "Falling = checking."),
       ch("Which tag fits? 'She can swim, ___?'", ["can't she", "doesn't she", "isn't she"], 0, "Same auxiliary: can."),
     ],
     [

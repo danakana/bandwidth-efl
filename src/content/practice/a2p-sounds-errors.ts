@@ -36,8 +36,8 @@ const weak: NodePractice = {
     ],
     [
       ch("Which word is usually stressed (strong)?", ["can't", "can", "to"], 0, "Negatives are strong."),
-      es(ch("In 'I want to go', how does 'to' sound?", ["Short and weak: /tə/", "Long: /tuː/", "Silent"], 0, "Weak form."), "'to' suena como «ta», muy corto."),
-      ch("'she's' can mean …", ["she is or she has", "she was", "she does"], 0, "She's happy / She's got a dog."),
+      es(ch("In 'I want to go', how does 'to' sound?", ["Short and weak: /tə/", "Long and strong: /tuː/", "Silent: you don't say it"], 0, "Weak form."), "'to' suena como «ta», muy corto."),
+      ch("'she's' can mean …", ["she is or she has", "she was or she does", "she is or she was"], 0, "She's happy / She's got a dog."),
       ctx("You hear: 'I kən come.'", "Can the person come?", ["Yes", "No", "Not sure"], 0, "Weak /kən/ = can."),
       ch("Which is the contraction of 'will not'?", ["won't", "willn't", "wont'"], 0, "will not → won't."),
     ],
@@ -96,7 +96,7 @@ const bv: NodePractice = {
       ch("Which pair has different meanings?", ["boat / vote", "big / big", "very / very"], 0, "b vs v changes the word."),
       es(ch("'I want to vote.' What does it mean?", ["Choose in an election", "Travel by boat", "Eat berries"], 0, "vote = /v/."), "vote = votar; boat = barco."),
       ch("Which word has /v/?", ["visit", "best", "bike"], 0, "visit = /v/."),
-      ctx("You say 'I have a bery good idea.'", "What should you say?", ["very (with /v/)", "berry", "bury"], 0, "very = /v/."),
+      ctx("You say 'I have a bery good idea.'", "What should you say?", ["very (with /v/)", "berry (with /b/)", "bury (with /b/)"], 0, "very = /v/."),
       ch("Which sound has a 'pop' from the lips?", ["/b/", "/v/", "Both"], 0, "/b/ starts with closed lips."),
     ],
     [
@@ -151,7 +151,7 @@ const iAmAgree: NodePractice = {
       ch("Which is the negative?", ["I don't agree.", "I'm not agree.", "I no agree."], 0, "don't + agree."),
     ],
     [
-      es(ch("Why is 'I am agree' wrong?", ["'agree' is a verb, not an adjective.", "It needs 'the'.", "It's correct."], 0, "Verbs don't need am / is / are."), "'agree' ya es el verbo, como 'like': no dices 'I am like'."),
+      es(ch("Why is 'I am agree' wrong?", ["'agree' is a verb, not an adjective.", "It needs 'the' before 'agree'.", "It's correct in formal English."], 0, "Verbs don't need am / is / are."), "'agree' ya es el verbo, como 'like': no dices 'I am like'."),
       ch("'She ___ with me.'", ["agrees", "is agree", "agree"], 0, "she → agrees."),
       ch("Which question is correct?", ["Do you agree?", "Are you agree?", "You are agree?"], 0, "Do you + verb?"),
       ctx("Your friend says: 'Pizza is the best food.' You think the same.", "You say:", ["I agree!", "I'm agree!", "I agreeing!"], 0, "I agree."),
@@ -230,7 +230,7 @@ const sinceFor: NodePractice = {
       ch("Which is wrong?", ["I've had my dog since three years.", "I've had my dog for three years.", "I've had my dog since 2022."], 0, "since + start, not length."),
     ],
     [
-      ch("A new teacher asks how long you've been at the school. Best answer:", ["For three years. Since sixth grade.", "Since three years.", "During three years ago."], 0, "for / since."),
+      ch("A new teacher asks how long you've been at the school. Best answer:", ["For three years. Since sixth grade.", "Since three years. Since sixth grade.", "During three years ago, in sixth grade."], 0, "for / since."),
       ch("Best text to a late friend:", ["I've been here for half an hour!", "I've been here since half an hour!", "I'm here for half an hour ago!"], 0, "for + length."),
       ctx("You met your best friend at age seven.", "You say:", ["We've been friends since we were seven.", "We've been friends for we were seven.", "We are friends since seven years."], 0, "since + start."),
       ch("Which is the most natural?", ["I haven't seen her for ages.", "I haven't seen her since ages.", "I don't see her for ages ago."], 0, "for ages = for a long time."),
@@ -269,7 +269,7 @@ const ppFinished: NodePractice = {
     [
       ch("Which word means finished time?", ["ago", "ever", "yet"], 0, "two years ago."),
       ch("Which can go with the present perfect?", ["never", "yesterday", "last year"], 0, "I've never …"),
-      es(ch("'I've found my keys now.' Why is the present perfect OK here?", ["'now' is not a finished time; the result is important now.", "It's wrong.", "Because of 'keys'."], 0, "Result now → present perfect."), "'now' no es un tiempo terminado."),
+      es(ch("'I've found my keys now.' Why is the present perfect OK here?", ["'now' is not a finished time; the result is important now.", "It's wrong; it should be the past simple 'I found'.", "Because 'keys' is a plural noun."], 0, "Result now → present perfect."), "'now' no es un tiempo terminado."),
       ctx("A: Have you ever been to Peru? B: Yes, ___ there two years ago.", "Best:", ["I went", "I've been", "I have gone"], 0, "two years ago → went."),
       ch("'When did you arrive?' Which tense is the answer?", ["Past simple: I arrived at 8.", "Present perfect: I've arrived at 8.", "Present: I arrive at 8."], 0, "When → past simple."),
     ],

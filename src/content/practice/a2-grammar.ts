@@ -100,7 +100,7 @@ const simpleVsCont: NodePractice = {
     [
       ch("'Look! It ___.'", ["is snowing", "snows", "snow"], 0, "Look! = now."),
       ch("'I ___ my teeth every morning.'", ["brush", "am brushing", "brushing"], 0, "every morning = habit."),
-      es(ch("Why is 'I am go to school every day' wrong?", ["Habits use the present simple: I go.", "It needs 'goes'.", "It's correct."], 0, "Present simple for habits."), "Para hábitos no uses 'am': I go to school every day."),
+      es(ch("Why is 'I am go to school every day' wrong?", ["Habits use the present simple: I go.", "It needs 'goes', because it's every day.", "It's correct: 'am' shows it's now."], 0, "Present simple for habits."), "Para hábitos no uses 'am': I go to school every day."),
       ctx("Your mum calls you at 8 p.m. You're in the middle of homework.", "You say:", ["I'm doing my homework.", "I do my homework.", "I did my homework."], 0, "Happening now."),
       ch("Which word goes with the present continuous?", ["at the moment", "usually", "every Friday"], 0, "at the moment = now."),
     ],
@@ -149,10 +149,10 @@ const goingWill: NodePractice = {
   es: "'going to' = voy a (un plan). 'will' = decisión del momento o predicción: «yo contesto», «creo que lloverá».",
   steps: [
     [
-      heard(X("03", "notice"), "What is the speaker going to do next summer?", ["Visit grandparents in Cali", "Go to the beach", "Start a new school"], 0, "'I'm going to visit my grandparents in Cali.'"),
+      heard(X("03", "notice"), "What is the speaker going to do next summer?", ["Visit grandparents in Cali", "Go to the beach with friends", "Start a new school in Bogotá"], 0, "'I'm going to visit my grandparents in Cali.'"),
       heard(X("03", "notice"), "What is the speaker going to do every day?", ["Swim", "Read", "Cook"], 0, "'I'm going to swim every day.'"),
       heard(X("03", "notice"), "What does the speaker decide when the phone rings?", ["To answer it", "To ignore it", "To call back later"], 0, "'I'll answer it.'"),
-      ch("Which is a plan?", ["I'm going to visit my grandparents.", "I'll answer it.", "I think it will rain."], 0, "going to = decided plan."),
+      ch("Which is a plan?", ["I'm going to visit my grandparents.", "I'll answer the phone for you right now.", "I think it will rain soon."], 0, "going to = decided plan."),
       ch("'I'll' means …", ["I will", "I all", "I would"], 0, "I'll = I will."),
     ],
     [
@@ -207,14 +207,14 @@ const arrangements: NodePractice = {
   es: "En inglés el presente continuo también sirve para planes ya organizados con fecha: «el sábado juego un torneo». Siempre di cuándo (on Saturday, tomorrow).",
   steps: [
     [
-      heard(X("04", "notice"), "What is happening on Monday?", ["A maths test", "A basketball game", "A party"], 0, "'On Monday, I'm having a maths test.'"),
+      heard(X("04", "notice"), "What is happening on Monday?", ["A maths test at school", "A basketball game", "A party"], 0, "'On Monday, I'm having a maths test.'"),
       heard(X("04", "notice"), "Who is the speaker meeting on Wednesday?", ["Laura", "Their teacher", "Their cousin"], 0, "'I'm meeting Laura at the library.'"),
-      heard(X("04", "notice"), "What is happening on Saturday?", ["A basketball tournament", "A maths test", "A trip"], 0, "'we're playing in a basketball tournament!'"),
+      heard(X("04", "notice"), "What is happening on Saturday?", ["A basketball tournament", "A maths test", "A school trip to the zoo"], 0, "'we're playing in a basketball tournament!'"),
       ch("'I'm meeting Laura on Wednesday.' Is this now or the future?", ["The future", "Now", "The past"], 0, "on Wednesday = future arrangement."),
-      ch("What makes it clear it's the future?", ["The time phrase (on Wednesday)", "The -ing", "The word 'I'm'"], 0, "Say when."),
+      ch("What makes it clear it's the future?", ["The time phrase (on Wednesday)", "The -ing at the end of the verb", "The word 'I'm' at the start"], 0, "Say when."),
     ],
     [
-      ch("Which is a future arrangement?", ["We're flying to Lima on Friday.", "We're flying now.", "We fly every year."], 0, "-ing + future time."),
+      ch("Which is a future arrangement?", ["We're flying to Lima on Friday.", "We're flying to Lima right now.", "We fly to Lima every year."], 0, "-ing + future time."),
       es(ch("'What are you doing tomorrow?' The person asks about …", ["your plans for tomorrow", "what you're doing now", "your habits"], 0, "Future arrangement."), "= ¿Qué vas a hacer mañana?"),
       ctx("You have a dentist appointment at 3 p.m. tomorrow.", "Best sentence:", ["I'm seeing the dentist tomorrow at three.", "I see the dentist every tomorrow.", "I saw the dentist tomorrow."], 0, "Arrangement with a time."),
       ch("Which question asks about plans?", ["Are you doing anything this weekend?", "Do you do anything every weekend?", "Did you do anything?"], 0, "Are you + -ing + future."),
@@ -236,7 +236,7 @@ const arrangements: NodePractice = {
     ],
     [
       ch("A friend invites you on Saturday, but you have plans. Best:", ["Sorry, I'm visiting my grandma on Saturday.", "Sorry, I visit my grandma yesterday.", "Sorry, I visiting grandma."], 0, "Arrangement as a reason."),
-      ch("Best question to plan a meeting:", ["Are you doing anything on Friday afternoon?", "Do you doing anything Friday?", "You did anything Friday?"], 0, "Are you + -ing?"),
+      ch("Best question to plan a meeting:", ["Are you doing anything on Friday afternoon?", "Do you doing anything on Friday afternoon?", "You did anything on Friday afternoon?"], 0, "Are you + -ing?"),
       ctx("You are writing your weekly plan in your diary.", "Best line:", ["Thursday: I'm meeting the science group at 4.", "Thursday: I met the science group.", "Thursday: I meet science group always."], 0, "Arrangement with time."),
       ch("Which reply is natural? 'What are you doing tonight?'", ["I'm going to the cinema with Pablo.", "I go to the cinema every night.", "I went to the cinema."], 0, "Arrangement."),
       say("I'm meeting Laura at the library on Wednesday.", "Clear -ing ending."),
@@ -266,7 +266,7 @@ const comparatives: NodePractice = {
   steps: [
     [
       heard(X("05", "notice"), "Who is taller, the speaker or the sister?", ["The sister", "The speaker", "The same"], 0, "'My sister is taller than me'."),
-      heard(X("05", "notice"), "What is the speaker's dog like?", ["The biggest dog in the street", "The smallest dog", "A fast dog"], 0, "'the biggest dog in our street'."),
+      heard(X("05", "notice"), "What is the speaker's dog like?", ["The biggest dog in the street", "The smallest dog in the street", "The fastest dog in the park"], 0, "'the biggest dog in our street'."),
       heard(X("05", "notice"), "Which city is colder?", ["Bogotá", "Cartagena", "Both"], 0, "'Bogotá is colder than Cartagena.'"),
       ch("Which is a comparative?", ["faster", "the fastest", "fast"], 0, "-er = comparative."),
       ch("Which is a superlative?", ["the best", "better", "good"], 0, "the + -est / best."),
@@ -391,7 +391,7 @@ const frequency: NodePractice = {
     [
       ch("Where does 'usually' go? 'I ___ walk ___ to school ___.'", ["Before 'walk'", "After 'school'", "Before 'I'"], 0, "Before the main verb."),
       ch("Where does 'never' go with 'be'? 'I am ___ late.'", ["After 'am'", "Before 'I'", "At the end"], 0, "After be."),
-      es(ch("Why is 'I don't never eat meat' wrong?", ["'never' is already negative.", "It needs 'always'.", "It's correct."], 0, "Use: I never eat meat."), "'never' ya es negativo; no uses 'don't' con 'never'."),
+      es(ch("Why is 'I don't never eat meat' wrong?", ["'never' is already negative.", "It needs 'always' instead of 'never'.", "It's correct: two negatives are strong."], 0, "Use: I never eat meat."), "'never' ya es negativo; no uses 'don't' con 'never'."),
       ctx("Ana goes to the gym on Monday, Wednesday and Friday.", "Which is true?", ["She often goes to the gym.", "She never goes to the gym.", "She always goes to the gym."], 0, "3 times a week = often."),
       ch("Which question asks about frequency?", ["How often do you play tennis?", "How long do you play tennis?", "How much tennis?"], 0, "How often …?"),
     ],
@@ -410,9 +410,9 @@ const frequency: NodePractice = {
       ch("Which is wrong?", ["She always is late.", "She is always late.", "She's always late."], 0, "After be: is always."),
     ],
     [
-      ch("A new friend asks how often you play sport. Best answer:", ["I usually play football three times a week.", "I play usually football.", "I'm usually play football."], 0, "usually + verb."),
+      ch("A new friend asks how often you play sport. Best answer:", ["I usually play football three times a week.", "I play usually football three times a week.", "I'm usually play football three times a week."], 0, "usually + verb."),
       ch("You want to say you don't eat fast food at all. Best:", ["I never eat fast food.", "I don't never eat fast food.", "I eat never fast food."], 0, "never + verb."),
-      ctx("The teacher asks why Pedro is late again.", "Best description:", ["He's often late because his bus is slow.", "He often is late.", "He late often."], 0, "be + often."),
+      ctx("The teacher asks why Pedro is late again.", "Best description:", ["He's often late because his bus is slow.", "He often is late because his bus is slow.", "He late often because his bus is slow."], 0, "be + often."),
       ch("Which is most natural?", ["Sometimes I walk, and sometimes I take the bus.", "I walk sometimes, and I sometimes take bus.", "I sometimes walking."], 0, "Sometimes at the start."),
       say("How often do you play video games?", "Stress HOW OFten."),
     ],
@@ -447,11 +447,11 @@ const shouldHaveTo: NodePractice = {
       ch("Which is a rule?", ["We have to arrive at 7.", "You should arrive early.", "You don't have to arrive."], 0, "have to = necessary."),
     ],
     [
-      es(ch("'You don't have to come.' This means …", ["You can come or not; it's your choice.", "You must not come.", "You should come."], 0, "Not necessary."), "don't have to = no es necesario, no es una prohibición."),
+      es(ch("'You don't have to come.' This means …", ["You can come or not; it's your choice.", "You must not come; it's not allowed.", "You should come; it's a good idea."], 0, "Not necessary."), "don't have to = no es necesario, no es una prohibición."),
       ch("'She ___ to work on Saturdays.'", ["has", "have", "haves"], 0, "she → has to."),
       ch("What follows 'should'?", ["base verb", "to + verb", "-ing"], 0, "should go (no 'to')."),
       ctx("Your friend has a bad cough.", "Best advice:", ["You should see a doctor.", "You have to see a doctor yesterday.", "You don't have to see anyone."], 0, "Advice → should."),
-      ch("Which is NOT necessary?", ["We don't have to pay; it's free.", "We have to pay.", "We should pay."], 0, "don't have to = not necessary."),
+      ch("Which is NOT necessary?", ["We don't have to pay; it's free.", "We have to pay at the door.", "We should pay before we go in."], 0, "don't have to = not necessary."),
     ],
     [
       gap("You", "eat so much sugar. It's bad for you.", ["shouldn't", "should not"], "Negative advice."),
@@ -468,7 +468,7 @@ const shouldHaveTo: NodePractice = {
       ch("Which is wrong?", ["He doesn't has to work.", "He doesn't have to work.", "He has to work."], 0, "doesn't + have."),
     ],
     [
-      ch("Your friend can't sleep. Best advice:", ["You shouldn't use your phone in bed.", "You don't have to sleep.", "You should to sleep."], 0, "Negative advice."),
+      ch("Your friend can't sleep. Best advice:", ["You shouldn't use your phone in bed.", "You don't have to sleep tonight.", "You should to sleep earlier."], 0, "Negative advice."),
       ch("You explain a school rule to a new student. Best:", ["We have to be in class at seven.", "We should to be in class.", "We don't have be in class."], 0, "Rule → have to."),
       ctx("The museum is free on Sundays.", "Best sentence:", ["You don't have to pay on Sundays.", "You mustn't pay on Sundays.", "You have to pay on Sundays."], 0, "Not necessary."),
       ch("Which sounds natural?", ["You look tired. You should take a break.", "You look tired. You have to take a break yesterday.", "You should taking a break."], 0, "Advice."),

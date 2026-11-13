@@ -27,16 +27,16 @@ const rare: NodePractice = {
     [
       heard(X("01", "notice"), "Will the show happen tonight?", ["Yes, whatever happens", "Only if the actor recovers", "No, it has been cancelled"], 0, "'Come what may, the show goes on tonight.'"),
       heard(X("01", "notice"), "Why didn't they cancel weeks ago?", ["Because the actor was so stubborn", "Because the tickets were sold", "Because the director refused"], 0, "'Were it not for his stubbornness, we would have cancelled.'"),
-      heard(X("01", "notice"), "What does 'far be it from me to complain' introduce?", ["A complaint, said politely", "A compliment", "A refusal to speak"], 0, "The speaker complains while pretending not to."),
+      heard(X("01", "notice"), "What does 'far be it from me to complain' introduce?", ["A complaint, said politely", "A compliment, said politely", "A refusal to say anything"], 0, "The speaker complains while pretending not to."),
       ch("'Come what may' means…", ["whatever happens", "if something comes", "maybe it will come"], 0, "A fixed subjunctive expression."),
-      ch("'Suffice it to say, the trip was a disaster' means…", ["I won't give details, but it was a disaster.", "It was enough of a disaster.", "The trip was sufficient."], 0, "Suffice it to say = I'll only say this."),
+      ch("'Suffice it to say, the trip was a disaster' means…", ["I won't give details, but it was a disaster.", "It was enough of a disaster for everyone.", "The trip was sufficient."], 0, "Suffice it to say = I'll only say this."),
     ],
     [
-      ch("What does 'Be that as it may' do in an argument?", ["It accepts a point but continues anyway.", "It strongly agrees.", "It asks for proof."], 0, "= Even so / That may be true, but…"),
-      ch("'Were it not for the bridge, the village would be cut off.' This means…", ["If the bridge didn't exist, the village would be isolated.", "The bridge cut the village off.", "The village built the bridge."], 0, "Were it not for = if it weren't for."),
-      ctx("A manager writes: 'Far be it from me to tell you how to do your job, but the report is late.'", "The real message is…", ["The report is late, and I'm criticising you.", "I won't mention the report.", "You are doing a perfect job."], 0, "A polite frame for criticism."),
+      ch("What does 'Be that as it may' do in an argument?", ["It accepts a point but continues anyway.", "It strongly agrees with the point.", "It asks for proof of the point."], 0, "= Even so / That may be true, but…"),
+      ch("'Were it not for the bridge, the village would be cut off.' This means…", ["If the bridge didn't exist, the village would be isolated.", "The bridge cut the village off from the city.", "The village built the bridge itself."], 0, "Were it not for = if it weren't for."),
+      ctx("A manager writes: 'Far be it from me to tell you how to do your job, but the report is late.'", "The real message is…", ["The report is late, and I'm criticising you.", "I won't mention the report at all.", "You are doing a perfect job."], 0, "A polite frame for criticism."),
       ch("'We'll work through the night if need be.' means…", ["if it's necessary", "if we need a break", "because we need it"], 0, "If need be = if necessary."),
-      ch("Why can't you say 'Comes what may'?", ["It's a fixed old subjunctive form that doesn't change.", "Because 'may' is past tense.", "Because it needs a question mark."], 0, "Fixed expressions keep their old grammar."),
+      ch("Why can't you say 'Comes what may'?", ["It's a fixed old subjunctive form that doesn't change.", "Because 'may' is a past tense form of 'might'.", "Because it needs a question mark."], 0, "Fixed expressions keep their old grammar."),
     ],
     [
       gap("Were it not", "your help, I would never have finished.", ["for"], "Were it not for + noun."),
@@ -54,8 +54,8 @@ const rare: NodePractice = {
     ],
     [
       ch("Where does 'Come what may' fit best?", ["The final line of a graduation speech", "A text asking for the bus time", "A shopping list"], 0, "Rhetorical, memorable moments."),
-      ch("Best reply in a formal debate after a good point from the other side?", ["Be that as it may, the costs remain too high.", "Whatever, it's too expensive.", "Yes but no."], 0, "Accepts, then moves on with style."),
-      ctx("A student uses 'be that as it may', 'suffice it to say' and 'far be it from me' in one short email.", "The effect is…", ["overdone and slightly comic", "perfectly natural", "too informal"], 0, "One per text is elegant; three is a costume."),
+      ch("Best reply in a formal debate after a good point from the other side?", ["Be that as it may, the costs remain too high.", "Whatever, it's still too expensive for us.", "Yes but no, the costs are too high."], 0, "Accepts, then moves on with style."),
+      ctx("A student uses 'be that as it may', 'suffice it to say' and 'far be it from me' in one short email.", "The effect is…", ["overdone and slightly comic", "perfectly natural and normal", "too informal for the context"], 0, "One per text is elegant; three is a costume."),
       ch("Most natural in a polite complaint letter?", ["Far be it from me to criticise, but the service was unacceptable.", "Far be it from me to criticise, but your service sucks.", "Far from me be it criticising the service."], 0, "Formal frame + formal vocabulary."),
       say("Were it not for my teachers, I would not be here today.", "Stress TEACHers and HERE; pause after TEACHers."),
     ],
@@ -81,7 +81,7 @@ const fronting: NodePractice = {
   pattern: ["Object fronting: That I can believe. · This much we know.", "Adjective fronting: Strange it may seem, but … · Rare as it is, …", "Participle + inversion: Gone are the days when … · Especially worrying is …", "Fragments for rhythm: A camera. A bank. A diary.", "Starting with And / But for emphasis", "Use in columns, speeches, stories; avoid in formal reports"],
   steps: [
     [
-      heard(X("02", "notice"), "How does the speaker describe the phone?", ["As many things at once, in short fragments", "As a simple device for calls", "As something people should avoid"], 0, "'A camera. A bank. A diary.'"),
+      heard(X("02", "notice"), "How does the speaker describe the phone?", ["As many things at once, in short fragments", "As a simple device for making calls", "As something people should avoid"], 0, "'A camera. A bank. A diary.'"),
       heard(X("02", "notice"), "What does nobody deny?", ["That phones have made life easier", "That phones make us happier", "That phones are cheap"], 0, "'That it has made life easier, nobody denies.'"),
       heard(X("02", "notice"), "'Gone are the days when a phone was just a phone' means…", ["Phones are no longer simple.", "Phones have disappeared.", "Phones will soon be simple again."], 0, "Gone are the days = that time is over."),
       ch("In 'That I can believe', what has moved to the front?", ["The object (that)", "The verb", "The subject"], 0, "Normal order: I can believe that."),
@@ -92,7 +92,7 @@ const fronting: NodePractice = {
       ch("'Strange it may seem, but I miss school.' The normal order would be…", ["It may seem strange, but I miss school.", "Strange may it seem, but I miss school.", "It strange may seem, but I miss school."], 0, "Adjective moved to the front."),
       ctx("A newspaper column ends: 'And that, in the end, is the point.'", "Why start with 'And'?", ["For a strong, conversational final punch", "Because the writer forgot the rule", "It's required at the end of columns"], 0, "Deliberate rule-breaking for effect."),
       ch("Where would fragments look like mistakes?", ["In a formal lab report", "In a personal blog", "In a short story"], 0, "Formal reports need full sentences."),
-      ch("'Especially worrying is the cost.' Why is the verb before the subject?", ["The adjective phrase is fronted, so the subject moves to the end for focus.", "It is a question.", "It's informal speech."], 0, "Fronting + inversion puts the new information last."),
+      ch("'Especially worrying is the cost.' Why is the verb before the subject?", ["The adjective phrase is fronted, so the subject moves to the end for focus.", "It is a question about the cost of the project.", "It's informal speech, not writing."], 0, "Fronting + inversion puts the new information last."),
     ],
     [
       gap("Gone", "the days when we could play outside until dark.", ["are"], "Gone are the days when…"),
@@ -139,16 +139,16 @@ const aspect: NodePractice = {
   steps: [
     [
       heard(X("03", "notice"), "How long has the speaker wanted to write to Marta?", ["For weeks", "Since yesterday", "For a year"], 0, "'I've been meaning to write to you for weeks.'"),
-      heard(X("03", "notice"), "How does the speaker ask about Saturday?", ["Politely: 'I was wondering whether you might…'", "Directly: 'Come for coffee.'", "By asking Marta's friend"], 0, "Past continuous for politeness."),
+      heard(X("03", "notice"), "How does the speaker ask about Saturday?", ["Politely: 'I was wondering whether you might…'", "Directly: 'Come for coffee on Saturday.'", "By asking Marta's friend to ask her"], 0, "Past continuous for politeness."),
       heard(X("03", "notice"), "How long will the speaker have worked on the project by Saturday?", ["Six months", "Six weeks", "One year"], 0, "'I'll have been working on this project for six months.'"),
-      ch("'I've been meaning to tidy my room' suggests…", ["I intended to for a while but haven't done it.", "I have just tidied my room.", "I never want to tidy my room."], 0, "Intention over time, plus a little guilt."),
+      ch("'I've been meaning to tidy my room' suggests…", ["I intended to for a while but haven't done it.", "I have just tidied my room this morning.", "I never want to tidy my room."], 0, "Intention over time, plus a little guilt."),
       ch("'He's always leaving his socks on the floor' shows…", ["irritation", "admiration", "a plan for the future"], 0, "always + present continuous."),
     ],
     [
-      ch("Why is 'I was wondering if you could help' more polite than 'Can you help?'", ["The past form creates distance, so the request feels softer.", "It is about the past.", "It sounds more confident."], 0, "Distance = politeness."),
-      ch("'She'll have finished the exam by now.' The speaker is…", ["making a confident guess about the present", "talking about next year", "giving an order"], 0, "will have + past participle = deduction."),
-      ctx("At 10 p.m. a mum says: 'Leave him alone. He'll have been studying all day.'", "She means…", ["I'm fairly sure he has studied all day, so he's tired.", "He will start studying tomorrow.", "He didn't study at all."], 0, "Future perfect continuous for a guess."),
-      ch("Which shows more annoyance?", ["You're always checking your phone.", "You check your phone.", "You checked your phone."], 0, "always + continuous = complaint."),
+      ch("Why is 'I was wondering if you could help' more polite than 'Can you help?'", ["The past form creates distance, so the request feels softer.", "It is about something that happened in the past.", "It sounds more confident."], 0, "Distance = politeness."),
+      ch("'She'll have finished the exam by now.' The speaker is…", ["making a confident guess about the present", "talking about next year's exam results", "giving an order to someone"], 0, "will have + past participle = deduction."),
+      ctx("At 10 p.m. a mum says: 'Leave him alone. He'll have been studying all day.'", "She means…", ["I'm fairly sure he has studied all day, so he's tired.", "He will start studying tomorrow morning.", "He didn't study at all today."], 0, "Future perfect continuous for a guess."),
+      ch("Which shows more annoyance?", ["You're always checking your phone.", "You check your phone a lot.", "You checked your phone again."], 0, "always + continuous = complaint."),
       ch("'I'm loving this new album.' This is…", ["informal and enthusiastic", "grammatically impossible", "very formal"], 0, "State verbs in the continuous for emphasis, in casual speech."),
     ],
     [
@@ -166,10 +166,10 @@ const aspect: NodePractice = {
       ch("Which is the most natural complaint?", ["My brother is always taking my headphones!", "My brother always is taking my headphones!", "My brother has always took my headphones!"], 0, "always between auxiliary and -ing."),
     ],
     [
-      ch("Best opening for an email to a teacher you don't know well?", ["I was wondering whether you might have time to look at my essay.", "Look at my essay.", "I'm loving your class, so check my essay."], 0, "Polite distance."),
+      ch("Best opening for an email to a teacher you don't know well?", ["I was wondering whether you might have time to look at my essay.", "Look at my essay, please, when you have some free time.", "I'm loving your class, so check my essay."], 0, "Polite distance."),
       ch("Your friend hasn't answered for hours. Best guess?", ["She'll have fallen asleep.", "She falls asleep.", "She will fall asleep yesterday."], 0, "will have + past participle = deduction."),
-      ctx("In a job interview you say: 'I'm loving the idea of working here.'", "This sounds…", ["too casual for the situation", "perfectly formal", "rude"], 0, "Better: I'm very excited about…"),
-      ch("Most tactful message after forgetting a friend's birthday?", ["I've been meaning to message you all week. Happy belated birthday!", "I didn't message you. Happy birthday.", "I'm always forgetting birthdays, so whatever."], 0, "Shows intention and apology."),
+      ctx("In a job interview you say: 'I'm loving the idea of working here.'", "This sounds…", ["too casual for the situation", "perfectly formal and correct", "rude and aggressive"], 0, "Better: I'm very excited about…"),
+      ch("Most tactful message after forgetting a friend's birthday?", ["I've been meaning to message you all week. Happy belated birthday!", "I didn't message you. Happy birthday, anyway.", "I'm always forgetting birthdays, so whatever, happy birthday."], 0, "Shows intention and apology."),
       say("By Friday, I'll have been working on this for a month.", "Stress FRIday and MONTH."),
     ],
   ],
@@ -198,15 +198,15 @@ const reporting: NodePractice = {
     [
       heard(X("04", "notice"), "What did the president admit?", ["That some receipts were missing", "That he had stolen money", "That the treasurer was right"], 0, "'he conceded that some receipts were missing'."),
       heard(X("04", "notice"), "What did the former treasurer say?", ["That the accounts had been changed", "That the money was spent properly", "That he would resign"], 0, "'claimed that the accounts had been changed'."),
-      heard(X("04", "notice"), "How did the president react to the accusation?", ["He dismissed it as ridiculous.", "He accepted it.", "He didn't hear it."], 0, "'an accusation he dismissed as ridiculous'."),
+      heard(X("04", "notice"), "How did the president react to the accusation?", ["He dismissed it as ridiculous.", "He accepted it and apologised.", "He didn't hear the question."], 0, "'an accusation he dismissed as ridiculous'."),
       ch("Which verb suggests the writer doubts the statement?", ["claimed", "explained", "stated"], 0, "claim = not necessarily true."),
       ch("'She conceded that the plan was expensive' means…", ["She accepted a point against her.", "She refused to talk about the cost.", "She proved the plan was cheap."], 0, "concede = admit something unwelcome."),
     ],
     [
-      ch("'He insisted that he was innocent' suggests…", ["he said it firmly, maybe more than once, despite doubts", "he wasn't sure", "he confessed"], 0, "insist = firm, repeated."),
-      ch("Why might a journalist write 'The actor is alleged to have hit a photographer'?", ["To report an accusation without saying it is true", "Because it is proven", "Because it happened in the future"], 0, "Passive reporting = distance."),
+      ch("'He insisted that he was innocent' suggests…", ["he said it firmly, maybe more than once, despite doubts", "he wasn't sure about it himself at all", "he confessed in the end"], 0, "insist = firm, repeated."),
+      ch("Why might a journalist write 'The actor is alleged to have hit a photographer'?", ["To report an accusation without saying it is true", "Because it has been proven in court already", "Because it will happen in the future"], 0, "Passive reporting = distance."),
       ctx("Two headlines: A) 'Minister explains delay.' B) 'Minister makes excuses for delay.'", "Which shows the writer's criticism?", ["B", "A", "Neither"], 0, "Word choice reveals stance."),
-      ch("'Admittedly, the film is too long, but…' The writer…", ["accepts a weakness before arguing", "hates the film", "is quoting someone else"], 0, "admittedly = I accept this."),
+      ch("'Admittedly, the film is too long, but…' The writer…", ["accepts a weakness before arguing", "hates the film from start to finish", "is quoting someone else's review"], 0, "admittedly = I accept this."),
       ch("Which verb shows the speaker rejected an idea as unimportant?", ["dismissed", "acknowledged", "maintained"], 0, "dismiss = treat as not worth considering."),
     ],
     [
@@ -260,10 +260,10 @@ const implied: NodePractice = {
       ch("'If I had studied medicine, I'd be a doctor now.' The times are…", ["past condition, present result", "present condition, future result", "both in the past"], 0, "A mixed conditional."),
     ],
     [
-      ch("'But for the goalkeeper, we would have lost.' means…", ["If it hadn't been for the goalkeeper, we'd have lost.", "Except the goalkeeper, everyone lost.", "The goalkeeper wanted us to lose."], 0, "But for = if it hadn't been for."),
-      ch("Where is the condition in 'I'd have come, but nobody told me'?", ["Hidden in 'but nobody told me' (= if someone had told me)", "In 'I'd have come'", "There isn't one"], 0, "Implied condition."),
+      ch("'But for the goalkeeper, we would have lost.' means…", ["If it hadn't been for the goalkeeper, we'd have lost.", "Except for the goalkeeper, everyone else lost.", "The goalkeeper wanted us to lose the match."], 0, "But for = if it hadn't been for."),
+      ch("Where is the condition in 'I'd have come, but nobody told me'?", ["Hidden in 'but nobody told me' (= if someone had told me)", "In 'I'd have come', at the start of the sentence", "There isn't a condition in it"], 0, "Implied condition."),
       ctx("'Take an umbrella, otherwise you'll get soaked.'", "'Otherwise' means…", ["if you don't", "however", "in addition"], 0, "otherwise = if not."),
-      ch("'If he weren't so stubborn, he'd have accepted the offer.' This means…", ["He is stubborn (always), so he didn't accept.", "He was stubborn only yesterday.", "He will accept tomorrow."], 0, "Present state → past result."),
+      ch("'If he weren't so stubborn, he'd have accepted the offer.' This means…", ["He is stubborn (always), so he didn't accept.", "He was stubborn only yesterday, so he didn't accept.", "He will accept the offer tomorrow."], 0, "Present state → past result."),
       ch("Which is the most concise version?", ["Without your advice, I'd have failed.", "If you had not given me your advice, then I would have failed.", "Your advice, if not given, would make failure."], 0, "Without + noun compresses the condition."),
     ],
     [
@@ -314,14 +314,14 @@ const ellipsis: NodePractice = {
       heard(X("06", "notice"), "Which route did her brother take?", ["The road", "The mountain path", "He didn't go"], 0, "'Ana chose the mountain path; her brother, the road.'"),
       heard(X("06", "notice"), "Did she hope to finish before dark?", ["Yes", "No", "She didn't care"], 0, "'Would she finish before dark? She hoped so.'"),
       ch("In 'Some walked, others ran', what is left out?", ["Nothing essential: two short balanced clauses", "The verb 'ran' in the first half", "The subject 'some' in the second half"], 0, "A balanced contrast pair."),
-      ch("'I'm afraid not' replaces…", ["a whole negative clause", "a single noun", "a question word"], 0, "Substitution with 'not'."),
+      ch("'I'm afraid not' replaces…", ["a whole negative clause", "a single noun in the sentence", "a question word like 'what'"], 0, "Substitution with 'not'."),
     ],
     [
       ch("'Ana chose the mountain path; her brother, the road.' What does the comma replace?", ["chose", "and", "the"], 0, "Gapping removes the repeated verb."),
-      ch("Why write 'Tired she may have been; defeated she was not' instead of 'She was tired but not defeated'?", ["Balance and emphasis create a literary effect.", "It is shorter.", "It is less formal."], 0, "Fronting + contrast for style."),
-      ctx("'Is the museum open on Mondays? If so, we'll go then.'", "'If so' means…", ["if it is open on Mondays", "if we want to", "if it is closed"], 0, "so = the previous clause."),
+      ch("Why write 'Tired she may have been; defeated she was not' instead of 'She was tired but not defeated'?", ["Balance and emphasis create a literary effect.", "It is shorter and quicker for the reader.", "It is less formal than usual."], 0, "Fronting + contrast for style."),
+      ctx("'Is the museum open on Mondays? If so, we'll go then.'", "'If so' means…", ["if it is open on Mondays", "if we want to go on Monday", "if it is closed on Mondays"], 0, "so = the previous clause."),
       ch("Which reply means 'I don't think it will rain'?", ["I hope not.", "I hope so.", "I don't hope so."], 0, "hope not = hope it won't."),
-      ch("When is ellipsis a bad idea?", ["When the reader can't tell what is missing", "In a novel", "In a speech"], 0, "Only omit what is recoverable."),
+      ch("When is ellipsis a bad idea?", ["When the reader can't tell what is missing", "In a novel or short story", "In a speech to an audience"], 0, "Only omit what is recoverable."),
     ],
     [
       gap("Will you be at the party? I'm afraid", ".", ["not"], "I'm afraid not."),

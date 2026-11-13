@@ -61,7 +61,7 @@ const sEndings: NodePractice = {
       ctx("You describe your dog.", "Say it naturally:", ["He runs, jumps and catches balls.", "He run, jump and catch balls.", "He runes and jumpes."], 0, "runs /z/, jumps /s/, catches /ɪz/."),
       ch("Count the syllables in 'She misses the buses':", ["6", "4", "5"], 0, "She-miss-es-the-bus-es."),
       ch("Read aloud: 'He likes cats'. How many syllables?", ["3", "5", "4"], 0, "He-likes-cats."),
-      ctx("Your friend says 'He watch-es-es'.", "Best help:", ["It's just watch-es: two syllables.", "It's watchs: one syllable.", "It's watch: no s."], 0, "watch-es."),
+      ctx("Your friend says 'He watch-es-es'.", "Best help:", ["It's just watch-es: two syllables.", "It's watchs: one syllable, like 'watch'.", "It's watch: no s, the same as one."], 0, "watch-es."),
       say("My cat sleeps, my dog plays and my fish watches me!", "sleeps /s/ · plays /z/ · watches /ɪz/."),
     ],
   ],
@@ -98,7 +98,7 @@ const noExtraE: NodePractice = {
       ch("How many syllables does 'student' have?", ["2", "3", "1"], 0, "stu-dent (not es-tu-dent)."),
       ch("Which word starts with s + consonant?", ["street", "seat", "sun"], 0, "s + t."),
       ch("How many syllables in 'Spanish'?", ["2", "3", "4"], 0, "Span-ish."),
-      ch("Best trick to say 'sport':", ["Start with a long ssss", "Start with 'e'", "Say 'es-port'"], 0, "ssss-port."),
+      ch("Best trick to say 'sport':", ["Start with a long ssss", "Start with 'e', like 'esport'", "Say 'es-port', with three letters"], 0, "ssss-port."),
     ],
     [
       gap("I go to", "every day. (escuela)", ["school"], "school."),
@@ -115,9 +115,9 @@ const noExtraE: NodePractice = {
       ord("Stop at the station, please.", "No e: stop, station."),
     ],
     [
-      ctx("A tourist asks: 'What do you do?'", "Best answer:", ["I'm a student at a school in Cali.", "I'm a estudent.", "I'm estudent in eschool."], 0, "student · school."),
+      ctx("A tourist asks: 'What do you do?'", "Best answer:", ["I'm a student at a school in Cali.", "I'm a estudent at a school in Cali.", "I'm estudent in a eschool in Cali."], 0, "student · school."),
       ch("Tell a friend about your hobbies:", ["I love sports and I play in a small team.", "I love esports and play in a esmall team.", "I love deportes."], 0, "No extra e."),
-      ctx("Your friend says 'Espanish'.", "Best help:", ["Try ssss-panish, with no e at the start.", "Say it faster.", "Say 'Espanich'."], 0, "Long s first."),
+      ctx("Your friend says 'Espanish'.", "Best help:", ["Try ssss-panish, with no e at the start.", "Say it faster, with an e at the start.", "Say 'Espanich', like in Spanish."], 0, "Long s first."),
       ch("Read: 'Stop! The station is on this street.' How many syllables in 'street'?", ["1", "2", "3"], 0, "street: one syllable."),
       say("Students study at school: stop, start, smile!", "No e on any word."),
     ],
@@ -171,7 +171,7 @@ const vowels: NodePractice = {
       ord("The bus leaves at six fifteen.", "leaves = long /iː/."),
     ],
     [
-      ctx("In a cinema, someone is in your place.", "Best:", ["Excuse me, I think this is my seat.", "Excuse me, this is my sit.", "Excuse me, my ship."], 0, "seat."),
+      ctx("In a cinema, someone is in your place.", "Best:", ["Excuse me, I think this is my seat.", "Excuse me, I think this is my sit.", "Excuse me, I think this is my ship."], 0, "seat."),
       ctx("Friend: 'Where do you live?'", "Best answer:", ["I live near the park.", "I leave near the park.", "I lives near the park."], 0, "live (short)."),
       ch("You're full after lunch:", ["I'm full! (short /ʊ/)", "I'm fool! (long /uː/)", "I'm fill!"], 0, "full = lleno."),
       ctx("Your friend asks: 'When does the train leave?'", "Best answer:", ["It leaves at nine.", "It lives at nine.", "It's leave at nine."], 0, "leaves (long)."),
@@ -202,7 +202,7 @@ const ageHave: NodePractice = {
     [
       heard(E("01", "notice"), "How old is the speaker?", ["Thirteen", "Ten", "Thirty"], 0, "'I'm thirteen.'"),
       heard(E("01", "notice"), "How old is the grandma?", ["Seventy-two", "Sixty-two", "Seventy"], 0, "'Seventy-two years old.'"),
-      heard(E("01", "notice"), "Which verb does the speaker use for age?", ["be (is / am)", "have", "do"], 0, "Age → be."),
+      heard(E("01", "notice"), "Which verb does the speaker use for age?", ["be (is / am)", "have (I have, she has)", "do (I do, she does)"], 0, "Age → be."),
       ch("How do you say «tengo 12 años»?", ["I'm 12.", "I have 12.", "I have 12 years."], 0, "be + age."),
       ch("How do you ask about age?", ["How old are you?", "How many years do you have?", "How years are you?"], 0, "How old …?"),
     ],
@@ -224,7 +224,7 @@ const ageHave: NodePractice = {
       fix(["My cousin", "has", "nine years old."], 1, ["is"], "Age → is."),
       fix(["I", "have", "twelve."], 1, ["am", "'m"], "Age → am."),
       fix(["She is ten", "years", "."], 1, ["years old"], "years old (complete)."),
-      ch("Which is wrong?", ["How many years do you have?", "How old are you?", "I'm fifteen."], 0, "How old are you?"),
+      ch("Which is wrong?", ["How many years do you have?", "How old are you, Camila?", "I'm fifteen years old."], 0, "How old are you?"),
       ord("How old is your best friend?", "How old + is + person?"),
     ],
     [
@@ -256,7 +256,7 @@ const missingIt: NodePractice = {
   es: "En inglés siempre hay sujeto. «Es tarde» = It's late (no 'Is late'). «Llueve» = It's raining.",
   steps: [
     [
-      heard(E("02", "notice"), "What's the weather?", ["It's raining and cold", "It's sunny", "It's hot"], 0, "'It's raining. It's cold today.'"),
+      heard(E("02", "notice"), "What's the weather?", ["It's raining and cold", "It's sunny and very hot", "It's windy and cold"], 0, "'It's raining. It's cold today.'"),
       heard(E("02", "notice"), "What time is it?", ["Nine o'clock", "Five o'clock", "Ten o'clock"], 0, "'It's nine o'clock.'"),
       heard(E("02", "notice"), "What does the speaker think about the song?", ["It's great", "It's boring", "It's sad"], 0, "'It's great!'"),
       ch("«Es tarde» in English:", ["It's late.", "Is late.", "Late is."], 0, "It's late."),
@@ -284,10 +284,10 @@ const missingIt: NodePractice = {
       ord("Is it far from your house?", "Is + it + adjective?"),
     ],
     [
-      ctx("Friend: 'What's the weather like?'", "Best answer:", ["It's cloudy, but it's not cold.", "Is cloudy.", "Cloudy is."], 0, "It's + weather."),
+      ctx("Friend: 'What's the weather like?'", "Best answer:", ["It's cloudy, but it's not cold.", "Is cloudy, but is not cold.", "It's cloudy, but it's no cold."], 0, "It's + weather."),
       ctx("Mum: 'What time is it?'", "Best answer:", ["It's seven o'clock.", "Is seven o'clock.", "Are seven."], 0, "It's + time."),
       ctx("Your friend asks about the new game.", "Best answer:", ["It's awesome! I love it.", "Is awesome! I love.", "Awesome is!"], 0, "It's + opinion · love it."),
-      ctx("A tourist: 'Is the beach near here?'", "Best answer:", ["No, it's quite far. Take a bus.", "No, is far.", "No, far."], 0, "it's far."),
+      ctx("A tourist: 'Is the beach near here?'", "Best answer:", ["No, it's quite far. Take a bus.", "No, is far. Take a bus.", "No, it's quite far. Take bus."], 0, "it's far."),
       say("Is it far? No, it isn't. It's very near.", "it-isn't: link."),
     ],
   ],
@@ -341,7 +341,7 @@ const pluralAdj: NodePractice = {
     ],
     [
       ctx("A tourist: 'What are Colombian people like?'", "Best answer:", ["People here are very friendly and happy.", "People here is very friendly.", "People here are very friendlys."], 0, "are + friendly."),
-      ch("Describe your sneakers:", ["They're white and they're very comfortable.", "They're whites and comfortables.", "Is white."], 0, "No s on adjectives."),
+      ch("Describe your sneakers:", ["They're white and they're very comfortable.", "They're whites and they're very comfortables.", "It's white and it's very comfortable."], 0, "No s on adjectives."),
       ch("Describe your classmates:", ["My classmates are funny and smart.", "My classmates are funnys and smarts.", "My classmates is funny."], 0, "are + adjectives."),
       ctx("Your friend writes 'The people is nice'.", "Best correction:", ["The people are nice.", "The peoples are nice.", "The people is nices."], 0, "people are."),
       say("These new shoes are amazing!", "new shoes: no extra s."),
