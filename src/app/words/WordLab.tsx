@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Art } from "../arcade/GameArt";
 import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../lib/auth";
 import { useProgress } from "../../lib/progress";
@@ -53,6 +54,7 @@ export function WordLab({ start }: { start: number }) {
   return (
     <div className="wl-page">
       <header className="ex-head">
+        <Art name="boss-6" size={190} className="page-art" />
         <p className="pt-kicker">Word lab</p>
         <h1>The words of your level</h1>
         <p className="pt-lede">Each band has 60 core words that you'll meet again and again at that level. Learn a set of ten, practise it, and the words come back in your review until you know them for good.</p>

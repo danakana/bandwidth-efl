@@ -4,9 +4,6 @@
    outlines, illustrated art on spotlit stages, and quiet glass HUD pills.
    ===================================================================== */
 :root {
-  --g-edge: rgba(15, 36, 71, 0.08);
-  --g-lift: inset 0 -3px 0 rgba(15, 36, 71, 0.10), 0 10px 22px -10px rgba(10, 24, 52, 0.55), 0 2px 4px rgba(10, 24, 52, 0.12);
-  --g-lift-sm: inset 0 -2px 0 rgba(15, 36, 71, 0.10), 0 4px 10px -4px rgba(10, 24, 52, 0.45);
   --g-glass: rgba(255, 255, 255, 0.14);
   --g-night: #0e1f3d;
 }

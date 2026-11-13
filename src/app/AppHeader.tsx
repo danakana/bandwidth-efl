@@ -1,4 +1,5 @@
 import { useAuth } from "../lib/auth";
+import { Art } from "./arcade/GameArt";
 import { Logo } from "../components/Logo";
 import { useProgress } from "../lib/progress";
 import { Icon } from "../components/Icon";
@@ -23,7 +24,7 @@ export function AppHeader() {
           {st && (
             <div className="wallet" aria-label={`${st.streak}-day streak, ${st.coins} coins, ${st.xp} XP`}>
               <span className={`w-streak${bumpStreak}`} title="Day streak"><b><Icon name="flame" size={16} fill /></b>{st.streak}</span>
-              <a className={`w-coin${bump}`} href="#app/shop" title="Coins: open the shop"><b><Icon name="coin" size={16} /></b>{coins}</a>
+              <a className={`w-coin${bump}`} href="#app/shop" title="Coins: open the shop"><b><Art name="coin" size={22} /></b>{coins}</a>
               <span className={`w-xp${bumpXp}`} title="XP"><b><Icon name="bolt" size={16} fill /></b>{xp}</span>
             </div>
           )}

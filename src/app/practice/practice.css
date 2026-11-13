@@ -10,7 +10,7 @@
 
 .px-session { display: grid; gap: var(--s-4); }
 .px-item { display: grid; gap: var(--s-4); }
-.px-context { margin: 0; padding: var(--s-4) var(--s-5); border-radius: var(--r-md); background: var(--paper); border: 1px solid var(--line); font-size: var(--step-1); line-height: 1.5; }
+.px-context { margin: 0; padding: var(--s-4) var(--s-5); border-radius: var(--r-md); background: var(--paper); border: 1px solid transparent; font-size: var(--step-1); line-height: 1.5; box-shadow: var(--g-lift-sm); }
 .px-keyword { font-size: var(--step--1); }
 .px-input {
   min-height: 52px; padding: 0 var(--s-4); border-radius: var(--r-sm); border: 2px solid var(--line); background: var(--white);
@@ -35,12 +35,12 @@
 
 .px-build { min-height: 64px; display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: center; padding: var(--s-3); border-radius: var(--r-md); border: 2px dashed var(--line); }
 .px-bank { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-.px-word { min-height: 44px; padding: 0 var(--s-3); border-radius: var(--r-sm); border: 2px solid var(--line); border-bottom-width: 4px; background: var(--white); color: var(--ink); font: 700 var(--step-0) / 1 var(--font-body); cursor: pointer; }
+.px-word { min-height: 44px; padding: 0 var(--s-3); border-radius: var(--r-sm); border: 1px solid transparent; border-bottom-width: 4px; background: var(--white); color: var(--ink); font: 700 var(--step-0) / 1 var(--font-body); cursor: pointer; box-shadow: var(--g-lift-sm); }
 .px-word:disabled:not(.is-placed) { opacity: 0.25; cursor: default; }
 .px-word.is-placed { background: var(--sky-soft); border-color: var(--cerulean); }
 
 .px-parts { display: flex; flex-wrap: wrap; gap: var(--s-2); font-size: var(--step-1); }
-.px-part { padding: var(--s-2) var(--s-3); border-radius: var(--r-sm); border: 2px solid var(--line); background: var(--white); color: var(--ink); font: 400 var(--step-1) / 1.3 var(--font-body); cursor: pointer; }
+.px-part { padding: var(--s-2) var(--s-3); border-radius: var(--r-sm); border: 1px solid transparent; background: var(--white); color: var(--ink); font: 400 var(--step-1) / 1.3 var(--font-body); cursor: pointer; box-shadow: var(--g-lift-sm); }
 .px-part:hover { border-color: var(--cerulean); }
 .px-part.is-sel { border-color: var(--try); background: var(--try-tint); text-decoration: line-through; text-decoration-color: var(--try); }
 .px-fixline { display: grid; gap: var(--s-2); font-weight: 700; }
@@ -65,9 +65,9 @@
 
 /* Create */
 .px-create .pt-textarea { min-height: 200px; }
-.px-transcript { display: grid; gap: var(--s-1); padding: var(--s-3); border-radius: var(--r-sm); background: var(--white); border: 1px solid var(--line); }
+.px-transcript { display: grid; gap: var(--s-1); padding: var(--s-3); border-radius: var(--r-sm); background: var(--white); border: 1px solid transparent; box-shadow: var(--g-lift-sm); }
 .px-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
-.px-checks li { position: relative; padding: var(--s-2) var(--s-3) var(--s-2) 2.4rem; border-radius: var(--r-sm); background: var(--paper); border: 1px solid var(--line); font-size: var(--step--1); }
+.px-checks li { position: relative; padding: var(--s-2) var(--s-3) var(--s-2) 2.4rem; border-radius: var(--r-sm); background: var(--paper); border: 1px solid transparent; font-size: var(--step--1); box-shadow: var(--g-lift-sm); }
 .px-checks li::before { content: ""; position: absolute; left: 0.8rem; top: 50%; width: 16px; height: 16px; margin-top: -8px; border-radius: 50%; border: 2px solid var(--ink-muted); }
 .px-checks li.is-ok { background: var(--good-tint); border-color: var(--good); font-weight: 700; }
 .px-checks li.is-ok::before { border-color: var(--good); background: var(--good); box-shadow: inset 0 0 0 3px var(--good-tint); }
@@ -99,7 +99,7 @@
 
 /* ---------- Skill panel: step ladder ---------- */
 .ladder { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
-.step-row { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-2) var(--s-3); border-radius: var(--r-md); border: 2px solid var(--line); background: var(--white); }
+.step-row { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-2) var(--s-3); border-radius: var(--r-md); border: 1px solid transparent; background: var(--white); box-shadow: var(--g-lift-sm); }
 .step-row.is-done { border-color: var(--good-tint); background: var(--good-tint); }
 .step-row.is-next { border-color: var(--ink); box-shadow: 4px 4px 0 var(--tree); }
 .step-row.is-locked { opacity: 0.55; }
@@ -113,7 +113,7 @@
 .check-card { display: grid; gap: var(--s-2); padding: var(--s-4); border-radius: var(--r-md); background: var(--ink); color: var(--white); }
 .check-card p { color: #dbe9f6; font-size: var(--step--1); }
 .check-card .btn { justify-self: start; background: var(--band-a2); color: var(--ink); }
-.state-pill { display: inline-flex; align-items: center; gap: 6px; padding: 0.2rem 0.7rem; border-radius: var(--r-pill); font: 800 0.75rem / 1.4 var(--font-display); text-transform: uppercase; letter-spacing: 0.05em; background: var(--line); }
+.state-pill { display: inline-flex; align-items: center; gap: 6px; padding: 0.2rem 0.7rem; border-radius: var(--r-pill); font: 800 0.75rem / 1.4 var(--font-display); text-transform: none; letter-spacing: 0; background: var(--line); }
 .state-pill.is-practising { background: var(--band-a2); }
 .state-pill.is-secure { background: var(--band-c1); }
 .state-pill.is-mastered { background: var(--good); color: var(--white); }
@@ -184,7 +184,7 @@
 .px .pt-option.is-picked { border-color: var(--cerulean-ink); background: var(--sky-soft); transform: none; }
 .px .pt-option.is-right { border-color: var(--good); background: var(--good-tint); }
 .px .pt-option.is-wrong { border-color: var(--try); background: var(--try-tint); }
-.px .pt-option-key { border-radius: 10px; background: var(--paper); border: 2px solid var(--line); }
+.px .pt-option-key { border-radius: 10px; background: var(--paper); border: 1px solid transparent; box-shadow: var(--g-lift-sm); }
 .px .pt-option.is-picked .pt-option-key { background: var(--cerulean-ink); border-color: var(--cerulean-ink); }
 
 .px .pt-actions .btn-primary, .px-feedback .btn-primary {
@@ -294,7 +294,7 @@
 .rw-ask { font-weight: 700; font-size: var(--step--1); white-space: pre-line; }
 .rw-sent { margin: var(--s-3) 0 0; padding: var(--s-3) var(--s-4); background: var(--good-tint); border-radius: var(--r-md); }
 .rv-first { margin: var(--s-2) 0; } .rv-first summary { cursor: pointer; font-weight: 700; } .rv-heard { font-size: var(--step--1); }
-.px-model { text-align: left; margin: var(--s-3) auto; max-width: 560px; padding: var(--s-3) var(--s-4); border: 1px solid var(--line); border-radius: var(--r-md); } .px-model summary { cursor: pointer; font-weight: 700; } .px-model p { margin: var(--s-2) 0 0; line-height: 1.6; }
+.px-model { text-align: left; margin: var(--s-3) auto; max-width: 560px; padding: var(--s-3) var(--s-4); border: 1px solid transparent; border-radius: var(--r-md); } .px-model summary { cursor: pointer; font-weight: 700; } .px-model p { margin: var(--s-2) 0 0; line-height: 1.6; box-shadow: var(--g-lift-sm); }
 
 .px-teacher-listens { margin: var(--s-3) 0; padding: var(--s-3) var(--s-4); border: 2px solid var(--sun, #f5c542); border-radius: var(--r-md); background: var(--sun-soft, #fff6d6); }
 .px-teacher-listens p { margin: 0; }

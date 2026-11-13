@@ -51,7 +51,7 @@
 .is-locked .bmap-label strong { color: #b9cde2; }
 .bmap-here {
   align-self: flex-start; padding: 0.2rem 0.6rem; border-radius: var(--r-pill); background: var(--white); color: var(--ink) !important;
-  font: 800 0.72rem / 1.2 var(--font-display) !important; letter-spacing: 0.06em; text-transform: uppercase;
+  font: 800 0.72rem / 1.2 var(--font-display) !important; letter-spacing: 0; text-transform: none;
 }
 .is-left .bmap-here { align-self: flex-end; }
 @media (max-width: 520px) {
@@ -102,7 +102,7 @@
 
 .bview-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: var(--s-4); }
 @media (max-width: 760px) { .bview-split { grid-template-columns: 1fr; } }
-.topics-card { padding: var(--s-5); border-radius: var(--r-lg); border: 2px solid var(--line); background: var(--white); }
+.topics-card { padding: var(--s-5); border-radius: var(--r-lg); border: 1px solid transparent; background: var(--white); box-shadow: var(--g-lift-sm); }
 .topics-card.is-dark { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .chip-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
 .chip-list li { padding: 0.35rem 0.8rem; border-radius: var(--r-pill); background: var(--tint); font-size: var(--step--1); font-weight: 700; }
@@ -111,7 +111,7 @@
 .uni-topics li.is-mine { background: rgba(255, 255, 255, 0.14); }
 .uni-topics strong { font-family: var(--font-display); }
 .uni-topics .uni-dot { flex: none; margin: 0; transform: translateY(2px); }
-.mine-tag { margin-left: auto; flex: none; padding: 0.1rem 0.5rem; border-radius: var(--r-pill); background: var(--sky); color: var(--ink); font: 800 0.7rem / 1.4 var(--font-display); text-transform: uppercase; letter-spacing: 0.05em; }
+.mine-tag { margin-left: auto; flex: none; padding: 0.1rem 0.5rem; border-radius: var(--r-pill); background: var(--sky); color: var(--ink); font: 800 0.7rem / 1.4 var(--font-display); text-transform: none; letter-spacing: 0; }
 
 .gate-card { display: flex; gap: var(--s-5); align-items: center; padding: var(--s-6); border-radius: var(--r-lg); border: 2px dashed var(--ink); background: var(--white); }
 .gate-card h2 { font-size: var(--step-1); margin-bottom: var(--s-2); }
@@ -162,7 +162,7 @@
 }
 .node-panel h2 { font-size: var(--step-2); line-height: 1.2; }
 .node-example { padding: var(--s-4) var(--s-5); border-radius: var(--r-md); background: color-mix(in srgb, var(--tree) 16%, var(--white)); }
-.node-example-label { font: 800 0.72rem / 1 var(--font-display); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); }
+.node-example-label { font: 800 0.72rem / 1 var(--font-display); text-transform: none; letter-spacing: 0; color: var(--ink-muted); }
 .node-example p { margin-top: var(--s-2); font-size: var(--step-1); line-height: 1.45; }
 .node-note { font-size: var(--step--1); color: var(--ink-soft); }
 .node-cta { display: grid; gap: var(--s-2); justify-items: start; }
@@ -188,5 +188,5 @@
 .tree-bar { position: relative; }
 .tree-bar span { position: absolute; left: 0; top: 0; }
 .tree-bar span.is-secure { opacity: 0.4; }
-.open-tag { margin-left: var(--s-2); vertical-align: middle; padding: 0.1rem 0.5rem; border-radius: var(--r-pill); background: var(--good); color: var(--white); font: 800 0.68rem / 1.4 var(--font-display); text-transform: uppercase; letter-spacing: 0.05em; }
+.open-tag { margin-left: var(--s-2); vertical-align: middle; padding: 0.1rem 0.5rem; border-radius: var(--r-pill); background: var(--good); color: var(--white); font: 800 0.68rem / 1.4 var(--font-display); text-transform: none; letter-spacing: 0; }
 .node-panel-head { display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); }

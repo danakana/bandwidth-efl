@@ -1,0 +1,43 @@
+/* =====================================================================
+   Site skin: carries the games' look (soft 3D surfaces, illustrated art,
+   glossy map nodes) onto the rest of the app. Loaded globally; selectors are
+   prefixed with :root so they win over the page stylesheets loaded later.
+   ===================================================================== */
+
+/* ---------- Home: goal card ---------- */
+:root .goal { border: 0; box-shadow: var(--g-lift); border-radius: 28px; position: relative; overflow: hidden; }
+:root .goal::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 6px; background: linear-gradient(90deg, var(--band-a1), var(--band-a2), var(--band-b1), var(--band-b2), var(--band-c1)); }
+:root .goal-band { border: 0; background: #eef3f9; box-shadow: inset 0 -3px 0 rgba(15,36,71,0.10); }
+:root .goal-band.is-now { background: linear-gradient(#ffe88a, var(--fill)); box-shadow: inset 0 -4px 0 rgba(0,0,0,0.12), 0 8px 14px -8px rgba(0,0,0,0.45); }
+:root .goal-bar { height: 14px; background: #e6edf5; box-shadow: inset 0 2px 3px rgba(15,36,71,0.10); }
+:root .goal-plan li > a, :root .goal-plan li > button, :root .goal-plan li > div { border: 0; box-shadow: var(--g-lift-sm); transition: transform 0.15s; }
+:root .goal-plan li > a:hover { transform: translateY(-2px); }
+
+/* ---------- Home: placement tiles ---------- */
+:root .res-tile { background: linear-gradient(160deg, #1d4a7a 0%, #10284a 100%); box-shadow: var(--g-lift); }
+:root .res-tile::after { width: 190px; height: 190px; inset: auto -18% -70% auto; opacity: 0.55; filter: blur(18px); }
+
+/* ---------- Home: band map nodes look like the game map ---------- */
+:root .bmap-field { box-shadow: 0 30px 60px -30px rgba(10, 24, 52, 0.75); }
+:root .bmap-node {
+  background: radial-gradient(circle at 35% 28%, rgba(255,255,255,0.65), transparent 42%), var(--fill);
+  box-shadow: inset 0 -7px 0 rgba(0, 0, 0, 0.18), 0 12px 18px -8px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s cubic-bezier(.3,1.5,.5,1);
+}
+:root .bmap-node:hover { transform: translateY(-3px) scale(1.04); }
+:root .is-locked .bmap-node { background: radial-gradient(circle at 35% 28%, rgba(255,255,255,0.18), transparent 45%), #2a4a70; box-shadow: inset 0 -6px 0 rgba(0,0,0,0.25), 0 10px 16px -8px rgba(0,0,0,0.6); }
+
+/* ---------- Band page: skill tree cards ---------- */
+:root .tree-card { border: 0; box-shadow: var(--g-lift-sm); }
+:root .tree-card:hover { border-color: transparent; box-shadow: var(--g-lift); transform: translateY(-4px); }
+:root .node.is-sel { border-color: transparent; box-shadow: var(--g-lift-sm), inset 4px 0 0 var(--tree); }
+
+/* ---------- Header wallet: coin art ---------- */
+:root .wallet .w-coin b .gart { margin: -5px -2px -5px -4px; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3)); }
+
+/* ---------- Labels: sentence-case kickers read as a quiet coloured line, not a shouty eyebrow ---------- */
+:root .pt-kicker { color: var(--cerulean-ink); font-weight: 700; letter-spacing: 0; }
+
+/* ---------- Primary buttons: the same soft 3D press as the games ---------- */
+:root .btn-primary { box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.22), 0 8px 16px -10px rgba(10, 24, 52, 0.7); }
+:root .btn-primary:active:not(:disabled) { box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.22), 0 3px 6px -4px rgba(10, 24, 52, 0.7); }

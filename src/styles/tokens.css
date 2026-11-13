@@ -65,5 +65,9 @@
 
   --measure: 64ch;
   --page: 1180px;
+  /* Soft 3D surfaces (shared with the games): a light bottom edge plus a real drop shadow */
+  --g-edge: rgba(15, 36, 71, 0.08);
+  --g-lift: inset 0 -3px 0 rgba(15, 36, 71, 0.10), 0 10px 22px -10px rgba(10, 24, 52, 0.55), 0 2px 4px rgba(10, 24, 52, 0.12);
+  --g-lift-sm: inset 0 -2px 0 rgba(15, 36, 71, 0.08), 0 6px 14px -8px rgba(10, 24, 52, 0.40), 0 1px 2px rgba(10, 24, 52, 0.08);
   --focus: 0 0 0 3px var(--white), 0 0 0 6px var(--cerulean-ink);
 }

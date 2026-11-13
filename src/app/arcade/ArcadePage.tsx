@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Art } from "./GameArt";
 import { useProgress } from "../../lib/progress";
 import { ARCADE_DAILY_COINS, ITEMS, owns } from "../../content/shop";
 import { bogotaDay } from "../../content/assessments";
@@ -24,6 +25,7 @@ export function ArcadePage({ start }: { start: number }) {
     <div className="ar-page">
       <nav className="crumbs" aria-label="Breadcrumb"><a href="#app">Map</a><span aria-hidden="true">/</span><span aria-current="page">Arcade</span></nav>
       <header className="ar-page-head">
+        <Art name="boss-7" size={190} className="page-art" />
         <p className="pt-kicker">Arcade</p>
         <h1>Play with your English.</h1>
         <p className="pt-lede">Adventure games use the words and grammar of your band, with levels to unlock and stars to collect. Quick games review the steps you've already passed.</p>

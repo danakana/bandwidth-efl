@@ -1,4 +1,5 @@
 import { Fragment, useCallback, useEffect, useState } from "react";
+import { Art } from "../arcade/GameArt";
 import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../lib/auth";
 import { useProgress } from "../../lib/progress";
@@ -89,6 +90,7 @@ export function ExamsPage() {
       {which === "icfes" ? (
         <>
           <header className="ex-head">
+        <Art name="boss-4" size={190} className="page-art" />
             <p className="pt-kicker">Exam prep</p>
             <h1>ICFES Saber 11 English</h1>
             <p className="pt-lede">55 questions in 7 parts. Each part has its own method. Learn the method, practise the part, then try a full mock.</p>
@@ -121,6 +123,7 @@ export function ExamsPage() {
       ) : which === "toefl" ? (
         <>
           <header className="ex-head">
+        <Art name="boss-4" size={190} className="page-art" />
             <p className="pt-kicker">Exam prep</p>
             <h1>TOEFL iBT</h1>
             <p className="pt-lede">For universities in the US and around the world. Since January 2026 each section is scored from 1 to 6. Learn each task, then try a full test.</p>
@@ -166,6 +169,7 @@ export function ExamsPage() {
       ) : which === "ielts" ? (
         <>
           <header className="ex-head">
+        <Art name="boss-4" size={190} className="page-art" />
             <p className="pt-kicker">Exam prep</p>
             <h1>IELTS Academic</h1>
             <p className="pt-lede">For studying at university abroad. Scores go from band 1 to 9. Learn each question type and task, then try a full test. Reading and Listening give you a band at once; your teacher marks Writing and Speaking.</p>
@@ -211,6 +215,7 @@ export function ExamsPage() {
       ) : (
         <>
           <header className="ex-head">
+        <Art name="boss-4" size={190} className="page-art" />
             <p className="pt-kicker">Exam prep</p>
             <h1>Aptis General</h1>
             <p className="pt-lede">The British Council test many Colombian universities use. Core (grammar and vocabulary), Reading, Listening, Writing and Speaking. Learn each part, then try a full practice test.</p>

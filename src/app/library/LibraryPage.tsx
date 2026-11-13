@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
+import { Art } from "../arcade/GameArt";
 import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../lib/auth";
 import { useProgress } from "../../lib/progress";
@@ -44,6 +45,7 @@ export function LibraryPage({ start }: { start: number }) {
   return (
     <div className="lib-page">
       <header className="ex-head">
+        <Art name="world-story" size={190} className="page-art" />
         <p className="pt-kicker">Read & listen</p>
         <h1>Your reading shelf</h1>
         <p className="pt-lede">Reading and listening a lot at your level is how your English grows. Pick something you like, listen while you read, then check you understood.</p>

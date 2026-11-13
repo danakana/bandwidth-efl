@@ -1,7 +1,7 @@
 /* Read & listen */
 .lib-page { display: grid; gap: var(--s-5); }
 .lib-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: var(--s-4); }
-.lib-card { display: grid; gap: var(--s-2); width: 100%; height: 100%; padding: var(--s-4); text-align: left; background: var(--white); color: var(--ink); border: 2px solid var(--line); border-top: 8px solid var(--uni, var(--ink)); border-radius: var(--r-md); font: inherit; cursor: pointer; }
+.lib-card { display: grid; gap: var(--s-2); width: 100%; height: 100%; padding: var(--s-4); text-align: left; background: var(--white); color: var(--ink); border: 1px solid transparent; border-top: 8px solid var(--uni, var(--ink)); border-radius: var(--r-md); font: inherit; cursor: pointer; box-shadow: var(--g-lift-sm); }
 .lib-card:hover { border-color: var(--ink); border-top-color: var(--uni, var(--ink)); }
 .lib-card:focus-visible { outline: none; box-shadow: var(--focus); }
 .lib-card strong { font: 800 var(--step-1) / 1.2 var(--font-display); }
@@ -14,7 +14,7 @@
 .lib-story { display: grid; gap: var(--s-4); max-width: 760px; margin: 0 auto; }
 .lib-story > .btn { justify-self: start; }
 .lib-story h1 { margin: 0; font-size: var(--step-3); }
-.lib-text { padding: var(--s-5); background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md); font-size: var(--step-1); line-height: 1.8; }
+.lib-text { padding: var(--s-5); background: var(--paper); border: 1px solid transparent; border-radius: var(--r-md); font-size: var(--step-1); line-height: 1.8; box-shadow: var(--g-lift-sm); }
 .lib-text p { margin: 0 0 var(--s-4); }
 .lib-text p:last-child { margin: 0; }
 .lib-gloss { padding: 0; border: 0; background: none; font: inherit; color: inherit; text-decoration: underline dotted 2px; text-underline-offset: 4px; cursor: help; }
@@ -30,7 +30,7 @@
 .lib-save { margin-left: 0.5em; padding: 0 0.5em; border: 1px solid var(--white); border-radius: var(--r-pill); background: transparent; color: var(--white); font: 700 var(--step--1) / 1.6 var(--font-body); cursor: pointer; } .lib-save:disabled { opacity: 0.8; cursor: default; } .lib-save:focus-visible { outline: none; box-shadow: var(--focus); }
 
 /* My words */
-.wd-card { padding: var(--s-5); background: var(--white); border: 2px solid var(--line); border-radius: var(--r-lg, var(--r-md)); }
+.wd-card { padding: var(--s-5); background: var(--white); border: 1px solid transparent; border-radius: var(--r-lg, var(--r-md)); box-shadow: var(--g-lift-sm); }
 .wd-flash { display: grid; gap: var(--s-3); margin-top: var(--s-4); padding: var(--s-5); border: 3px solid var(--ink); border-radius: var(--r-md); background: var(--paper); text-align: center; justify-items: center; }
 .wd-meaning { margin: 0; font: 700 var(--step-1) / 1.4 var(--font-display); }
 .wd-example { margin: 0; font-size: var(--step-0); line-height: 1.6; max-width: 52ch; }

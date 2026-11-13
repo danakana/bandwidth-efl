@@ -68,7 +68,7 @@
 .new-class input { flex: 1 1 260px; min-width: 0; }
 .empty { padding: var(--s-7); border: 2px dashed var(--line); border-radius: var(--r-lg); display: grid; gap: var(--s-2); }
 .class-list { display: grid; gap: var(--s-5); }
-.class-card { background: var(--white); border: 2px solid var(--line); border-radius: var(--r-lg); padding: var(--s-6); display: grid; gap: var(--s-4); }
+.class-card { background: var(--white); border: 1px solid transparent; border-radius: var(--r-lg); padding: var(--s-6); display: grid; gap: var(--s-4); box-shadow: var(--g-lift-sm); }
 .class-card.is-paused { opacity: 0.75; }
 .class-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-4); }
 .class-code { display: flex; align-items: center; gap: var(--s-3); }
@@ -171,7 +171,7 @@
 .goal-streak { display: inline-flex; align-items: center; gap: 4px; }
 .goal-plan ol { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); counter-reset: plan; }
 .goal-plan li { counter-increment: plan; }
-.goal-task { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: var(--s-3); width: 100%; padding: var(--s-3) var(--s-4); border: 2px solid var(--line); border-radius: var(--r-md); background: var(--white); color: var(--ink); text-align: left; text-decoration: none; font: inherit; cursor: pointer; }
+.goal-task { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: var(--s-3); width: 100%; padding: var(--s-3) var(--s-4); border: 1px solid transparent; border-radius: var(--r-md); background: var(--white); color: var(--ink); text-align: left; text-decoration: none; font: inherit; cursor: pointer; box-shadow: var(--g-lift-sm); }
 .goal-task::before { content: counter(plan); grid-row: 1 / 3; align-self: center; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: var(--white); font: 800 var(--step-0) / 1 var(--font-display); }
 .goal-task:hover { border-color: var(--ink); }
 .goal-task:focus-visible { outline: none; box-shadow: var(--focus); }
@@ -185,11 +185,11 @@
 .home-hero .goal { margin: var(--s-4) 0 var(--s-5); }
 
 /* Your journey */
-.jr-card { padding: var(--s-5); background: var(--white); border: 2px solid var(--line); border-radius: var(--r-md); }
+.jr-card { padding: var(--s-5); background: var(--white); border: 1px solid transparent; border-radius: var(--r-md); box-shadow: var(--g-lift-sm); }
 .jr-path { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); margin: var(--s-2) 0 var(--s-4); }
 .jr-path .is-now { background: var(--ink); color: var(--white); }
 .jr-stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: var(--s-3); }
-.jr-stats li { display: grid; gap: 2px; padding: var(--s-3); border: 2px solid var(--line); border-radius: var(--r-md); background: var(--paper); }
+.jr-stats li { display: grid; gap: 2px; padding: var(--s-3); border: 1px solid transparent; border-radius: var(--r-md); background: var(--paper); box-shadow: var(--g-lift-sm); }
 .jr-stats strong { font: 800 var(--step-2) / 1 var(--font-display); }
 .jr-stats span { font-size: var(--step--1); color: var(--muted, inherit); }
 .jr-retake { margin-top: var(--s-4); display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; justify-content: space-between; }
