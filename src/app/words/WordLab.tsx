@@ -3,7 +3,7 @@ import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../lib/auth";
 import { useProgress } from "../../lib/progress";
 import { BANDS, type BandId } from "../../content/bands";
-import { setById, setsFor, gapped, formIn, type VocabSet, type VocabWord } from "../../content/vocab";
+import { EXAM_SETS, setById, setsFor, siblingsOf, gapped, formIn, type VocabSet, type VocabWord } from "../../content/vocab";
 import { loadWords, saveWord, type MyWord } from "../../lib/wordsApi";
 import { say } from "../exams/ExamAudio";
 import { Icon } from "../../components/Icon";
@@ -19,7 +19,8 @@ const POS: Record<VocabWord["pos"], string> = { noun: "noun", verb: "verb", adj:
 export function WordLab({ start }: { start: number }) {
   const { profile } = useAuth();
   const es = !!profile?.spanish_help;
-  const [band, setBand] = useState<BandId>(BANDS[start].id);
+  // A band id, or "exam" for the Exams & essays sets.
+  const [band, setBand] = useState<BandId | "exam">(BANDS[start].id);
   const [results, setResults] = useState<Result[]>([]);
   const [mine, setMine] = useState<MyWord[]>([]);
   const [open, setOpen] = useState<VocabSet | null>(() => setById(window.location.hash.split("/")[2] ?? "") ?? null);
@@ -42,7 +43,8 @@ export function WordLab({ start }: { start: number }) {
   };
   if (open) return <SetView set={open} es={es} onClose={close} />;
 
-  const sets = setsFor(band);
+  const exam = band === "exam";
+  const sets = exam ? EXAM_SETS : setsFor(band);
   const byWord = new Map(mine.map((w) => [w.word, w]));
   const all = sets.flatMap((s) => s.words);
   const inReview = all.filter((w) => byWord.has(w.w.toLowerCase())).length;
@@ -63,15 +65,17 @@ export function WordLab({ start }: { start: number }) {
             {b.id}{i === start && <span className="visually-hidden"> (your band)</span>}
           </button>
         ))}
+        <button type="button" role="tab" aria-selected={exam} className={`wl-band wl-band-exam${exam ? " is-on" : ""}`} onClick={() => setBand("exam")}>Exams & essays</button>
       </div>
+      {exam && <p className="muted">Extra words for IELTS, TOEFL and academic essays, at C1 and C2. Use them in your writing and speaking tasks to show a wider range.</p>}
 
       <section className="home-section wl-summary" aria-live="polite">
         <div className="wl-meter" role="img" aria-label={`${learnt} of ${all.length} learnt for good, ${inReview} in your review`}>
           <span className="wl-meter-review" style={{ width: `${(100 * inReview) / all.length}%` }} />
           <span className="wl-meter-learnt" style={{ width: `${(100 * learnt) / all.length}%` }} />
         </div>
-        <p><strong>{learnt} of {all.length}</strong> {band} words learnt for good · {inReview} in your review</p>
-        {BANDS.findIndex((b) => b.id === band) > start + 1 && <p className="muted px-small">This band is above yours. Try it if you feel confident.</p>}
+        <p><strong>{learnt} of {all.length}</strong> {exam ? "exam and essay" : band} words learnt for good · {inReview} in your review</p>
+        {!exam && BANDS.findIndex((b) => b.id === band) > start + 1 && <p className="muted px-small">This band is above yours. Try it if you feel confident.</p>}
       </section>
 
       <ul className="wl-grid">
@@ -83,7 +87,7 @@ export function WordLab({ start }: { start: number }) {
           return (
             <li key={s.id}>
               <button type="button" className={`wl-card${passed ? " is-passed" : ""}`} onClick={() => { history.replaceState(null, "", `#app/words/${s.id}`); setOpen(s); }}>
-                <span className="wl-num">Set {k + 1}</span>
+                <span className="wl-num">{exam ? s.band : `Set ${k + 1}`}</span>
                 <strong>{s.topic}</strong>
                 <span className="wl-preview">{s.words.slice(0, 4).map((w) => w.w).join(", ")}…</span>
                 <span className="wl-meta">
@@ -120,7 +124,7 @@ function shuffle<T>(a: T[]): T[] {
  */
 function optionsFor(word: VocabWord, set: VocabSet, forGap: boolean): string[] {
   const own = set.words.filter((w) => w !== word);
-  let pool = forGap ? setsFor(set.band).filter((x) => x.id !== set.id).flatMap((x) => x.words).filter((w) => w.pos === word.pos) : own;
+  let pool = forGap ? siblingsOf(set).filter((x) => x.id !== set.id).flatMap((x) => x.words).filter((w) => w.pos === word.pos) : own;
   if (pool.length < 3) pool = own;
   const near = [...pool].sort((a, b) => Math.abs(a.w.length - word.w.length) - Math.abs(b.w.length - word.w.length)).slice(0, 5);
   return shuffle([word.w, ...shuffle(near).slice(0, 3).map((w) => w.w)]);
@@ -174,7 +178,7 @@ function SetView({ set, es, onClose }: { set: VocabSet; es: boolean; onClose: (c
     return (
       <article className="wl-set" aria-labelledby="wl-title">
         <button type="button" className="btn btn-ghost btn-sm" onClick={() => onClose(false)}><Icon name="x" size={16} /> Back to the lab</button>
-        <p className="pt-kicker">{set.band} · Word lab</p>
+        <p className="pt-kicker">{set.track === "exam" ? `Exams & essays · ${set.band}` : `${set.band} · Word lab`}</p>
         <h1 id="wl-title">{set.topic}</h1>
         <p className="pt-lede">Read each word, listen to it and say it aloud. Notice how it's used in the example. Then practise.</p>
         <ol className="wl-learn">

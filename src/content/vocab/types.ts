@@ -9,4 +9,5 @@ export type Pos = "noun" | "verb" | "adj" | "adv" | "phrase";
 export type VocabWord = { w: string; pos: Pos; means: string; es: string; ex: string };
 
 /** Ten words on one topic. Six sets make a band's 60 core words. */
-export type VocabSet = { id: string; band: BandId; topic: string; words: VocabWord[] };
+/** `track: "exam"` marks the Exams & essays sets (IELTS, TOEFL, academic writing); `band` is then their level. */
+export type VocabSet = { id: string; band: BandId; topic: string; words: VocabWord[]; track?: "exam" };

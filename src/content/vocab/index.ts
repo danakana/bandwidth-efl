@@ -3,14 +3,20 @@ import type { VocabSet, VocabWord } from "./types";
 import { A_VOCAB } from "./a-levels";
 import { B_VOCAB } from "./b-levels";
 import { C_VOCAB } from "./c-levels";
+import { EXAM_VOCAB } from "./exam";
 
 export type { VocabSet, VocabWord } from "./types";
 
 /** Every band's core words: 9 bands × 6 sets × 10 words. */
 export const VOCAB: VocabSet[] = [...A_VOCAB, ...B_VOCAB, ...C_VOCAB];
 
+/** Exams & essays: extra sets for IELTS, TOEFL and academic writing (C1–C2). */
+export const EXAM_SETS: VocabSet[] = EXAM_VOCAB;
+
 export const setsFor = (band: BandId) => VOCAB.filter((s) => s.band === band);
-export const setById = (id: string) => VOCAB.find((s) => s.id === id);
+export const setById = (id: string) => VOCAB.find((s) => s.id === id) ?? EXAM_SETS.find((s) => s.id === id);
+/** The sets a set belongs with: its band's core sets, or all the exam sets. */
+export const siblingsOf = (set: VocabSet) => (set.track === "exam" ? EXAM_SETS : setsFor(set.band));
 export const wordsFor = (band: BandId) => setsFor(band).flatMap((s) => s.words);
 
 const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

@@ -35,3 +35,4 @@
 .wl-listen input { width: min(100%, 320px); font-size: var(--step-1); padding: var(--s-2) var(--s-3); border: 2px solid var(--ink); border-radius: var(--r-md); }
 .wl-missed ul { padding-left: 1.2em; }
 .wl-set > .btn-sm { justify-self: start; }
+.wl-band-exam { min-width: auto; }
