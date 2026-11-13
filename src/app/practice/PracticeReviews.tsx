@@ -4,7 +4,7 @@ import { useAuth } from "../../lib/auth";
 import type { Submission } from "../../lib/placementApi";
 import { NODES } from "../../content/curriculum";
 import { TREES } from "../map/trees";
-import { aptisLabel } from "../../content/exams/aptis-production";
+import { aptisLabel, APTIS_MARK_COINS } from "../../content/exams/aptis-production";
 
 const APTIS_LEVELS = ["A0", "A1", "A2", "B1", "B2", "C"];
 
@@ -146,8 +146,9 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
             Aptis level for this part{" "}
             <select value={level} onChange={(e) => { setLevel(e.target.value); setState("idle"); }}>
               <option value="">Not set</option>
-              {APTIS_LEVELS.map((l) => <option key={l} value={l}>{l}</option>)}
+              {APTIS_LEVELS.map((l) => <option key={l} value={l}>{l} ({APTIS_MARK_COINS[l]} coins)</option>)}
             </select>
+            <span className="muted">The student earns these coins when you send.</span>
           </label>
         )}
         <label className="visually-hidden" htmlFor={`pw-${sub.id}`}>Comment for {name}</label>

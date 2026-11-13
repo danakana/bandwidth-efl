@@ -167,3 +167,6 @@ export function aptisLabel(nodeId: string | null | undefined): string | null {
   const p = APTIS_PRODUCTION_PARTS.find((x) => x.part === Number(m[1]));
   return p ? `Aptis ${p.name}: ${p.skill}` : null;
 }
+
+/** Coins a student earns when the teacher gives this Aptis level (XP is three times this). Matches the server. */
+export const APTIS_MARK_COINS: Record<string, number> = { A0: 0, A1: 2, A2: 4, B1: 6, B2: 8, C: 10 };

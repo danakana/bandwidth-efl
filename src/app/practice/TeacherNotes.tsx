@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import type { Submission } from "../../lib/placementApi";
 import { NODES } from "../../content/curriculum";
-import { aptisLabel } from "../../content/exams/aptis-production";
+import { aptisLabel, APTIS_MARK_COINS } from "../../content/exams/aptis-production";
 
 /** "From your teacher": comments on the student's practice writing and speaking. New ones stay highlighted until read. */
 export function TeacherNotes({ es }: { es: boolean }) {
@@ -50,7 +50,7 @@ export function TeacherNotes({ es }: { es: boolean }) {
                 {!n.feedback_seen_at && <span className="tn-dot" aria-label="New" />}
                 <span className="tn-title">
                   <strong>{aptisLabel(n.node_id) ?? node?.title ?? "Your practice"}</strong>
-                  <small>{n.skill === "writing" ? "Your writing" : "Your speaking"} · {aptisLabel(n.node_id) ? (n.teacher_band ? `Level ${n.teacher_band}` : "Aptis") : node?.band ?? ""}</small>
+                  <small>{n.skill === "writing" ? "Your writing" : "Your speaking"} · {aptisLabel(n.node_id) ? (n.teacher_band ? `Level ${n.teacher_band}${APTIS_MARK_COINS[n.teacher_band] ? ` · +${APTIS_MARK_COINS[n.teacher_band]} coins` : ""}` : "Aptis") : node?.band ?? ""}</small>
                 </span>
               </button>
               {isOpen && (

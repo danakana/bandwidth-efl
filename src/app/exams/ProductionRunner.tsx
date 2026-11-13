@@ -27,7 +27,7 @@ async function rewardFor(ids: string[]): Promise<Reward | null> {
 }
 function RewardLine({ r }: { r: Reward | null }) {
   if (!r) return null;
-  return <p className="ex-reward"><Icon name="bolt" size={18} /> +{r.xp} XP · <Icon name="coin" size={18} /> +{r.coins} coins{r.capped && <span className="muted"> (daily exam coins reached)</span>}</p>;
+  return <p className="ex-reward"><Icon name="bolt" size={18} /> +{r.xp} XP · <Icon name="coin" size={18} /> +{r.coins} {r.coins === 1 ? "coin" : "coins"}{r.capped && <span className="muted"> (daily exam coins reached)</span>}</p>;
 }
 const fmt = (s: number) => `${Math.floor(Math.max(0, s) / 60)}:${String(Math.max(0, s) % 60).padStart(2, "0")}`;
 
@@ -125,7 +125,7 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
           <h2 id="pw-sent">Sent to your teacher</h2>
           <p className="pt-lede">Your teacher will read it and leave a comment on your home page.</p>
           <RewardLine r={reward} />
-          {reward && reward.xp < parts.length * 15 && <p className="muted px-small">Full coins go to answers that reach the word count.</p>}
+          <p className="ex-next"><strong>More coins when your teacher marks it:</strong> up to 10 coins for each part, depending on your level (B1 = 6 coins).</p>
           <h3>While you wait, check your own work</h3>
           <ul className="ex-tips">
             <li>Did you answer <strong>every</strong> question?</li>
@@ -329,6 +329,7 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
           <h2 id="sp-done">{phase === "sent" ? "Sent to your teacher" : "Listen to yourself"}</h2>
           <p className="pt-lede">{phase === "sent" ? "Your teacher will listen and leave a comment on your home page." : "Did you answer every question and keep talking until the time ended?"}</p>
           {phase === "sent" && <RewardLine r={reward} />}
+          {phase === "sent" && <p className="ex-next"><strong>More coins when your teacher marks it:</strong> up to 10 coins for each part, depending on your level (B1 = 6 coins).</p>}
           <ul className="ex-recs">
             {clips.map((c) => (
               <li key={c.part}><strong>{partInfo(c.part).name}</strong><audio controls src={c.url} /></li>
