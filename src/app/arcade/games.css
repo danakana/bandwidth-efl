@@ -150,7 +150,7 @@
 .lw-world.is-crush { background: linear-gradient(160deg, #ff9ac1 0%, #c03c86 55%, #6b1c55 100%); }
 .gk-crush { background: radial-gradient(circle at 30% 0%, #ffe3f0 0%, #ffb3d1 40%, #c03c86 100%); }
 .cc-status { display: flex; gap: 6px; }
-.cc-moves, .cc-goal { padding: 0.35rem 0.7rem; border-radius: var(--r-pill); background: #fff; border: 2px solid var(--ink); font-weight: 800; white-space: nowrap; }
+.cc-moves, .cc-goal { padding: 0.35rem 0.7rem; border-radius: var(--r-pill); background: #fff; color: var(--ink); border: 2px solid var(--ink); font-weight: 800; white-space: nowrap; }
 .cc-moves b { font: 900 var(--step-1) / 1 var(--font-display); }
 .cc { display: grid; gap: var(--s-2); justify-items: center; width: min(560px, 100%); justify-self: center; }
 .cc-brief { margin: 0; text-align: center; font-weight: 600; }
@@ -306,3 +306,31 @@
 .ws-pad button { height: 48px; border-radius: 14px; border: 2px solid var(--ink); background: #fff; color: var(--ink); font-size: 1.2rem; box-shadow: 0 4px 0 var(--ink); cursor: pointer; }
 .ws-pad button:nth-child(1) { grid-area: u; } .ws-pad button:nth-child(2) { grid-area: l; } .ws-pad button:nth-child(3) { grid-area: p; } .ws-pad button:nth-child(4) { grid-area: r; } .ws-pad button:nth-child(5) { grid-area: d; }
 .ws-pad button:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+
+/* ---------- Pronunciation Racer ---------- */
+.lw-world.is-racer { background: linear-gradient(160deg, #ffb35c 0%, #e0482f 55%, #6e1a12 100%); }
+.gk-racer { background: linear-gradient(180deg, #2b2f3a 0%, #3c4250 100%); color: #fff; }
+.pr { display: grid; gap: var(--s-3); width: min(820px, 100%); justify-self: center; align-self: start; }
+.pr-track { position: relative; display: grid; gap: 6px; padding: var(--s-3); border-radius: 22px; background: #1a1d24; border: 3px solid #000; }
+.pr-lane { position: relative; height: 62px; border-radius: 10px; background: repeating-linear-gradient(90deg, #555b68 0 40px, #4a505c 40px 80px); border-top: 3px dashed rgba(255,255,255,0.35); }
+.pr-lane.is-you { background: repeating-linear-gradient(90deg, #6a6152 0 40px, #5c5446 40px 80px); outline: 3px solid #ffd95c; }
+.pr-car { position: absolute; top: 4px; display: grid; justify-items: center; font-size: 2.3rem; line-height: 1; transition: left 0.6s cubic-bezier(.3,1.3,.5,1); transform: scaleX(-1); }
+.pr-car small { transform: scaleX(-1); font: 800 0.6rem / 1 var(--font-display); color: #fff; }
+.pr-car.is-boost { animation: pr-boost 0.6s; }
+@keyframes pr-boost { 30% { filter: drop-shadow(-14px 0 0 #ffb35c) drop-shadow(-24px 0 0 #ff5d3d); } }
+.pr-finish { position: absolute; right: 6px; top: 12px; font-size: 1.8rem; }
+.pr-count { position: absolute; inset: 0; display: grid; place-items: center; font: 900 5rem / 1 var(--font-display); color: #ffd95c; text-shadow: 0 6px 0 #000; animation: wr-pulse 0.8s ease-out; }
+.pr-card { display: grid; gap: var(--s-2); justify-items: center; text-align: center; padding: var(--s-4); border-radius: 22px; background: #fff; color: var(--ink); border: 3px solid #000; box-shadow: 0 6px 0 #000; }
+.pr-say { margin: 0; font-weight: 700; color: #5b6b80; }
+.pr-target { margin: 0; font: 900 var(--step-3) / 1.2 var(--font-display); }
+.pr-target.is-hidden { letter-spacing: 0.3em; color: #9aa7b8; }
+.pr-actions { display: flex; flex-wrap: wrap; gap: var(--s-2); justify-content: center; align-items: center; }
+.pr-mic { font-size: var(--step-1); padding-inline: 1.4rem; }
+.pr-mic.is-on { background: #e0482f; border-color: #e0482f; animation: wr-pulse 0.8s infinite alternate; }
+.pr-type { display: flex; gap: var(--s-2); }
+.pr-type input { font: 700 var(--step-1) / 1.2 inherit; padding: 0.4rem 0.7rem; border: 2px solid var(--ink); border-radius: 12px; width: min(320px, 60vw); }
+.pr-heard { margin: 0; min-height: 1.5rem; font-weight: 800; }
+.pr-heard.is-ok { color: #17602c; }
+.pr-heard.is-mid { color: #8a5a00; }
+.pr-heard.is-no { color: #8a2a00; }
+@media (max-width: 520px) { .pr-lane { height: 52px; } .pr-car { font-size: 1.8rem; } .pr-target { font-size: var(--step-2); } }

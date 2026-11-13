@@ -4,13 +4,14 @@ import { NODES } from "../../content/curriculum";
 import type { BandId } from "../../content/bands";
 import { EXAM_SETS, setsFor, gapped, formIn, type VocabWord } from "../../content/vocab";
 
-export type LevelGame = "tower" | "rain" | "crush" | "kitchen" | "golf" | "boss" | "snake";
+export type LevelGame = "tower" | "rain" | "crush" | "kitchen" | "golf" | "boss" | "snake" | "racer";
 
 /** Name, life icon and the line shown when a level is lost. */
 export const GAME_META: Record<LevelGame, { name: string; life: string; lives: string; lost: string }> = {
   tower: { name: "Word Tower", life: "🧱", lives: "steadiness", lost: "The tower fell!" },
   rain: { name: "Word Rain", life: "❤️", lives: "lives", lost: "The city got soaked!" },
   crush: { name: "Collocation Crush", life: "", lives: "moves", lost: "Out of moves!" },
+  racer: { name: "Pronunciation Racer", life: "", lives: "", lost: "The others crossed the line first!" },
   snake: { name: "Word Snake", life: "🐍", lives: "lives", lost: "Game over, snake!" },
   boss: { name: "Boss Battles", life: "💖", lives: "hit points", lost: "The monster won this time!" },
   golf: { name: "Grammar Golf", life: "", lives: "strokes", lost: "Too many strokes!" },
@@ -37,6 +38,27 @@ for (const [id, p] of Object.entries(PRACTICE)) {
   const b = BAND_OF.get(id);
   if (!b) continue;
   for (const step of p.steps) for (const it of step) if (it.kind === "fix") (FIXES[b] ??= []).push(it);
+}
+
+/* ---------------- Pronunciation Racer ---------------- */
+
+const SAYS: Record<string, string[]> = {};
+for (const [id, p] of Object.entries(PRACTICE)) {
+  const b = BAND_OF.get(id);
+  if (!b) continue;
+  for (const step of p.steps) for (const it of step) if (it.kind === "say") (SAYS[b] ??= []).push(it.target);
+}
+
+/** Seconds a rival needs per stretch of track; the player moves one stretch per good attempt. */
+export const racerShape = (level: number) => ({ laps: level === 7 ? 8 : 6, rivalA: level === 7 ? 7 : 13 - level, rivalB: level === 7 ? 9 : 16 - level });
+
+/** Levels 1–3: single words; 4–6: short sentences; 7: longer sentences. */
+export function buildRacer(band: BandId, level: number): string[] {
+  const { laps } = racerShape(level);
+  if (level <= 3) return shuffle(wordsFor(band, level).map((w) => w.w)).slice(0, laps);
+  const says = SAYS[band] ?? [];
+  const byLen = shuffle(says).filter((t) => (level === 7 ? t.split(" ").length >= 6 : t.split(" ").length <= 9));
+  return (byLen.length >= laps ? byLen : shuffle(says)).slice(0, laps);
 }
 
 /* ---------------- Word Snake ---------------- */
@@ -194,6 +216,7 @@ export const starsFrom = (cleared: boolean, hearts: number) => (cleared ? Math.m
 export const LEVEL_NAMES: Record<LevelGame, string[]> = {
   tower: ["Wobbly start", "Two floors up", "Windy day", "Night shift", "Earthquake drill", "Sky high", "The Great Tower"],
   rain: ["Light drizzle", "Showers", "Downpour", "Thunder", "Hailstorm", "Monsoon", "The Storm Boss"],
+  racer: ["Go-kart track", "City circuit", "Coastal road", "Mountain pass", "Night race", "Rainy grand prix", "The Golden Cup"],
   snake: ["Garden path", "Long grass", "Jungle", "Desert", "Night garden", "Speed snake", "The Python King"],
   boss: ["Grumble the Goblin", "Syntax Slime", "The Tense Troll", "Professor Preposition", "The Phrasal Phantom", "Lord Lexicon", "The Grammar Dragon"],
   golf: ["Practice green", "Palm Hills", "Windy links", "Lake course", "Desert dunes", "Mountain pass", "The Championship"],
