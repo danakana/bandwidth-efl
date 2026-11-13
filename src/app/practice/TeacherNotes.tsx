@@ -3,12 +3,14 @@ import { supabase } from "../../lib/supabase";
 import type { Submission } from "../../lib/placementApi";
 import { NODES } from "../../content/curriculum";
 import { productionInfo } from "../../content/exams/production";
+import { Rewrite } from "./Rewrite";
 
 /** "From your teacher": comments on the student's practice writing and speaking. New ones stay highlighted until read. */
 export function TeacherNotes({ es }: { es: boolean }) {
   const [notes, setNotes] = useState<Submission[]>([]);
   const [open, setOpen] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
+  const [rewriting, setRewriting] = useState<string | null>(null);
 
   useEffect(() => {
     let live = true;
@@ -56,12 +58,16 @@ export function TeacherNotes({ es }: { es: boolean }) {
               {isOpen && (
                 <div className="tn-body">
                   <blockquote className="tn-quote">{n.teacher_feedback}</blockquote>
-                  {n.skill === "writing" && n.body && (
+                  {n.skill === "writing" && n.body && rewriting !== n.id && (
                     <details>
                       <summary>What you wrote</summary>
                       <p className="rv-body">{n.body}</p>
                     </details>
                   )}
+                  {n.skill === "writing" && n.body && n.node_id && (rewriting === n.id
+                    ? <Rewrite sub={n} onDone={() => setRewriting(null)} />
+                    : <button type="button" className="btn btn-sm btn-primary" onClick={() => setRewriting(n.id)}>Rewrite it with this feedback</button>)}
+                  {n.skill === "speaking" && <p className="muted px-small">Try the same task again and use the comment: it's the best way to hear your progress.</p>}
                 </div>
               )}
             </li>

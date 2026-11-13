@@ -212,3 +212,11 @@
 .ex-chip.is-placed { background: var(--ink); color: var(--white); }
 .ex-chip:disabled { cursor: default; }
 .ov-controls { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+
+/* Model answers */
+.md { margin-top: var(--s-3); padding: var(--s-3) var(--s-4); border: 1px solid var(--line); border-radius: var(--r-md); background: var(--white); }
+.md summary { cursor: pointer; font-weight: 700; }
+.md-pair { margin-top: var(--s-3); }
+.md-ask { margin: 0 0 var(--s-2); font-weight: 600; font-size: var(--step--1); }
+.md-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: var(--s-3); }
+.md-text { margin: var(--s-1) 0 0; padding: var(--s-3); background: var(--paper); border-radius: var(--r-sm); white-space: pre-line; line-height: 1.6; }

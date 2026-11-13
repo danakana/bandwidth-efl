@@ -85,6 +85,15 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
   const [level, setLevel] = useState(sub.teacher_band ?? "");
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [first, setFirst] = useState<Submission | null>(null);
+
+  // A rewrite: load the first version and the comment it answers, to compare.
+  useEffect(() => {
+    if (!sub.revision_of) return;
+    let live = true;
+    void supabase.from("submissions").select("*").eq("id", sub.revision_of).maybeSingle().then(({ data }) => { if (live) setFirst(data as Submission | null); });
+    return () => { live = false; };
+  }, [sub.revision_of]);
 
   useEffect(() => {
     if (sub.skill !== "speaking" || !sub.audio_path) return;
@@ -123,6 +132,7 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
       </div>
       <div className="rv-meta">
         <span className="pill">{label}</span>
+        {sub.revision_of && <span className="pill pill-good">Rewrite after your feedback</span>}
         {sub.word_count != null && <span className="muted">{sub.word_count} words</span>}
         {sub.auto_passed === true && <span className="pill pill-good">{aptis ? "Word counts met" : "Auto-check passed"}</span>}
         {sub.auto_passed === false && <span className="pill">{aptis ? (prod!.exam === "ielts" ? "Under the word count" : "Some answers too short") : "Auto-check not passed"}</span>}
@@ -132,8 +142,16 @@ function PracticeCard({ sub, name, onSaved }: { sub: Submission; name: string; o
       </div>
       <p className="rv-prompt">{sub.prompt}</p>
       {aptis && sub.skill === "speaking" && <p className="muted px-small">One recording for the whole part. Each question was read aloud before the student answered.</p>}
+      {first && (
+        <details className="rv-first">
+          <summary>First version and your comment</summary>
+          {first.teacher_feedback && <blockquote className="tn-quote">{first.teacher_feedback}</blockquote>}
+          <div className="rv-body">{first.body}</div>
+        </details>
+      )}
+      {sub.skill === "speaking" && sub.body && <div className="rv-body rv-heard"><strong>What the browser heard (automatic, may have mistakes):</strong> {sub.body}</div>}
       {sub.skill === "writing"
-        ? <div className="rv-body" tabIndex={0} aria-label="Student writing">{sub.body}</div>
+        ? <div className="rv-body" tabIndex={0} aria-label={sub.revision_of ? "Student rewrite" : "Student writing"}>{sub.body}</div>
         : audioUrl ? <audio controls src={audioUrl} style={{ width: "100%", maxWidth: 520 }} /> : <p className="muted">Loading recording…</p>}
       <div className="rv-form">
         <div className="pw-quick" role="group" aria-label="Quick comments">

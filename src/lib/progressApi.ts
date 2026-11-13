@@ -57,7 +57,7 @@ export async function recordMilestone(id: string, correct: number, total: number
 }
 
 /** Save a Create piece so the teacher can read or listen and give feedback. */
-export async function savePractice(userId: string, nodeId: string, prompt: string, body: string, words: number, audio: Blob | null, autoPassed: boolean | null, targetBand?: string): Promise<string> {
+export async function savePractice(userId: string, nodeId: string, prompt: string, body: string, words: number, audio: Blob | null, autoPassed: boolean | null, targetBand?: string, revisionOf?: string): Promise<string> {
   let audio_path: string | null = null;
   if (audio) {
     const type = (audio.type || "audio/webm").split(";")[0];
@@ -68,7 +68,7 @@ export async function savePractice(userId: string, nodeId: string, prompt: strin
   }
   const { data, error } = await supabase.from("submissions").insert({
     skill: audio ? "speaking" : "writing", prompt, body: body || null, word_count: words || null,
-    audio_path, node_id: nodeId, auto_passed: autoPassed, target_band: targetBand ?? null,
+    audio_path, node_id: nodeId, auto_passed: autoPassed, target_band: targetBand ?? null, revision_of: revisionOf ?? null,
   }).select("id").single();
   if (error) throw error;
   return (data as { id: string }).id;

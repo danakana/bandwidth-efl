@@ -11,6 +11,8 @@ import { Chart } from "./Chart";
 import { MethodCard } from "./ExamRunner";
 import { Scene } from "./Scenes";
 import { say } from "./ExamAudio";
+import { makeRecogniser } from "../practice/Items";
+import { SPEAKING_MODELS, WRITING_MODELS } from "../../content/exams/models";
 
 export type ProductionRun =
   | { kind: "writing"; exam: ProductionExam; test: boolean; title: string; set: WritingSet & { charts?: Partial<Record<number, ChartId>> }; parts: number[]; minutes?: number }
@@ -175,6 +177,26 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
             {parts.some((p) => p.part === 32) && <li>Discussion: did you add a new idea, not just repeat a classmate?</li>}
             <li>Did you use linking words: because, so, but, however, also?</li>
           </ul>
+          {WRITING_MODELS[run.set.id] && (
+            <>
+              <h3>Compare with a model answer</h3>
+              <p className="muted">A strong answer for the same task. Look for one or two things to borrow next time: a linking word, a way to start, how it's organised.</p>
+              {parts.map((p) => (
+                <details key={p.part} className="md">
+                  <summary>{partInfo(p.part).name}: {partInfo(p.part).skill}</summary>
+                  {p.questions.map((q) => WRITING_MODELS[run.set.id][q.id] && (
+                    <div key={q.id} className="md-pair">
+                      {p.questions.length > 1 && <p className="md-ask">{q.from ? `${q.from}: ` : ""}{q.ask}</p>}
+                      <div className="md-cols">
+                        <div><span className="node-example-label">Your answer</span><p className="md-text">{(text[q.id] ?? "").trim() || "(no answer)"}</p></div>
+                        <div><span className="node-example-label">Model answer</span><p className="md-text">{WRITING_MODELS[run.set.id][q.id]}</p></div>
+                      </div>
+                    </div>
+                  ))}
+                </details>
+              ))}
+            </>
+          )}
         </section>
       </Shell>
     );
@@ -241,11 +263,33 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
   const [step, setStep] = useState<Step>("reading");
   const [left, setLeft] = useState(0);
   const [blocked, setBlocked] = useState(false);
-  const [clips, setClips] = useState<{ part: number; blob: Blob; url: string }[]>([]);
+  const [clips, setClips] = useState<{ part: number; blob: Blob; url: string; heard: string }[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
   const [reward, setReward] = useState<Reward | null>(null);
   const stream = useRef<MediaStream | null>(null);
+  /** The browser's free speech recognition, on only while the student answers (not while a question is read). */
+  const recog = useRef<ReturnType<typeof makeRecogniser>>(null);
+  const heard = useRef<string[]>([]);
+  const said = useRef<string[]>([]);
+  function hearOn() {
+    if (recog.current) return;
+    const r = makeRecogniser();
+    if (!r) return;
+    r.continuous = true; r.interimResults = false;
+    r.onresult = (e) => { said.current = Array.from(e.results as ArrayLike<ArrayLike<{ transcript: string }>>).map((x) => x[0].transcript.trim()); };
+    r.onend = () => {
+      heard.current.push(...said.current); said.current = [];
+      if (recog.current === r) { try { r.start(); } catch { /* already running */ } }
+    };
+    recog.current = r;
+    try { r.start(); } catch { recog.current = null; }
+  }
+  function hearOff() {
+    const r = recog.current; recog.current = null;
+    if (r) { r.stop(); }
+    heard.current.push(...said.current); said.current = [];
+  }
   const rec = useRef<MediaRecorder | null>(null);
   const chunks = useRef<Blob[]>([]);
   const part = parts[pi];
@@ -273,7 +317,9 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
     return new Promise((resolve) => {
       m.onstop = () => {
         const blob = new Blob(chunks.current, { type: m.mimeType || "audio/webm" });
-        setClips((c) => [...c.filter((x) => x.part !== part.part), { part: part.part, blob, url: URL.createObjectURL(blob) }]);
+        const text = heard.current.filter(Boolean).join(". ");
+        heard.current = [];
+        setClips((c) => [...c.filter((x) => x.part !== part.part), { part: part.part, blob, url: URL.createObjectURL(blob), heard: text }]);
         resolve();
       };
       if (m.state === "paused") m.resume();
@@ -291,12 +337,13 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
     if (phase !== "run" || step !== "reading") return;
     let live = true;
     rec.current?.state === "recording" && rec.current.pause();
+    hearOff();
     const cue = run.set.cues?.[part.part];
     const text = four ? `${cue ? `${cue} ` : ""}${part.questions.map((q) => q.ask).join(". ")}` : part.questions[qi].ask;
     void say(text).then(() => {
       if (!live) return;
       if (four) { setLeft(part.prep!); setStep("prep"); }
-      else { setLeft(part.questions[qi].seconds); rec.current?.resume(); setStep("answer"); }
+      else { setLeft(part.questions[qi].seconds); rec.current?.resume(); hearOn(); setStep("answer"); }
     });
     return () => { live = false; };
   }, [phase, step, pi, qi, four, part, run.set.cues]);
@@ -316,9 +363,12 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
     try { await move(); } finally { moving.current = false; }
   }
   async function move() {
-    if (step === "prep") { window.speechSynthesis?.cancel(); setLeft(part.questions.reduce((s, q) => s + q.seconds, 0)); rec.current?.resume(); setStep("answer"); return; }
+    if (step === "prep") { window.speechSynthesis?.cancel(); setLeft(part.questions.reduce((s, q) => s + q.seconds, 0)); rec.current?.resume(); hearOn(); setStep("answer"); return; }
     if (step !== "answer") return;
     if (!four && qi < part.questions.length - 1) { rec.current?.pause(); setQi(qi + 1); setStep("reading"); return; }
+    hearOff();
+    // Recognition delivers its last words a moment after stopping.
+    await new Promise((r) => setTimeout(r, 400));
     await endPart();
     if (pi < parts.length - 1) { newRecorder(); setPi(pi + 1); setQi(0); setStep("reading"); return; }
     stream.current?.getTracks().forEach((t) => t.stop());
@@ -334,14 +384,14 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
         const info = partInfo(p.part);
         const cue = run.set.cues?.[p.part];
         const prompt = `${info.name}: ${info.skill}. ${cue ? `${cue} ${p.questions.map((q) => q.ask).join("; ")}` : p.questions.map((q, k) => `${k + 1}. ${q.ask}`).join(" ")}`;
-        ids.push(await savePractice(session!.user.id, `${run.exam}-s${p.part}`, prompt, "", 0, c.blob, null));
+        ids.push(await savePractice(session!.user.id, `${run.exam}-s${p.part}`, prompt, c.heard, 0, c.blob, null));
       }
       setReward(await rewardFor(ids));
       setPhase("sent");
     } catch { setError(true); } finally { setBusy(false); }
   }
 
-  const leave = () => { rec.current?.state !== "inactive" && rec.current?.stop(); stream.current?.getTracks().forEach((t) => t.stop()); window.speechSynthesis?.cancel(); onClose(); };
+  const leave = () => { hearOff(); rec.current?.state !== "inactive" && rec.current?.stop(); stream.current?.getTracks().forEach((t) => t.stop()); window.speechSynthesis?.cancel(); onClose(); };
 
   if (phase === "intro") {
     return (
@@ -383,7 +433,18 @@ function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speak
           {phase === "sent" && <p className="ex-next"><strong>More coins when your teacher marks it:</strong> {MARK_NOTE[run.exam]}</p>}
           <ul className="ex-recs">
             {clips.map((c) => (
-              <li key={c.part}><strong>{partInfo(c.part).name}</strong><audio controls src={c.url} /></li>
+              <li key={c.part}>
+                <strong>{partInfo(c.part).name}</strong><audio controls src={c.url} />
+                {c.heard && <p className="px-transcript"><span className="node-example-label">What the browser understood</span>{c.heard}</p>}
+                {c.heard && <p className="muted px-small">If a word is wrong here, the browser may not have understood how you said it. Practise saying that word clearly.</p>}
+                {SPEAKING_MODELS[run.set.id]?.[c.part] && (
+                  <details className="md">
+                    <summary>Hear a strong answer</summary>
+                    <p className="md-text">{SPEAKING_MODELS[run.set.id][c.part]}</p>
+                    <button type="button" className="btn btn-ghost btn-sm" onClick={() => void say(SPEAKING_MODELS[run.set.id][c.part])}>Listen to it</button>
+                  </details>
+                )}
+              </li>
             ))}
           </ul>
           {error && <p className="form-error" role="alert">We couldn't send it. Check your connection and try again.</p>}

@@ -26,6 +26,8 @@ export type Submission = {
   target_band: string | null;
   body: string | null;
   word_count: number | null;
+  /** A rewrite after the teacher's feedback points to the first version. */
+  revision_of?: string | null;
   audio_path: string | null;
   created_at: string;
   teacher_band: string | null;

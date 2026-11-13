@@ -106,6 +106,7 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
             )}
             {phase === "result" && outcome && raw && (
               <Result outcome={outcome} raw={raw} review={target.kind === "review" ? review : undefined} isCreate={target.kind === "step" && target.step === 6}
+                model={target.kind === "step" && target.step === 6 ? target.practice.create.model : undefined}
                 step={target.kind === "step" ? target.step : 0}
                 onAgain={() => { setRound(round + 1); setOutcome(null); setPhase("play"); }}
                 onClose={() => onClose(true)} />
@@ -171,7 +172,7 @@ function Intro({ target, label, onStart }: { target: PlayTarget; label: string; 
   );
 }
 
-function Result({ outcome, raw, isCreate, step, onAgain, onClose, review }: { outcome: StepOutcome; raw: { score: number; total: number }; isCreate: boolean; step: number; onAgain: () => void; onClose: () => void; review?: ReviewOutcome | null }) {
+function Result({ outcome, raw, isCreate, step, onAgain, onClose, review, model }: { outcome: StepOutcome; raw: { score: number; total: number }; isCreate: boolean; step: number; onAgain: () => void; onClose: () => void; review?: ReviewOutcome | null; model?: string }) {
   const [headline] = useState(() => review !== undefined
     ? (raw.score === raw.total ? "All correct." : raw.score >= raw.total / 2 ? "Good progress." : "They'll come back tomorrow.")
     : outcome.passed
@@ -208,7 +209,14 @@ function Result({ outcome, raw, isCreate, step, onAgain, onClose, review }: { ou
           ))}
         </ol>
       )}
-      {isCreate && <p className="muted">Your teacher can read or listen to it and leave feedback.</p>}
+      {isCreate && <p className="muted">Your teacher can read or listen to it and leave feedback. When they do, you can rewrite it from your home page.</p>}
+      {isCreate && model && (
+        <details className="px-model">
+          <summary>Compare with an example</summary>
+          <p>{model}</p>
+          <p className="muted px-small">Find one thing the example does that you could use next time.</p>
+        </details>
+      )}
       <div className="px-loot">
         <Counter label="XP" value={outcome.xp} cls="is-xp" />
         <Counter label="Coins" value={outcome.coins} cls="is-coin" />

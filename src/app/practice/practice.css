@@ -287,3 +287,11 @@
   .mk-head { grid-template-columns: auto minmax(0, 1fr); }
   .mk-head > .btn { grid-column: 1 / -1; justify-self: start; }
 }
+
+/* Rewrite after feedback */
+.rw { display: grid; gap: var(--s-3); margin-top: var(--s-3); }
+.rw-part { display: grid; gap: var(--s-1); }
+.rw-ask { font-weight: 700; font-size: var(--step--1); white-space: pre-line; }
+.rw-sent { margin: var(--s-3) 0 0; padding: var(--s-3) var(--s-4); background: var(--good-tint); border-radius: var(--r-md); }
+.rv-first { margin: var(--s-2) 0; } .rv-first summary { cursor: pointer; font-weight: 700; } .rv-heard { font-size: var(--step--1); }
+.px-model { text-align: left; margin: var(--s-3) auto; max-width: 560px; padding: var(--s-3) var(--s-4); border: 1px solid var(--line); border-radius: var(--r-md); } .px-model summary { cursor: pointer; font-weight: 700; } .px-model p { margin: var(--s-2) 0 0; line-height: 1.6; }
