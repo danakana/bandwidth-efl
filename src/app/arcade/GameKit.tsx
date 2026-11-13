@@ -102,7 +102,7 @@ export function EndScreen({ game, band, level, stars, score, learnt, onNext, onR
       {stars > 0 && stars < 3 && <p className="muted">{game === "crush" ? "Finish with more moves left" : game === "golf" ? "Use fewer strokes" : game === "kitchen" ? "Keep every customer happy" : game === "boss" ? "Take fewer hits" : `Lose fewer ${game === "tower" ? "blocks" : "lives"}`} to get 3 stars.</p>}
       {learnt.length > 0 && (
         <details className="gk-learnt" open={stars === 0}>
-          <summary>{game === "tower" || game === "kitchen" ? "The mistakes and how to fix them" : game === "crush" ? "Pairs to remember" : game === "golf" ? "Holes to look at again" : game === "boss" ? "Questions to look at again" : "Words to look at again"} ({learnt.length})</summary>
+          <summary>{game === "tower" || game === "kitchen" ? "The mistakes and how to fix them" : game === "crush" ? "Pairs to remember" : game === "golf" ? "Holes to look at again" : game === "boss" ? "Questions to look at again" : game === "snake" ? "Words to practise spelling" : "Words to look at again"} ({learnt.length})</summary>
           <ul>{learnt.map((l, i) => <li key={i}><strong>{l.text}</strong> <span>{l.note}</span></li>)}</ul>
         </details>
       )}

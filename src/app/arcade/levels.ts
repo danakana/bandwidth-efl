@@ -4,13 +4,14 @@ import { NODES } from "../../content/curriculum";
 import type { BandId } from "../../content/bands";
 import { EXAM_SETS, setsFor, gapped, formIn, type VocabWord } from "../../content/vocab";
 
-export type LevelGame = "tower" | "rain" | "crush" | "kitchen" | "golf" | "boss";
+export type LevelGame = "tower" | "rain" | "crush" | "kitchen" | "golf" | "boss" | "snake";
 
 /** Name, life icon and the line shown when a level is lost. */
 export const GAME_META: Record<LevelGame, { name: string; life: string; lives: string; lost: string }> = {
   tower: { name: "Word Tower", life: "🧱", lives: "steadiness", lost: "The tower fell!" },
   rain: { name: "Word Rain", life: "❤️", lives: "lives", lost: "The city got soaked!" },
   crush: { name: "Collocation Crush", life: "", lives: "moves", lost: "Out of moves!" },
+  snake: { name: "Word Snake", life: "🐍", lives: "lives", lost: "Game over, snake!" },
   boss: { name: "Boss Battles", life: "💖", lives: "hit points", lost: "The monster won this time!" },
   golf: { name: "Grammar Golf", life: "", lives: "strokes", lost: "Too many strokes!" },
   kitchen: { name: "Word Kitchen", life: "⭐", lives: "customer ratings", lost: "The restaurant closed early!" },
@@ -36,6 +37,19 @@ for (const [id, p] of Object.entries(PRACTICE)) {
   const b = BAND_OF.get(id);
   if (!b) continue;
   for (const step of p.steps) for (const it of step) if (it.kind === "fix") (FIXES[b] ??= []).push(it);
+}
+
+/* ---------------- Word Snake ---------------- */
+
+/** Single words (letters only) to spell, with the clue shown while you eat the letters in order. */
+export type SnakeWord = { word: string; clue: string; es: string };
+export const snakeShape = (level: number) => ({ words: level === 7 ? 8 : 5, tick: level === 7 ? 130 : 230 - level * 14 });
+
+export function buildSnake(band: LevelBand, level: number): SnakeWord[] {
+  const pool = wordsFor(band, 7).filter((w) => /^[a-z]{3,10}$/i.test(w.w));
+  const own = level < 7 ? wordsFor(band, level).filter((w) => /^[a-z]{3,10}$/i.test(w.w)) : [];
+  const pick = shuffle(own.length >= snakeShape(level).words ? own : pool).slice(0, snakeShape(level).words);
+  return pick.map((w) => ({ word: w.w.toLowerCase(), clue: w.means, es: w.es }));
 }
 
 /* ---------------- Boss Battles ---------------- */
@@ -180,6 +194,7 @@ export const starsFrom = (cleared: boolean, hearts: number) => (cleared ? Math.m
 export const LEVEL_NAMES: Record<LevelGame, string[]> = {
   tower: ["Wobbly start", "Two floors up", "Windy day", "Night shift", "Earthquake drill", "Sky high", "The Great Tower"],
   rain: ["Light drizzle", "Showers", "Downpour", "Thunder", "Hailstorm", "Monsoon", "The Storm Boss"],
+  snake: ["Garden path", "Long grass", "Jungle", "Desert", "Night garden", "Speed snake", "The Python King"],
   boss: ["Grumble the Goblin", "Syntax Slime", "The Tense Troll", "Professor Preposition", "The Phrasal Phantom", "Lord Lexicon", "The Grammar Dragon"],
   golf: ["Practice green", "Palm Hills", "Windy links", "Lake course", "Desert dunes", "Mountain pass", "The Championship"],
   kitchen: ["Opening day", "Lunch rush", "Food critic", "Family dinner", "Busy Friday", "Wedding party", "The Master Chef"],
