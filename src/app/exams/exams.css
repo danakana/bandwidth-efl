@@ -178,3 +178,4 @@
 .ex-fill-input.is-right { background: var(--good-tint); border-color: var(--good); }
 .ex-fill-input.is-wrong { background: var(--try-tint); border-color: var(--try); }
 .ex-fill-input:disabled { opacity: 1; color: var(--ink); -webkit-text-fill-color: var(--ink); }
+.ex-sub { margin: var(--s-4) 0 0; padding-top: var(--s-4); border-top: 1px solid var(--line); font-size: var(--step-1); }

@@ -3,7 +3,7 @@ import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../lib/auth";
 import { Icon } from "../../components/Icon";
 import { countQ } from "../../content/exams/icfes";
-import { readingBand } from "../../content/exams/ielts";
+import { ieltsBand } from "../../content/exams/ielts";
 import type { AudioClip, ExamBlock, ExamConfig, ExamQ, FillBlock, MatchBlock, OrderBlock, PartInfo, TextBlock } from "../../content/exams/types";
 import { ExamAudio, Transcript } from "./ExamAudio";
 
@@ -58,7 +58,18 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
   const [saveError, setSaveError] = useState(false);
   const [left, setLeft] = useState((run.minutes ?? 0) * 60);
   const total = useMemo(() => run.blocks.reduce((n, b) => n + countQ(b), 0), [run.blocks]);
-  const block = run.blocks[i];
+  /** Screens: blocks that share one recording go together, so the recording plays once for all their questions. */
+  const pages = useMemo(() => {
+    const out: ExamBlock[][] = [];
+    for (const b of run.blocks) {
+      const last = out[out.length - 1];
+      const a = "audio" in b ? b.audio : undefined;
+      if (last && a && "audio" in last[0] && last[0].audio === a) last.push(b); else out.push([b]);
+    }
+    return out;
+  }, [run.blocks]);
+  const page = pages[i];
+  const block = page[0];
   const info = partOf((phase === "intro" ? run.blocks[0] : block).part);
 
   useEffect(() => {
@@ -72,7 +83,7 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
   const isBlank = (k: Key) => (k.accept ? !(typed[k.id] ?? "").trim() : picks[k.id] === undefined);
   const correctIn = (b: ExamBlock) => qsOf(b).filter(isRight).length;
   const blanks = run.blocks.flatMap(qsOf).filter(isBlank).length;
-  const blockDone = qsOf(block).every((k) => !isBlank(k));
+  const blockDone = page.flatMap(qsOf).every((k) => !isBlank(k));
   const revealed = !mock && !!checked[block.id];
 
   async function finish() {
@@ -86,7 +97,7 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
 
   function next() {
     if (!mock && !checked[block.id]) { setChecked({ ...checked, [block.id]: true }); return; }
-    if (i < run.blocks.length - 1) { setI(i + 1); return; }
+    if (i < pages.length - 1) { setI(i + 1); return; }
     if (mock && blanks > 0 && !blankWarn) { setBlankWarn(true); return; }
     void finish();
   }
@@ -123,10 +134,11 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
                 <li><strong>Never leave a blank.</strong> A guess can score; a blank can't.</li>
                 <li><strong>Remove wrong options first,</strong> then choose.</li>
                 {run.blocks.some(listening)
-                  ? <><li><strong>Read the questions before you listen.</strong></li><li><strong>Each recording plays twice at most.</strong> Use the second time to check.</li></>
+                  ? <><li><strong>Read the questions before you listen.</strong></li>{exam.id === "ielts" ? <li><strong>Each recording plays once,</strong> like the real test. Write as you listen.</li> : <li><strong>Each recording plays twice at most.</strong> Use the second time to check.</li>}</>
                   : exam.id !== "ielts" && <li><strong>Read the whole sentence</strong> around every gap.</li>}
-                {run.blocks.some((b) => b.kind === "fill") && <li><strong>Keep to the word limit</strong> and copy words exactly from the passage.</li>}
-                {exam.id === "ielts" && <li><strong>About 20 minutes for each passage.</strong> The last one is the hardest.</li>}
+                {run.blocks.some((b) => b.kind === "fill") && <li><strong>Keep to the word limit</strong> and check your spelling{run.blocks.some(listening) ? "" : ": copy words exactly from the passage"}.</li>}
+                {exam.id === "ielts" && !run.blocks.some(listening) && <li><strong>About 20 minutes for each passage.</strong> The last one is the hardest.</li>}
+                {exam.id === "ielts" && run.blocks.some(listening) && <li><strong>The sections get harder:</strong> Section 4 is a lecture with no break.</li>}
                 {exam.id === "icfes" ? <li><strong>Move fast in Parts 1–3</strong> so you have time for the long texts.</li>
                   : exam.id === "aptis" && !run.blocks.some(listening) && <li><strong>Do the short parts quickly</strong> so you have time for the long text at the end.</li>}
               </ul>
@@ -141,19 +153,24 @@ export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: 
 
       {phase === "play" && (
         <section className="pt-card ex-block" aria-labelledby="ex-part-title">
-          <div className="pt-meter" aria-hidden="true">{run.blocks.map((b, k) => <span key={b.id} className={k < i ? "is-on" : k === i ? "is-now" : ""} />)}</div>
+          <div className="pt-meter" aria-hidden="true">{pages.map((pg, k) => <span key={pg[0].id} className={k < i ? "is-on" : k === i ? "is-now" : ""} />)}</div>
           <header className="ex-block-head">
             <p className="pt-kicker">{info.name} · {info.skill}</p>
             <h2 id="ex-part-title">{info.task}</h2>
             {block.kind === "text" && block.challenge && <span className="pill">Challenge</span>}
           </header>
-          <BlockView key={block.id} block={block} info={info} exam={exam} picks={picks} typed={typed} revealed={revealed} onPick={pick} onType={type} onSwap={swap} test={mock} />
-          {revealed && <p className="ex-score" role="status">You got {correctIn(block)} of {countQ(block)}.</p>}
+          {page.map((b, k) => (
+            <Fragment key={b.id}>
+              {k > 0 && <h3 className="ex-sub">Next questions · {partOf(b.part).task}</h3>}
+              <BlockView block={b} info={partOf(b.part)} exam={exam} picks={picks} typed={typed} revealed={revealed} onPick={pick} onType={type} onSwap={swap} test={mock} hideAudio={k > 0} />
+            </Fragment>
+          ))}
+          {revealed && <p className="ex-score" role="status">You got {page.reduce((n, b) => n + correctIn(b), 0)} of {page.reduce((n, b) => n + countQ(b), 0)}.</p>}
           {blankWarn && <p className="form-error" role="alert">You left {blanks} blank. On the real test, never leave a blank: guess! You can go back, or finish anyway.</p>}
           <div className="pt-actions">
             {i > 0 && mock && <button type="button" className="btn btn-ghost" onClick={() => setI(i - 1)}>Back</button>}
             <button type="button" className="btn btn-primary" disabled={!mock && !revealed && !blockDone} onClick={next}>
-              {!mock && !revealed ? "Check answers" : i < run.blocks.length - 1 ? "Next" : blankWarn ? "Finish anyway" : "Finish"}
+              {!mock && !revealed ? "Check answers" : i < pages.length - 1 ? "Next" : blankWarn ? "Finish anyway" : "Finish"}
             </button>
             {!mock && !revealed && !blockDone && <span className="muted px-small">Answer every question to check.</span>}
           </div>
@@ -183,11 +200,13 @@ export function MethodCard({ info: p, es }: { info: PartInfo; es: boolean }) {
 
 type ViewProps = { picks: Picks; revealed: boolean; onPick: PickFn; test: boolean; typed?: Typed; onType?: TypeFn };
 
-function BlockView({ block, info, exam, onSwap, ...v }: ViewProps & { block: ExamBlock; info: PartInfo; exam: ExamConfig; onSwap: (b: OrderBlock, a: number, z: number) => void }) {
-  const audio = "audio" in block && block.audio?.length ? block.audio : null;
+function BlockView({ block, info, exam, onSwap, hideAudio, ...v }: ViewProps & { block: ExamBlock; info: PartInfo; exam: ExamConfig; onSwap: (b: OrderBlock, a: number, z: number) => void; hideAudio?: boolean }) {
+  const audio = !hideAudio && "audio" in block && block.audio?.length ? block.audio : null;
+  /** IELTS plays each recording once in the full test, like the real exam. */
+  const plays = exam.id === "ielts" && v.test ? 1 : 2;
   return (
     <>
-      {audio && <ExamAudio clips={audio} unlimited={v.revealed} allowSlow={!v.test} />}
+      {audio && <ExamAudio clips={audio} max={plays} unlimited={v.revealed} allowSlow={!v.test} />}
       {block.kind === "match" ? <MatchView b={block} {...v} />
         : block.kind === "order" ? <OrderView b={block} picks={v.picks} revealed={v.revealed} onSwap={onSwap} />
         : block.kind === "text" ? <TextView b={block} {...v} />
@@ -450,7 +469,7 @@ function Results({ run, picks, typed, total, correctIn, outcome, saveError }: {
         <p className="ex-next"><strong>Estimated Aptis score: {Math.round((score / total) * 50)} / 50.</strong> <span className="muted">An estimate only: the real test uses its own scale.</span></p>
       )}
       {ielts && (
-        <p className="ex-next"><strong>Estimated IELTS Reading band: {readingBand(score, total)}.</strong> <span className="muted">From the official table for 40 questions. Real passages are longer, so treat it as a guide.</span></p>
+        <p className="ex-next"><strong>Estimated IELTS {run.ref.includes("listening") ? "Listening" : "Reading"} band: {ieltsBand(run.ref, score, total)}.</strong> <span className="muted">From the official table for 40 questions. Treat it as a guide: the real test is longer and harder to predict.</span></p>
       )}
       {outcome && (
         <p className="ex-reward"><Icon name="bolt" size={18} /> +{outcome.xp} XP · <Icon name="coin" size={18} /> +{outcome.coins} coins{outcome.capped && <span className="muted"> (daily exam coins reached)</span>}</p>

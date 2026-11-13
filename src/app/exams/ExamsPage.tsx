@@ -5,7 +5,7 @@ import { useProgress } from "../../lib/progress";
 import { Icon } from "../../components/Icon";
 import { ICFES, ICFES_BANK, ICFES_MOCKS, countQ } from "../../content/exams/icfes";
 import { APTIS, APTIS_BANK, APTIS_TESTS } from "../../content/exams/aptis";
-import { IELTS, IELTS_BANK, IELTS_TESTS, readingBand } from "../../content/exams/ielts";
+import { IELTS, IELTS_BANK, IELTS_TESTS, ieltsBand } from "../../content/exams/ielts";
 import type { ExamConfig, PartInfo } from "../../content/exams/types";
 import { APTIS_SPEAKING, APTIS_S_PARTS, APTIS_WRITING, APTIS_W_PARTS } from "../../content/exams/aptis-production";
 import { ExamRunner, type ExamRun } from "./ExamRunner";
@@ -118,22 +118,27 @@ export function ExamsPage() {
           <header className="ex-head">
             <p className="pt-kicker">Exam prep</p>
             <h1>IELTS Academic</h1>
-            <p className="pt-lede">For studying at university abroad. Scores go from band 1 to 9. Reading is ready: learn each question type, then try a full 60-minute test. Listening, Writing and Speaking are coming next.</p>
+            <p className="pt-lede">For studying at university abroad. Scores go from band 1 to 9. Reading and Listening are ready: learn each question type, then try a full test. Writing and Speaking are coming next.</p>
             {es && <p lang="es" className="es">Practica cada tipo de pregunta y luego haz la prueba completa de Reading.</p>}
           </header>
-          <PartList exam={IELTS} rows={mine} title="Reading question types" onPractise={(p) => practise(IELTS, p)} />
+          {(["Reading", "Listening"] as const).map((g) => (
+          <Fragment key={g}>
+          <PartList exam={{ ...IELTS, parts: IELTS.parts.filter((p) => p.group === g) }} rows={mine} title={g} onPractise={(p) => practise(IELTS, p)} />
           <div className="ex-mocks ex-aptis-tests">
-            {IELTS_TESTS.map((t) => {
+            {IELTS_TESTS.filter((t) => t.group === g).map((t) => {
               const total = t.blocks.reduce((n, b) => n + countQ(b), 0);
               const b = best(t.id);
               return (
                 <article key={t.id} className="class-card ex-mock">
-                  <TestRow name={`Academic ${t.name}`} total={total} minutes={t.minutes} best={b} extra={b !== null ? ` · band ${readingBand(b, total)}` : ""}
+                  <TestRow name={`Academic ${t.name}`} total={total} minutes={t.minutes} best={b} extra={b !== null ? ` · band ${ieltsBand(t.id, b, total)}` : ""}
                     onStart={() => setRun({ exam: IELTS, mode: "section", ref: t.id, title: `IELTS ${t.name}`, blocks: t.blocks, minutes: t.minutes })} />
                 </article>
               );
             })}
           </div>
+          </Fragment>
+          ))}
+          <p className="muted px-small">Listening uses your device's voice until the recorded voices are ready.</p>
         </>
       ) : (
         <>

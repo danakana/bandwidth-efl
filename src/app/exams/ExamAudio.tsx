@@ -86,7 +86,7 @@ export function ExamAudio({ clips, max = 2, unlimited = false, label = "Listen",
       <div className="px-clip-text">
         <strong>{now?.who && now.device ? `${now.who} speaking` : label}</strong>
         <span className="ex-plays px-small" aria-live="polite">
-          {left === Infinity ? "Play as often as you like" : left <= 0 ? "No plays left" : left === max ? `You can listen ${max === 2 ? "twice" : `${max} times`}` : "1 play left"}
+          {left === Infinity ? "Play as often as you like" : left <= 0 ? "No plays left" : left === max ? `You can listen ${max === 1 ? "once" : max === 2 ? "twice" : `${max} times`}` : "1 play left"}
         </span>
         {plays > 0 && <span className="pt-ai">{usedDevice ? "Device voice" : "AI voice"}</span>}
       </div>

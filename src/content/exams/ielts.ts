@@ -5,7 +5,7 @@
  * Passages here are shorter than the real test (about 500 words, not 700 to 900).
  * Original content for Bandwidth EFL. For teacher review.
  */
-import type { ExamBlock, ExamConfig, ExamQ, FillBlock, MatchBlock, Opt, PartInfo, TextBlock } from "./types";
+import type { AudioClip, ExamBlock, ExamConfig, ExamQ, FillBlock, MatchBlock, Opt, PartInfo, TextBlock } from "./types";
 
 const o = (text: string, why: string): Opt => ({ text, why });
 
@@ -23,6 +23,21 @@ export const IELTS_PARTS: PartInfo[] = [
     question: "", method: ["Read the question (not the options) and find the right part of the passage.", "Read that part carefully and answer in your own head.", "Now find the option that matches. Remove the ones the text doesn't support."],
     trap: "Options that copy words from the passage but change the meaning.", es: "Las opciones que copian palabras del texto suelen ser trampas: revisa el significado." },
 ];
+
+IELTS_PARTS.push(
+  { part: 5, group: "Listening", name: "Form completion", skill: "Section 1: everyday conversation", task: "Listen to a conversation and complete a form. Write one word and/or a number.", options: 0, approx: 10,
+    question: "", method: ["Before you listen, read the form and guess the kind of answer: a name, a number, a date?", "The answers come in order. Follow the form line by line.", "Names are often spelt out: write each letter carefully.", "Check spelling and the word limit at the end."],
+    trap: "The speaker changes their mind or corrects a number (\"fifteen… no, fourteen\"). The last one is the answer.", es: "Cuidado: a veces la persona se corrige. La respuesta es la última que dice." },
+  { part: 6, group: "Listening", name: "Multiple choice", skill: "Detail and opinion", task: "Listen and choose the correct answer, A, B or C.", options: 3, approx: 10,
+    question: "", method: ["Read the questions before the recording starts and underline key words.", "You'll often hear all three options mentioned. Listen for which one is really the answer.", "If you miss one, move on to the next question. Don't lose the next answer too."],
+    trap: "Hearing a word from an option. All three options are usually mentioned, but only one answers the question.", es: "Normalmente se mencionan las tres opciones: escucha cuál responde la pregunta." },
+  { part: 7, group: "Listening", name: "Matching", skill: "Section 3: discussion", task: "Listen to a discussion and match each item to a person, place or idea.", options: 4, approx: 8,
+    question: "", method: ["Read the list of options and the items before you listen.", "Speakers often discuss an idea before they decide. Wait for the decision.", "An option can be used more than once, or not at all."],
+    trap: "Choosing the first idea you hear. Students often suggest something, then change the plan.", es: "Los estudiantes suelen cambiar de idea: espera la decisión final." },
+  { part: 8, group: "Listening", name: "Lecture notes", skill: "Section 4: academic talk", task: "Listen to a lecture and complete the notes. Write one word and/or a number.", options: 0, approx: 10,
+    question: "", method: ["Read the notes first: the headings tell you how the talk is organised.", "Predict the type of word for each gap: a noun, a number, an adjective?", "There's no break in the middle, so keep up with the notes.", "Check spelling and the word limit."],
+    trap: "Writing what you expect instead of what you hear, or misspelling a word you heard correctly.", es: "Lee las notas antes de escuchar y revisa la ortografía al final." },
+);
 
 export const IELTS: ExamConfig = { id: "ielts", label: "IELTS Academic", parts: IELTS_PARTS, neverBlank: true };
 
@@ -185,7 +200,146 @@ for (const x of [...P2_MC.questions, ...P3_MC.questions]) {
   x.options = rotated; x.answer = target;
 }
 
+/* ---------- Listening ---------- */
+const V = { isabelle: "tPDVQaZ6fdDCUmYpHyYd", jessica: "cgSgspJ2msm6clMCkdW9", aoife: "63T2Z5X6a8FKjTpmpqjH", akshara: "8DvnqWWA3WWXixOm7zQI", will: "bIHbv24MWmeRgasZH58o", hamish: "MAy1fRIg5hTqbhiwOUyh", noah: "9hb1f7xQcMLB90qbYSY3" };
+/** A conversation: one clip per line, so each speaker keeps their voice. */
+const talk = (id: string, w: string, m: string, lines: ["W" | "M", string][]): AudioClip[] =>
+  lines.map(([who, script], k) => ({ file: `p/iel-${id}-${String(k + 1).padStart(2, "0")}.mp3`, voice: who === "W" ? w : m, script, who: who === "W" ? "Woman" : "Man" }));
+const mono = (id: string, voice: string, paragraphs: string[]): AudioClip[] =>
+  paragraphs.map((script, k) => ({ file: `p/iel-${id}-${String(k + 1).padStart(2, "0")}.mp3`, voice, script }));
+const lfill = (id: string, title: string, audio: AudioClip[], instruction: string, max: number, notesTitle: string, items: [string, string[], string][]): FillBlock => ({
+  kind: "fill", part: id.startsWith("s1") ? 5 : 8, id: `ie-${id}`, title, audio, instruction, maxWords: max, notesTitle,
+  items: items.map(([prompt, accept, why], k) => ({ id: `ie-${id}-${k + 1}`, prompt, accept, why })),
+});
+const ONE = "Write ONE WORD AND/OR A NUMBER for each answer.";
+
+const S1_AUDIO = talk("s1", V.isabelle, V.will, [
+  ["W", "Good morning, Riverside Summer Science Camp. How can I help you?"],
+  ["M", "Hi. I'd like to book a place for my son for the summer."],
+  ["W", "Of course. Can I take his name, please?"],
+  ["M", "Yes, it's Daniel Okafor. That's O, K, A, F, O, R."],
+  ["W", "Thank you. And how old is Daniel?"],
+  ["M", "He's fifteen. Oh, sorry, no. He'll be fifteen in September, but he's fourteen now."],
+  ["W", "That's fine, the camp is for ages eleven to sixteen. What's your address?"],
+  ["M", "Twenty-eight Station Road, Hillside."],
+  ["W", "Station Road. And a contact phone number?"],
+  ["M", "It's oh seven nine one, five eight four, two three six."],
+  ["W", "Five eight four, two three six. Lovely. Now, which week would you like? We have weeks starting on the seventh, the fourteenth and the twenty-first of July."],
+  ["M", "The seventh is no good, we're away. Let's say the week starting the fourteenth."],
+  ["W", "And which course? There's space science, marine biology, or robotics and engineering."],
+  ["M", "He was interested in space science, but his friends are doing robotics, so I think robotics and engineering."],
+  ["W", "Great choice. The day starts at half past eight and finishes at four."],
+  ["M", "Half past eight. Is lunch provided?"],
+  ["W", "We have a café, but most children bring a packed lunch. It's cheaper."],
+  ["M", "OK, he'll bring a packed lunch. Oh, and he's allergic to nuts."],
+  ["W", "Thanks for telling me. I'll make a note of that."],
+  ["M", "And how much is it?"],
+  ["W", "It's one hundred and seventy-five pounds for the week. That includes all the materials."],
+  ["M", "That's fine. Thank you."],
+]);
+const S1 = lfill("s1", "Summer camp booking", S1_AUDIO, ONE, 2, "Riverside Summer Science Camp: booking form", [
+  ["Child's family name: ___", ["Okafor"], "He spells it: O, K, A, F, O, R."],
+  ["Age: ___", ["14", "fourteen"], "He says fifteen, then corrects himself: \"he's fourteen now\"."],
+  ["Address: 28 ___ Road, Hillside", ["Station"], "\"Twenty-eight Station Road, Hillside.\""],
+  ["Phone: 0791 ___", ["584 236", "584236"], "\"Oh seven nine one, five eight four, two three six.\""],
+  ["Week starting: ___ July", ["14", "14th", "fourteenth"], "The seventh is no good; he chooses the week starting the fourteenth."],
+  ["Course: ___ and engineering", ["robotics"], "He mentions space science, then chooses robotics and engineering."],
+  ["Start time each day: ___", ["8:30", "half past eight", "8.30"], "\"The day starts at half past eight.\""],
+  ["Lunch: child brings a ___ lunch", ["packed"], "\"He'll bring a packed lunch.\""],
+  ["Allergy: ___", ["nuts", "nut"], "\"He's allergic to nuts.\""],
+  ["Cost per week: £___", ["175"], "\"One hundred and seventy-five pounds for the week.\""],
+]);
+
+const S2_AUDIO = mono("s2", V.hamish, [
+  "Good morning, everyone, and welcome to the new Central Library. My name's Tom, and I'm going to tell you a little about the building before you explore it yourselves.",
+  "The library opened in March, two months later than planned, because of problems with the glass roof. It cost twelve million pounds. Local businesses gave some of the money, but most of it came from the city council.",
+  "The first thing most visitors notice is the light. The architects wanted the building to feel like being outdoors, so the roof is made almost entirely of glass, and there are trees growing inside the main hall.",
+  "Membership is free for everyone who lives or studies in the city. You don't need a passport or a photo; you just need to show a document with your address, such as a bank statement. You can borrow up to twelve items at a time, for three weeks.",
+  "Now, the floors. On the ground floor, you'll find the café and the children's library, which has a special storytelling corner. The first floor is where most of our books for adults are, and it also has the music room, where you can book a soundproof studio to practise an instrument.",
+  "The second floor is our quiet floor: no phones, no talking, just individual study desks. And at the top, on the third floor, there's the local history archive, with old maps and newspapers going back two hundred years, and a roof terrace with views over the river.",
+  "A few practical things. The library opens at eight in the morning on weekdays and at ten at weekends. We close at eight every evening, except on Sundays, when we close at five.",
+]);
+const lmc = (id: string, prompt: string, a: number, opts: [string, string][]): ExamQ => mc(id, prompt, a, opts);
+const S2_MC: TextBlock = { kind: "text", part: 6, id: "ie-s2-mc", title: "A talk about the new library", text: "", audio: S2_AUDIO, questions: [
+  lmc("ie-s2-1", "Why did the library open late?", 0, [["There were problems with the roof.", "\"Two months later than planned, because of problems with the glass roof.\""], ["There wasn't enough money.", "Money is mentioned, but not as the reason for the delay."], ["The trees took longer to grow.", "The trees are inside the hall; they didn't cause a delay."]]),
+  lmc("ie-s2-2", "Where did most of the money come from?", 1, [["Local businesses", "Businesses gave \"some of the money\", not most."], ["The city council", "\"Most of it came from the city council.\""], ["Library members", "Membership is free."]]),
+  lmc("ie-s2-3", "What did the architects want?", 2, [["A building that was cheap to heat", "Heating isn't mentioned."], ["A building made from local materials", "Materials aren't mentioned."], ["A building that felt like being outside", "\"The architects wanted the building to feel like being outdoors.\""]]),
+  lmc("ie-s2-4", "To join the library, you need to show", 1, [["a passport.", "\"You don't need a passport.\""], ["a document with your address.", "\"You just need to show a document with your address.\""], ["a photo.", "\"You don't need … a photo.\""]]),
+  lmc("ie-s2-5", "How many items can members borrow at one time?", 0, [["Twelve", "\"Up to twelve items at a time.\""], ["Three", "Three is the number of weeks."], ["Twenty", "Twenty isn't mentioned."]]),
+  lmc("ie-s2-6", "What time does the library close on Sundays?", 2, [["Ten", "Ten is the weekend opening time."], ["Eight", "Eight is the closing time on other days."], ["Five", "\"Except on Sundays, when we close at five.\""]]),
+] };
+const S2_MATCH: MatchBlock = { kind: "match", part: 7, id: "ie-s2-match", title: "Which floor has each of these?", audio: S2_AUDIO,
+  words: [{ w: "Ground floor" }, { w: "First floor" }, { w: "Second floor" }, { w: "Third floor" }],
+  items: [
+    { id: "ie-s2-7", desc: "Old newspapers", answer: 3, why: "The local history archive on the third floor has \"old maps and newspapers\"." },
+    { id: "ie-s2-8", desc: "A place to practise an instrument", answer: 1, why: "The music room with a soundproof studio is on the first floor." },
+    { id: "ie-s2-9", desc: "A storytelling area", answer: 0, why: "The children's library on the ground floor has \"a special storytelling corner\"." },
+    { id: "ie-s2-10", desc: "Silent study", answer: 2, why: "The second floor is the quiet floor: \"no phones, no talking\"." },
+  ] };
+
+const S3_AUDIO = talk("s3", V.aoife, V.noah, [
+  ["M", "So, Lucía, we've got two weeks to prepare this presentation on recycling plastic. Where should we start?"],
+  ["W", "Well, our tutor said we should focus on one city rather than the whole country. I thought we could look at Bogotá, since there's so much information about it."],
+  ["M", "Good idea. I read that only about seventeen per cent of the city's rubbish is recycled."],
+  ["W", "Actually, I think that figure is out of date. The latest report says it's closer to twenty per cent."],
+  ["M", "OK, we'll use the newer one. So who does what? I'm happy to find the statistics. I like working with numbers."],
+  ["W", "Great. Then I'll interview someone. My aunt works for a recycling cooperative, so I could ask her about the people who collect materials from the streets."],
+  ["M", "That would be really interesting. And what about the slides? I'm terrible at design."],
+  ["W", "I'll make them, then. But you should write the introduction, because you're better at speaking in front of people."],
+  ["M", "Fine. And the conclusion? I think we should write that together, once we know what we've found."],
+  ["W", "Agreed. Oh, and we need a short video. Shall we both film something?"],
+  ["M", "Let's ask Mr Díaz first whether videos count toward the time limit. If they do, we might not have space."],
+  ["W", "Good point. The limit's fifteen minutes, isn't it?"],
+  ["M", "Twelve, plus three for questions."],
+  ["W", "Right. I think the hardest part is explaining why people don't recycle more."],
+  ["M", "In my opinion, it's not that people don't care. It's that it isn't convenient. There aren't enough collection points."],
+  ["W", "I partly agree, but I also think many people simply don't know which plastics can be recycled."],
+  ["M", "Then maybe that's our main recommendation: clearer labels on packaging."],
+  ["W", "Yes, that's practical. Let's meet on Friday to put it all together."],
+]);
+const S3_MATCH: MatchBlock = { kind: "match", part: 7, id: "ie-s3-match", title: "Who will do each task?", audio: S3_AUDIO,
+  words: [{ w: "Lucía" }, { w: "Sam" }, { w: "Both of them" }],
+  items: [
+    { id: "ie-s3-1", desc: "Find the statistics", answer: 1, why: "Sam: \"I'm happy to find the statistics.\"" },
+    { id: "ie-s3-2", desc: "Interview a recycling worker", answer: 0, why: "Lucía will interview her aunt, who works for a recycling cooperative." },
+    { id: "ie-s3-3", desc: "Design the slides", answer: 0, why: "Sam is \"terrible at design\", so Lucía says \"I'll make them\"." },
+    { id: "ie-s3-4", desc: "Write the introduction", answer: 1, why: "Lucía: \"You should write the introduction.\" Sam agrees." },
+    { id: "ie-s3-5", desc: "Write the conclusion", answer: 2, why: "\"We should write that together.\" \"Agreed.\"" },
+  ] };
+const S3_MC: TextBlock = { kind: "text", part: 6, id: "ie-s3-mc", title: "Planning a presentation", text: "", audio: S3_AUDIO, questions: [
+  lmc("ie-s3-6", "What did their tutor advise?", 0, [["Focus on one city", "\"Our tutor said we should focus on one city rather than the whole country.\""], ["Compare two countries", "The tutor said the opposite: one city, not the whole country."], ["Use only data from this year", "Data age comes up, but not as the tutor's advice."]]),
+  lmc("ie-s3-7", "According to the latest report, how much of Bogotá's rubbish is recycled?", 1, [["About 17%", "Sam's figure is \"out of date\"."], ["About 20%", "\"The latest report says it's closer to twenty per cent.\""], ["About 50%", "Fifty isn't mentioned."]]),
+  lmc("ie-s3-8", "Before making a video, they will", 2, [["film Lucía's aunt.", "The aunt will be interviewed; filming her isn't decided."], ["buy a camera.", "A camera isn't mentioned."], ["ask their tutor about the time limit.", "\"Let's ask Mr Díaz first whether videos count toward the time limit.\""]]),
+  lmc("ie-s3-9", "How long can the presentation itself be?", 0, [["12 minutes", "\"Twelve, plus three for questions.\""], ["15 minutes", "Fifteen is Lucía's mistake, which Sam corrects."], ["3 minutes", "Three minutes is for questions."]]),
+  lmc("ie-s3-10", "What will their main recommendation be?", 1, [["More collection points", "Sam mentions this, but they choose something else."], ["Clearer labels on packaging", "\"Maybe that's our main recommendation: clearer labels on packaging.\" \"Yes, that's practical.\""], ["Fines for people who don't recycle", "Fines aren't mentioned."]]),
+] };
+
+const S4_AUDIO = mono("s4", V.akshara, [
+  "Today I want to talk about one of the most remarkable journeys in nature: bird migration. Every year, about four thousand species of birds, roughly forty per cent of all species, travel between the places where they breed and the places where they spend the winter. Colombia is an important stop for many of them: more than a hundred and fifty migrant species spend the northern winter here.",
+  "Why do birds migrate? The main reason is food. In the northern summer, days are long and insects are plentiful, which is perfect for raising chicks. When winter comes, food becomes scarce, so birds fly south, where it is still available.",
+  "The distances can be extraordinary. The Arctic tern holds the record: it flies from the Arctic to the Antarctic and back every year, a round trip of about seventy thousand kilometres. Smaller birds are just as impressive. The blackpoll warbler, which weighs only twelve grams, flies non-stop over the Atlantic Ocean for up to three days.",
+  "How do they find their way? Scientists believe birds use several methods together. Young birds seem to be born with a sense of direction. They also use the position of the sun during the day and the stars at night. Perhaps most surprisingly, many birds can sense the Earth's magnetic field, rather like a compass. In one experiment, pigeons carrying small magnets found their way less accurately on cloudy days, when they could not see the sun.",
+  "Preparing for migration takes a great deal of energy. Before leaving, many birds eat so much that they almost double their body weight, storing the extra energy as fat.",
+  "Unfortunately, migration is becoming more dangerous. The biggest threat is the loss of habitat, especially the wetlands and forests where birds stop to rest and feed. City lights are another problem: they confuse birds that fly at night, and millions die every year after hitting glass buildings. In the next lecture, we'll look at how scientists track individual birds using tiny GPS devices.",
+]);
+const S4 = lfill("s4", "A lecture on bird migration", S4_AUDIO, ONE, 2, "Bird migration", [
+  ["About ___ per cent of bird species migrate.", ["40", "forty"], "\"Roughly forty per cent of all species.\""],
+  ["More than 150 migrant species spend the winter in ___.", ["Colombia"], "\"More than a hundred and fifty migrant species spend the northern winter here\", in Colombia."],
+  ["The main reason for migrating: ___", ["food"], "\"The main reason is food.\""],
+  ["Arctic tern: a round trip of about ___ km a year", ["70,000", "70000", "seventy thousand"], "\"A round trip of about seventy thousand kilometres.\""],
+  ["Blackpoll warbler: weighs only ___ grams", ["12", "twelve"], "\"Weighs only twelve grams.\""],
+  ["Navigation: the sun by day and the ___ at night", ["stars"], "\"The position of the sun during the day and the stars at night.\""],
+  ["Many birds sense the Earth's magnetic field, like a ___", ["compass"], "\"Rather like a compass.\""],
+  ["Pigeons with magnets were less accurate on ___ days", ["cloudy"], "\"Less accurately on cloudy days, when they could not see the sun.\""],
+  ["Before leaving, birds store energy as ___", ["fat"], "\"Storing the extra energy as fat.\""],
+  ["The biggest threat: loss of ___", ["habitat"], "\"The biggest threat is the loss of habitat.\""],
+]);
+
 export const IELTS_BANK: Record<number, ExamBlock[]> = {
+  5: [S1],
+  6: [S2_MC, S3_MC],
+  7: [S3_MATCH, S2_MATCH],
+  8: [S4],
   1: [P1_TF, P3_TF],
   2: [P2_HEAD, P4_HEAD],
   3: [P1_FILL, P3_FILL],
@@ -195,7 +349,11 @@ export const IELTS_BANK: Record<number, ExamBlock[]> = {
 export type IeltsTest = { id: string; name: string; group: string; minutes: number; blocks: ExamBlock[] };
 export const IELTS_TESTS: IeltsTest[] = [
   { id: "ielts-reading-a", name: "Reading test", group: "Reading", minutes: 60, blocks: [P1_TF, P1_FILL, P2_HEAD, P2_MC, P3_MC, P3_TF, P3_FILL] },
+  { id: "ielts-listening-a", name: "Listening test", group: "Listening", minutes: 35, blocks: [S1, S2_MC, S2_MATCH, S3_MATCH, S3_MC, S4] },
 ];
+
+/** Every recording, for generating the audio later. */
+export const IELTS_CLIPS: AudioClip[] = [...S1_AUDIO, ...S2_AUDIO, ...S3_AUDIO, ...S4_AUDIO];
 
 /** Official Academic Reading conversion: correct answers out of 40 → band. */
 const READING_BANDS: [number, number][] = [[39, 9], [37, 8.5], [35, 8], [33, 7.5], [30, 7], [27, 6.5], [23, 6], [19, 5.5], [15, 5], [13, 4.5], [10, 4], [8, 3.5], [6, 3], [4, 2.5], [0, 0]];
@@ -203,3 +361,10 @@ export function readingBand(correct: number, total = 40): number {
   const c = Math.round((correct / total) * 40);
   return READING_BANDS.find(([min]) => c >= min)![1];
 }
+/** Official Listening conversion: correct answers out of 40 → band. */
+const LISTENING_BANDS: [number, number][] = [[39, 9], [37, 8.5], [35, 8], [32, 7.5], [30, 7], [26, 6.5], [23, 6], [18, 5.5], [16, 5], [13, 4.5], [10, 4], [8, 3.5], [6, 3], [4, 2.5], [0, 0]];
+export function listeningBand(correct: number, total = 40): number {
+  const c = Math.round((correct / total) * 40);
+  return LISTENING_BANDS.find(([min]) => c >= min)![1];
+}
+export const ieltsBand = (ref: string, correct: number, total: number) => (ref.includes("listening") ? listeningBand : readingBand)(correct, total);
