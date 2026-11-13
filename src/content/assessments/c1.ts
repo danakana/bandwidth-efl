@@ -36,11 +36,11 @@ A more serious concern is transparency. Most users have little idea why a partic
 
 None of this means that algorithms are inherently harmful. Used well, they can introduce us to music and ideas we would never otherwise have found. What matters is that we remain aware of their influence and occasionally make the effort to step outside the bubble.`,
     items: [
-      ch("What is the writer's overall position on recommendation algorithms?", ["They can be useful, but users should stay aware of their influence.", "They are dangerous and should be banned.", "They have no real influence on users."], 0, "Final paragraph: 'None of this means… What matters is that we remain aware.'"),
+      ch("What is the writer's overall position on recommendation algorithms?", ["They can be useful, but users should stay aware of their influence.", "They are dangerous enough that governments should ban them completely.", "They have very little real influence on what users choose to watch."], 0, "Final paragraph: 'None of this means… What matters is that we remain aware.'"),
       ch("According to paragraph 2, why do many users like recommendations?", ["They save time searching.", "They are always accurate.", "They are free."], 0, "'less time searching, more time enjoying'."),
-      ch("How does the writer present the evidence on 'filter bubbles'?", ["As mixed: the effect seems to depend on how people use the technology.", "As conclusive proof that algorithms narrow tastes.", "As completely invented."], 0, "'The evidence for this is mixed… It would appear, then…'"),
-      ch("Why do companies refuse to explain their algorithms?", ["They say the information is commercially sensitive.", "They don't understand them.", "Governments forbid it."], 0, "'claiming that the information is commercially sensitive'."),
-      ch("'Be that as it may' (paragraph 4) is used to…", ["acknowledge the companies' point before introducing a counterpoint", "agree completely with the companies", "give an example"], 0, "Concession + contrast."),
+      ch("How does the writer present the evidence on 'filter bubbles'?", ["As mixed: the effect seems to depend on how people use the technology.", "As conclusive: the studies clearly prove that algorithms narrow people's tastes.", "As a myth: there is no real evidence that filter bubbles exist at all."], 0, "'The evidence for this is mixed… It would appear, then…'"),
+      ch("Why do companies refuse to explain their algorithms?", ["They say the information is commercially sensitive.", "They admit they don't fully understand the algorithms.", "Governments have told them not to share the details."], 0, "'claiming that the information is commercially sensitive'."),
+      ch("'Be that as it may' (paragraph 4) is used to…", ["acknowledge the companies' point before introducing a counterpoint", "show complete agreement with the companies' position", "introduce an example that supports the previous point"], 0, "Concession + contrast."),
       gap("'Their influence… is difficult to", ".' (= it is very great)", ["overstate"], "difficult to overstate = extremely important."),
     ],
   }],
@@ -48,17 +48,17 @@ None of this means that algorithms are inherently harmful. Used well, they can i
     {
       id: "c1-mid-l1", title: "A radio discussion", audio: "p/c1mid-l1.mp3", speaker: "Speaker from India",
       items: [
-        ch("What happened in London and Stockholm?", ["Traffic fell after charges were introduced.", "The charges were cancelled.", "Bus use fell."], 0, "'traffic fell noticeably after charges were introduced'."),
-        ch("What do critics contend?", ["The charge hits low-income workers hardest.", "The charge is too low.", "Wealthy drivers stop driving."], 0, "'hits low-income workers hardest'."),
-        ch("According to the speaker, when does the scheme work?", ["Only if the money is spent on better buses", "Always", "Only in small towns"], 0, "'but only if the money raised is spent on better buses'."),
+        ch("What happened in London and Stockholm?", ["Traffic fell after charges were introduced.", "The charges were cancelled after protests.", "Bus use fell as more people drove."], 0, "'traffic fell noticeably after charges were introduced'."),
+        ch("What do critics contend?", ["The charge hits low-income workers hardest.", "The charge is too low to change anything.", "Wealthy drivers are the ones who stop driving."], 0, "'hits low-income workers hardest'."),
+        ch("According to the speaker, when does the scheme work?", ["Only if the money is spent on better buses", "Always, whatever the money is spent on", "Only in small towns with little traffic"], 0, "'but only if the money raised is spent on better buses'."),
       ],
     },
     {
       id: "c1-mid-l2", title: "A voice message", audio: "p/c1mid-l2.mp3", speaker: "A voice message from a classmate in Ireland",
       items: [
-        ch("Why has the presentation moved?", ["The head of department moved the session to Monday.", "Niamh is ill.", "The projector is broken."], 0, "'the head of department has moved the whole session to Monday'."),
+        ch("Why has the presentation moved?", ["The head of department moved the session to Monday.", "Niamh is ill and can't present on Friday.", "The projector in the room is broken again."], 0, "'the head of department has moved the whole session to Monday'."),
         ch("'You needn't have rushed the slides' means…", ["You rushed, but it wasn't necessary.", "You didn't rush, and that was right.", "You must rush now."], 0, "needn't have + past participle."),
-        ch("What does Niamh imply about the projector?", ["It's old and unreliable.", "It's brand new.", "It's in another room."], 0, "'it's seen better days' = understatement for old/unreliable."),
+        ch("What does Niamh imply about the projector?", ["It's old and unreliable.", "It's brand new and works well.", "It's been moved to another room."], 0, "'it's seen better days' = understatement for old/unreliable."),
       ],
     },
   ],
@@ -116,11 +116,11 @@ Having said that, repair is not a complete solution. Many products are designed 
 
 What the repair movement does offer is a shift in attitude. Fixing something, rather than throwing it away, forces us to consider how it was made and how long it should last. Small as that change may seem, it could prove to be one of the more significant cultural developments of the decade.`,
       items: [
-        ch("Why did repairing things become less common?", ["Replacing products became cheaper than fixing them, and skills were lost.", "Repair shops were banned.", "Products stopped breaking."], 0, "Paragraph 1."),
-        ch("What does 'Were it not for growing public anger…' suggest?", ["Public anger was a key reason the laws were passed.", "The public didn't care.", "Governments ignored the public."], 0, "Were it not for = without."),
-        ch("How does the writer treat the manufacturers' safety concerns?", ["As partly valid, but possibly influenced by profit", "As completely false", "As the only real issue"], 0, "'not entirely without foundation, but…'"),
-        ch("What limitation of repair does paragraph 4 describe?", ["Some products are designed in ways that make repair difficult or expensive.", "Repair cafés charge too much.", "Nobody wants to learn repair skills."], 0, "Paragraph 4."),
-        ch("'Small as that change may seem' means…", ["Although that change may seem small", "Because that change is small", "As small as possible"], 0, "Adjective + as = although."),
+        ch("Why did repairing things become less common?", ["Replacing products became cheaper than fixing them, and skills were lost.", "Governments made it illegal for small shops to repair electronics.", "Modern products became so reliable that they rarely needed repairs."], 0, "Paragraph 1."),
+        ch("What does 'Were it not for growing public anger…' suggest?", ["Public anger was a key reason the laws were passed.", "The public showed little interest in the issue.", "Governments passed the laws despite public opposition."], 0, "Were it not for = without."),
+        ch("How does the writer treat the manufacturers' safety concerns?", ["As partly valid, but possibly influenced by profit", "As entirely invented to protect company profits", "As the most important issue in the whole debate"], 0, "'not entirely without foundation, but…'"),
+        ch("What limitation of repair does paragraph 4 describe?", ["Some products are designed in ways that make repair difficult or expensive.", "Repair cafés charge more than most people are willing to pay for a fix.", "Young people have shown almost no interest in learning repair skills."], 0, "Paragraph 4."),
+        ch("'Small as that change may seem' means…", ["Although that change may seem small", "Because that change is so small", "Making that change as small as possible"], 0, "Adjective + as = although."),
       ],
     },
     {
@@ -136,10 +136,10 @@ Implicature is not unique to English, but the forms it takes vary from one cultu
 For language learners, this presents a genuine challenge. Grammar books rarely explain what people mean when they say less than they mean. The best strategy, perhaps, is to notice: to pay attention to what is missing from an answer, and to ask, gently, when the meaning is unclear. Misunderstandings are inevitable. They are also, arguably, one of the most interesting parts of learning a language.`,
       items: [
         ch("What does the friend mean by 'certainly an experience'?", ["The holiday didn't go well.", "The holiday was wonderful.", "She doesn't remember the holiday."], 0, "Paragraph 1: implied meaning."),
-        ch("According to linguists, why do we search for hidden meaning?", ["We assume speakers are trying to be relevant and informative.", "People always lie.", "Grammar is unclear."], 0, "'We assume that people are trying to be relevant and informative.'"),
-        ch("What does the manager's reply 'He's always very punctual' imply?", ["He has few other strengths as a worker.", "He is an excellent worker.", "He is often late."], 0, "Faint praise."),
-        ch("What is the point of the Colombian student example?", ["Polite indirectness can be misunderstood across cultures.", "Colombians are always late.", "Australians are rude."], 0, "Paragraph 3."),
-        ch("What strategy does the writer recommend?", ["Notice what is missing and ask gently when unsure", "Always speak very directly", "Avoid conversations"], 0, "Paragraph 4."),
+        ch("According to linguists, why do we search for hidden meaning?", ["We assume speakers are trying to be relevant and informative.", "We assume most speakers are hiding the truth from us.", "English grammar often leaves the meaning of a sentence unclear."], 0, "'We assume that people are trying to be relevant and informative.'"),
+        ch("What does the manager's reply 'He's always very punctual' imply?", ["He has few other strengths as a worker.", "He is an excellent and reliable worker.", "He is often late, so the manager is joking."], 0, "Faint praise."),
+        ch("What is the point of the Colombian student example?", ["Polite indirectness can be misunderstood across cultures.", "Colombians tend to be more direct than Australians.", "Australians usually find indirect speech impolite."], 0, "Paragraph 3."),
+        ch("What strategy does the writer recommend?", ["Notice what is missing and ask gently when unsure", "Always speak very directly to avoid confusion", "Avoid conversations with people from other cultures"], 0, "Paragraph 4."),
       ],
     },
   ],
@@ -147,19 +147,19 @@ For language learners, this presents a genuine challenge. Grammar books rarely e
     {
       id: "c1-gate-l1", title: "A podcast on fast fashion", audio: "p/c1gate-l1.mp3", speaker: "Speaker from Canada",
       items: [
-        ch("What does the speaker say about fast fashion's environmental impact?", ["It is arguably still underestimated.", "It has been exaggerated.", "It has been solved."], 0, "'arguably, still underestimated'."),
+        ch("What does the speaker say about fast fashion's environmental impact?", ["It is arguably still underestimated.", "It has been greatly exaggerated by campaigners.", "It has largely been solved by new technology."], 0, "'arguably, still underestimated'."),
         ch("Who does the speaker say shouldn't be blamed alone?", ["Shoppers", "Factories", "Governments"], 0, "'it would be a mistake to blame shoppers alone'."),
-        ch("'Were it not for constant advertising…' means…", ["Without constant advertising, few people would buy so much.", "Advertising doesn't affect shopping.", "People want more advertising."], 0, "Inverted conditional."),
-        ch("What is 'the real challenge'?", ["Making sustainable clothing affordable without shifting costs onto workers", "Stopping all clothes shopping", "Making clothes cheaper"], 0, "'strike a balance…'"),
+        ch("'Were it not for constant advertising…' means…", ["Without constant advertising, few people would buy so much.", "Advertising has surprisingly little effect on how much people buy.", "If there were more advertising, people would buy more clothes."], 0, "Inverted conditional."),
+        ch("What is 'the real challenge'?", ["Making sustainable clothing affordable without shifting costs onto workers", "Persuading people to stop buying new clothes altogether, at least for a while", "Making clothes cheaper by producing them faster and in larger factories"], 0, "'strike a balance…'"),
       ],
     },
     {
       id: "c1-gate-l2", title: "A mediation", audio: "p/c1gate-l2.mp3", speaker: "A student mediator from Nigeria",
       items: [
-        ch("What do both groups want?", ["Guaranteed lab time before the regional finals", "A new lab", "To cancel the competition"], 0, "'What you both seem to want is…'"),
-        ch("What is the condition in the proposal?", ["Robotics has priority for the next three weeks", "The science club pays", "Both groups meet on Thursdays"], 0, "'provided that robotics has priority…'"),
-        ch("What happens after three weeks?", ["The science club gets Thursdays back.", "Robotics keeps the lab forever.", "The lab closes."], 0, "'After that, the science club gets Thursdays back.'"),
-        ch("'Is it just me, or does that sound fair?' The mediator is…", ["inviting agreement politely", "complaining", "asking about the weather"], 0, "Indirect, face-saving question."),
+        ch("What do both groups want?", ["Guaranteed lab time before the regional finals", "A new, larger lab for both clubs to share", "To move the competition to a later date"], 0, "'What you both seem to want is…'"),
+        ch("What is the condition in the proposal?", ["Robotics has priority for the next three weeks", "The science club pays for the equipment", "Both groups share the lab every Thursday"], 0, "'provided that robotics has priority…'"),
+        ch("What happens after three weeks?", ["The science club gets Thursdays back.", "Robotics keeps the lab on Thursdays as well.", "The lab closes for repairs until next term."], 0, "'After that, the science club gets Thursdays back.'"),
+        ch("'Is it just me, or does that sound fair?' The mediator is…", ["inviting agreement politely", "complaining about the unfair situation", "admitting that she isn't sure herself"], 0, "Indirect, face-saving question."),
       ],
     },
   ],

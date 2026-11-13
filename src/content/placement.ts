@@ -48,7 +48,7 @@ export const READING_ITEMS: ChoiceItem[] = [
   { id: "r15", band: 4, focus: "vocabulary", passage: "Despite the heavy rain, thousands of fans waited outside the stadium for hours, and not one of them seemed to mind.", stem: "In this text, \"mind\" means:", options: ["think", "be bothered", "remember"], answer: 1 },
   // B2
   { id: "r16", band: 5, focus: "grammar", stem: "The lights are off and nobody's answering. They ___ gone out.", options: ["must have", "can't have", "should have"], answer: 0 },
-  { id: "r17", band: 5, focus: "reading", passage: "City officials insist the new bike lanes are a success. Yet the figures they cite cover only the summer months, when cycling naturally peaks.", stem: "What does the writer suggest?", options: ["The bike lanes have failed", "The officials' evidence may be misleading", "Cycling is more popular in winter"], answer: 1 },
+  { id: "r17", band: 5, focus: "reading", passage: "City officials insist the new bike lanes are a success. Yet the figures they cite cover only the summer months, when cycling naturally peaks.", stem: "What does the writer suggest?", options: ["The bike lanes have clearly been a failure", "The officials' evidence may be misleading", "More people cycle in winter than in summer"], answer: 1 },
   { id: "r18", band: 5, focus: "vocabulary", stem: "The new law ___ a serious threat to small businesses.", options: ["makes", "poses", "does"], answer: 1 },
   // B2+
   { id: "r19", band: 6, focus: "grammar", stem: "Not only ___ the exam, but she also got the highest mark in the class.", options: ["she passed", "did she pass", "she did pass"], answer: 1 },
@@ -56,10 +56,10 @@ export const READING_ITEMS: ChoiceItem[] = [
   { id: "r21", band: 6, focus: "vocabulary", stem: "The plan sounded good on paper, but it ___ because nobody wanted to pay for it.", options: ["fell through", "fell out", "fell behind"], answer: 0 },
   // C1
   { id: "r22", band: 7, focus: "grammar", stem: "___ I known about the strike, I would have left earlier.", options: ["If", "Had", "Should"], answer: 1 },
-  { id: "r23", band: 7, focus: "reading", passage: "The author's enthusiasm for the technology is evident; her account of its drawbacks, by contrast, occupies a single, rather hurried paragraph.", stem: "What is implied about the author?", options: ["She ignores the drawbacks entirely", "She gives the drawbacks less attention than they deserve", "She is opposed to the technology"], answer: 1 },
+  { id: "r23", band: 7, focus: "reading", passage: "The author's enthusiasm for the technology is evident; her account of its drawbacks, by contrast, occupies a single, rather hurried paragraph.", stem: "What is implied about the author?", options: ["She leaves the drawbacks out of her account completely", "She gives the drawbacks less attention than they deserve", "She is more critical of the technology than she admits"], answer: 1 },
   { id: "r24", band: 7, focus: "vocabulary", stem: "The latest data ___ suggests that the policy had little effect.", options: ["strongly", "hugely", "deeply"], answer: 0 },
   // C2
-  { id: "r25", band: 8, focus: "reading", passage: "To call the minister's reply evasive would be generous; it was less an answer than an elegant change of subject.", stem: "The writer thinks the reply was:", options: ["slightly unclear", "worse than evasive", "honest but brief"], answer: 1 },
+  { id: "r25", band: 8, focus: "reading", passage: "To call the minister's reply evasive would be generous; it was less an answer than an elegant change of subject.", stem: "The writer thinks the reply was:", options: ["a little unclear", "worse than evasive", "brief but honest"], answer: 1 },
   { id: "r26", band: 8, focus: "vocabulary", stem: "Her criticism was ___: polite on the surface, but clearly intended to wound.", options: ["veiled", "blunt", "candid"], answer: 0 },
   { id: "r27", band: 8, focus: "vocabulary", stem: "The report ___ over the most serious problems, mentioning them only in a footnote.", options: ["glossed", "looked", "passed"], answer: 0 },
 ];
@@ -83,19 +83,19 @@ export const LISTENING_ITEMS: ListeningItem[] = [
     stem: "What was the film like for the speaker?", options: ["Worse than expected", "Better than expected", "Exactly as expected"], answer: 1 },
   { id: "l06", band: 3, focus: "reading", speaker: "Speaker from India", audio: "l06.mp3",
     script: "If you're coming to the museum by bus, get off at the stop after the bridge, not at the main square. The square is closed this week because of the festival.",
-    stem: "Where should you get off the bus?", options: ["At the main square", "At the stop after the bridge", "Just before the bridge"], answer: 1 },
+    stem: "Where should you get off the bus?", options: ["At the main square, near the festival", "At the stop after the bridge", "At the stop just before the bridge"], answer: 1 },
   { id: "l07", band: 5, focus: "reading", speaker: "Speaker from Scotland", audio: "l07.mp3",
     script: "People assume that learning a language is mostly about memorising words. In my experience, though, the students who make the fastest progress are the ones who aren't afraid of making mistakes when they speak.",
-    stem: "What is the speaker's main point?", options: ["Vocabulary matters most", "Being willing to make mistakes helps progress", "Fast learners make fewer mistakes"], answer: 1 },
+    stem: "What is the speaker's main point?", options: ["Memorising lots of words is the key to progress", "Being willing to make mistakes helps progress", "The fastest learners rarely make mistakes"], answer: 1 },
   { id: "l08", band: 5, focus: "reading", speaker: "Speaker from Canada", audio: "l08.mp3",
     script: "We've had a lot of complaints about the new timetable, and, to be fair, some of them are justified. That said, going back to the old system isn't an option, so we'll be making a few adjustments instead.",
-    stem: "What will happen to the timetable?", options: ["They will return to the old one", "They will ignore the complaints", "They will change parts of the new one"], answer: 2 },
+    stem: "What will happen to the timetable?", options: ["They will go back to the old timetable", "They will ignore most of the complaints", "They will change parts of the new one"], answer: 2 },
   { id: "l09", band: 7, focus: "reading", speaker: "Speaker from England", audio: "l09.mp3",
     script: "It's tempting to see the decline of local newspapers as simply a story about technology. But that misses the point. What we've really lost is a shared space where a town could argue with itself.",
-    stem: "What does the speaker suggest?", options: ["Technology fully explains the decline", "The main loss is a place for local debate", "Local newspapers are recovering"], answer: 1 },
+    stem: "What does the speaker suggest?", options: ["Technology is the whole explanation for the decline", "The main loss is a place for local debate", "Local newspapers are slowly starting to recover"], answer: 1 },
   { id: "l10", band: 7, focus: "reading", speaker: "Speaker from the USA", audio: "l10.mp3",
     script: "I wouldn't say the experiment failed, exactly. It's more that it answered a question nobody had thought to ask.",
-    stem: "What is the speaker's attitude to the experiment?", options: ["It was a complete failure", "The result was unexpected but still valuable", "The researchers asked the wrong people"], answer: 1 },
+    stem: "What is the speaker's attitude to the experiment?", options: ["It was a complete failure and a waste of money", "The result was unexpected but still valuable", "The researchers made serious mistakes in their method"], answer: 1 },
 ];
 
 export type ProductionPrompt = { minBand: BandIndex; maxBand: BandIndex; text: string; hint: string; minWords?: number; maxSeconds?: number };

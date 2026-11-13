@@ -36,11 +36,11 @@ None of this is an argument for giving up at the first sign of difficulty. Persi
 
 Tired of starting things, you may be. Defeated by them, I hope not.`,
     items: [
-      ch("What is the writer's main argument?", ["We shouldn't feel guilty about every unfinished project, because starting things has value in itself.", "We should always finish what we start.", "Schools should stop giving grades."], 0, "Paragraphs 2–4."),
-      ch("What does 'the cult of completion' refer to?", ["A modern belief that only finished things count", "A religious group", "A school subject"], 0, "Schools and workplaces reward only finished work."),
-      ch("What is the function of 'Be that as it may' in paragraph 2?", ["It accepts that guilt is common before arguing it is harmful.", "It agrees that unfinished projects are bad.", "It introduces an example."], 0, "Concession, then the writer's counter-claim."),
-      ch("How does the writer limit the argument in paragraph 4?", ["Some things, like degrees and promises, really do need to be finished.", "Everything should be abandoned.", "Nobody should ever persist."], 0, "'None of this is an argument for giving up…'"),
-      ch("The final line uses…", ["fronting and ellipsis for a memorable, balanced ending", "a rhetorical question", "a quotation from an expert"], 0, "'Tired… you may be. Defeated…, I hope not.'"),
+      ch("What is the writer's main argument?", ["We shouldn't feel guilty about every unfinished project, because starting things has value in itself.", "We should always finish what we start, because unfinished projects make us feel guilty and unproductive.", "Schools should stop giving grades, because grades make students afraid of starting new projects."], 0, "Paragraphs 2–4."),
+      ch("What does 'the cult of completion' refer to?", ["A modern belief that only finished things count", "A group of people who never give up on projects", "A popular method for finishing projects quickly"], 0, "Schools and workplaces reward only finished work."),
+      ch("What is the function of 'Be that as it may' in paragraph 2?", ["It accepts that guilt is common before arguing it is harmful.", "It agrees that unfinished projects are usually a bad sign.", "It introduces an example that supports the previous sentence."], 0, "Concession, then the writer's counter-claim."),
+      ch("How does the writer limit the argument in paragraph 4?", ["Some things, like degrees and promises, really do need to be finished.", "Most projects should be abandoned as soon as they become difficult or boring.", "People who persist with every project tend to be less happy than others."], 0, "'None of this is an argument for giving up…'"),
+      ch("The final line uses…", ["fronting and ellipsis for a memorable, balanced ending", "a rhetorical question that invites the reader to decide", "a quotation from an expert to support the argument"], 0, "'Tired… you may be. Defeated…, I hope not.'"),
       gap("'Were it not", "the willingness to begin things…' (= if it weren't for)", ["for"], "Were it not for."),
     ],
   }],
@@ -48,9 +48,9 @@ Tired of starting things, you may be. Defeated by them, I hope not.`,
     {
       id: "c2-mid-l1", title: "A public lecture", audio: "p/c2mid-l1.mp3", speaker: "A lecturer from England",
       items: [
-        ch("How was nostalgia first understood?", ["As a disease, a dangerous homesickness", "As a type of poetry", "As a happy feeling"], 0, "'who regarded it as a disease'."),
+        ch("How was nostalgia first understood?", ["As a disease, a dangerous homesickness", "As a type of poetry about lost homes", "As a pleasant, harmless kind of memory"], 0, "'who regarded it as a disease'."),
         ch("How do psychologists see nostalgia today?", ["As broadly healthy", "As a serious illness", "As a myth"], 0, "'psychologists tend to see nostalgia as broadly healthy'."),
-        ch("What risk does the lecturer describe?", ["Taken too far, it turns the past into a fantasy.", "It makes people forget the past.", "It causes physical illness."], 0, "'a fantasy… is a poor guide to the future'."),
+        ch("What risk does the lecturer describe?", ["Taken too far, it turns the past into a fantasy.", "It makes people forget what really happened in the past.", "It can still cause serious physical illness today."], 0, "'a fantasy… is a poor guide to the future'."),
       ],
     },
     {
@@ -58,7 +58,7 @@ Tired of starting things, you may be. Defeated by them, I hope not.`,
       items: [
         ch("How did the camping trip go?", ["Badly", "Brilliantly", "It was cancelled"], 0, "'Not exactly our finest weekend' = understatement."),
         ch("When do festival tickets go on sale?", ["This afternoon", "Next March", "Tomorrow morning"], 0, "arvo = afternoon."),
-        ch("What does Jess offer?", ["To drive, if you buy the tickets", "To buy the tickets", "A new tent"], 0, "'If you could sort the tickets, I'd be happy to drive.'"),
+        ch("What does Jess offer?", ["To drive, if you buy the tickets", "To buy the tickets, if you drive", "To lend you her new tent"], 0, "'If you could sort the tickets, I'd be happy to drive.'"),
       ],
     },
   ],
@@ -114,11 +114,11 @@ Admittedly, this objection can sound like snobbery. Not everyone has ten spare h
 
 The danger lies elsewhere. It is that the summary becomes the standard by which we judge everything else. Once we are used to receiving ideas pre-digested, a difficult text begins to feel not challenging but badly designed. Why, we ask, does this writer take forty pages to say what could be said in four? And the honest answer, that some ideas cannot survive being shortened, becomes harder and harder to hear.`,
       items: [
-        ch("What is the 'seductive promise' of summaries?", ["Getting a book's ideas without spending hours reading it", "Making books more expensive", "Replacing writers with apps"], 0, "Paragraph 1."),
-        ch("Why, according to the writer, is a book more than a container for ideas?", ["Following its argument teaches us how a mind reaches its conclusions.", "Books are longer than summaries.", "Books are always more accurate."], 0, "'learning how a mind arrives at them'."),
-        ch("What is the purpose of paragraph 3?", ["To concede that summaries have real value before narrowing the criticism", "To attack people who read summaries", "To summarise the whole essay"], 0, "'Admittedly…' signals a concession."),
-        ch("What, finally, is 'the danger'?", ["That summaries make us judge difficult texts as badly designed", "That summaries contain errors", "That nobody reads any more"], 0, "Paragraph 4."),
-        ch("'keep the destination while discarding the journey' is…", ["a metaphor for keeping conclusions but losing the reasoning", "a literal description of travel", "a criticism of tourism"], 0, "Figurative language."),
+        ch("What is the 'seductive promise' of summaries?", ["Getting a book's ideas without spending hours reading it", "Making long books cheaper and easier for everyone to buy", "Replacing human writers with apps that write books instead"], 0, "Paragraph 1."),
+        ch("Why, according to the writer, is a book more than a container for ideas?", ["Following its argument teaches us how a mind reaches its conclusions.", "A book contains far more facts and examples than any summary can.", "Books are always more accurate, because summaries contain mistakes."], 0, "'learning how a mind arrives at them'."),
+        ch("What is the purpose of paragraph 3?", ["To concede that summaries have real value before narrowing the criticism", "To attack readers who rely on summaries instead of reading whole books", "To summarise the argument of the essay before reaching a conclusion"], 0, "'Admittedly…' signals a concession."),
+        ch("What, finally, is 'the danger'?", ["That summaries make us judge difficult texts as badly designed", "That summaries often contain errors that readers never notice", "That people will eventually stop reading books altogether"], 0, "Paragraph 4."),
+        ch("'keep the destination while discarding the journey' is…", ["a metaphor for keeping conclusions but losing the reasoning", "a literal description of how the writer prefers to travel", "a criticism of tourists who only visit famous places"], 0, "Figurative language."),
       ],
     },
     {
@@ -133,11 +133,11 @@ Hedging can, of course, be overdone. A text in which every claim is softened ("I
 
 For learners, the lesson is liberating. Precision is not about knowing more words; it is about choosing, among the words you already know, the ones that tell the reader exactly how confident you are, and why.`,
       items: [
-        ch("Why is 'This proves that social media causes depression' a problem?", ["It claims more certainty than the evidence allows.", "It has a grammar mistake.", "It's too informal."], 0, "Stance, not grammar."),
+        ch("Why is 'This proves that social media causes depression' a problem?", ["It claims more certainty than the evidence allows.", "It contains a grammar mistake in the verb.", "It's too informal for an academic essay."], 0, "Stance, not grammar."),
         ch("According to the writer, what do hedges signal when used well?", ["That the writer has weighed the evidence", "That the writer is unsure of their English", "That the writer is hiding something"], 0, "'they signal that the writer has weighed the evidence'."),
-        ch("What is the problem with 'It could perhaps be suggested that this might possibly indicate…'?", ["It's over-hedged, so it's unconvincing.", "It's too direct.", "It uses no verbs."], 0, "Hedging can be overdone."),
-        ch("What is 'the skill', according to paragraph 3?", ["Matching the strength of the language to the strength of the evidence", "Using as many hedges as possible", "Never hedging"], 0, "Calibration."),
-        ch("Why does the writer call the lesson 'liberating'?", ["Precision depends on choosing well, not on knowing more words.", "Learners can stop studying.", "Grammar doesn't matter."], 0, "Final paragraph."),
+        ch("What is the problem with 'It could perhaps be suggested that this might possibly indicate…'?", ["It's over-hedged, so it's unconvincing.", "It's far too direct and certain.", "It sounds too informal and chatty."], 0, "Hedging can be overdone."),
+        ch("What is 'the skill', according to paragraph 3?", ["Matching the strength of the language to the strength of the evidence", "Using as many hedges as possible so that no claim can be challenged", "Never hedging, because confident writing is always more persuasive"], 0, "Calibration."),
+        ch("Why does the writer call the lesson 'liberating'?", ["Precision depends on choosing well, not on knowing more words.", "Learners no longer need to study new vocabulary at all.", "Grammar matters much less than most teachers believe."], 0, "Final paragraph."),
       ],
     },
   ],
@@ -145,19 +145,19 @@ For learners, the lesson is liberating. Precision is not about knowing more word
     {
       id: "c2-gate-l1", title: "A campaign speech", audio: "p/c2gate-l1.mp3", speaker: "A campaigner from Scotland",
       items: [
-        ch("What three things were they told about the cinema?", ["Too old, too expensive and too far gone to save", "Too small, too quiet and too far away", "Too modern, too cheap and too popular"], 0, "Rule of three."),
-        ch("What happened last Saturday?", ["Four hundred people queued to watch a film there.", "The cinema was demolished.", "The council voted to save it."], 0, "'four hundred people queued around the block'."),
-        ch("What does the speaker say they are really fighting for?", ["A community", "A building", "Free films"], 0, "'It is not a building we are fighting for. It is a community.'"),
-        ch("Which device does 'We were told… We were told… We were told…' use?", ["Repetition to build momentum", "Understatement", "A pun"], 0, "Anaphora."),
+        ch("What three things were they told about the cinema?", ["Too old, too expensive and too far gone to save", "Too small, too quiet and too far from the centre", "Too modern, too plain and too unpopular to keep"], 0, "Rule of three."),
+        ch("What happened last Saturday?", ["Four hundred people queued to watch a film there.", "Workers began demolishing part of the cinema.", "The council voted to save the cinema at last."], 0, "'four hundred people queued around the block'."),
+        ch("What does the speaker say they are really fighting for?", ["A community", "An old building", "Cheaper films"], 0, "'It is not a building we are fighting for. It is a community.'"),
+        ch("Which device does 'We were told… We were told… We were told…' use?", ["Repetition to build momentum", "Understatement for irony", "A pun on the word 'told'"], 0, "Anaphora."),
       ],
     },
     {
       id: "c2-gate-l2", title: "A news bulletin", audio: "p/c2gate-l2.mp3", speaker: "A newsreader",
       items: [
         ch("What has the fitness-centre owner promised?", ["To keep fighting", "To resign", "To pay everyone double"], 0, "'vowed to fight on'."),
-        ch("What does the company concede?", ["Some records are incomplete.", "Wages were not paid.", "Money was moved abroad."], 0, "'it concedes that some records are incomplete'."),
-        ch("How did the owner's lawyers react to the allegation?", ["They dismissed it as absurd.", "They accepted it.", "They didn't comment."], 0, "'a claim his lawyers dismissed as absurd'."),
-        ch("What does 'somewhat optimistically' suggest about the council's description?", ["The newsreader doubts the cut is really temporary.", "The newsreader agrees completely.", "The programme has already returned."], 0, "Stance through an adverb."),
+        ch("What does the company concede?", ["Some records are incomplete.", "Some wages were paid late.", "Money was moved abroad legally."], 0, "'it concedes that some records are incomplete'."),
+        ch("How did the owner's lawyers react to the allegation?", ["They dismissed it as absurd.", "They accepted it and apologised.", "They refused to comment on it."], 0, "'a claim his lawyers dismissed as absurd'."),
+        ch("What does 'somewhat optimistically' suggest about the council's description?", ["The newsreader doubts the cut is really temporary.", "The newsreader agrees that it will be short.", "The programme is expected to return very soon."], 0, "Stance through an adverb."),
       ],
     },
   ],

@@ -23,7 +23,7 @@ So now we have a rule. She can play for twenty minutes after dinner. Then the ph
     questions: [
       { q: "Why did Tomás get a phone?", options: ["It was his birthday.", "He found it on the bus.", "His sister gave it to him."], answer: 0, why: "\"Last week was my birthday. My mum gave me a new phone.\"" },
       { q: "What does Tomás do on the bus?", options: ["He plays games.", "He listens to music.", "He takes photos of his dog."], answer: 1, why: "\"I also listen to music on the bus.\"" },
-      { q: "What is the new rule?", options: ["His sister can't use the phone.", "His sister can play for twenty minutes after dinner.", "Tomás can only use the phone at school."], answer: 1, why: "\"She can play for twenty minutes after dinner.\"" },
+      { q: "What is the new rule?", options: ["His sister can't use the phone on school days at all.", "His sister can play for twenty minutes after dinner.", "Tomás and his sister can play games for an hour."], answer: 1, why: "\"She can play for twenty minutes after dinner.\"" },
     ],
   },
   {
@@ -48,7 +48,7 @@ Every giraffe has a different pattern of spots, like a human fingerprint. No two
     questions: [
       { q: "How tall is an adult giraffe?", options: ["About two metres", "About five metres", "About sixteen metres"], answer: 1, why: "\"An adult giraffe is about five metres tall.\"" },
       { q: "How do giraffes often sleep?", options: ["Standing up", "In trees", "For sixteen hours"], answer: 0, why: "\"They often sleep standing up.\" Sixteen hours is how long they eat." },
-      { q: "What is special about a giraffe's spots?", options: ["They are all black.", "They change every year.", "Every giraffe has a different pattern."], answer: 2, why: "\"Every giraffe has a different pattern of spots, like a human fingerprint.\"" },
+      { q: "What is special about a giraffe's spots?", options: ["They are all brown with black lines.", "They change colour when the giraffe grows.", "Every giraffe has a different pattern."], answer: 2, why: "\"Every giraffe has a different pattern of spots, like a human fingerprint.\"" },
     ],
   },
   {
@@ -69,9 +69,9 @@ Today, thousands of tourists visit Comuna 13 every year to see the street art. V
       { word: "hope", means: "the feeling that good things can happen", es: "esperanza" },
     ],
     questions: [
-      { q: "What was Comuna 13 like when Valeria was a child?", options: ["Full of tourists", "Grey, and many people were afraid to go there", "Full of colourful walls"], answer: 1, why: "\"Many people were afraid to visit it. The streets were grey.\"" },
-      { q: "How did Valeria start painting?", options: ["An artist gave her paint and asked her to try.", "She studied art at university.", "Her grandmother taught her."], answer: 0, why: "\"An artist gave her a can of paint and said, 'Do you want to try?'\"" },
-      { q: "What does Valeria do now?", options: ["She sells paint.", "She works in a shop.", "She is a guide for tourists."], answer: 2, why: "\"She works as a guide.\"" },
+      { q: "What was Comuna 13 like when Valeria was a child?", options: ["Full of tourists who came to see the art", "Grey, and many people were afraid to go there", "Full of colourful walls and street art"], answer: 1, why: "\"Many people were afraid to visit it. The streets were grey.\"" },
+      { q: "How did Valeria start painting?", options: ["An artist gave her paint and asked her to try.", "She studied art at a university in Medellín.", "Her grandmother taught her to paint faces."], answer: 0, why: "\"An artist gave her a can of paint and said, 'Do you want to try?'\"" },
+      { q: "What does Valeria do now?", options: ["She sells paint to young artists.", "She works in a shop in the neighbourhood.", "She is a guide for tourists."], answer: 2, why: "\"She works as a guide.\"" },
     ],
   },
   {
@@ -94,9 +94,9 @@ But he also had good memories. At lunchtime, the children played football with a
       { word: "memories", means: "things you remember from the past", es: "recuerdos" },
     ],
     questions: [
-      { q: "How did Jorge get to school?", options: ["By bus", "He walked for an hour.", "His father drove him."], answer: 1, why: "\"Every morning I walked for an hour to get to school. There was no bus.\"" },
-      { q: "What was different about his school?", options: ["All the children studied in one room.", "It had many teachers.", "The children used computers."], answer: 0, why: "\"His school had only one room. Children of all ages studied together.\"" },
-      { q: "What happened if a child arrived late?", options: ["They went home.", "They cleaned the blackboards.", "They stood at the back of the room."], answer: 2, why: "\"If you arrived late, you stood at the back of the room for the whole lesson.\"" },
+      { q: "How did Jorge get to school?", options: ["He took a bus with other children.", "He walked for an hour.", "His father drove him in the car."], answer: 1, why: "\"Every morning I walked for an hour to get to school. There was no bus.\"" },
+      { q: "What was different about his school?", options: ["All the children studied in one room.", "It had a different teacher for each subject.", "The children wrote in notebooks for every subject."], answer: 0, why: "\"His school had only one room. Children of all ages studied together.\"" },
+      { q: "What happened if a child arrived late?", options: ["They had to go back home for the day.", "They cleaned all the blackboards after class.", "They stood at the back of the room."], answer: 2, why: "\"If you arrived late, you stood at the back of the room for the whole lesson.\"" },
     ],
   },
   {
@@ -117,9 +117,9 @@ So should you stop at 7,000? Not necessarily. More steps usually bring more bene
       { word: "not necessarily", means: "not always; maybe not", es: "no necesariamente" },
     ],
     questions: [
-      { q: "Where did the idea of 10,000 steps come from?", options: ["A scientific study", "The name of a step counter sold in Japan", "A doctor in the United States"], answer: 1, why: "It came from the name of a Japanese step counter. \"Nobody had done a scientific study.\"" },
-      { q: "What did recent studies find?", options: ["Health benefits start at around 7,000 steps.", "You need at least 15,000 steps.", "Walking doesn't help your heart."], answer: 0, why: "\"People who walk around 7,000 steps a day have a lower risk of heart problems.\"" },
-      { q: "What do scientists say is most important?", options: ["To walk exactly 10,000 steps", "To stop at 7,000 steps", "To move a little more than you do now"], answer: 2, why: "\"The most important thing… is to move a bit more than you do now.\"" },
+      { q: "Where did the idea of 10,000 steps come from?", options: ["A large scientific study of walkers in Japan", "The name of a step counter sold in Japan", "Advice from a famous doctor in the United States"], answer: 1, why: "It came from the name of a Japanese step counter. \"Nobody had done a scientific study.\"" },
+      { q: "What did recent studies find?", options: ["Health benefits start at around 7,000 steps.", "You need at least 15,000 steps for any benefit.", "Walking more than 3,000 steps doesn't help your heart."], answer: 0, why: "\"People who walk around 7,000 steps a day have a lower risk of heart problems.\"" },
+      { q: "What do scientists say is most important?", options: ["To walk exactly 10,000 steps every single day", "To stop walking when you reach 7,000 steps", "To move a little more than you do now"], answer: 2, why: "\"The most important thing… is to move a bit more than you do now.\"" },
     ],
   },
   {
@@ -142,9 +142,9 @@ Now Andrés is nineteen and studies to become a PE teacher. On Saturdays he coac
       { word: "coaches", means: "trains a team or a player", es: "entrena" },
     ],
     questions: [
-      { q: "Why were Andrés's parents worried?", options: ["He played games for many hours and his grades were falling.", "He wanted to be a teacher.", "He didn't like the e-sports club."], answer: 0, why: "\"He played video games for six or seven hours a day… His grades were falling.\"" },
-      { q: "Why did Andrés start doing his homework first?", options: ["His parents took his console.", "He needed good grades to play in the tournament.", "His friends told him to."], answer: 1, why: "To join the team, students had to keep their grades up, and he wanted to play in the tournament." },
-      { q: "What does Andrés teach the young players besides winning?", options: ["To play for longer", "To buy better consoles", "To take breaks and look after themselves"], answer: 2, why: "\"I also teach them to take breaks, drink water and go outside.\"" },
+      { q: "Why were Andrés's parents worried?", options: ["He played games for many hours and his grades were falling.", "He wanted to leave school and become a professional gamer.", "He spent all his time with friends and never stayed at home."], answer: 0, why: "\"He played video games for six or seven hours a day… His grades were falling.\"" },
+      { q: "Why did Andrés start doing his homework first?", options: ["His parents took his console away until he finished it.", "He needed good grades to play in the tournament.", "His friends in the club told him it would help him win."], answer: 1, why: "To join the team, students had to keep their grades up, and he wanted to play in the tournament." },
+      { q: "What does Andrés teach the young players besides winning?", options: ["To practise for longer every single day", "To buy better consoles and fast internet", "To take breaks and look after themselves"], answer: 2, why: "\"I also teach them to take breaks, drink water and go outside.\"" },
     ],
   },
 ];

@@ -21,8 +21,8 @@ This does not mean the original insight was worthless. Rather, it suggests that 
     ],
     questions: [
       { q: "What did the original jam study appear to show?", options: ["People bought more jam when they had fewer options.", "People preferred the larger display and bought more.", "Choice made no difference."], answer: 0, why: "Shoppers who saw six options \"were far more likely to actually buy a jar\"." },
-      { q: "What did a large review of later studies find?", options: ["The effect was even stronger than expected.", "On average, the number of options had virtually no effect, though it depended on circumstances.", "More choice always makes people happier."], answer: 1, why: "\"On average, the number of options had virtually no effect… The effect… depended on circumstances.\"" },
-      { q: "What is the writer's conclusion?", options: ["Shops should always offer fewer products.", "The original study was worthless.", "The real issue is usually how we navigate choice, not choice itself."], answer: 2, why: "\"The problem is seldom choice itself, but the absence of a clear way to navigate it.\"" },
+      { q: "What did a large review of later studies find?", options: ["The effect was even stronger than expected, especially when the options were complicated.", "On average, the number of options had virtually no effect, though it depended on circumstances.", "More choice made people happier in almost every situation the researchers tested."], answer: 1, why: "\"On average, the number of options had virtually no effect… The effect… depended on circumstances.\"" },
+      { q: "What is the writer's conclusion?", options: ["Shops should always offer fewer products, whatever they are selling.", "The original jam study was worthless and should be forgotten.", "The real issue is usually how we navigate choice, not choice itself."], answer: 2, why: "\"The problem is seldom choice itself, but the absence of a clear way to navigate it.\"" },
     ],
   },
   {
@@ -43,9 +43,9 @@ Courts have since appeared more cautious, with several later decisions emphasisi
       { word: "monopolised", means: "controlled completely by one person or company" },
     ],
     questions: [
-      { q: "What does copyright law aim to protect, in principle?", options: ["General styles and genres", "Specific original expression, such as a distinctive melody", "Every chord progression"], answer: 1, why: "\"It protects specific, original expression, such as a distinctive melody or particular lyrics, while leaving general ideas, styles… free.\"" },
-      { q: "Why did some musicians start keeping records of their creative process?", options: ["To prove independent authorship if accused of copying", "To sell them to fans", "Because the law required it"], answer: 0, why: "They were \"ready to prove their independent authorship if challenged\"." },
-      { q: "What tension does the writer identify at the end?", options: ["Between musicians and fans", "Between pop and classical music", "Between rewarding creativity and the imitation that creativity depends on"], answer: 2, why: "\"Copyright exists to reward creativity, yet creativity in music has always depended on imitation, quotation and reinvention.\"" },
+      { q: "What does copyright law aim to protect, in principle?", options: ["General styles, genres and the overall feel of a song", "Specific original expression, such as a distinctive melody", "Every chord progression used in a successful song"], answer: 1, why: "\"It protects specific, original expression, such as a distinctive melody or particular lyrics, while leaving general ideas, styles… free.\"" },
+      { q: "Why did some musicians start keeping records of their creative process?", options: ["To prove independent authorship if accused of copying", "To sell them to fans as part of special editions", "Because new copyright laws required all songwriters to do it"], answer: 0, why: "They were \"ready to prove their independent authorship if challenged\"." },
+      { q: "What tension does the writer identify at the end?", options: ["Between musicians who want income and fans who want free music", "Between pop music, which borrows a lot, and classical music, which doesn't", "Between rewarding creativity and the imitation that creativity depends on"], answer: 2, why: "\"Copyright exists to reward creativity, yet creativity in music has always depended on imitation, quotation and reinvention.\"" },
     ],
   },
   {
@@ -66,9 +66,9 @@ None of this amounts to an argument for cultivating misery. Chronic boredom, par
       { word: "corrosive", means: "gradually damaging or destructive" },
     ],
     questions: [
-      { q: "Why does the writer compare silencing boredom to switching off a smoke alarm?", options: ["Boredom is dangerous.", "Boredom may be a useful warning signal that we ignore.", "Smoke alarms are boring."], answer: 1, why: "Boredom is described as \"a signal… telling us that our current activity is not meaningful enough\"; silencing it ignores the warning." },
-      { q: "How does the writer present the link between boredom and creativity?", options: ["As proven beyond doubt", "As completely false", "As suggested by limited evidence"], answer: 2, why: "It has been linked \"albeit tentatively\", using \"one small study\"." },
-      { q: "Which statement best matches the final paragraph?", options: ["Occasional boredom can be valuable, but chronic boredom is harmful.", "People should try to be bored as often as possible.", "Screens should be banned."], answer: 0, why: "\"None of this amounts to an argument for cultivating misery. Chronic boredom… is corrosive… But there may be something to be said for occasionally resisting the reflex.\"" },
+      { q: "Why does the writer compare silencing boredom to switching off a smoke alarm?", options: ["Boredom is as dangerous as a fire if it lasts too long.", "Boredom may be a useful warning signal that we ignore.", "Both boredom and alarms are irritating, so we try to stop them."], answer: 1, why: "Boredom is described as \"a signal… telling us that our current activity is not meaningful enough\"; silencing it ignores the warning." },
+      { q: "How does the writer present the link between boredom and creativity?", options: ["As proven beyond doubt by many studies", "As a popular idea with no evidence at all", "As suggested by limited evidence"], answer: 2, why: "It has been linked \"albeit tentatively\", using \"one small study\"." },
+      { q: "Which statement best matches the final paragraph?", options: ["Occasional boredom can be valuable, but chronic boredom is harmful.", "People should try to be bored as often as they can, because it makes them creative.", "Screens should be banned in some places so that people are forced to think."], answer: 0, why: "\"None of this amounts to an argument for cultivating misery. Chronic boredom… is corrosive… But there may be something to be said for occasionally resisting the reflex.\"" },
     ],
   },
   {
@@ -89,9 +89,9 @@ Yet technology alone cannot resolve the deeper question of selection. Previous g
       { word: "curate", means: "select, organise and look after a collection" },
     ],
     questions: [
-      { q: "What is the paradox described in the first paragraph?", options: ["We produce huge amounts of data, but much of it may become unreadable.", "Ancient tablets are harder to read than digital files.", "Historians are not interested in our century."], answer: 0, why: "We produce data \"on an unprecedented scale\", yet it's stored in formats that are \"startlingly fragile\"." },
-      { q: "Which risk is NOT mentioned in the second paragraph?", options: ["Storage media degrading", "File formats becoming obsolete", "Governments deliberately deleting data"], answer: 2, why: "The paragraph mentions degrading media, obsolete formats and platforms shutting down, but not government deletion." },
-      { q: "What is the writer's main point in the final paragraph?", options: ["DNA storage will solve the problem.", "The key question is consciously deciding what deserves to be preserved.", "We should stop producing data."], answer: 1, why: "\"Technology alone cannot resolve the deeper question of selection… whether we ever decide, consciously, what deserves to last.\"" },
+      { q: "What is the paradox described in the first paragraph?", options: ["We produce huge amounts of data, but much of it may become unreadable.", "Ancient clay tablets are now harder to read than most modern digital files.", "Future historians will probably not be very interested in our century."], answer: 0, why: "We produce data \"on an unprecedented scale\", yet it's stored in formats that are \"startlingly fragile\"." },
+      { q: "Which risk is NOT mentioned in the second paragraph?", options: ["Storage media such as hard drives degrading", "File formats becoming obsolete as software disappears", "Governments deliberately deleting data"], answer: 2, why: "The paragraph mentions degrading media, obsolete formats and platforms shutting down, but not government deletion." },
+      { q: "What is the writer's main point in the final paragraph?", options: ["New technologies such as DNA storage will probably solve the problem.", "The key question is consciously deciding what deserves to be preserved.", "We should produce much less data so that we can keep all of it."], answer: 1, why: "\"Technology alone cannot resolve the deeper question of selection… whether we ever decide, consciously, what deserves to last.\"" },
     ],
   },
 ];

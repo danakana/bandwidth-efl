@@ -37,11 +37,11 @@ Supporters admit these problems are real. Nevertheless, they argue that the mura
 
 Whether the city can keep that energy without losing control of its streets is still an open question. What seems clear is that, for many young people, the walls are where Bogotá talks back.`,
     items: [
-      ch("What is the main idea of the article?", ["Street art in Bogotá has gone from being punished to being part of the city's identity, though not without problems.", "Graffiti tours are the best way to see Bogotá.", "The city should ban tags but keep murals."], 0, "The first and last paragraphs frame the whole change."),
-      ch("What helped change the city's rules?", ["Public anger after a young artist was killed", "A rise in tourism", "Complaints from shop owners"], 0, "Paragraph 2: 'The public anger that followed pushed the city to rethink…'"),
+      ch("What is the main idea of the article?", ["Street art in Bogotá has gone from being punished to being part of the city's identity, though not without problems.", "Graffiti tours have become the most popular way for tourists to discover the history of Bogotá.", "Bogotá should keep its large murals but continue to punish the artists who paint tags."], 0, "The first and last paragraphs frame the whole change."),
+      ch("What helped change the city's rules?", ["Public anger after a young artist was killed", "A sudden rise in tourists visiting the murals", "Complaints from shop owners about damaged walls"], 0, "Paragraph 2: 'The public anger that followed pushed the city to rethink…'"),
       ch("Under the new rules, artists can paint a wall legally if…", ["the owner agrees", "they pay a fee", "it is in a poor neighbourhood"], 0, "'as long as the owner agreed'."),
-      ch("What is the critics' point about the tours?", ["They don't share the benefits fairly.", "They are too expensive for tourists.", "They damage the murals."], 0, "Tours visit 'the same few blocks', while some artists 'see little of the money'."),
-      ch("In paragraph 4, 'Supporters admit these problems are real. Nevertheless, …' The writer is…", ["presenting a concession, then the supporters' main argument", "changing the topic", "agreeing with the critics"], 0, "Concede, then counter."),
+      ch("What is the critics' point about the tours?", ["They don't share the benefits fairly.", "They are much too expensive for tourists.", "Large groups of visitors damage the murals."], 0, "Tours visit 'the same few blocks', while some artists 'see little of the money'."),
+      ch("In paragraph 4, 'Supporters admit these problems are real. Nevertheless, …' The writer is…", ["presenting a concession, then the supporters' main argument", "moving on to a completely different topic", "agreeing with the critics and dropping the argument"], 0, "Concede, then counter."),
       gap("The artist compares a museum, which waits for you, with a wall, which comes out to", "you.", ["meet"], "Quoted in paragraph 4."),
     ],
   }],
@@ -50,7 +50,7 @@ Whether the city can keep that energy without losing control of its streets is s
       id: "mid-l1", title: "The beach clean-up", audio: "p/b2mid-l1.mp3", speaker: "Speaker from Nigeria",
       items: [
         ch("Why did the speaker first take part?", ["A friend persuaded him to go.", "His school made it compulsory.", "He wanted to meet fishermen."], 0, "'my friend dragged me along'."),
-        ch("What surprised him most?", ["How many passers-by joined in", "How much plastic there was", "How early they had to start"], 0, "'What surprised me most wasn't the rubbish… It was how many people… joined in.'"),
+        ch("What surprised him most?", ["How many passers-by joined in", "How much plastic they found in one morning", "How early in the morning they had to start"], 0, "'What surprised me most wasn't the rubbish… It was how many people… joined in.'"),
         ch("What does he plan to do next month?", ["Go back and bring his friends", "Organise a clean-up on another beach", "Stop volunteering"], 0, "'this time I'm the one dragging my friends'."),
       ],
     },
@@ -117,11 +117,11 @@ Brands insist they are changing. Many now offer recycling schemes or "conscious"
 
 So what can an ordinary teenager do? Buying nothing is unrealistic for most people. Buying less, and keeping clothes for longer, is not. Second-hand apps, clothing swaps and simple repairs are arguably more effective than any label promising that a product is "green".`,
       items: [
-        ch("What does the writer mean in paragraph 1?", ["Cheap clothes have hidden costs that the buyer doesn't see.", "T-shirts are now more expensive than sandwiches.", "Shops charge extra at the till."], 0, "'you simply don't pay for it at the till'."),
-        ch("How does the writer treat the figure for carbon emissions?", ["With caution: it is often quoted but hard to measure.", "As a proven fact.", "As obviously exaggerated."], 0, "'often said to… estimates vary widely… difficult to measure' = hedging."),
-        ch("Why do campaigners think brands could pay workers more?", ["Labour is only a small part of a garment's final cost.", "Shoppers would happily pay more.", "Factories already earn high profits."], 0, "'labour tends to make up only a small part of the final cost'."),
+        ch("What does the writer mean in paragraph 1?", ["Cheap clothes have hidden costs that the buyer doesn't see.", "T-shirts now cost more than a sandwich in most cities.", "Shops often add charges at the till that buyers don't expect."], 0, "'you simply don't pay for it at the till'."),
+        ch("How does the writer treat the figure for carbon emissions?", ["With caution: it is often quoted but hard to measure.", "As a proven fact that most experts agree on.", "As a clear exaggeration invented by campaigners."], 0, "'often said to… estimates vary widely… difficult to measure' = hedging."),
+        ch("Why do campaigners think brands could pay workers more?", ["Labour is only a small part of a garment's final cost.", "Shoppers have said they'd happily pay higher prices.", "Factories already earn very high profits from brands."], 0, "'labour tends to make up only a small part of the final cost'."),
         ch("'Critics, though, are not entirely convinced.' This suggests critics are…", ["quite doubtful", "completely satisfied", "slightly impressed"], 0, "'Not entirely convinced' is understatement for real doubt."),
-        ch("What does the writer recommend?", ["Buying fewer clothes and making them last", "Only buying clothes labelled 'green'", "Never buying new clothes"], 0, "'Buying less, and keeping clothes for longer, is not [unrealistic].'"),
+        ch("What does the writer recommend?", ["Buying fewer clothes and making them last", "Only buying clothes with a 'green' label", "Never buying new clothes again, only used ones"], 0, "'Buying less, and keeping clothes for longer, is not [unrealistic].'"),
       ],
     },
     {
@@ -139,10 +139,10 @@ What surprised me most was how little I actually missed. The news still reached 
 Would I recommend it? Not for everyone, and probably not for ever. I've reinstalled one app, with the notifications switched off. But I no longer reach for my phone forty-three times a day, and that, for me, is the point.`,
       items: [
         ch("'The first week was not exactly relaxing.' The writer means the first week was…", ["difficult", "boring", "very relaxing"], 0, "'Not exactly' + positive = understatement for a negative."),
-        ch("Why does the writer mention the weather in Medellín?", ["To show, humorously, how often he checked his phone", "Because the weather was unusual", "Because he wanted to be a meteorologist"], 0, "His thumb 'wandered off to check the weather instead'."),
+        ch("Why does the writer mention the weather in Medellín?", ["To show, humorously, how often he checked his phone", "To explain why he stayed at home that week", "To complain that the weather app was often wrong"], 0, "His thumb 'wandered off to check the weather instead'."),
         ch("What changed in the second week?", ["He began to complete activities.", "He reinstalled the apps.", "He stopped talking to his friends."], 0, "'I started finishing things'."),
-        ch("How did he feel about missing the party?", ["Upset, though he says it lightly", "Relieved", "He didn't care at all"], 0, "'not my favourite evening' = understatement."),
-        ch("What is his final position?", ["A break helped him, but he doesn't think everyone needs to quit completely.", "Everyone should delete social media for ever.", "The experiment was a waste of time."], 0, "'Not for everyone, and probably not for ever… that, for me, is the point.'"),
+        ch("How did he feel about missing the party?", ["Upset, though he says it lightly", "Relieved, because he didn't want to go", "Completely indifferent to it"], 0, "'not my favourite evening' = understatement."),
+        ch("What is his final position?", ["A break helped him, but he doesn't think everyone needs to quit completely.", "Everyone should delete their social media accounts for good.", "The break was a waste of time, and nothing really changed for him."], 0, "'Not for everyone, and probably not for ever… that, for me, is the point.'"),
       ],
     },
   ],
@@ -150,19 +150,19 @@ Would I recommend it? Not for everyone, and probably not for ever. I've reinstal
     {
       id: "gate-l1", title: "On a coffee farm", audio: "p/b2gate-l1.mp3", speaker: "A tour guide",
       items: [
-        ch("According to the guide, why does altitude improve the coffee?", ["Cool nights make the cherries ripen more slowly.", "There are fewer insects up the mountain.", "It rains less at that height."], 0, "'the cool nights slow the cherries down… sweeter, more complex flavour'."),
-        ch("Why is the coffee picked by hand?", ["Machines can't tell ripe from unripe cherries.", "It is cheaper than using machines.", "Tourists like to watch."], 0, "'a machine can't tell a ripe cherry from a green one'."),
+        ch("According to the guide, why does altitude improve the coffee?", ["Cool nights make the cherries ripen more slowly.", "There are fewer insects that damage the plants.", "It rains less, so the beans are drier when picked."], 0, "'the cool nights slow the cherries down… sweeter, more complex flavour'."),
+        ch("Why is the coffee picked by hand?", ["Machines can't tell ripe from unripe cherries.", "Picking by hand is cheaper than buying machines.", "Tourists pay to watch and take part in the harvest."], 0, "'a machine can't tell a ripe cherry from a green one'."),
         gap("A single green cherry can spoil the taste of a whole", ".", ["batch"], "'can spoil the taste of a whole batch'."),
-        ch("What does the guide suggest about the future?", ["Farms like hers might eventually have nowhere higher to go.", "Climate change will improve the coffee.", "The farm will soon move to another country."], 0, "'farms like ours may simply run out of mountain'."),
+        ch("What does the guide suggest about the future?", ["Farms like hers might eventually have nowhere higher to go.", "Warmer weather will slowly improve the taste of the coffee.", "The family plans to move the farm to another country soon."], 0, "'farms like ours may simply run out of mountain'."),
       ],
     },
     {
       id: "gate-l2", title: "A debate speech", audio: "p/b2gate-l2.mp3", speaker: "Speaker from Canada",
       items: [
-        ch("What is the speaker's position?", ["Against banning AI tools for homework", "For banning AI tools for homework", "Undecided"], 0, "'I'm speaking against it'."),
-        ch("What does he concede?", ["Some students may let AI think for them.", "AI tools are always accurate.", "Homework is unnecessary."], 0, "'Admittedly, there's a real risk that some students will let a chatbot do their thinking'."),
+        ch("What is the speaker's position?", ["Against banning AI tools for homework", "In favour of banning AI tools for homework", "Undecided: he can see both sides equally"], 0, "'I'm speaking against it'."),
+        ch("What does he concede?", ["Some students may let AI think for them.", "AI tools are usually accurate enough.", "Homework has become unnecessary for most students."], 0, "'Admittedly, there's a real risk that some students will let a chatbot do their thinking'."),
         ch("Why does he call a ban 'unrealistic'?", ["The tools are on everyone's phone.", "Teachers can't agree on the rules.", "It would be too expensive."], 0, "'the tools are on every phone in this room'."),
-        ch("What does he propose instead?", ["Homework that asks students to check and improve AI answers", "Letting AI write all homework", "Doing all homework in class"], 0, "'homework that asks students to check, correct and improve what the AI produces'."),
+        ch("What does he propose instead?", ["Homework that asks students to check and improve AI answers", "Letting students use AI for any homework they choose", "Doing all homework in class, with no screens allowed"], 0, "'homework that asks students to check, correct and improve what the AI produces'."),
       ],
     },
   ],

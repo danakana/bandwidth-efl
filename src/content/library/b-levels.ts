@@ -22,9 +22,9 @@ Perhaps the most likely future is a mix: machines doing the repetitive, dangerou
       { word: "repetitive", means: "doing the same thing again and again" },
     ],
     questions: [
-      { q: "According to supporters, how could robot kitchens help?", options: ["By making food more creative", "By solving staff shortages and reducing food waste", "By giving young people jobs"], answer: 1, why: "Restaurants \"struggle to find staff\" and robots \"measure ingredients exactly, which means less food is wasted\"." },
-      { q: "Why have some robot restaurants closed?", options: ["Customers didn't like the food.", "The robots were too slow.", "The machines were expensive to buy and repair."], answer: 2, why: "\"The machines were expensive to buy and repair.\"" },
-      { q: "What does the writer think is most likely?", options: ["Robots will replace all cooks.", "A mix of robots doing repetitive work and people doing creative work", "Robot kitchens will disappear."], answer: 1, why: "\"Perhaps the most likely future is a mix.\"" },
+      { q: "According to supporters, how could robot kitchens help?", options: ["By making dishes more creative and changing them every season", "By solving staff shortages and reducing food waste", "By giving young people their first job in a kitchen"], answer: 1, why: "Restaurants \"struggle to find staff\" and robots \"measure ingredients exactly, which means less food is wasted\"." },
+      { q: "Why have some robot restaurants closed?", options: ["Customers complained that the food didn't taste good.", "The robots were too slow to cook for busy lunchtimes.", "The machines were expensive to buy and repair."], answer: 2, why: "\"The machines were expensive to buy and repair.\"" },
+      { q: "What does the writer think is most likely?", options: ["Robots will replace all cooks in restaurants within a few years.", "A mix of robots doing repetitive work and people doing creative work", "Robot kitchens will disappear because they are too expensive to run."], answer: 1, why: "\"Perhaps the most likely future is a mix.\"" },
     ],
   },
   {
@@ -47,9 +47,9 @@ So next time someone tells you that reading novels or watching films is a waste 
       { word: "passed on", means: "gave knowledge to the next people or generation" },
     ],
     questions: [
-      { q: "Why do teachers often start lessons with a story, according to the text?", options: ["Stories are shorter than lists.", "Our brains remember events that happen to people better than facts.", "Students prefer films."], answer: 1, why: "\"Our brains are not very good at remembering lists of facts, but they are excellent at remembering events that happen to people.\"" },
-      { q: "What happened in the experiment?", options: ["People who watched an emotional story gave more money to charity.", "People forgot the story quickly.", "People stopped trusting each other."], answer: 0, why: "They \"were more likely to give money to charity afterwards\"." },
-      { q: "What is the main social reason for stories, according to the writer?", options: ["To entertain children", "To sell products", "To pass on knowledge that helped people survive"], answer: 2, why: "\"Stories were how humans passed on knowledge… People who listened carefully had a better chance of surviving.\"" },
+      { q: "Why do teachers often start lessons with a story, according to the text?", options: ["Stories are usually shorter and simpler than lists of facts.", "Our brains remember events that happen to people better than facts.", "Students pay more attention when a lesson starts with a film."], answer: 1, why: "\"Our brains are not very good at remembering lists of facts, but they are excellent at remembering events that happen to people.\"" },
+      { q: "What happened in the experiment?", options: ["People who watched an emotional story gave more money to charity.", "People who watched a funny story remembered it for much longer.", "People who watched a sad story trusted each other a lot less."], answer: 0, why: "They \"were more likely to give money to charity afterwards\"." },
+      { q: "What is the main social reason for stories, according to the writer?", options: ["To entertain children before they went to sleep", "To help people sell products at the market", "To pass on knowledge that helped people survive"], answer: 2, why: "\"Stories were how humans passed on knowledge… People who listened carefully had a better chance of surviving.\"" },
     ],
   },
   {
@@ -72,9 +72,9 @@ Soriano's story is now told in documentaries and children's books. But perhaps i
       { word: "donations", means: "money or things given to help" },
     ],
     questions: [
-      { q: "What problem did Luis Soriano notice?", options: ["Children in rural villages had very little access to books.", "The school had no teachers.", "Children didn't want to read."], answer: 0, why: "\"Many children… had never owned a book. The nearest library was hours away.\"" },
-      { q: "What kept Soriano going despite the difficulties?", options: ["The money he earned", "The children's enthusiasm", "The journalists"], answer: 1, why: "\"But the children's enthusiasm kept him going.\"" },
-      { q: "What is the writer's main message at the end?", options: ["Donkeys are the best way to travel.", "Education always needs big budgets.", "One determined person can make a big difference in education."], answer: 2, why: "\"Big changes in education don't always need big budgets. Sometimes they need one person who refuses…\"" },
+      { q: "What problem did Luis Soriano notice?", options: ["Children in rural villages had very little access to books.", "The village schools didn't have enough teachers for everyone.", "Children in the villages weren't interested in reading."], answer: 0, why: "\"Many children… had never owned a book. The nearest library was hours away.\"" },
+      { q: "What kept Soriano going despite the difficulties?", options: ["The money he earned from donations", "The children's enthusiasm", "The attention from journalists and TV"], answer: 1, why: "\"But the children's enthusiasm kept him going.\"" },
+      { q: "What is the writer's main message at the end?", options: ["Donkeys are still the best way to reach remote villages today.", "Real change in education always needs a big government budget.", "One determined person can make a big difference in education."], answer: 2, why: "\"Big changes in education don't always need big budgets. Sometimes they need one person who refuses…\"" },
     ],
   },
   {
@@ -96,8 +96,8 @@ So if you like music while you study, the advice is simple: choose songs without
     ],
     questions: [
       { q: "When does the brain often release dopamine during a song?", options: ["Just before the best moment", "Only at the end", "When the song is sad"], answer: 0, why: "\"The brain often releases it slightly before the best moment of a song.\"" },
-      { q: "How do some hospitals use music?", options: ["To wake patients up", "To help patients relax before operations", "To replace all pain medicine"], answer: 1, why: "\"Hospitals… use music to help patients relax before operations.\" It may reduce, not replace, medicine." },
-      { q: "Why can music with lyrics make difficult studying harder?", options: ["It's too loud.", "It makes people sleepy.", "The brain tries to process the song's words and the text at the same time."], answer: 2, why: "\"The brain tries to process the words of the song and the words on the page at the same time.\"" },
+      { q: "How do some hospitals use music?", options: ["To wake patients up gently after operations", "To help patients relax before operations", "To replace all pain medicine with music"], answer: 1, why: "\"Hospitals… use music to help patients relax before operations.\" It may reduce, not replace, medicine." },
+      { q: "Why can music with lyrics make difficult studying harder?", options: ["Most students play their music far too loud when they study.", "Slow songs in a minor key make people feel sad and sleepy.", "The brain tries to process the song's words and the text at the same time."], answer: 2, why: "\"The brain tries to process the words of the song and the words on the page at the same time.\"" },
     ],
   },
   {
@@ -118,9 +118,9 @@ The good news is that small changes can shift the balance back. Turning off non-
       { word: "friction", means: "(here) a small difficulty that slows you down" },
     ],
     questions: [
-      { q: "What does \"you are the product\" mean in the text?", options: ["Users design the apps.", "Companies sell users' attention to advertisers.", "Users pay a monthly fee."], answer: 1, why: "\"Their real business is selling advertising… Your attention… is what's being sold.\"" },
-      { q: "Why do unpredictable notifications matter, according to researchers?", options: ["They make us check our phones more often.", "They are easier to ignore.", "They use less battery."], answer: 0, why: "They make us check \"more often than regular, predictable rewards would\"." },
-      { q: "What is the writer's attitude to social media?", options: ["It should be banned for teenagers.", "It has no real benefits.", "It has benefits, but users should take control of how they use it."], answer: 2, why: "\"None of this means that social media is simply bad… The aim isn't to quit, but to make sure you're the one deciding.\"" },
+      { q: "What does \"you are the product\" mean in the text?", options: ["Users help to design the apps they use every day.", "Companies sell users' attention to advertisers.", "Users pay a monthly fee for the extra features."], answer: 1, why: "\"Their real business is selling advertising… Your attention… is what's being sold.\"" },
+      { q: "Why do unpredictable notifications matter, according to researchers?", options: ["They make us check our phones more often.", "They are much easier to ignore than regular ones.", "They use less battery than other notifications."], answer: 0, why: "They make us check \"more often than regular, predictable rewards would\"." },
+      { q: "What is the writer's attitude to social media?", options: ["It should be banned for teenagers until they are old enough to control it.", "It has no real benefits, because it's designed only to sell adverts.", "It has benefits, but users should take control of how they use it."], answer: 2, why: "\"None of this means that social media is simply bad… The aim isn't to quit, but to make sure you're the one deciding.\"" },
     ],
   },
   {
@@ -142,8 +142,8 @@ What the most successful projects seem to have in common is that they don't just
     ],
     questions: [
       { q: "What did shop owners in Pontevedra fear?", options: ["That customers would go to shopping centres on the outskirts", "That tourists would stop coming", "That pollution would increase"], answer: 0, why: "\"Customers, they argued, would simply go to shopping centres on the outskirts.\"" },
-      { q: "Which criticism is mentioned?", options: ["Bike lanes are too expensive.", "Restrictions can push traffic into poorer neighbourhoods.", "Pedestrians cause accidents."], answer: 1, why: "\"Restrictions have pushed traffic into surrounding neighbourhoods, which are often poorer.\"" },
-      { q: "According to the writer, what do successful projects have in common?", options: ["They ban cars quickly and completely.", "They charge drivers high fees.", "They offer good alternatives before restricting cars."], answer: 2, why: "\"They offer alternatives first: frequent public transport, safe routes for bikes…\"" },
+      { q: "Which criticism is mentioned?", options: ["Protected bike lanes cost cities far too much to build.", "Restrictions can push traffic into poorer neighbourhoods.", "More pedestrians in the centre cause more traffic accidents."], answer: 1, why: "\"Restrictions have pushed traffic into surrounding neighbourhoods, which are often poorer.\"" },
+      { q: "According to the writer, what do successful projects have in common?", options: ["They ban cars from the centre quickly and completely.", "They charge drivers high fees to enter the city centre.", "They offer good alternatives before restricting cars."], answer: 2, why: "\"They offer alternatives first: frequent public transport, safe routes for bikes…\"" },
     ],
   },
   {
@@ -164,9 +164,9 @@ Today, many children in Palenque learn the language at school, and young musicia
       { word: "intangible heritage", means: "traditions, knowledge and practices passed down, not physical objects" },
     ],
     questions: [
-      { q: "Why did many parents raise their children in Spanish?", options: ["They had forgotten Palenquero.", "They hoped it would give their children better opportunities.", "Schools didn't allow Palenquero."], answer: 1, why: "Parents chose Spanish \"hoping it would give them better opportunities\"." },
+      { q: "Why did many parents raise their children in Spanish?", options: ["They had forgotten most of the Palenquero they once knew.", "They hoped it would give their children better opportunities.", "Local schools didn't allow children to speak Palenquero."], answer: 1, why: "Parents chose Spanish \"hoping it would give them better opportunities\"." },
       { q: "Where did the turning point come from, according to the text?", options: ["From the community's teachers and elders", "From the national government", "From tourists"], answer: 0, why: "\"The turning point came from within the community. Teachers and elders began to argue…\"" },
-      { q: "What is the writer's view about the language's future?", options: ["It will certainly replace Spanish.", "It will disappear soon.", "It's uncertain, but it depends mainly on speakers' decision to keep it."], answer: 2, why: "\"Whether it will become an everyday language again remains uncertain… depends less on numbers than on whether its speakers decide it is worth keeping.\"" },
+      { q: "What is the writer's view about the language's future?", options: ["It will certainly replace Spanish as the town's everyday language.", "It will disappear within a generation, despite the schools' efforts.", "It's uncertain, but it depends mainly on speakers' decision to keep it."], answer: 2, why: "\"Whether it will become an everyday language again remains uncertain… depends less on numbers than on whether its speakers decide it is worth keeping.\"" },
     ],
   },
   {
@@ -187,9 +187,9 @@ These discoveries matter far beyond curiosity. Some deep-sea organisms have prov
       { word: "compounds", means: "chemical substances made of two or more elements" },
     ],
     questions: [
-      { q: "Why does most of the deep sea remain unexplored?", options: ["Because of extreme conditions such as darkness, cold and pressure", "Because nothing lives there", "Because it is too close to the Moon"], answer: 0, why: "\"Largely because of the extreme conditions down there\": no light, near-freezing water and crushing pressure." },
-      { q: "What is special about ecosystems around hydrothermal vents?", options: ["They are very cold.", "They survive without energy from the sun.", "They are full of plants."], answer: 1, why: "\"Entire ecosystems survive without any energy from the sun, relying instead on bacteria that turn chemicals into food.\"" },
-      { q: "What do many scientists argue at the end?", options: ["Mining should start as soon as possible.", "Deep-sea creatures are dangerous.", "We should understand deep-sea ecosystems before risking their destruction."], answer: 2, why: "\"We should understand these ecosystems better before we risk destroying them.\"" },
+      { q: "Why does most of the deep sea remain unexplored?", options: ["Because of extreme conditions such as darkness, cold and pressure", "Because scientists believed for years that nothing could live there", "Because maps of the Moon were more important to scientists"], answer: 0, why: "\"Largely because of the extreme conditions down there\": no light, near-freezing water and crushing pressure." },
+      { q: "What is special about ecosystems around hydrothermal vents?", options: ["They are colder than the rest of the sea.", "They survive without energy from the sun.", "They are full of plants that need sunlight."], answer: 1, why: "\"Entire ecosystems survive without any energy from the sun, relying instead on bacteria that turn chemicals into food.\"" },
+      { q: "What do many scientists argue at the end?", options: ["Deep-sea mining should start as soon as possible, because the metals are needed.", "Deep-sea creatures could be dangerous to divers and should be studied from a distance.", "We should understand deep-sea ecosystems before risking their destruction."], answer: 2, why: "\"We should understand these ecosystems better before we risk destroying them.\"" },
     ],
   },
 ];

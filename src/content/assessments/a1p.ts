@@ -56,7 +56,7 @@ I go to school by bus. School starts at seven o'clock. My favourite subject is a
       items: [
         ch("What page do they open?", ["Twenty", "Twelve", "Two"], 0, "'page twenty'."),
         ch("How many children are in the picture?", ["Three", "Two", "Four"], 0, "'three children in the garden'."),
-        ch("What are the children doing?", ["Playing with a dog", "Eating", "Reading"], 0, "'They are playing with a dog.'"),
+        ch("What are the children doing?", ["Playing with a dog", "Eating cake in the garden", "Working in pairs"], 0, "'They are playing with a dog.'"),
       ],
     },
   ],
@@ -117,7 +117,7 @@ There are races, football and volleyball. Parents can come and watch. Don't brin
         ch("Where is Sports Day if it rains?", ["In the gym", "In the classroom", "There's no Sports Day"], 0, "'If it rains, we are in the gym.'"),
         ch("Why do students need a cap?", ["It's usually hot.", "It's part of the uniform.", "For the races."], 0, "'it's usually hot'."),
         ch("Which thing is NOT allowed?", ["A phone", "A water bottle", "A cap"], 0, "'Don't bring your phone.'"),
-        ch("What happens at 10:30?", ["Free fruit and juice", "The football match", "Parents arrive"], 0, "Last line."),
+        ch("What happens at 10:30?", ["Free fruit and juice", "The races and football start", "Everyone goes into the gym"], 0, "Last line."),
       ],
     },
     {
@@ -135,11 +135,11 @@ Today it's cold and windy, so I'm wearing my big jacket. Tomorrow we're going to
 See you on Monday,
 Martín`,
       items: [
-        ch("Where is Martín?", ["At his grandparents' house", "At school", "At a hotel"], 0, "Paragraph 1."),
+        ch("Where is Martín?", ["At his grandparents' house", "At the dinosaur museum", "At a hotel in Villa de Leyva"], 0, "Paragraph 1."),
         ch("What are the houses like?", ["White", "New", "Big and red"], 0, "Paragraph 1."),
         ch("What can his grandpa do?", ["Ride a horse", "Make soup", "Play the guitar"], 0, "Paragraph 2."),
         ch("What do they buy every morning?", ["Bread", "Soup", "Fruit"], 0, "Paragraph 2."),
-        ch("Why is Martín wearing his big jacket?", ["It's cold and windy.", "It's raining.", "He's at the museum."], 0, "Paragraph 3."),
+        ch("Why is Martín wearing his big jacket?", ["It's cold and windy.", "He is going to ride a horse.", "The museum is cold inside."], 0, "Paragraph 3."),
       ],
     },
   ],
@@ -147,8 +147,8 @@ Martín`,
     {
       id: "a1p-gate-l1", title: "A phone message", audio: "p/a1pgate-l1.mp3", speaker: "A girl",
       items: [
-        ch("Who is Lucía calling?", ["Her grandma", "Her mum", "Her friend"], 0, "'Hello, Grandma!'"),
-        ch("Where is Lucía?", ["At the park", "At home", "At school"], 0, "'I'm at the park'."),
+        ch("Who is Lucía calling?", ["Her grandma", "Her mum", "Her friends at the park"], 0, "'Hello, Grandma!'"),
+        ch("Where is Lucía?", ["At the park", "At her grandma's house", "At school"], 0, "'I'm at the park'."),
         ch("What's the weather like?", ["Sunny and warm", "Cold and rainy", "Windy"], 0, "'It's sunny and warm today.'"),
         ch("What time is Mum coming?", ["At five o'clock", "At four o'clock", "At nine o'clock"], 0, "'at five o'clock'."),
       ],

@@ -271,7 +271,7 @@ const L1: ListBlock["items"] = [
   { stem: "What will the weather be like in the afternoon?", audio: [clip("1-6", F.aoife, "Tomorrow morning will be cloudy and cool, but in the afternoon we expect heavy rain, so take an umbrella if you're going out after lunch.")],
     ...q("apl1-6", undefined, 1, [o("Cloudy and cool", "That's the morning."), o("Rainy", "'In the afternoon we expect heavy rain.'"), o("Sunny", "Sun isn't mentioned.")]) },
   { stem: "What is the speaker's brother wearing?", audio: [clip("1-7", M.will, "My brother is the tall one with glasses. He's wearing a green jacket, not the blue one. He should be near the entrance.")],
-    ...q("apl1-7", undefined, 0, [o("Glasses and a green jacket", "'The tall one with glasses… a green jacket.'"), o("A blue jacket", "'Not the blue one.'"), o("A hat", "A hat isn't mentioned.")]) },
+    ...q("apl1-7", undefined, 0, [o("Glasses and a green jacket", "'The tall one with glasses… a green jacket.'"), o("A blue jacket and glasses", "'Not the blue one.'"), o("A hat and a green scarf", "A hat isn't mentioned.")]) },
   { stem: "When does the pool open on Saturdays?", audio: [clip("1-8", F.akshara, "The swimming pool opens at six on weekdays, but on weekends it doesn't open until eight. On public holidays it's closed.")],
     ...q("apl1-8", undefined, 2, [o("At six", "Six is on weekdays."), o("It's closed", "It's closed on public holidays, not Saturdays."), o("At eight", "'On weekends it doesn't open until eight.'")]) },
 ];
@@ -351,12 +351,12 @@ const L4: TextBlock[] = [
     audio: [clip("4a", F.akshara, "When I signed up to teach English in a small town in La Guajira, I thought I would be the teacher. In the end, I learnt more than my students did. They taught me words in Wayuunaiki, how to cook friche, and how to be patient when the internet doesn't work for three days. I'd go back tomorrow, although next time I'd pack more mosquito spray.")],
     questions: [
       q("apl4-guajira-1", "How does the speaker feel about the experience?", 1, [o("Disappointed", "She says she'd go back tomorrow."), o("Very positive", "She learnt a lot and would go back tomorrow."), o("Nervous", "She doesn't talk about being nervous.")]),
-      q("apl4-guajira-2", "What does she say about her expectations?", 0, [o("The experience was different from what she expected.", "She thought she'd be the teacher, but she learnt the most."), o("She expected it to be easy.", "She doesn't say this."), o("She didn't want to go.", "She signed up herself.")]),
+      q("apl4-guajira-2", "What does she say about her expectations?", 0, [o("The experience was different from what she expected.", "She thought she'd be the teacher, but she learnt the most."), o("She expected it to be easy, and it was.", "She doesn't say this."), o("She didn't want to go at first, but her parents insisted.", "She signed up herself.")]),
     ] },
   { kind: "text", part: 10, id: "apl4-coach", title: "After the final", text: "",
     audio: [clip("4b", M.noah, "A lot of people think our team lost the final because of the referee. I understand why they say that, and yes, one decision was strange. But if I'm honest, we didn't play well that day. We were tired, we made mistakes, and the other team wanted it more. Next season, we need to be fitter, not angrier.")],
     questions: [
-      q("apl4-coach-1", "Why does the speaker think the team lost?", 1, [o("Mainly because of the referee.", "He mentions the referee only to disagree: 'But if I'm honest…'"), o("Mainly because of the team's own performance.", "'We didn't play well… we were tired, we made mistakes.'"), o("Because the other team cheated.", "He doesn't say this.")]),
+      q("apl4-coach-1", "Why does the speaker think the team lost?", 1, [o("Mainly because of the referee's decisions.", "He mentions the referee only to disagree: 'But if I'm honest…'"), o("Mainly because of the team's own performance.", "'We didn't play well… we were tired, we made mistakes.'"), o("Mainly because the other team cheated.", "He doesn't say this.")]),
       q("apl4-coach-2", "What is his attitude to next season?", 0, [o("The team should focus on improving.", "'We need to be fitter, not angrier.'"), o("They should complain more about referees.", "He says 'not angrier'."), o("He isn't interested in it.", "He talks about what they need to do next season.")]),
     ] },
 ];

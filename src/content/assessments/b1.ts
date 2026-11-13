@@ -35,10 +35,10 @@ Valeria's school doesn't have a robotics club, so she works at home, in a corner
 
 Her advice for other young inventors is simple: "Don't be afraid of mistakes. Every robot I've made has failed at least ten times before it worked."`,
     items: [
-      ch("How did Valeria start building robots?", ["Her uncle gave her an old robot kit.", "She joined a school club.", "She watched a film about robots."], 0, "Paragraph 1."),
-      ch("What could Chispa do?", ["Collect and sort plastic bottles from a river", "Cook breakfast", "Clean the kitchen"], 0, "Paragraph 2."),
-      ch("Why was her result surprising?", ["She was the youngest person in the final.", "She had never built a robot before.", "Her robot didn't work."], 0, "'Although she was the youngest…'"),
-      ch("Where does Valeria build her robots now?", ["In a corner of the kitchen at home", "In a school workshop", "At her uncle's house"], 0, "Paragraph 3."),
+      ch("How did Valeria start building robots?", ["Her uncle gave her an old robot kit.", "She joined the robotics club at her school.", "She watched a film about robots with her uncle."], 0, "Paragraph 1."),
+      ch("What could Chispa do?", ["Collect and sort plastic bottles from a river", "Clean the floor of the kitchen by itself", "Cook a simple breakfast for the family"], 0, "Paragraph 2."),
+      ch("Why was her result surprising?", ["She was the youngest person in the final.", "She had never built a robot before that year.", "Her robot stopped working during the final."], 0, "'Although she was the youngest…'"),
+      ch("Where does Valeria build her robots now?", ["In a corner of the kitchen at home", "In a workshop at her school", "In her uncle's garage, with his tools"], 0, "Paragraph 3."),
       ch("What is her main advice?", ["Don't be afraid of mistakes.", "Buy expensive parts.", "Always follow the instructions."], 0, "Final paragraph."),
       gap("'If I had a real workshop, I", "build bigger robots.' (second conditional)", ["would", "'d"], "would + base verb."),
     ],
@@ -56,8 +56,8 @@ Her advice for other young inventors is simple: "Don't be afraid of mistakes. Ev
       id: "b1-mid-l2", title: "A new school", audio: "p/b1mid-l2.mp3", speaker: "A student talking to a friend",
       items: [
         ch("What happened twice?", ["He got lost.", "He missed the bus.", "He forgot his homework."], 0, "'I got lost twice!'"),
-        ch("What does he say about the maths teacher?", ["He gives a lot of homework.", "He is very strict.", "He is new."], 0, "'although the maths teacher gives a lot of homework'."),
-        ch("What is the only problem?", ["The bus takes almost an hour.", "He has no friends.", "The building is small."], 0, "'The only problem is the bus.'"),
+        ch("What does he say about the maths teacher?", ["He gives a lot of homework.", "He is very strict in class.", "He is new at the school this year."], 0, "'although the maths teacher gives a lot of homework'."),
+        ch("What is the only problem?", ["The bus takes almost an hour.", "He hasn't made any friends yet.", "The school building is quite small."], 0, "'The only problem is the bus.'"),
       ],
     },
   ],
@@ -110,11 +110,11 @@ The first two days were the hardest. "I kept reaching for my phone in my pocket,
 
 Not everyone enjoyed it. Some students said they missed listening to music, and a few parents complained that they couldn't contact their children. Despite these problems, most students said the experiment was worth it.`,
       items: [
-        ch("Whose idea was the experiment?", ["A group of students", "The teachers", "The parents"], 0, "'The idea came from a group of students, not the teachers.'"),
-        ch("Why did they decide to do it?", ["They realised they had been spending over six hours a day on screens.", "Their phones were broken.", "The school banned phones."], 0, "Paragraph 1."),
-        ch("How did Juan feel at first?", ["Bored and a bit nervous", "Happy and relaxed", "Angry with his friends"], 0, "Paragraph 2."),
-        ch("What changed by Wednesday?", ["Students played, read and talked more.", "Everyone used their phones again.", "The experiment stopped."], 0, "Paragraph 2."),
-        ch("What problem did some parents mention?", ["They couldn't contact their children.", "Their children were too tired.", "The school was too noisy."], 0, "Paragraph 3."),
+        ch("Whose idea was the experiment?", ["A group of students", "The head teacher and staff", "A group of worried parents"], 0, "'The idea came from a group of students, not the teachers.'"),
+        ch("Why did they decide to do it?", ["They realised they had been spending over six hours a day on screens.", "The school had just banned phones in every classroom.", "Their parents had complained about their marks in exams."], 0, "Paragraph 1."),
+        ch("How did Juan feel at first?", ["Bored and a bit nervous", "Happy and very relaxed", "Angry with his friends for the idea"], 0, "Paragraph 2."),
+        ch("What changed by Wednesday?", ["Students played, read and talked more.", "Most students had started using their phones again.", "The teachers decided to stop the experiment early."], 0, "Paragraph 2."),
+        ch("What problem did some parents mention?", ["They couldn't contact their children.", "Their children were too tired to do homework.", "The school had become much too noisy."], 0, "Paragraph 3."),
       ],
     },
     {
@@ -127,11 +127,11 @@ The best thing about the game is its atmosphere. The music, which was written by
 
 However, the game isn't perfect. The story is a bit predictable, and I guessed the ending halfway through. Also, it's quite expensive for such a short game. If it were cheaper, I would recommend it to everyone. Still, if you love calm, beautiful games, it's definitely worth playing.`,
       items: [
-        ch("What starts the adventure?", ["Mara finds a message in a bottle.", "A storm destroys the lighthouse.", "Mara meets a stranger."], 0, "Paragraph 1."),
-        ch("What does the reviewer like most?", ["The atmosphere: the music and the sound of the sea", "The difficult puzzles", "The long story"], 0, "Paragraph 2."),
-        ch("Why does the reviewer say they wanted to wear a jacket?", ["The sea sounded so realistic.", "It was cold in their room.", "Mara wears a jacket."], 0, "A humorous way to praise the sound."),
+        ch("What starts the adventure?", ["Mara finds a message in a bottle.", "A storm destroys the old lighthouse.", "Mara meets a stranger on the beach."], 0, "Paragraph 1."),
+        ch("What does the reviewer like most?", ["The atmosphere: the music and the sound of the sea", "The puzzles, which get harder in every chapter", "The long story and its surprising ending"], 0, "Paragraph 2."),
+        ch("Why does the reviewer say they wanted to wear a jacket?", ["The sea sounded so realistic.", "It was cold in their room that night.", "Mara wears a jacket in every scene."], 0, "A humorous way to praise the sound."),
         ch("What is one problem with the game?", ["The story is predictable.", "The puzzles are impossible.", "The music is boring."], 0, "Paragraph 3."),
-        ch("'If it were cheaper, I would recommend it to everyone' means…", ["It's quite expensive, so the reviewer doesn't recommend it to everyone.", "It's cheap, so everyone should buy it.", "The reviewer won't recommend it at all."], 0, "Second conditional: unreal present."),
+        ch("'If it were cheaper, I would recommend it to everyone' means…", ["It's quite expensive, so the reviewer doesn't recommend it to everyone.", "It's cheap enough, so the reviewer thinks everyone should buy it.", "The reviewer won't recommend it to anyone, whatever the price."], 0, "Second conditional: unreal present."),
       ],
     },
   ],
@@ -139,8 +139,8 @@ However, the game isn't perfect. The story is a bit predictable, and I guessed t
     {
       id: "b1-gate-l1", title: "An exchange trip", audio: "p/b1gate-l1.mp3", speaker: "A student who studied in Canada",
       items: [
-        ch("Why was the speaker nervous before the trip?", ["She had never travelled alone.", "She didn't speak any English.", "She was afraid of dogs."], 0, "'I had never travelled alone'."),
-        ch("What was the hardest thing?", ["The food: dinner was very early.", "The weather", "The school"], 0, "'dinner was at six o'clock'."),
+        ch("Why was the speaker nervous before the trip?", ["She had never travelled alone.", "She didn't speak any English at all.", "She was afraid of flying for so long."], 0, "'I had never travelled alone'."),
+        ch("What was the hardest thing?", ["The food: dinner was very early.", "The weather: it rained almost every day.", "The school: the lessons were very long."], 0, "'dinner was at six o'clock'."),
         ch("How did she feel about the jokes by the end?", ["She was laughing all the time.", "She still didn't understand them.", "She thought they were rude."], 0, "'by the end I was laughing all the time'."),
         ch("What did the trip change?", ["She became more confident.", "She decided to live in Canada.", "She got a dog."], 0, "'If I hadn't gone, I would never have become so confident.'"),
       ],
@@ -148,9 +148,9 @@ However, the game isn't perfect. The story is a bit predictable, and I guessed t
     {
       id: "b1-gate-l2", title: "A school announcement", audio: "p/b1gate-l2.mp3", speaker: "A teacher",
       items: [
-        ch("Why has the science fair been moved?", ["The hall is being painted.", "A teacher is ill.", "It's going to rain."], 0, "'because the hall is being painted'."),
+        ch("Why has the science fair been moved?", ["The hall is being painted.", "Mr Gómez is ill this week.", "It's going to rain on that day."], 0, "'because the hall is being painted'."),
         ch("When is the science fair now?", ["Friday", "Wednesday", "Monday"], 0, "'it has been moved to Friday'."),
-        ch("Who will judge the projects?", ["Three teachers and a scientist", "The students", "Mr Gómez alone"], 0, "'three teachers and a scientist from the university'."),
+        ch("Who will judge the projects?", ["Three teachers and a scientist", "The students in each class", "Mr Gómez and the head teacher"], 0, "'three teachers and a scientist from the university'."),
         ch("Who should students ask for extra tables?", ["Mr Gómez", "The speaker", "The scientist"], 0, "'ask Mr Gómez, not me!'"),
       ],
     },

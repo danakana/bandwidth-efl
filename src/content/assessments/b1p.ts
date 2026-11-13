@@ -36,10 +36,10 @@ The app has been downloaded more than two hundred thousand times. As far as the 
 Of course, the app is not perfect. Some users complain that the bags are sometimes too small, and others say that popular shops sell out in minutes. Having said that, most users are happy. One student told us: "I used to spend a lot on lunch. Now I'm used to getting my surprise bag every Friday, and I've discovered bakeries I never knew existed."`,
     items: [
       ch("What problem does the app try to solve?", ["Shops throwing away good food", "Students not having time to cook", "Bakeries closing early"], 0, "Paragraph 1."),
-      ch("How much do users pay for a surprise bag?", ["About a third of the normal price", "The normal price", "Nothing"], 0, "'about a third of the normal price'."),
-      ch("According to the founders, what is the most important result?", ["The food that has been saved", "The money they've made", "The number of downloads"], 0, "'not the money but the food'."),
-      ch("What is one complaint about the app?", ["Popular shops sell out very quickly.", "The food is old.", "It's too expensive."], 0, "'popular shops sell out in minutes'."),
-      ch("What does the student mean by 'Now I'm used to getting my surprise bag every Friday'?", ["It has become a normal habit for her.", "She used to do it in the past.", "She doesn't like it."], 0, "be used to + -ing."),
+      ch("How much do users pay for a surprise bag?", ["About a third of the normal price", "The normal price, but with extra food", "Nothing at all: the bags are free"], 0, "'about a third of the normal price'."),
+      ch("According to the founders, what is the most important result?", ["The food that has been saved", "The money the app has made", "The number of people who downloaded it"], 0, "'not the money but the food'."),
+      ch("What is one complaint about the app?", ["Popular shops sell out very quickly.", "The food is often old or bad.", "The bags are too expensive for students."], 0, "'popular shops sell out in minutes'."),
+      ch("What does the student mean by 'Now I'm used to getting my surprise bag every Friday'?", ["It has become a normal habit for her.", "She did it in the past, but she stopped.", "She still finds it strange and difficult."], 0, "be used to + -ing."),
       gap("The app has", "downloaded more than two hundred thousand times.", ["been"], "Present perfect passive."),
     ],
   }],
@@ -47,17 +47,17 @@ Of course, the app is not perfect. Some users complain that the bags are sometim
     {
       id: "b1p-mid-l1", title: "A voice message", audio: "p/b1pmid-l1.mp3", speaker: "A voice message from a friend",
       items: [
-        ch("Why has the volunteer day been moved?", ["Because it's going to rain on Saturday", "Because the shelter is closed", "Because Valentina is busy"], 0, "'because it's going to rain on Saturday'."),
+        ch("Why has the volunteer day been moved?", ["Because it's going to rain on Saturday", "Because the animal shelter is closed that day", "Because Valentina is busy with an exam"], 0, "'because it's going to rain on Saturday'."),
         ch("What time are they meeting?", ["At nine", "At ten", "At eleven"], 0, "'at nine, not ten'."),
-        ch("What does Valentina ask?", ["To tell Mateo about the change", "To bring food for the dogs", "To call her back"], 0, "'could you tell Mateo?'"),
+        ch("What does Valentina ask?", ["To tell Mateo about the change", "To bring some food for the dogs", "To call her back before Saturday"], 0, "'could you tell Mateo?'"),
       ],
     },
     {
       id: "b1p-mid-l2", title: "A short presentation", audio: "p/b1pmid-l2.mp3", speaker: "A student presentation",
       items: [
         ch("What happens first when a phone is recycled?", ["The battery is removed.", "The phone is melted.", "The metals are separated."], 0, "'First, the battery is removed'."),
-        ch("Which metals can be used again?", ["Gold, copper and silver", "Iron and steel", "Aluminium only"], 0, "'Gold, copper and silver can be used again'."),
-        ch("What is the speaker's final advice?", ["Don't throw old phones away.", "Buy a new phone every year.", "Keep the battery."], 0, "'don't throw it away'."),
+        ch("Which metals can be used again?", ["Gold, copper and silver", "Iron, steel and plastic", "Only aluminium and glass"], 0, "'Gold, copper and silver can be used again'."),
+        ch("What is the speaker's final advice?", ["Don't throw old phones away.", "Buy a new phone every year or two.", "Take out the battery and keep it."], 0, "'don't throw it away'."),
       ],
     },
   ],
@@ -114,9 +114,9 @@ Psychologists say that people who see mistakes as information, not as proof that
 Of course, this doesn't mean that failing feels good. It doesn't. But if we stop being so afraid of mistakes, we might try more things, and in the long run, we might discover what we are really good at.`,
       items: [
         ch("What is the main idea of the text?", ["Failure can help us learn and succeed.", "Failure should be avoided at all costs.", "Only inventors fail."], 0, "Main idea."),
-        ch("What does the inventor example show?", ["Persistence after many failures can lead to success.", "Vacuum cleaners are easy to make.", "He failed only once."], 0, "Over five thousand prototypes."),
-        ch("What happened to the writer's first book?", ["It was turned down by twelve publishers, but it ended up very successful.", "It was published immediately.", "She never published it."], 0, "turned down … ended up."),
-        ch("What is a 'growth mindset'?", ["Seeing mistakes as information to learn from", "Believing you're bad at things", "Never making mistakes"], 0, "Paragraph 3."),
+        ch("What does the inventor example show?", ["Persistence after many failures can lead to success.", "Good inventions usually work well the first time.", "He was lucky because he failed only once or twice."], 0, "Over five thousand prototypes."),
+        ch("What happened to the writer's first book?", ["It was turned down by twelve publishers, but it ended up very successful.", "It was published immediately and became very successful.", "Twelve publishers wanted it, so she chose the best offer."], 0, "turned down … ended up."),
+        ch("What is a 'growth mindset'?", ["Seeing mistakes as information to learn from", "Believing that talent can't really change", "Trying hard to never make any mistakes"], 0, "Paragraph 3."),
         ch("What does the writer admit in the last paragraph?", ["Failing doesn't feel good.", "Failing is always fun.", "Mistakes are not important."], 0, "'It doesn't.'"),
       ],
     },
@@ -132,11 +132,11 @@ On the other hand, there are a few problems. It gets very crowded at weekends, s
 
 All in all, the Floating Market is a fun and tasty day out. I would recommend it to anyone who loves food and doesn't mind crowds.`,
       items: [
-        ch("Who is the market ideal for, according to the review?", ["Families and groups of friends", "People who hate crowds", "Only tourists from abroad"], 0, "First paragraph."),
-        ch("What did the writer think of the empanadas?", ["They were so good that they went back for more.", "They were too expensive.", "They were cold."], 0, "so … that."),
+        ch("Who is the market ideal for, according to the review?", ["Families and groups of friends", "People who prefer quiet places", "Tourists who visit from abroad"], 0, "First paragraph."),
+        ch("What did the writer think of the empanadas?", ["They were so good that they went back for more.", "They were good, but too expensive to buy twice.", "They were cold, so the writer didn't finish them."], 0, "so … that."),
         ch("What advice does the writer give about crowds?", ["Arrive before eleven.", "Go at night.", "Go on a weekday only."], 0, "'arrive before eleven if you can'."),
-        ch("Which problem is mentioned?", ["There isn't much shade.", "There is no music.", "The food is bad."], 0, "Paragraph 3."),
-        ch("How is the review organised?", ["Introduction, sections (food, prices, atmosphere), problems, recommendation", "Only a list of prices", "A story with no opinions"], 0, "Review structure."),
+        ch("Which problem is mentioned?", ["There isn't much shade.", "There is no live music.", "The food is too expensive."], 0, "Paragraph 3."),
+        ch("How is the review organised?", ["Introduction, sections (food, prices, atmosphere), problems, recommendation", "A list of the stalls and their prices, with no opinions given", "A story of one visit, told in time order, with no recommendation"], 0, "Review structure."),
       ],
     },
   ],
@@ -146,7 +146,7 @@ All in all, the Floating Market is a fun and tasty day out. I would recommend it
       items: [
         ch("How much time did the speaker use to spend on their phone?", ["Six hours a day", "Two hours a day", "Six hours a week"], 0, "'I used to spend six hours a day'."),
         ch("Who pointed out the problem?", ["A teacher", "A parent", "A friend"], 0, "'my teacher pointed out…'"),
-        ch("What experiment did the speaker try?", ["Not using the phone after nine p.m.", "Deleting all apps", "Giving the phone away"], 0, "'I stopped using my phone after nine p.m.'"),
+        ch("What experiment did the speaker try?", ["Not using the phone after nine p.m.", "Deleting all the social media apps", "Giving the phone to a parent every night"], 0, "'I stopped using my phone after nine p.m.'"),
         ch("What did the speaker discover?", ["How much they love books", "A new app", "That they need more sleep"], 0, "'If I hadn't tried, I would never have discovered how much I love books.'"),
       ],
     },
@@ -155,7 +155,7 @@ All in all, the Floating Market is a fun and tasty day out. I would recommend it
       items: [
         ch("What is the group deciding?", ["The class trip", "A project topic", "A party date"], 0, "'let's decide on the class trip'."),
         ch("Why does Sofía suggest the botanical garden?", ["It's next to the museum.", "It's free.", "It's her favourite place."], 0, "'because it's next door'."),
-        ch("What does the leader say to Andrés?", ["Sorry, go ahead. You were saying?", "Please be quiet.", "You're wrong."], 0, "Giving the turn back."),
+        ch("What does the leader say to Andrés?", ["Sorry, go ahead. You were saying?", "Please wait until the others finish.", "I'm afraid you're wrong about that."], 0, "Giving the turn back."),
         ch("How will they travel?", ["By bus", "By train", "On foot"], 0, "'the bus is cheaper than the train'."),
       ],
     },
