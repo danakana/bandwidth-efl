@@ -35,7 +35,7 @@ function productionBand(reading: BandIndex | null, listening: BandIndex | null):
   return measured.length ? (Math.min(...measured) as BandIndex) : 3;
 }
 
-export function Placement({ onExit, onFinished }: { onExit: () => void; onFinished: () => void }) {
+export function Placement({ onExit, onFinished, mode = "placement" }: { onExit: () => void; onFinished: () => void; mode?: "placement" | "check" }) {
   const { profile, session } = useAuth();
   const es = !!profile?.spanish_help;
   const [stage, setStage] = useState<Stage>("intro");
@@ -50,10 +50,11 @@ export function Placement({ onExit, onFinished }: { onExit: () => void; onFinish
   async function begin() {
     setError("");
     try {
-      setAttempt(await startAttempt());
+      setAttempt(await startAttempt(mode));
       setStage("reading");
-    } catch {
-      setError("We couldn't start the test. Check your connection and try again.");
+    } catch (e) {
+      const msg = (e as { message?: string }).message ?? "";
+      setError(msg.includes("not due") ? "Your next level check isn't open yet. It opens 6 weeks after your last one." : "We couldn't start the test. Check your connection and try again.");
     }
   }
 
@@ -110,7 +111,7 @@ export function Placement({ onExit, onFinished }: { onExit: () => void; onFinish
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.28, ease: [0.2, 0.7, 0.2, 1] }}
           >
-            {stage === "intro" && <Intro es={es} onStart={() => void begin()} />}
+            {stage === "intro" && <Intro mode={mode} es={es} onStart={() => void begin()} />}
             {stage === "reading" && (
               <ChoiceSection
                 kind="reading" es={es} pool={READING_ITEMS}
@@ -155,13 +156,14 @@ export function Placement({ onExit, onFinished }: { onExit: () => void; onFinish
 
 /* ---------------- Intro ---------------- */
 
-function Intro({ es, onStart }: { es: boolean; onStart: () => void }) {
+function Intro({ mode, es, onStart }: { mode: "placement" | "check"; es: boolean; onStart: () => void }) {
+  const check = mode === "check";
   return (
     <section className="pt-card pt-intro">
-      <p className="pt-kicker">Placement test</p>
-      <h1>Let's find your starting band.</h1>
+      <p className="pt-kicker">{check ? "Level check" : "Placement test"}</p>
+      <h1>{check ? "Let's see how far you've come." : "Let's find your starting band."}</h1>
       <p className="pt-lede">Four short parts, about 25 minutes. The questions adapt to you, so they'll get harder or easier as you go. That's normal.</p>
-      {es && <p lang="es" className="es">Son cuatro partes cortas. Las preguntas cambian según tus respuestas.</p>}
+      {es && <p lang="es" className="es">{check ? "Es la misma prueba, seis semanas después. Muestra cuánto has avanzado." : "Son cuatro partes cortas. Las preguntas cambian según tus respuestas."}</p>}
       <ul className="pt-plan">
         <li><strong>Reading & language</strong><span>9 questions</span></li>
         <li><strong>Listening</strong><span>6 short clips</span></li>
@@ -169,7 +171,9 @@ function Intro({ es, onStart }: { es: boolean; onStart: () => void }) {
         <li><strong>Speaking</strong><span>One recording</span></li>
       </ul>
       <div className="pt-note">
-        <p><strong>No points, no pressure.</strong> This isn't a grade. It just tells Bandwidth where to start, and your teacher checks your writing and speaking.</p>
+        {check
+          ? <p><strong>Same test, six weeks later.</strong> It shows how your level has changed in each skill. It can move you up, never down, and your teacher checks your writing and speaking.</p>
+          : <p><strong>No points, no pressure.</strong> This isn't a grade. It just tells Bandwidth where to start, and your teacher checks your writing and speaking.</p>}
       </div>
       <button type="button" className="btn btn-primary pt-go" onClick={onStart}>Start the test</button>
     </section>

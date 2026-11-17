@@ -15,6 +15,8 @@ export type Attempt = {
   listening_log: LogEntry[];
   started_at: string;
   completed_at: string | null;
+  /** The first test is the placement; later retakes (every 6 weeks) are level checks. */
+  kind?: "placement" | "check";
 };
 
 export type Submission = {
@@ -38,8 +40,8 @@ export type Submission = {
   feedback_seen_at?: string | null;
 };
 
-export async function startAttempt(): Promise<Attempt> {
-  const { data, error } = await supabase.from("placement_attempts").insert({}).select().single();
+export async function startAttempt(kind: "placement" | "check" = "placement"): Promise<Attempt> {
+  const { data, error } = await supabase.from("placement_attempts").insert({ kind }).select().single();
   if (error) throw error;
   return data as Attempt;
 }
@@ -77,10 +79,10 @@ export async function submitSpeaking(userId: string, attemptId: string, prompt: 
   if (error) throw error;
 }
 
-/** The student's most recent completed attempt plus its submissions, or null. */
+/** The student's completed placement (not a later level check) plus its submissions, or null. */
 export async function latestResult(): Promise<{ attempt: Attempt; submissions: Submission[] } | null> {
   const { data } = await supabase
-    .from("placement_attempts").select("*").eq("status", "completed")
+    .from("placement_attempts").select("*").eq("status", "completed").eq("kind", "placement")
     .order("completed_at", { ascending: false }).limit(1);
   const attempt = (data as Attempt[] | null)?.[0];
   if (!attempt) return null;
@@ -103,4 +105,32 @@ export function startBandIndex(attempt: Attempt, submissions: Submission[]): num
   ];
   const idx = ids.map((id) => BANDS.findIndex((b) => b.id === id)).filter((i) => i >= 0);
   return idx.length ? Math.min(...idx) : null;
+}
+
+/** Days between level checks. The server enforces the same gap. */
+export const CHECK_EVERY_DAYS = 42;
+
+export type LevelPoint = { attempt: Attempt; submissions: Submission[]; bands: { reading: string | null; listening: string | null; writing: string | null; speaking: string | null } };
+
+/** Every completed placement and level check, oldest first, with the band measured in each skill. */
+export async function levelHistory(studentId?: string): Promise<LevelPoint[]> {
+  let q = supabase.from("placement_attempts").select("*").eq("status", "completed").order("completed_at");
+  if (studentId) q = q.eq("student_id", studentId);
+  const { data } = await q;
+  const attempts = (data as Attempt[]) ?? [];
+  if (!attempts.length) return [];
+  const subs = await supabase.from("submissions").select("*").in("attempt_id", attempts.map((a) => a.id));
+  const all = (subs.data as Submission[]) ?? [];
+  return attempts.map((attempt) => {
+    const submissions = all.filter((x) => x.attempt_id === attempt.id);
+    const tb = (k: "writing" | "speaking") => submissions.find((x) => x.skill === k)?.teacher_band ?? null;
+    return { attempt, submissions, bands: { reading: attempt.reading_band, listening: attempt.listening_band, writing: tb("writing"), speaking: tb("speaking") } };
+  });
+}
+
+/** A level check's overall band once all four skills are in (writing and speaking marked); otherwise null. */
+export function checkBandIndex(p: LevelPoint): number | null {
+  const ids = [p.bands.reading, p.bands.listening, p.bands.writing, p.bands.speaking];
+  if (ids.some((x) => !x)) return null;
+  return Math.min(...ids.map((id) => BANDS.findIndex((b) => b.id === id)));
 }

@@ -12,6 +12,7 @@ import { BandMap } from "./map/BandMap";
 import { BandView } from "./map/BandView";
 import { TreeView } from "./map/TreeView";
 import { GateReviews } from "./assess/GateReviews";
+import { StudentProgress } from "./StudentProgress";
 import { PracticeReviews } from "./practice/PracticeReviews";
 import { IcfesOverview } from "./exams/IcfesOverview";
 import { ExamOverview } from "./exams/ExamOverview";
@@ -32,6 +33,7 @@ export function TeacherHome() {
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [subs, setSubs] = useState<Submission[]>([]);
   const [reviewing, setReviewing] = useState<string | null>(null);
+  const [tracking, setTracking] = useState<string | null>(null);
   const [gates, setGates] = useState<AssessmentRow[]>([]);
   const [unlocks, setUnlocks] = useState<{ student_id: string; band: string }[]>([]);
   const route = useAppRoute();
@@ -98,6 +100,7 @@ export function TeacherHome() {
   };
   const pending = subs.filter((x) => !x.teacher_band && attempts.some((a) => a.id === x.attempt_id && latest(a.student_id)?.id === a.id)).length;
   const reviewStudent = students.find((s) => s.id === reviewing);
+  const trackStudent = students.find((s) => s.id === tracking);
 
   if (route.band) {
     return (
@@ -137,6 +140,11 @@ export function TeacherHome() {
         <PracticeReviews subs={subs} classes={classes} students={students} onChanged={() => void load()} />
         <IcfesOverview classes={classes} students={students} />
         <ExamOverview classes={classes} students={students} />
+
+        {trackStudent && (
+          <StudentProgress key={trackStudent.id} studentId={trackStudent.id}
+            name={trackStudent.display_name ?? trackStudent.username ?? "Student"} onClose={() => setTracking(null)} />
+        )}
 
         {reviewStudent && (
           <Review
@@ -191,7 +199,10 @@ export function TeacherHome() {
                                 const b = skillBand(s.id, k);
                                 return <td key={k}>{b === "review" ? <span className="pill">To review</span> : <Chip band={b} />}</td>;
                               })}
-                              <td>
+                              <td className="roster-actions">
+                                {latest(s.id) && (
+                                  <button type="button" className="link-btn" onClick={() => { setTracking(s.id); setReviewing(null); window.scrollTo({ top: 0, behavior: "smooth" }); }}>Progress</button>
+                                )}
                                 {latest(s.id) && (
                                   <button type="button" className="link-btn" onClick={() => { setReviewing(s.id); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
                                     {subsFor(s.id).some((x) => !x.teacher_band) ? "Review" : "View"}

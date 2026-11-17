@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../lib/auth";
 import { UNIVERSE_LIST } from "../content/universes";
-import { latestResult, startBandIndex, type Attempt, type Submission } from "../lib/placementApi";
+import { checkBandIndex, latestResult, levelHistory, startBandIndex, type Attempt, type LevelPoint, type Submission } from "../lib/placementApi";
 import { useAppRoute } from "../lib/route";
 import { AppHeader } from "./AppHeader";
 import { Placement } from "./placement/Placement";
@@ -21,6 +21,7 @@ import { TeacherNotes } from "./practice/TeacherNotes";
 import { MistakesCard } from "./practice/MistakesCard";
 import { GoalCard } from "./GoalCard";
 import { JourneyCard } from "./JourneyCard";
+import { RetentionCard } from "./RetentionCard";
 import "./placement/placement.css";
 import "./map/map.css";
 
@@ -36,25 +37,29 @@ export function StudentHome() {
   const route = useAppRoute();
   const progress = useProgress();
   const mine = UNIVERSE_LIST.filter((u) => profile?.universes.includes(u.id));
-  const [testing, setTesting] = useState(false);
+  const [testing, setTesting] = useState<false | "placement" | "check">(false);
+  const [history, setHistory] = useState<LevelPoint[]>([]);
   const [result, setResult] = useState<{ attempt: Attempt; submissions: Submission[] } | null>(null);
   const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
-    setResult(await latestResult());
+    const [r, h] = await Promise.all([latestResult(), levelHistory()]);
+    setResult(r); setHistory(h);
     setLoading(false);
   }, []);
   useEffect(() => { void load(); }, [load]);
   useEffect(() => { window.scrollTo({ top: 0 }); }, [route.band, route.tree, route.page]);
 
   if (testing) {
-    return <Placement onExit={() => setTesting(false)} onFinished={() => { setTesting(false); setLoading(true); void load(); }} />;
+    return <Placement mode={testing} onExit={() => setTesting(false)} onFinished={() => { setTesting(false); setLoading(true); void load(); }} />;
   }
 
   // Placement sets the first band; passing a Gate (confirmed by the teacher) moves it up.
   const placed = result ? startBandIndex(result.attempt, result.submissions) ?? 0 : null;
   const unlocked = Math.max(-1, ...(progress?.unlocks ?? []).map((b) => BANDS.findIndex((x) => x.id === b)));
-  const start = placed === null ? null : Math.max(placed, unlocked);
+  // A level check can move the student up (never down) once all four skills are in.
+  const checked = Math.max(-1, ...history.filter((h) => h.attempt.kind === "check").map((h) => checkBandIndex(h) ?? -1));
+  const start = placed === null ? null : Math.max(placed, unlocked, checked);
 
   // Arcade and shop.
   if (start !== null && route.page !== "map") {
@@ -107,14 +112,15 @@ export function StudentHome() {
                 <h2>Placement test</h2>
                 <p>Reading, listening, writing and speaking. About 25 minutes. Find a quiet place and use headphones if you can.</p>
                 {es && <p lang="es" className="es">Unos 25 minutos. Busca un lugar tranquilo y usa audífonos si puedes.</p>}
-                <button type="button" className="btn btn-primary" onClick={() => setTesting(true)}>Start the placement test</button>
+                <button type="button" className="btn btn-primary" onClick={() => setTesting("placement")}>Start the placement test</button>
               </div>
             </>
           )}
         </section>
+        {start !== null && <RetentionCard es={es} />}
         {start !== null && <MistakesCard es={es} />}
         {start !== null && <WordsCard es={es} />}
-        {start !== null && placed !== null && result && <JourneyCard placed={placed} start={start} placedAt={result.attempt.completed_at} onRetake={() => setTesting(true)} />}
+        {start !== null && placed !== null && result && <JourneyCard placed={placed} start={start} placedAt={result.attempt.completed_at} history={history} onCheck={() => setTesting("check")} />}
         {start !== null && <TeacherNotes es={es} />}
         {start !== null && <BandMap start={start} />}
         <section className="home-section">
