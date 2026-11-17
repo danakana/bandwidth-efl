@@ -125,11 +125,11 @@ For now, cultivated meat remains a fascinating but uncertain technology. It may 
   {
     id: "b2-forger", band: "B2", universe: "arts", kind: "story",
     title: "The copyist", blurb: "Elena paints perfect copies for a living. Then someone asks her to do more.",
-    text: `Elena had always been able to copy anything. At art school in Bogotá, her teachers praised her technique but complained that her own paintings lacked something they couldn't name. After graduating, she found a job that suited her perfectly: painting authorised copies of famous works for hotels, restaurants and private homes. Each copy was signed on the back with her own name and the word "reproduction". She was proud of the work, and she earned a decent living.
+    text: `Elena had always been able to copy anything. At art school in Berlin, her teachers praised her technique but complained that her own paintings lacked something they couldn't name. After graduating, she found a job that suited her perfectly: painting authorised copies of famous works for hotels, restaurants and private homes. Each copy was signed on the back with her own name and the word "reproduction". She was proud of the work, and she earned a decent living.
 
-One afternoon, a well-dressed man came to her studio. He had seen her copy of a famous landscape and was impressed. He wanted something slightly different: a painting "in the style of" a twentieth-century Colombian master, a work that didn't exist but could have. He would provide old canvas and paints from the right period. He would pay her more than she earned in a year. And, he said with a smile, there was no need to sign it.
+One afternoon, a well-dressed man came to her studio. He had seen her copy of a famous landscape and was impressed. He wanted something slightly different: a painting "in the style of" a famous German Expressionist painter from the early twentieth century, a work that didn't exist but could have. He would provide old canvas and paints from the right period. He would pay her more than she earned in a year. And, he said with a smile, there was no need to sign it.
 
-Elena understood immediately. He didn't want a reproduction. He wanted a forgery, a painting that could be sold as an original. For a week, she couldn't stop thinking about it. The money would pay her mother's debts. Nobody would be hurt, she told herself, except some rich collector who could afford it.
+Elena understood immediately. He didn't want a reproduction. He wanted a forgery, a painting that could be sold as an original. For a week, she couldn't stop thinking about it. The money would pay off her mother's debts. Nobody would be hurt, she told herself, except some rich collector who could afford it.
 
 But the more she imagined it, the more uncomfortable she felt. It wasn't only that it was illegal. A forgery would put lies into the history of an artist she admired, confusing experts and students for decades.
 
@@ -141,7 +141,7 @@ She refused. The man shrugged and left. That night, for the first time in years,
       { word: "shrugged", means: "raised his shoulders to show he didn't care" },
     ],
     questions: [
-      { q: "What was the difference between Elena's job and the man's request?", options: ["He wanted a fake to sell as an original, not a clearly labelled copy.", "He wanted a much larger painting than the ones she usually made.", "He wanted her to copy a European artist."], answer: 0, why: "Her copies were \"signed… 'reproduction'\"; he wanted \"a forgery, a painting that could be sold as an original.\"" },
+      { q: "What was the difference between Elena's job and the man's request?", options: ["He wanted a fake to sell as an original, not a clearly labelled copy.", "He wanted a much larger painting than the ones she usually made.", "He wanted an exact copy of a famous landscape."], answer: 0, why: "Her copies were \"signed… 'reproduction'\"; he wanted \"a forgery, a painting that could be sold as an original.\"" },
       { q: "Besides being illegal, why did Elena feel the forgery was wrong?", options: ["The collector who would buy it was a friend of hers.", "It would falsify the history of an artist she admired.", "She didn't have the right paints or canvas from the period."], answer: 1, why: "\"A forgery would put lies into the history of an artist she admired.\"" },
       { q: "What does the teacher's comment at the end suggest?", options: ["Elena's technique for copying paintings had improved a lot.", "Elena should return to making reproductions.", "Elena's own work finally showed her personal voice."], answer: 2, why: "Her teachers had said her paintings \"lacked something\"; now: \"The thing that was missing.\"" },
     ],
@@ -220,16 +220,16 @@ Salsa caleña is a perfect example of how cultures travel and change. A music bo
   },
   {
     id: "b2-bike-mechanic", band: "B2", universe: "past", kind: "story",
-    title: "The bicycle doctor", blurb: "For forty years, Don Aurelio has fixed bikes in the same garage in Medellín.",
-    text: `Don Aurelio's workshop is so small that two bicycles barely fit inside at the same time. The walls are covered with tools, old photographs of cycling heroes and a calendar from 1987 that he refuses to take down. For forty years, people from his neighbourhood in Medellín have brought him their bikes, and he has fixed them all: children's first bicycles, delivery bikes, racing bikes worth more than his workshop.
+    title: "The bicycle doctor", blurb: "For forty years, Mr Visser has fixed bikes in the same garage in Amsterdam.",
+    text: `Mr Visser's workshop is so small that two bicycles barely fit inside at the same time. The walls are covered with tools, old photographs of cycling heroes and a calendar from 1987 that he refuses to take down. For forty years, people from his neighbourhood in Amsterdam have brought him their bikes, and he has fixed them all: children's first bicycles, delivery bikes, racing bikes worth more than his workshop.
 
 I started working there as an assistant when I was fifteen, mostly sweeping the floor and passing him tools. He rarely explained anything. Instead, he would hand me a wheel and say, "Listen." At first I thought he was joking. But slowly I learnt to hear the difference between a healthy wheel and one with a loose spoke, a chain that needed oil and one that was about to break.
 
-What impressed me most wasn't his skill but his memory. He remembered every customer and every bike. "That's the Rojas girl's bike," he would say. "I fixed her brakes in 2009. Her father couldn't pay that month, so he paid me in mangoes." Half the neighbourhood seemed to owe him small favours, and he owed them just as many.
+What impressed me most wasn't his skill but his memory. He remembered every customer and every bike. "That's the Bakker girl's bike," he would say. "I fixed her brakes in 2009. Her father couldn't pay that month, so he paid me in home-made apple cake." Half the neighbourhood seemed to owe him small favours, and he owed them just as many.
 
-Last year, a large bicycle shop opened nearby, with bright lights, online booking and a team of young mechanics. I worried that Don Aurelio would lose his customers. Some did go. But many came back. "They fix the bike," an old woman told me, "but they don't ask about your knees."
+Last year, a large bicycle shop opened nearby, with bright lights, online booking and a team of young mechanics. I worried that Mr Visser would lose his customers. Some did go. But many came back. "They fix the bike," an old woman told me, "but they don't ask about your knees."
 
-Don Aurelio is seventy-three now. His hands shake a little, and he lets me do most of the difficult repairs. Recently, he gave me the key to the workshop. He didn't make a speech. He just said, "Listen to the wheels." I think I understand now that he wasn't only talking about bikes.`,
+Mr Visser is seventy-three now. His hands shake a little, and he lets me do most of the difficult repairs. Recently, he gave me the key to the workshop. He didn't make a speech. He just said, "Listen to the wheels." I think I understand now that he wasn't only talking about bikes.`,
     gloss: [
       { word: "workshop", means: "a room or building where things are made or repaired" },
       { word: "spoke", means: "one of the thin metal bars that connect the centre of a wheel to its edge" },
@@ -237,9 +237,9 @@ Don Aurelio is seventy-three now. His hands shake a little, and he lets me do mo
       { word: "speech", means: "a formal talk given to people" },
     ],
     questions: [
-      { q: "How did Don Aurelio teach the narrator?", options: ["By making him listen and learn from experience.", "By giving him detailed written instructions for each repair.", "By sending him to a training course."], answer: 0, why: "\"He rarely explained anything. Instead, he would hand me a wheel and say, 'Listen.'\"" },
-      { q: "Why did many customers return to Don Aurelio?", options: ["His prices were much lower than the new shop's prices.", "He cared about them as people, not just about their bikes.", "The new shop closed after a few months."], answer: 1, why: "\"They fix the bike, but they don't ask about your knees.\"" },
-      { q: "What does 'Listen to the wheels' mean at the end of the story?", options: ["The narrator should always check the wheels before anything else.", "Don Aurelio wants the narrator to become a cyclist.", "Pay close attention to people, not just to the job."], answer: 2, why: "\"He wasn't only talking about bikes.\"" },
+      { q: "How did Mr Visser teach the narrator?", options: ["By making him listen and learn from experience.", "By giving him detailed written instructions for each repair.", "By sending him to a training course."], answer: 0, why: "\"He rarely explained anything. Instead, he would hand me a wheel and say, 'Listen.'\"" },
+      { q: "Why did many customers return to Mr Visser?", options: ["His prices were much lower than the new shop's prices.", "He cared about them as people, not just about their bikes.", "The new shop closed after a few months."], answer: 1, why: "\"They fix the bike, but they don't ask about your knees.\"" },
+      { q: "What does 'Listen to the wheels' mean at the end of the story?", options: ["The narrator should always check the wheels before anything else.", "Mr Visser wants the narrator to become a cyclist.", "Pay close attention to people, not just to the job."], answer: 2, why: "\"He wasn't only talking about bikes.\"" },
     ],
   },
   {
@@ -316,16 +316,16 @@ So if you love competitive games, the dream doesn't have to be all or nothing. Y
   },
   {
     id: "b2-ghostwriter", band: "B2", universe: "arts", kind: "story",
-    title: "Somebody else's song", blurb: "Isa writes a hit song. The world thinks someone else wrote it.",
-    text: `Isa was nineteen when she sold her first song. She had written it in her bedroom in Barranquilla, on a cheap keyboard, about a summer romance that had ended badly. A producer heard it on a demo and offered her money for it, on one condition: a famous singer would record it, and Isa's name would appear only in the small print, as one of five co-writers.
+    title: "Somebody else's song", blurb: "Ada writes a hit song. The world thinks someone else wrote it.",
+    text: `Ada was nineteen when she sold her first song. She had written it in her bedroom in Lagos, on a cheap keyboard, about a summer romance that had ended badly. A producer heard it on a demo and offered her money for it, on one condition: a famous singer would record it, and Ada's name would appear only in the small print, as one of five co-writers.
 
-She accepted. The money paid for a year of university. A few months later, the song was everywhere: on the radio, in shops, in thousands of short videos. In interviews, the singer talked about how the song came from "a very personal moment" in her life. Isa watched one of those interviews three times, feeling something between pride and anger.
+She accepted. The money paid for a year of university. A few months later, the song was everywhere: on the radio, in shops, in thousands of short videos. In interviews, the singer talked about how the song came from "a very personal moment" in her life. Ada watched one of those interviews three times, feeling something between pride and anger.
 
-Her friends were furious on her behalf. "It's your story," they said. "She's lying." Isa wasn't so sure. She knew how the industry worked. Many famous songs are written by teams of professional songwriters, and singers often perform emotions that began in someone else's life. Wasn't that what actors did too? And yet, every time the singer described "her" heartbreak, Isa felt as if a part of her own life had been sold along with the song.
+Her friends were furious on her behalf. "It's your story," they said. "She's lying." Ada wasn't so sure. She knew how the industry worked. Many famous songs are written by teams of professional songwriters, and singers often perform emotions that began in someone else's life. Wasn't that what actors did too? And yet, every time the singer described "her" heartbreak, Ada felt as if a part of her own life had been sold along with the song.
 
 She talked to an older songwriter, Martha, who had written hits for others for twenty years. "There are two kinds of reward in this job," Martha said. "Money and recognition. Sometimes you get one, sometimes the other, very rarely both. You have to decide which one you need right now."
 
-Isa kept writing songs for others; it paid well and taught her a lot. But she also started performing her own songs in small bars on weekends, under her own name. The audiences were tiny at first. Last month, a girl came up to her after a show. "That song about the summer," she said. "I know it's famous, but the way you sing it, it sounds like it's really yours." Isa smiled. "It is," she said.`,
+Ada kept writing songs for others; it paid well and taught her a lot. But she also started performing her own songs in small bars on weekends, under her own name. The audiences were tiny at first. Last month, a girl came up to her after a show. "That song about the summer," she said. "I know it's famous, but the way you sing it, it sounds like it's really yours." Ada smiled. "It is," she said.`,
     gloss: [
       { word: "demo", means: "a simple recording made to show what a song sounds like" },
       { word: "in the small print", means: "in a part that is easy to miss, often in very small letters" },
@@ -333,9 +333,9 @@ Isa kept writing songs for others; it paid well and taught her a lot. But she al
       { word: "recognition", means: "public praise or credit for something you have done" },
     ],
     questions: [
-      { q: "What was the condition for selling the song?", options: ["A star would sing it, and Isa would get little public credit.", "Isa would have to sing it herself on the radio and on television.", "Isa had to change the lyrics completely."], answer: 0, why: "\"A famous singer would record it, and Isa's name would appear only in the small print.\"" },
-      { q: "Why did Isa have mixed feelings about the singer's interviews?", options: ["The singer criticised the song and changed parts of the lyrics.", "She was proud, but felt her personal story had been taken.", "She didn't receive any money."], answer: 1, why: "She felt \"something between pride and anger… as if a part of her own life had been sold.\"" },
-      { q: "How did Isa resolve her dilemma?", options: ["She stopped writing songs for other artists.", "She demanded that the singer credit her publicly in every interview.", "She kept writing for others but also sang under her own name."], answer: 2, why: "\"Isa kept writing songs for others… But she also started performing her own songs… under her own name.\"" },
+      { q: "What was the condition for selling the song?", options: ["A star would sing it, and Ada would get little public credit.", "Ada would have to sing it herself on the radio and on television.", "Ada had to change the lyrics completely."], answer: 0, why: "\"A famous singer would record it, and Ada's name would appear only in the small print.\"" },
+      { q: "Why did Ada have mixed feelings about the singer's interviews?", options: ["The singer criticised the song and changed parts of the lyrics.", "She was proud, but felt her personal story had been taken.", "She didn't receive any money."], answer: 1, why: "She felt \"something between pride and anger… as if a part of her own life had been sold.\"" },
+      { q: "How did Ada resolve her dilemma?", options: ["She stopped writing songs for other artists.", "She demanded that the singer credit her publicly in every interview.", "She kept writing for others but also sang under her own name."], answer: 2, why: "\"Ada kept writing songs for others… But she also started performing her own songs… under her own name.\"" },
     ],
   },
 ];

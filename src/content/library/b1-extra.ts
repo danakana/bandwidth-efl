@@ -94,16 +94,16 @@ In 2015, UNESCO added traditional vallenato to its list of intangible cultural h
   },
   {
     id: "b1-sign-language", band: "B1", universe: "words", kind: "story",
-    title: "Hello with my hands", blurb: "Tomás learns sign language to talk to his new neighbour.",
-    text: `When the Gutiérrez family moved into the flat next door, I noticed that their son, Samuel, never answered when people said hello. I thought he was rude. Then one afternoon I saw him in the lift, moving his hands quickly while talking with his mother. Samuel was deaf.
+    title: "Hello with my hands", blurb: "Leon learns sign language to talk to his new neighbour.",
+    text: `When the Becker family moved into the flat next door, I noticed that their son, Jonas, never answered when people said hello. I thought he was rude. Then one afternoon I saw him in the lift, moving his hands quickly while talking with his mother. Jonas was deaf.
 
-That night I looked up Colombian Sign Language online. I was surprised to learn that sign languages are real languages, with their own grammar, and that they are different in each country. A person who signs in Colombia can't automatically understand someone who signs in the United States.
+That night I looked up German Sign Language online. I was surprised to learn that sign languages are real languages, with their own grammar, and that they are different in each country. A person who signs in Germany can't automatically understand someone who signs in Britain or the United States.
 
-I started with the alphabet and simple words: hello, thank you, football, friend. I practised in front of the mirror, feeling a bit silly. A week later, I saw Samuel in the park and signed "Hello, my name is Tomás." My hands were shaking. He looked surprised, then laughed and signed something very fast. I didn't understand a thing. He noticed, slowed down and spelled his name letter by letter.
+I started with the alphabet and simple words: hello, thank you, football, friend. I practised in front of the mirror, feeling a bit silly. A week later, I saw Jonas in the park and signed "Hello, my name is Leon." My hands were shaking. He looked surprised, then laughed and signed something very fast. I didn't understand a thing. He noticed, slowed down and spelled his name letter by letter.
 
-Now we play football together on Saturdays. He's teaching me new signs, and I'm getting faster. Some of my friends have started learning too, because Samuel is the best goalkeeper in the building. The hardest part isn't the signs; it's remembering to look at people's faces, because in sign language your expression is part of the grammar.
+Now we play football together on Saturdays. He's teaching me new signs, and I'm getting faster. Some of my friends have started learning too, because Jonas is the best goalkeeper in the building. The hardest part isn't the signs; it's remembering to look at people's faces, because in sign language your expression is part of the grammar.
 
-I used to think Samuel was rude for not saying hello. Now I realise that, for months, nobody had said hello in a way he could understand.`,
+I used to think Jonas was rude for not saying hello. Now I realise that, for months, nobody had said hello in a way he could understand.`,
     gloss: [
       { word: "deaf", means: "not able to hear" },
       { word: "sign language", means: "a language that uses hand movements and facial expressions" },
@@ -111,9 +111,9 @@ I used to think Samuel was rude for not saying hello. Now I realise that, for mo
       { word: "goalkeeper", means: "the player who stops the ball going into the goal" },
     ],
     questions: [
-      { q: "Why did Tomás first think Samuel was rude?", options: ["Samuel didn't answer when people said hello.", "Samuel laughed at his signing.", "Samuel didn't want to play football with the other students."], answer: 0, why: "\"Their son, Samuel, never answered when people said hello. I thought he was rude.\"" },
-      { q: "What surprised Tomás about sign languages?", options: ["They only use the alphabet.", "They are different in each country.", "They are easy to learn in a week."], answer: 1, why: "\"They are different in each country.\"" },
-      { q: "What does the last paragraph suggest?", options: ["Samuel had been rude to his classmates for months.", "Tomás still doesn't understand anything Samuel signs to him.", "The problem was communication, not Samuel's attitude."], answer: 2, why: "\"Nobody had said hello in a way he could understand.\"" },
+      { q: "Why did Leon first think Jonas was rude?", options: ["Jonas didn't answer when people said hello.", "Jonas laughed at his signing.", "Jonas didn't want to play football with the other students."], answer: 0, why: "\"Their son, Jonas, never answered when people said hello. I thought he was rude.\"" },
+      { q: "What surprised Leon about sign languages?", options: ["They only use the alphabet.", "They are different in each country.", "They are easy to learn in a week."], answer: 1, why: "\"They are different in each country.\"" },
+      { q: "What does the last paragraph suggest?", options: ["Jonas had been rude to his classmates for months.", "Leon still doesn't understand anything Jonas signs to him.", "The problem was communication, not Jonas's attitude."], answer: 2, why: "\"Nobody had said hello in a way he could understand.\"" },
     ],
   },
   {
@@ -140,12 +140,12 @@ For now, vertical farms mostly grow fast, light plants like lettuce, herbs and s
   },
   {
     id: "b1-audition", band: "B1", universe: "arts", kind: "story",
-    title: "Thirty seconds", blurb: "Daniela has thirty seconds to show a dance company what she can do.",
-    text: `The email said: "Each dancer will have thirty seconds of free choreography." Daniela read it five times. Thirty seconds. She had been dancing since she was seven, first in her neighbourhood's cultural centre in Cali, then in a youth company. Now one of the most famous dance companies in the country was holding auditions, and she had thirty seconds to show them everything.
+    title: "Thirty seconds", blurb: "Lerato has thirty seconds to show a dance company what she can do.",
+    text: `The email said: "Each dancer will have thirty seconds of free choreography." Lerato read it five times. Thirty seconds. She had been dancing since she was seven, first in her neighbourhood's community centre in Soweto, then in a youth company. Now one of the most famous dance companies in the country was holding auditions, and she had thirty seconds to show them everything.
 
-For two weeks, she practised every evening on the roof of her building. Her first idea was to include all her most difficult moves. Her teacher, Profe Arley, watched and shook his head. "It's impressive," he said, "but who are you? I can't see you in it." Daniela was annoyed. She had worked hard on those moves.
+For two weeks, she practised every evening on the roof of her building. Her first idea was to include all her most difficult moves. Her teacher, Mr Dlamini, watched and shook his head. "It's impressive," he said, "but who are you? I can't see you in it." Lerato was annoyed. She had worked hard on those moves.
 
-That night she couldn't sleep. She thought about why she had started dancing: her grandmother dancing salsa in the kitchen, the music from the street on Sunday afternoons. The next day she threw away her plan and created something new: a short piece that started slowly, like her grandmother's steps, and ended with the fast footwork of Cali salsa.
+That night she couldn't sleep. She thought about why she had started dancing: her grandmother dancing to old jazz records in the kitchen, the music from the street on Sunday afternoons. The next day she threw away her plan and created something new: a short piece that started slowly, like her grandmother's steps, and ended with the fast footwork of pantsula, the street dance of Soweto.
 
 On the day of the audition, there were almost two hundred dancers. When her turn came, her legs were shaking, but as soon as the music started she forgot about the judges. Thirty seconds later, it was over. One of the judges wrote something and said only, "Thank you."
 
@@ -157,8 +157,8 @@ Three weeks later, she got another email. It started with the word "Congratulati
       { word: "footwork", means: "the way you move your feet, especially in dancing or sport" },
     ],
     questions: [
-      { q: "What was Profe Arley's criticism of her first plan?", options: ["It showed difficult moves but not her personality.", "It was too slow and calm for a contemporary dance audition.", "It was longer than thirty seconds."], answer: 0, why: "\"It's impressive, but who are you? I can't see you in it.\"" },
-      { q: "What inspired Daniela's new piece?", options: ["A video of a famous company.", "Her memories of her grandmother and of her own neighbourhood.", "The other dancers she watched on the day of the audition."], answer: 1, why: "She thought about \"her grandmother dancing salsa in the kitchen, the music from the street.\"" },
+      { q: "What was Mr Dlamini's criticism of her first plan?", options: ["It showed difficult moves but not her personality.", "It was too slow and calm for a contemporary dance audition.", "It was longer than thirty seconds."], answer: 0, why: "\"It's impressive, but who are you? I can't see you in it.\"" },
+      { q: "What inspired Lerato's new piece?", options: ["A video of a famous company.", "Her memories of her grandmother and of her own neighbourhood.", "The other dancers she watched on the day of the audition."], answer: 1, why: "She thought about \"her grandmother dancing to old jazz records in the kitchen, the music from the street.\"" },
       { q: "What can we understand from the last line?", options: ["She was asked to come back and audition again.", "The company rejected her politely.", "She was chosen by the dance company."], answer: 2, why: "An email starting with \"Congratulations\" means she was successful." },
     ],
   },
@@ -279,27 +279,27 @@ Is there anything good about this mess? Actually, yes. English spelling often sh
     ],
   },
   {
-    id: "b1-tatacoa-stars", band: "B1", universe: "science", kind: "story",
-    title: "A night in the desert", blurb: "Luisa sees the Milky Way for the first time.",
-    text: `I live in Bogotá, and I'd never really seen the stars. On a good night, I could see the Moon and maybe five or six bright points. So when my aunt invited me on a trip to the Tatacoa Desert in Huila, I didn't expect much. A desert? In Colombia? I imagined sand dunes like in films.
+    id: "b1-dark-sky", band: "B1", universe: "science", kind: "story",
+    title: "A night in the desert", blurb: "In Namibia, Luisa sees the Milky Way for the first time.",
+    text: `I live in London, and I'd never really seen the stars. On a good night, I could see the Moon and maybe five or six bright points. So when my aunt invited me on a trip to the NamibRand Nature Reserve in Namibia, I didn't expect much. A desert? I imagined endless sand and nothing else, like in films.
 
-The Tatacoa isn't like that at all. It's a dry forest with red and grey rock shapes, cactus plants and strange valleys that look like another planet. During the day, it was incredibly hot. We walked through the red area in the morning and hid in the shade in the afternoon, drinking cold juice.
+The NamibRand isn't like that at all. There are huge red sand dunes, but also golden grasslands, rocky mountains and strange round patches with no grass, called "fairy circles", that make it look like another planet. During the day, it was incredibly hot. We walked in the morning and hid in the shade in the afternoon, drinking cold juice.
 
-But the real reason people go there is the night. Because there are almost no towns nearby and very little light, the sky is incredibly dark. At about eight o'clock, we went to a small observatory, where a guide called Javier showed us the sky through a telescope. He pointed out Saturn, and I could actually see its rings. I couldn't believe something so far away could look so clear.
+But the real reason people go there is the night. Because there are almost no towns nearby and very little light, the sky is incredibly dark. In fact, it is one of the darkest places on Earth. At about eight o'clock, a guide called Johannes showed us the sky through a telescope. He pointed out Saturn, and I could actually see its rings. I couldn't believe something so far away could look so clear.
 
-Then Javier turned off all the lights and told us to wait. Slowly, my eyes got used to the darkness, and the sky filled with thousands of stars. Across the middle there was a pale, cloudy band. "That's the Milky Way," he said. "Our own galaxy. You're looking at it from the inside."
+Then Johannes turned off all the lights and told us to wait. Slowly, my eyes got used to the darkness, and the sky filled with thousands of stars. Across the middle there was a pale, cloudy band. "That's the Milky Way," he said. "Our own galaxy. You're looking at it from the inside."
 
-I lay on the ground for an hour without speaking. Back in Bogotá, the sky looks empty again. But now I know what's hiding behind the lights.`,
+I lay on the ground for an hour without speaking. Back in London, the sky looks empty again. But now I know what's hiding behind the lights.`,
     gloss: [
-      { word: "sand dunes", means: "hills of sand made by the wind" },
-      { word: "observatory", means: "a building with telescopes for looking at stars and planets" },
+      { word: "dunes", means: "hills of sand made by the wind" },
+      { word: "telescope", means: "an instrument that makes faraway things look bigger and closer" },
       { word: "pale", means: "light in colour, not bright" },
       { word: "galaxy", means: "a huge group of stars; ours is the Milky Way" },
     ],
     questions: [
-      { q: "What did Luisa expect the Tatacoa Desert to look like?", options: ["Sand dunes like in films.", "A dry forest with red rocks.", "A large city with an observatory."], answer: 0, why: "\"I imagined sand dunes like in films.\"" },
-      { q: "Why is the night sky so dark in the Tatacoa?", options: ["It's very high in the mountains.", "There are few towns and little light nearby.", "The guide turns off all the lights in the desert every night."], answer: 1, why: "\"Because there are almost no towns nearby and very little light.\"" },
-      { q: "What does Luisa mean by 'what's hiding behind the lights'?", options: ["Planets are only visible through large telescopes, not with your eyes.", "Bogotá has a secret observatory.", "City lights hide the stars that are really there."], answer: 2, why: "The stars are still there; the city's lights stop her seeing them." },
+      { q: "What did Luisa expect the desert to look like?", options: ["Endless sand and nothing else.", "Grasslands and red dunes.", "A busy town with hotels."], answer: 0, why: "\"I imagined endless sand and nothing else, like in films.\"" },
+      { q: "Why is the night sky so dark in the NamibRand?", options: ["It's very high up in the mountains.", "There are few towns and little light nearby.", "The guide turns off all the lights in the desert every night."], answer: 1, why: "\"Because there are almost no towns nearby and very little light.\"" },
+      { q: "What does Luisa mean by 'what's hiding behind the lights'?", options: ["Planets are only visible through large telescopes, not with your eyes.", "London has a secret observatory.", "City lights hide the stars that are really there."], answer: 2, why: "The stars are still there; the city's lights stop her seeing them." },
     ],
   },
   {

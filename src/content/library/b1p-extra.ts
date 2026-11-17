@@ -28,38 +28,37 @@ So what should you do? Experts suggest spreading your studying over several days
   },
   {
     id: "b1p-wall-letter", band: "B1+", universe: "past", kind: "story",
-    title: "The letter in the wall", blurb: "Renovating an old house in Popayán, Andrea finds a letter from 1952.",
-    text: `When my parents bought an old house in the centre of Popayán, everyone said they were mad. The walls were cracked, the roof leaked and the kitchen hadn't been changed since the 1950s. My dad, who is an architect, said it had "character". I said it had insects.
+    title: "The letter in the wall", blurb: "Renovating an old house in Edinburgh, Ellie finds a letter from 1952.",
+    text: `When my parents bought an old house in the centre of Edinburgh, everyone said they were mad. The walls were cracked, the roof leaked and the kitchen hadn't been changed since the 1950s. My dad, who is an architect, said it had "character". I said it had insects.
 
 In July, the builders started removing an old wall between the kitchen and the dining room. In the middle of the morning, one of them called my dad. Between the bricks, there was a small metal box, rusty and covered in dust. Inside was an envelope, yellow with age. On it, someone had written in careful handwriting: "For whoever lives here in the future."
 
-We opened it at dinner. The letter was dated 4 March 1952 and signed by a woman called Inés. She explained that her family had built the house and that she was writing on the day her first son was born. She described the street, the price of bread and the sound of church bells in the morning. At the end, she wrote: "I hope the people who find this are happy here. A house is only walls until someone fills it with life."
+We opened it at dinner. The letter was dated 4 March 1952 and signed by a woman called Margaret. She explained that her family had built the house and that she was writing on the day her first son was born. She described the street, the price of bread and the sound of church bells in the morning. At the end, she wrote: "I hope the people who find this are happy here. A house is only walls until someone fills it with life."
 
-My dad wanted to find Inés's family, so we started searching. The city archive had the property records, and after weeks of emails and phone calls, we found her granddaughter, who now lives in Cali. She came to visit in December. When she read the letter, she cried. "That son was my father," she said.
+My dad wanted to find Margaret's family, so we started searching. The city archive had the property records, and after weeks of emails and phone calls, we found her granddaughter, who now lives in Canada. She flew over to visit in December. When she read the letter, she cried. "That son was my father," she said.
 
-Before the builders closed the new wall, we put the box back, with Inés's letter and a new one from us.`,
+Before the builders closed the new wall, we put the box back, with Margaret's letter and a new one from us.`,
     gloss: [
-      { word: "rusty", means: "covered in rust, the brown layer that forms on old metal" },
       { word: "rusty", means: "covered in the red-brown substance that forms on old metal" },
       { word: "archive", means: "a place where old official documents are kept" },
       { word: "property records", means: "official documents showing who owned a building or land" },
     ],
     questions: [
       { q: "Where was the box found?", options: ["Between the bricks of a wall being removed.", "Under the wooden floor of the old dining room.", "In the old kitchen cupboards."], answer: 0, why: "\"Between the bricks, there was a small metal box.\"" },
-      { q: "How did the family find Inés's granddaughter?", options: ["She saw a news story about the letter on television and called them.", "They searched the city archive and made many phone calls.", "The builders knew her family."], answer: 1, why: "\"The city archive had the property records, and after weeks of emails and phone calls, we found her granddaughter.\"" },
-      { q: "Why did the family put the box back in the wall?", options: ["The granddaughter didn't want to keep the letter herself.", "The builders asked them to.", "To continue the tradition for future owners."], answer: 2, why: "They added \"a new one from us\", repeating what Inés had done." },
+      { q: "How did the family find Margaret's granddaughter?", options: ["She saw a news story about the letter on television and called them.", "They searched the city archive and made many phone calls.", "The builders knew her family."], answer: 1, why: "\"The city archive had the property records, and after weeks of emails and phone calls, we found her granddaughter.\"" },
+      { q: "Why did the family put the box back in the wall?", options: ["The granddaughter didn't want to keep the letter herself.", "The builders asked them to.", "To continue the tradition for future owners."], answer: 2, why: "They added \"a new one from us\", repeating what Margaret had done." },
     ],
   },
   {
     id: "b1p-electric-buses", band: "B1+", universe: "futures", kind: "article",
-    title: "The quiet bus", blurb: "Bogotá has one of the largest electric bus fleets outside China.",
-    text: `If you've ridden a bus in Bogotá recently, you may have noticed something strange: silence. No roar of a diesel engine, no black smoke at the traffic lights. Over the last few years, the city has introduced well over a thousand electric buses into its public transport system, making it one of the largest electric bus fleets anywhere outside China.
+    title: "The quiet bus", blurb: "One Chinese city changed every one of its buses to electric. Others are following.",
+    text: `If you ride a bus in Shenzhen, in southern China, you may notice something strange: silence. No roar of a diesel engine, no black smoke at the traffic lights. In 2017, Shenzhen became the first big city in the world where every public bus was electric: more than sixteen thousand of them.
 
-The reasons are clear. Transport is one of the main sources of air pollution in Latin American cities, and old diesel buses are among the worst offenders. They release tiny particles that damage people's lungs, especially children's and older people's. Electric buses produce no exhaust fumes at all. In Bogotá, where a large part of the electricity comes from hydroelectric dams, they also produce much less carbon dioxide over their lifetime than diesel buses.
+The reasons are clear. Transport is one of the main sources of air pollution in big cities, and old diesel buses are among the worst offenders. They release tiny particles that damage people's lungs, especially children's and older people's. Electric buses produce no exhaust fumes at all. They also usually produce less carbon dioxide over their lifetime than diesel buses, although the exact benefit depends on how the electricity is produced.
 
 Of course, the change hasn't been simple. Electric buses cost more to buy, although they are cheaper to run and maintain. Cities need large charging stations, usually in the bus depots, and drivers and mechanics need training. Some critics also point out that new buses don't solve every problem: traffic jams, long journeys and overcrowding remain serious issues.
 
-Still, other Latin American cities, such as Santiago de Chile, have also built large electric fleets, and many more are planning to. For passengers, the most obvious change may be the simplest one. "The first time I took an electric bus," one student said, "I could actually hear my music without turning it up."`,
+Still, cities on every continent are following. London, Santiago de Chile and Bogotá have all built large electric fleets, and many more are planning to. For passengers, the most obvious change may be the simplest one. "The first time I took an electric bus," one student said, "I could actually hear my music without turning it up."`,
     gloss: [
       { word: "fleets", means: "groups of vehicles owned by the same company or city" },
       { word: "offenders", means: "(here) things that cause a problem" },
@@ -69,7 +68,7 @@ Still, other Latin American cities, such as Santiago de Chile, have also built l
     questions: [
       { q: "Why are diesel buses a health problem?", options: ["They release tiny particles that harm people's lungs.", "They are much too loud for passengers and drivers.", "They use electricity from dams."], answer: 0, why: "\"They release tiny particles that damage people's lungs.\"" },
       { q: "What is one disadvantage of electric buses mentioned in the text?", options: ["They produce more carbon dioxide.", "They cost more to buy at first.", "They need more drivers."], answer: 1, why: "\"Electric buses cost more to buy, although they are cheaper to run.\"" },
-      { q: "What do critics point out?", options: ["Electric buses are less safe.", "Other cities in Latin America have better and cheaper buses.", "New buses don't fix all transport problems."], answer: 2, why: "\"New buses don't solve every problem: traffic jams, long journeys and overcrowding remain.\"" },
+      { q: "What do critics point out?", options: ["Electric buses are less safe.", "Other cities in the world have better and cheaper buses.", "New buses don't fix all transport problems."], answer: 2, why: "\"New buses don't solve every problem: traffic jams, long journeys and overcrowding remain.\"" },
     ],
   },
   {
@@ -122,26 +121,26 @@ Botero was also generous with his own country. In the year 2000, he donated a la
   },
   {
     id: "b1p-spelling-bee", band: "B1+", universe: "words", kind: "story",
-    title: "One letter", blurb: "In the final round of the spelling competition, Mateo has to spell a word he's never heard.",
-    text: `There were only two of us left on the stage: me and a girl from Barranquilla called Valentina. It was the final of the national English spelling competition for schools, and the room was so quiet I could hear the air conditioning.
+    title: "One letter", blurb: "In the final round of the national spelling bee, Marcus has to spell a word he's never heard.",
+    text: `There were only two of us left on the stage: me and a girl from Ohio called Priya. It was the final of the Scripps National Spelling Bee, near Washington, D.C., and the room was so quiet I could hear the air conditioning.
 
 I had prepared for months. Every night after dinner, my older sister read words to me from a list of three thousand. I learnt that English words often carry their history with them. Words from Greek, like "rhythm" and "psychology", have strange letters like "rh" and "ps". Words from French often end in "-ique" or "-eau". If you know where a word comes from, you can sometimes guess how to spell it.
 
-Valentina spelled "conscientious" perfectly. Then it was my turn. The judge said: "Your word is 'sesquipedalian'." I had never heard it. My mind went blank. I asked for the definition: "using long words." I asked for the language of origin: "Latin." I took a deep breath and broke it into pieces, the way my sister had taught me. Sesqui, like a word meaning "one and a half". Ped, like "pedal", connected to the foot. Ian, a common ending.
+Priya spelled "conscientious" perfectly. Then it was my turn. The judge said: "Your word is 'sesquipedalian'." I had never heard it. My mind went blank. I asked for the definition: "using long words." I asked for the language of origin: "Latin." I took a deep breath and broke it into pieces, the way my sister had taught me. Sesqui, like a word meaning "one and a half". Ped, like "pedal", connected to the foot. Ian, a common ending.
 
 I spelled it slowly. When I finished, the judge paused. "That is correct."
 
-But in the next round, I missed the word "liaison" by one letter. I forgot the second "i". Valentina spelled it correctly and won. I was disappointed, of course. But afterwards, she came over and said, "How did you get sesquipedalian? I didn't know it either." We spent the evening talking about words. We still message each other a "word of the day".`,
+But in the next round, I missed the word "liaison" by one letter. I forgot the second "i". Priya spelled it correctly and won. I was disappointed, of course. But afterwards, she came over and said, "How did you get sesquipedalian? I didn't know it either." We spent the evening talking about words. We still message each other a "word of the day".`,
     gloss: [
-      { word: "spelling competition", means: "a contest where people spell words correctly, letter by letter" },
+      { word: "spelling bee", means: "a contest where people spell words correctly, letter by letter" },
       { word: "my mind went blank", means: "I suddenly couldn't think of anything" },
       { word: "origin", means: "the place or language something comes from" },
       { word: "disappointed", means: "sad because something didn't happen as you hoped" },
     ],
     questions: [
-      { q: "How did Mateo prepare for the competition?", options: ["His sister read him words from a long list every night.", "He studied Greek and Latin at school with a special teacher.", "He practised with Valentina online."], answer: 0, why: "\"Every night after dinner, my older sister read words to me from a list of three thousand.\"" },
-      { q: "How did Mateo spell a word he didn't know?", options: ["He guessed and was lucky.", "He divided it into parts and used their origins.", "He asked the judge to say it more slowly."], answer: 1, why: "\"I… broke it into pieces, the way my sister had taught me.\"" },
-      { q: "What does the ending show?", options: ["Mateo was too upset to talk to Valentina.", "Valentina won because the judges preferred her to Mateo.", "Losing led to a new friendship based on a shared interest."], answer: 2, why: "They \"still message each other a 'word of the day'\"." },
+      { q: "How did Marcus prepare for the competition?", options: ["His sister read him words from a long list every night.", "He studied Greek and Latin at school with a special teacher.", "He practised with Priya online."], answer: 0, why: "\"Every night after dinner, my older sister read words to me from a list of three thousand.\"" },
+      { q: "How did Marcus spell a word he didn't know?", options: ["He guessed and was lucky.", "He divided it into parts and used their origins.", "He asked the judge to say it more slowly."], answer: 1, why: "\"I… broke it into pieces, the way my sister had taught me.\"" },
+      { q: "What does the ending show?", options: ["Marcus was too upset to talk to Priya.", "Priya won because the judges preferred her to Marcus.", "Losing led to a new friendship based on a shared interest."], answer: 2, why: "They \"still message each other a 'word of the day'\"." },
     ],
   },
   {
@@ -245,7 +244,7 @@ I still think about that moment. Forgetting your lines is every actor's nightmar
 
 In the last months of pregnancy, babies can hear sounds from outside the womb. Studies have shown that newborns prefer their mother's voice to other voices, and that they react differently to the language their mother spoke during pregnancy. A French baby and an English baby, just a few days old, already seem to recognise the rhythm of "their" language.
 
-In their first months, babies can hear the difference between almost all the sounds used in human languages, including sounds their parents can't distinguish. A baby in Bogotá, for example, can hear the difference between two Hindi sounds that most Spanish-speaking adults hear as the same. But by around their first birthday, this ability changes. Babies become experts in the sounds of the language around them and less sensitive to others. Scientists sometimes call this "perceptual narrowing".
+In their first months, babies can hear the difference between almost all the sounds used in human languages, including sounds their parents can't distinguish. A baby in Madrid, for example, can hear the difference between two Hindi sounds that most Spanish-speaking adults hear as the same. But by around their first birthday, this ability changes. Babies become experts in the sounds of the language around them and less sensitive to others. Scientists sometimes call this "perceptual narrowing".
 
 How do babies find words in a continuous stream of speech, where people don't pause between words? One famous experiment found that eight-month-olds can track which syllables tend to appear together. After listening to a stream of made-up syllables for just two minutes, babies could tell the difference between "words" (syllables that always appeared together) and random combinations.
 
@@ -264,25 +263,25 @@ Parents don't need special programmes to help. Researchers agree that the most u
   },
   {
     id: "b1p-bird-count", band: "B1+", universe: "science", kind: "story",
-    title: "The bird count", blurb: "Valeria joins a team of volunteers counting birds before sunrise.",
-    text: `At 4:45 in the morning, my phone rang. "Are you ready?" It was my biology teacher, Profe Hernán. Two weeks earlier, he had asked if anyone wanted to join a bird count with a local birdwatching club. I had said yes without really thinking. Now, in the dark and the cold, I was regretting it.
+    title: "The bird count", blurb: "In Kenya, Wanjiru joins a team of volunteers counting birds before sunrise.",
+    text: `At 4:45 in the morning, my phone rang. "Are you ready?" It was my biology teacher, Mr Otieno. Two weeks earlier, he had asked if anyone wanted to join a bird count with a local birdwatching club. I had said yes without really thinking. Now, in the dark and the cold, I was regretting it.
 
-We drove to a forest reserve outside the city. There were eight of us: a retired doctor, two university students, a taxi driver who had been birdwatching for twenty years and a few others. Each group received a route and a sheet to record every bird we saw or heard.
+We drove to Kakamega Forest, the last piece of rainforest of its kind in Kenya. There were eight of us: a retired doctor, two university students, a taxi driver who had been birdwatching for twenty years and a few others. Each group received a route and a sheet to record every bird we saw or heard.
 
-Colombia has more bird species than any other country in the world, almost two thousand. I had never thought much about that. In my mind, there were pigeons and "other birds". But as the sun came up, the forest exploded with sound. Don Wilson, the taxi driver, identified birds just by their songs. "That's a tanager. That one's a woodpecker. Listen, a motmot." I couldn't see anything, but he was always right.
+Kenya has more than a thousand bird species, more than all of Europe. I had never thought much about that. In my mind, there were pigeons and "other birds". But as the sun came up, the forest exploded with sound. Mr Kamau, the taxi driver, identified birds just by their songs. "That's a turaco. That one's a woodpecker. Listen, a sunbird." I couldn't see anything, but he was always right.
 
-By ten o'clock, our group had recorded fifty-three species. I had seen a hummingbird with a tail longer than its body and a toucan eating fruit just a few metres away. My hands were cold, my shoes were wet and I was completely happy.
+By ten o'clock, our group had recorded fifty-three species. I had seen a sunbird with a tail longer than its body and a hornbill eating fruit just a few metres away. My hands were cold, my shoes were wet and I was completely happy.
 
-The data from counts like ours is sent to scientists, who use it to understand which species are increasing or decreasing. Profe Hernán said that ordinary people like us collect information that scientists could never collect alone. On the way home, I downloaded a bird identification app. Next year, I want to identify the songs myself.`,
+The data from counts like ours is sent to scientists, who use it to understand which species are increasing or decreasing. Mr Otieno said that ordinary people like us collect information that scientists could never collect alone. On the way home, I downloaded a bird identification app. Next year, I want to identify the songs myself.`,
     gloss: [
       { word: "regretting", means: "feeling sorry that you did something" },
-      { word: "reserve", means: "a protected area for animals and plants" },
+      { word: "rainforest", means: "a thick forest in a hot place where it rains a lot" },
       { word: "identified", means: "recognised and named" },
       { word: "species", means: "a type of animal or plant" },
     ],
     questions: [
-      { q: "How did Valeria feel at the start of the morning?", options: ["She regretted agreeing to go.", "She was excited to see a toucan.", "She was worried about her biology grade."], answer: 0, why: "\"In the dark and the cold, I was regretting it.\"" },
-      { q: "What was special about Don Wilson?", options: ["He was a biology teacher.", "He could identify birds just from their songs.", "He was the person who organised the whole bird count."], answer: 1, why: "\"Don Wilson… identified birds just by their songs.\"" },
+      { q: "How did Wanjiru feel at the start of the morning?", options: ["She regretted agreeing to go.", "She was excited to see a toucan.", "She was worried about her biology grade."], answer: 0, why: "\"In the dark and the cold, I was regretting it.\"" },
+      { q: "What was special about Mr Kamau?", options: ["He was a biology teacher.", "He could identify birds just from their songs.", "He was the person who organised the whole bird count."], answer: 1, why: "\"Mr Kamau… identified birds just by their songs.\"" },
       { q: "Why is the bird count useful for science?", options: ["It helps sell bird identification apps.", "It brings more tourists and money to the reserve every year.", "Volunteers collect data scientists couldn't gather alone."], answer: 2, why: "\"Ordinary people like us collect information that scientists could never collect alone.\"" },
     ],
   },

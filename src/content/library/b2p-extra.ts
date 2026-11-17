@@ -126,16 +126,16 @@ Perhaps the most practical lesson for language learners is this: learning a new 
   },
   {
     id: "b2p-understudy", band: "B2+", universe: "arts", kind: "story",
-    title: "The understudy", blurb: "For a year, Mateo learnt every line. He never expected to say them.",
-    text: `Being an understudy, Mateo often thought, was like being a spare tyre: essential in theory, invisible in practice. For eleven months he had attended every rehearsal of the theatre company's production of a famous Colombian play, learnt every line of the lead role, every movement, every pause. Then, every night, he had sat in the dressing room, listening to the performance through a small speaker, while Julián, the star, received the applause.
+    title: "The understudy", blurb: "For a year, Sam learnt every line. He never expected to say them.",
+    text: `Being an understudy, Sam often thought, was like being a spare tyre: essential in theory, invisible in practice. For eleven months he had attended every rehearsal of a London theatre's production of Shakespeare's Hamlet, learnt every line of the lead role, every movement, every pause. Then, every night, he had sat in the dressing room, listening to the performance through a small speaker, while Oliver, the star, received the applause.
 
-He had stopped resenting it. Julián was genuinely brilliant, and Mateo learnt something new from him every night: how he let a silence grow until the audience leaned forward, how he played anger not by shouting but by becoming terrifyingly calm. Mateo assumed he would never use any of it.
+He had stopped resenting it. Oliver was genuinely brilliant, and Sam learnt something new from him every night: how he let a silence grow until the audience leaned forward, how he played anger not by shouting but by becoming terrifyingly calm. Sam assumed he would never use any of it.
 
-Then, at six o'clock on a Saturday, with the theatre sold out, the director phoned. Julián had food poisoning. "You're on," she said. "Are you ready?" Mateo said yes, because there was no other possible answer, and then went to the bathroom and was sick.
+Then, at six o'clock on a Saturday, with the theatre sold out, the director phoned. Oliver had food poisoning. "You're on," she said. "Are you ready?" Sam said yes, because there was no other possible answer, and then went to the bathroom and was sick.
 
-The first ten minutes were a blur. He could hear his own voice as if it belonged to someone else. Then, in the second scene, something unexpected happened. Instead of imitating Julián's famous calm, he found himself playing the anger differently: hurt rather than cold, closer to tears than to violence. It wasn't planned. It simply felt true.
+The first ten minutes were a blur. He could hear his own voice as if it belonged to someone else. Then, in the second scene, something unexpected happened. Instead of imitating Oliver's famous calm, he found himself playing the anger differently: hurt rather than cold, closer to tears than to violence. It wasn't planned. It simply felt true.
 
-At the end, the applause was polite, then warm, then, to his astonishment, enthusiastic. Afterwards, the director found him. "It wasn't Julián's performance," she said. "I was worried for a moment. But it was yours." The next week, Julián returned, and Mateo went back to the dressing room. But something had changed. He no longer felt like a spare tyre. He felt like an actor who was waiting, and that, he discovered, was a completely different thing.`,
+At the end, the applause was polite, then warm, then, to his astonishment, enthusiastic. Afterwards, the director found him. "It wasn't Oliver's performance," she said. "I was worried for a moment. But it was yours." The next week, Oliver returned, and Sam went back to the dressing room. But something had changed. He no longer felt like a spare tyre. He felt like an actor who was waiting, and that, he discovered, was a completely different thing.`,
     gloss: [
       { word: "understudy", means: "an actor who learns another actor's part in order to replace them if necessary" },
       { word: "resenting", means: "feeling angry because something seems unfair" },
@@ -143,9 +143,9 @@ At the end, the applause was polite, then warm, then, to his astonishment, enthu
       { word: "astonishment", means: "very great surprise" },
     ],
     questions: [
-      { q: "Why does Mateo compare himself to a spare tyre?", options: ["He is essential in theory but rarely used or even noticed.", "He often feels tired and bored after long rehearsals.", "He replaces Julián every weekend."], answer: 0, why: "\"Essential in theory, invisible in practice.\"" },
-      { q: "What was different about Mateo's performance?", options: ["He copied Julián's famous calm style as exactly as he could.", "He played the character's anger as hurt rather than cold.", "He forgot many of his lines."], answer: 1, why: "\"Instead of imitating Julián's famous calm… hurt rather than cold.\"" },
-      { q: "How has Mateo's view of himself changed by the end?", options: ["He believes he is better than Julián.", "He has decided to leave the company and look for leading roles.", "He now sees himself as a real actor waiting for his moment."], answer: 2, why: "\"He felt like an actor who was waiting, and that… was a completely different thing.\"" },
+      { q: "Why does Sam compare himself to a spare tyre?", options: ["He is essential in theory but rarely used or even noticed.", "He often feels tired and bored after long rehearsals.", "He replaces Oliver every weekend."], answer: 0, why: "\"Essential in theory, invisible in practice.\"" },
+      { q: "What was different about Sam's performance?", options: ["He copied Oliver's famous calm style as exactly as he could.", "He played the character's anger as hurt rather than cold.", "He forgot many of his lines."], answer: 1, why: "\"Instead of imitating Oliver's famous calm… hurt rather than cold.\"" },
+      { q: "How has Sam's view of himself changed by the end?", options: ["He believes he is better than Oliver.", "He has decided to leave the company and look for leading roles.", "He now sees himself as a real actor waiting for his moment."], answer: 2, why: "\"He felt like an actor who was waiting, and that… was a completely different thing.\"" },
     ],
   },
   {
@@ -175,15 +175,15 @@ Experiments in other countries, from Kenya to the United States, have produced v
   {
     id: "b2p-cartographer", band: "B2+", universe: "past", kind: "story",
     title: "The cartographer's mistake", blurb: "In 1789, a young mapmaker invents an island. Nobody checks.",
-    text: `In the archive where I work, there is a map from 1789 with an island on it that does not exist. It sits off the Caribbean coast, small and neatly drawn, with a name in elegant handwriting: Isla de Santa Inés. For two centuries, it appeared on other maps, copied from one to the next. Sailors searched for it; at least one ship's captain claimed to have seen it. It was only removed from official charts in the twentieth century.
+    text: `In the archive where I work, there is a map from 1789 with an island on it that does not exist. It sits in the Coral Sea, east of Australia, small and neatly drawn, with a name in elegant handwriting: St Agnes Island. For two centuries, it appeared on other maps, copied from one to the next. Sailors searched for it; at least one ship's captain claimed to have seen it. It was only removed from official charts in the twentieth century.
 
-For years, historians assumed it was an honest mistake: perhaps a sailor had confused a bank of clouds or a floating mass of vegetation with land. But last year, while cataloguing a box of unsorted letters, I found something else. The letters were written by the map's author, a young cartographer named Tomás Arrieta, to his sister in Cartagena.
+For years, historians assumed it was an honest mistake: perhaps a sailor had confused a bank of clouds or a floating mass of vegetation with land. But last year, while cataloguing a box of unsorted letters, I found something else. The letters were written by the map's author, a young cartographer named Thomas Hale, to his sister in Bristol.
 
-In one letter, Tomás confesses that he invented the island. He had been sent to map the coast but, delayed by storms and illness, he had not finished. Fearing he would lose his position, he completed the map from imagination. He added the island, he wrote, "so that anyone who copies my work without permission will be discovered". It was a trap, a signature hidden in the sea.
+In one letter, Thomas confesses that he invented the island. He had been sent to map the coast but, delayed by storms and illness, he had not finished. Fearing he would lose his position, he completed the map from imagination. He added the island, he wrote, "so that anyone who copies my work without permission will be discovered". It was a trap, a signature hidden in the sea.
 
 What fascinated me was what happened next. Other mapmakers did copy his work, and the island spread, but nobody was ever caught, because nobody knew it was a trap. Instead, the invented island acquired a life of its own. Sailors reported seeing it because they expected to see it.
 
-I have thought a great deal about Tomás. His small lie was meant to protect the truth of his work, yet it became one of the most persistent errors in the history of the region. I sometimes wonder how many of the "facts" we repeat today began as someone's convenient invention, copied faithfully until no one remembered to ask where they came from.`,
+I have thought a great deal about Thomas. His small lie was meant to protect the truth of his work, yet it became one of the most persistent errors in the history of the region. I sometimes wonder how many of the "facts" we repeat today began as someone's convenient invention, copied faithfully until no one remembered to ask where they came from.`,
     gloss: [
       { word: "archive", means: "a collection of historical documents, or the place where they are kept" },
       { word: "cataloguing", means: "making a list of items in an organised way" },
@@ -191,8 +191,8 @@ I have thought a great deal about Tomás. His small lie was meant to protect the
       { word: "persistent", means: "continuing to exist for a long time" },
     ],
     questions: [
-      { q: "Why did Tomás add the island to his map?", options: ["To catch people who copied his map without his permission.", "Because a sailor told him he had seen it near Cartagena.", "To make the map look more complete for his sister."], answer: 0, why: "\"So that anyone who copies my work without permission will be discovered.\"" },
-      { q: "Why did the 'trap' fail?", options: ["Tomás's map was never copied.", "Nobody knew the island was invented, so no copier was caught.", "The island was removed from the map as soon as other mapmakers saw it."], answer: 1, why: "\"Nobody was ever caught, because nobody knew it was a trap.\"" },
+      { q: "Why did Thomas add the island to his map?", options: ["To catch people who copied his map without his permission.", "Because a sailor told him he had seen it near Cartagena.", "To make the map look more complete for his sister."], answer: 0, why: "\"So that anyone who copies my work without permission will be discovered.\"" },
+      { q: "Why did the 'trap' fail?", options: ["Thomas's map was never copied.", "Nobody knew the island was invented, so no copier was caught.", "The island was removed from the map as soon as other mapmakers saw it."], answer: 1, why: "\"Nobody was ever caught, because nobody knew it was a trap.\"" },
       { q: "What broader point does the narrator make at the end?", options: ["Old maps are more accurate than modern ones.", "Cartographers in the eighteenth century were often dishonest about their work.", "Unchecked information can be copied until people accept it as fact."], answer: 2, why: "\"Copied faithfully until no one remembered to ask where they came from.\"" },
     ],
   },
@@ -275,16 +275,16 @@ The best defence remains awareness. Once you learn to recognise dark patterns, y
   },
   {
     id: "b2p-observatory", band: "B2+", universe: "science", kind: "story",
-    title: "Night shift", blurb: "Paula spends the night at an observatory, looking for something nobody has seen.",
-    text: `The observatory sits at almost three thousand metres above sea level, far enough from any city that the sky at night is not black but crowded, almost noisy with stars. Paula, a second-year physics student from Pasto, arrived for a two-week internship expecting to look through a telescope. On her first night, she discovered that nobody looks through the telescope anymore.
+    title: "Night shift", blurb: "Thandi spends the night at an observatory, looking for something nobody has seen.",
+    text: `The observatory sits on a hill in South Africa's dry Karoo region, far enough from any city that the sky at night is not black but crowded, almost noisy with stars. Thandi, a second-year physics student from Durban, arrived for a two-week internship expecting to look through a telescope. On her first night, she discovered that nobody looks through the telescope anymore.
 
 Instead, she sat in a warm control room with three screens and a cup of coffee, while the telescope above her moved silently, photographing the same patch of sky every few minutes. Her job was to help monitor the images for changes: a star that suddenly brightened, an object that moved. Most of the work was done by software. Her role was to check the cases the software couldn't decide.
 
-It was, at first, profoundly boring. Hour after hour, the program flagged changes that turned out to be nothing: a satellite crossing the frame, a cosmic ray hitting the camera, a flaw in the image. The senior astronomer, Dr Villamil, told her that this was what science mostly looked like. "Ninety-nine percent of discovery," she said, "is the patience to look at ninety-nine things that aren't discoveries."
+It was, at first, profoundly boring. Hour after hour, the program flagged changes that turned out to be nothing: a satellite crossing the frame, a cosmic ray hitting the camera, a flaw in the image. The senior astronomer, Dr Naidoo, told her that this was what science mostly looked like. "Ninety-nine percent of discovery," she said, "is the patience to look at ninety-nine things that aren't discoveries."
 
-On the ninth night, at around 3 a.m., the software flagged a faint point of light in a distant galaxy that hadn't been there the previous week. Paula almost dismissed it. Something made her check the earlier images again, compare the brightness, look at the shape. She called Dr Villamil, who looked at the screen for a long time without speaking.
+On the ninth night, at around 3 a.m., the software flagged a faint point of light in a distant galaxy that hadn't been there the previous week. Thandi almost dismissed it. Something made her check the earlier images again, compare the brightness, look at the shape. She called Dr Naidoo, who looked at the screen for a long time without speaking.
 
-It turned out to be a supernova, the explosion of a dying star, so far away that the light had been travelling for millions of years before reaching the camera. It was not a major discovery; supernovae are detected regularly. But Paula's name appeared in the report. Driving down the mountain at the end of her internship, she realised that what she would remember was not the moment of discovery, but the eight boring nights that had made her ready for it.`,
+It turned out to be a supernova, the explosion of a dying star, so far away that the light had been travelling for millions of years before reaching the camera. It was not a major discovery; supernovae are detected regularly. But Thandi's name appeared in the report. Driving down the mountain at the end of her internship, she realised that what she would remember was not the moment of discovery, but the eight boring nights that had made her ready for it.`,
     gloss: [
       { word: "internship", means: "a short period of work to get experience, often for students" },
       { word: "flagged", means: "marked something so people notice it" },
@@ -292,9 +292,9 @@ It turned out to be a supernova, the explosion of a dying star, so far away that
       { word: "supernova", means: "the huge explosion of a star" },
     ],
     questions: [
-      { q: "What was Paula's actual job at the observatory?", options: ["Checking image changes that the software could not classify.", "Looking at stars through the telescope all night and drawing them.", "Repairing the camera when it failed."], answer: 0, why: "\"Her role was to check the cases the software couldn't decide.\"" },
-      { q: "What did Dr Villamil mean by her comment about discovery?", options: ["Discoveries are mostly made by computers.", "Discovery depends on patiently checking a great many false alarms.", "Only one percent of astronomers ever make a real discovery."], answer: 1, why: "\"The patience to look at ninety-nine things that aren't discoveries.\"" },
-      { q: "What does Paula value most when she leaves?", options: ["The fame of having her name in an official scientific report.", "The beauty of the sky at high altitude.", "The routine work that prepared her for the discovery."], answer: 2, why: "\"What she would remember was… the eight boring nights that had made her ready for it.\"" },
+      { q: "What was Thandi's actual job at the observatory?", options: ["Checking image changes that the software could not classify.", "Looking at stars through the telescope all night and drawing them.", "Repairing the camera when it failed."], answer: 0, why: "\"Her role was to check the cases the software couldn't decide.\"" },
+      { q: "What did Dr Naidoo mean by her comment about discovery?", options: ["Discoveries are mostly made by computers.", "Discovery depends on patiently checking a great many false alarms.", "Only one percent of astronomers ever make a real discovery."], answer: 1, why: "\"The patience to look at ninety-nine things that aren't discoveries.\"" },
+      { q: "What does Thandi value most when she leaves?", options: ["The fame of having her name in an official scientific report.", "The beauty of the sky at high altitude.", "The routine work that prepared her for the discovery."], answer: 2, why: "\"What she would remember was… the eight boring nights that had made her ready for it.\"" },
     ],
   },
   {
