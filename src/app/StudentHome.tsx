@@ -22,6 +22,7 @@ import { MistakesCard } from "./practice/MistakesCard";
 import { GoalCard } from "./GoalCard";
 import { JourneyCard } from "./JourneyCard";
 import { RetentionCard } from "./RetentionCard";
+import { WeeklyCard } from "./WeeklyCard";
 import "./placement/placement.css";
 import "./map/map.css";
 
@@ -118,6 +119,7 @@ export function StudentHome() {
           )}
         </section>
         {start !== null && <RetentionCard es={es} />}
+        {start !== null && <WeeklyCard start={start} es={es} />}
         {start !== null && <MistakesCard es={es} />}
         {start !== null && <WordsCard es={es} />}
         {start !== null && placed !== null && result && <JourneyCard placed={placed} start={start} placedAt={result.attempt.completed_at} history={history} onCheck={() => setTesting("check")} />}

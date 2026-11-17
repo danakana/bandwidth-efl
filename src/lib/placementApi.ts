@@ -38,6 +38,9 @@ export type Submission = {
   node_id?: string | null;
   auto_passed?: boolean | null;
   feedback_seen_at?: string | null;
+  /** Weekly tasks: the teacher's CEFR rubric (-1 below band, 0 at, 1 above) and skills sent back to review. */
+  rubric?: Record<string, -1 | 0 | 1> | null;
+  focus?: string[];
 };
 
 export async function startAttempt(kind: "placement" | "check" = "placement"): Promise<Attempt> {

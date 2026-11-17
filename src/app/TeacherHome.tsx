@@ -14,6 +14,7 @@ import { TreeView } from "./map/TreeView";
 import { GateReviews } from "./assess/GateReviews";
 import { StudentProgress } from "./StudentProgress";
 import { PracticeReviews } from "./practice/PracticeReviews";
+import { WeeklyReviews } from "./practice/WeeklyReviews";
 import { IcfesOverview } from "./exams/IcfesOverview";
 import { ExamOverview } from "./exams/ExamOverview";
 import "./exams/exams.css";
@@ -137,6 +138,7 @@ export function TeacherHome() {
           nameOf={(id) => { const st = students.find((x) => x.id === id); return st?.display_name ?? st?.username ?? "Student"; }}
           onChanged={() => void load()} />
 
+        <WeeklyReviews subs={subs} classes={classes} students={students} onChanged={() => void load()} />
         <PracticeReviews subs={subs} classes={classes} students={students} onChanged={() => void load()} />
         <IcfesOverview classes={classes} students={students} />
         <ExamOverview classes={classes} students={students} />

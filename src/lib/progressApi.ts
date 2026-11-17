@@ -62,7 +62,7 @@ export async function savePractice(userId: string, nodeId: string, prompt: strin
   if (audio) {
     const type = (audio.type || "audio/webm").split(";")[0];
     const ext = type === "audio/mp4" ? "m4a" : type === "audio/ogg" ? "ogg" : "webm";
-    audio_path = `${userId}/practice-${nodeId}-${Date.now()}.${ext}`;
+    audio_path = `${userId}/practice-${nodeId.replace(/[^a-z0-9.+-]/gi, "_")}-${Date.now()}.${ext}`;
     const up = await supabase.storage.from("speaking").upload(audio_path, audio, { contentType: type });
     if (up.error) throw up.error;
   }

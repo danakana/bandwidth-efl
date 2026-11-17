@@ -232,3 +232,49 @@
 .spp-ev { margin: var(--s-4) 0; }
 .spp-list { padding-left: 1.1rem; display: grid; gap: 6px; }
 .roster-actions { display: flex; gap: var(--s-3); white-space: nowrap; }
+
+/* ---------- Weekly task (student) ---------- */
+.wk-card { padding: var(--s-5); border-radius: 28px; background: linear-gradient(150deg, #eef0ff 0%, #ffffff 55%); box-shadow: var(--g-lift); }
+.wk-card.is-doing { background: #fff; }
+.wk-top { display: grid; grid-template-columns: auto 1fr; gap: var(--s-4); align-items: center; }
+.wk-top h2 { margin: 0.15rem 0 0.3rem; }
+.wk-top p { margin: 0; max-width: 62ch; }
+.wk-art { width: 96px; height: 96px; }
+.wk-tasks { list-style: none; padding: 0; margin: var(--s-4) 0 var(--s-2); display: grid; gap: var(--s-3); }
+.wk-task { display: grid; grid-template-columns: auto 1fr auto; gap: var(--s-3); align-items: center; padding: var(--s-3) var(--s-4); border-radius: 18px; background: #fff; box-shadow: var(--g-lift-sm); }
+.wk-task.is-sent { background: #f3fbf4; }
+.wk-task strong { display: block; }
+.wk-prompt { display: block; color: var(--ink-soft); font-size: var(--step--1); margin-top: 2px; }
+.wk-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: #ece6ff; color: #4b2a9c; }
+.wk-doing-head { display: flex; justify-content: space-between; align-items: center; }
+.wk-feedback { margin-top: var(--s-4); }
+.wk-feedback h3 { display: flex; align-items: center; gap: var(--s-2); }
+.wk-marks { list-style: none; padding: 0; margin: 0 0 var(--s-3); display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.wk-marks li { padding: 0.5rem 0.7rem; border-radius: 12px; background: #f1f4f9; display: grid; }
+.wk-marks li span { font-size: var(--step--1); color: var(--ink-muted); }
+.wk-marks li.is-up { background: #e3f7e6; } .wk-marks li.is-down { background: #fff0e6; }
+.wk-focus { margin: var(--s-3) 0; padding: var(--s-3) var(--s-4); border-radius: 14px; background: #fff8d6; }
+.wk-focus p { margin: 0 0 6px; }
+.wk-focus ul { margin: 0; padding-left: 1.1rem; }
+@media (max-width: 560px) { .wk-top { grid-template-columns: 1fr; } .wk-art { width: 72px; height: 72px; } .wk-task { grid-template-columns: auto 1fr; } .wk-task > :last-child { grid-column: 1 / -1; justify-self: start; } }
+
+/* ---------- Weekly task (teacher marking) ---------- */
+.wr-rubric { border: 0; padding: 0; margin: var(--s-3) 0; display: grid; gap: 8px; }
+.wr-rubric legend { font-weight: 800; margin-bottom: 6px; }
+.wr-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-3); align-items: center; padding: 8px 10px; border-radius: 12px; background: #f6f8fb; }
+.wr-crit small { display: block; color: var(--ink-muted); font-size: var(--step--1); }
+.wr-marks { display: flex; gap: 6px; flex-wrap: wrap; }
+.wr-mark { min-height: 36px; padding: 0.3rem 0.7rem; border-radius: 999px; border: 0; background: #fff; box-shadow: var(--g-lift-sm); font: 700 var(--step--1) / 1 var(--font-body); color: var(--ink); cursor: pointer; }
+.wr-mark[aria-checked="true"].is-at { background: #dcecff; box-shadow: inset 0 0 0 2px var(--cerulean-ink); }
+.wr-mark[aria-checked="true"].is-up { background: #d9f6df; box-shadow: inset 0 0 0 2px var(--good); }
+.wr-mark[aria-checked="true"].is-down { background: #ffe8dc; box-shadow: inset 0 0 0 2px var(--try); }
+.wr-focus { margin: var(--s-3) 0; }
+.wr-focus summary { font-weight: 800; cursor: pointer; }
+.wr-group { margin-top: var(--s-2); }
+.wr-group-name { font-weight: 700; font-size: var(--step--1); color: var(--ink-muted); }
+.wr-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.wr-chips .pw-chip[aria-pressed="true"] { background: var(--ink); color: #fff; }
+@media (max-width: 700px) { .wr-row { grid-template-columns: 1fr; } }
+.wr-card textarea { font: inherit; width: 100%; min-height: 90px; padding: 0.7rem 0.9rem; border-radius: 12px; border: 1px solid var(--line); box-sizing: border-box; }
+.wk-feedback .tn-body > .btn { justify-self: start; width: auto; }
+.wk-feedback .tn-body { display: grid; gap: var(--s-2); }
