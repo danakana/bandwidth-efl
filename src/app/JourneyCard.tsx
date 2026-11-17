@@ -77,7 +77,7 @@ const SKILLS = [["reading", "Reading"], ["listening", "Listening"], ["writing", 
 export function LevelTable({ history, caption = "Your level over time" }: { history: LevelPoint[]; caption?: string }) {
   const fmt = (d: string | null) => d ? new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "2-digit" }) : "";
   return (
-    <div className="table-wrap jr-levels">
+    <div className="table-wrap jr-levels" tabIndex={0} role="region" aria-label={caption}>
       <table>
         <caption>{caption}</caption>
         <thead>

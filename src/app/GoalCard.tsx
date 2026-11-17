@@ -14,8 +14,12 @@ import { supabase } from "../lib/supabase";
 import { useAuth } from "../lib/auth";
 import { loadWords } from "../lib/wordsApi";
 import { setsFor } from "../content/vocab";
+import { GENRE_NAME, weekKey, weeklyFor } from "../content/weekly";
+import { isDue, loadRetention } from "../lib/retentionApi";
 
-type Plan = { id: string; title: string; detail: string; minutes: number; href?: string; onClick?: () => void };
+type Slot = "Review" | "New" | "Read" | "This week";
+type Plan = { id: string; slot: Slot; title: string; detail: string; minutes: number; href?: string; onClick?: () => void; done?: boolean };
+const scrollTo = (id: string) => () => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 
 /**
  * The goal is always visible: the student's CEFR band, the next one, how far they are, and the next milestone.
@@ -26,6 +30,9 @@ export function GoalCard({ start, es, onFixMistakes }: { start: number; es: bool
   const { profile } = useAuth();
   const [due, setDue] = useState(0);
   const [read, setRead] = useState<Set<string>>(new Set());
+  const [readToday, setReadToday] = useState<string | null>(null);
+  const [weekSent, setWeekSent] = useState<Set<string> | null>(null);
+  const [memoryDue, setMemoryDue] = useState(false);
   const [labDone, setLabDone] = useState<Set<string> | null>(null);
   const [wordsDue, setWordsDue] = useState(0);
   useEffect(() => {
@@ -36,7 +43,17 @@ export function GoalCard({ start, es, onFixMistakes }: { start: number; es: bool
   useEffect(() => {
     let live = true;
     void supabase.from("vocab_results").select("set_id").eq("passed", true).limit(500).then(({ data }) => { if (live) setLabDone(new Set(((data as { set_id: string }[]) ?? []).map((r) => r.set_id))); });
-    void supabase.from("library_reads").select("story_id").limit(500).then(({ data }) => { if (live) setRead(new Set(((data as { story_id: string }[]) ?? []).map((r) => r.story_id))); });
+    void supabase.from("library_reads").select("story_id, created_at").order("created_at", { ascending: false }).limit(500).then(({ data }) => {
+      if (!live) return;
+      const rows = (data as { story_id: string; created_at: string }[]) ?? [];
+      setRead(new Set(rows.map((r) => r.story_id)));
+      const t = today();
+      setReadToday(rows.find((r) => new Date(r.created_at).toLocaleDateString("en-CA", { timeZone: "America/Bogota" }) === t)?.story_id ?? null);
+    });
+    void supabase.from("submissions").select("skill").like("node_id", `week:${weekKey().key}:%`).is("revision_of", null).then(({ data }) => {
+      if (live) setWeekSent(new Set(((data as { skill: string }[]) ?? []).map((r) => r.skill)));
+    });
+    void loadRetention().then((r) => { if (live) setMemoryDue(r.some(isDue)); }).catch(() => {});
     return () => { live = false; };
   }, [progress?.stats.xp]);
   useEffect(() => {
@@ -65,29 +82,54 @@ export function GoalCard({ start, es, onFixMistakes }: { start: number; es: bool
     : mid.ready ? "Your Midpoint check is open. Take it on your band page."
     : `Midpoint: ${mid.need - mid.have} more ${mid.need - mid.have === 1 ? "skill" : "skills"} Secure to open it.`;
 
-  // Today's plan: mistakes first (they're the fastest gains), then due checks, then the next new step, then something fun.
+  // Today's plan is a fixed mix, because each part moves the level in a different way:
+  // review (keeps what you learnt), new (moves you forward), reading (input), and the weekly writing and speaking (output).
   const plan: Plan[] = [];
-  if (due > 0) plan.push({ id: "mistakes", title: `Fix ${Math.min(due, 10)} mistakes`, detail: "Questions you got wrong, back at the right time.", minutes: 4, onClick: onFixMistakes });
-  if (wordsDue > 0) plan.push({ id: "words", title: `Review ${Math.min(wordsDue, 15)} of your words`, detail: "Words you saved while reading. Remember them before you look.", minutes: 3, onClick: () => document.getElementById("wd-start")?.click() });
+
+  // 1. Review: the most urgent thing that brings old learning back.
   const check = views.find((x) => x.v === "check");
-  if (check) plan.push({ id: "check", title: `Skill check: ${check.n.title}`, detail: "A quick check on a different day makes it stick.", minutes: 2, href: hrefFor(band.id, check.n.tree) });
+  const reviews: Plan[] = [];
+  if (memoryDue) reviews.push({ id: "memory", slot: "Review", title: "Memory check", detail: "Three weeks after your Gate: what stuck?", minutes: 5, onClick: scrollTo("rt-title") });
+  if (due > 0) reviews.push({ id: "mistakes", slot: "Review", title: `Fix ${Math.min(due, 10)} mistakes`, detail: "Questions you got wrong, back at the right time.", minutes: 4, onClick: onFixMistakes });
+  if (check) reviews.push({ id: "check", slot: "Review", title: `Skill check: ${check.n.title}`, detail: "A quick check on a different day makes it stick.", minutes: 2, href: hrefFor(band.id, check.n.tree) });
+  if (wordsDue > 0) reviews.push({ id: "words", slot: "Review", title: `Review ${Math.min(wordsDue, 15)} of your words`, detail: "Words you saved while reading. Remember them before you look.", minutes: 3, onClick: () => document.getElementById("wd-start")?.click() });
+  const passedAny = Object.values(nodes).some((x) => x.steps_passed > 0);
+  if (reviews.length > 0) {
+    const [first, ...rest] = reviews;
+    plan.push(rest.length ? { ...first, detail: `${first.detail} Also due: ${rest.map((r) => r.title.toLowerCase()).join(", ")}.`, minutes: Math.min(8, first.minutes + rest.reduce((n, r) => n + r.minutes, 0)) } : first);
+  } else if (passedAny) {
+    plan.push({ id: "fun", slot: "Review", title: "One arcade game", detail: "Nothing is due, so review skills you've passed, against the clock.", minutes: 3, href: "#app/arcade" });
+  }
+
+  // 2. New: the next step of a skill (finish what's started first), or new words.
   const going = views.filter((x) => x.p && x.p.steps_passed > 0 && x.p.steps_passed < 6).sort((a, b) => b.p!.steps_passed - a.p!.steps_passed)[0];
   const treeLoad = (t: string) => views.filter((x) => x.n.tree === t && (x.v === "secure" || x.v === "mastered")).length;
   const fresh = [...TREES].sort((a, b) => treeLoad(a.id) - treeLoad(b.id))
     .map((t) => views.find((x) => x.n.tree === t.id && x.v === "new")).find(Boolean);
   const step = going ?? fresh;
+  const labSet = labDone ? setsFor(band.id).find((x) => !labDone.has(x.id)) : undefined;
+  const lab: Plan | null = labSet ? { id: "lab", slot: "New", title: `Word lab: ${labSet.topic}`, detail: `Ten core ${band.id} words. Learn them, then practise.`, minutes: 6, href: `#app/words/${labSet.id}` } : null;
   if (step) {
     const s = (step.p?.steps_passed ?? 0) + 1;
-    plan.push({ id: "step", title: `${going ? "Continue" : "Start"}: ${step.n.title}`, detail: `Step ${s} · ${STEP_NAMES[s - 1]}`, minutes: 5, href: hrefFor(band.id, step.n.tree) });
-  }
-  // Reading at your level, about something you like: input is how a language grows.
+    plan.push({ id: "step", slot: "New", title: `${going ? "Continue" : "Start"}: ${step.n.title}`, detail: `Step ${s} · ${STEP_NAMES[s - 1]}`, minutes: 5, href: hrefFor(band.id, step.n.tree) });
+  } else if (lab) plan.push(lab);
+
+  // 3. Read: one text at your level, about something you like. Once today's is read, it shows as done.
+  const doneText = readToday ? LIBRARY.find((s) => s.id === readToday) : undefined;
   const unread = LIBRARY.filter((s) => s.band === band.id && !read.has(s.id))
     .sort((a, b) => Number(profile?.universes.includes(b.universe)) - Number(profile?.universes.includes(a.universe)))[0];
-  const labSet = labDone ? setsFor(band.id).find((x) => !labDone.has(x.id)) : undefined;
-  if (labSet) plan.push({ id: "lab", title: `Word lab: ${labSet.topic}`, detail: `Ten core ${band.id} words. Learn them, then practise.`, minutes: 6, href: `#app/words/${labSet.id}` });
-  if (unread) plan.push({ id: "read", title: `Read: ${unread.title}`, detail: unread.blurb, minutes: minutesFor(unread) + 2, href: `#app/library/${unread.id}` });
-  if (Object.values(nodes).some((x) => x.steps_passed > 0)) plan.push({ id: "fun", title: "One arcade game", detail: "Quick review of skills you've already passed, against the clock.", minutes: 2, href: "#app/arcade" });
-  const minutes = plan.slice(0, 4).reduce((n, p) => n + p.minutes, 0);
+  if (doneText) plan.push({ id: "read", slot: "Read", title: doneText.title, detail: "Done for today. Another one is always welcome.", minutes: 0, href: unread ? `#app/library/${unread.id}` : "#app/library", done: true });
+  else if (unread) plan.push({ id: "read", slot: "Read", title: unread.title, detail: unread.blurb, minutes: minutesFor(unread) + 2, href: `#app/library/${unread.id}` });
+
+  // 4. This week: the writing or speaking task until both are sent; after that, more new words.
+  const tasks = weeklyFor(band.id);
+  const missing = weekSent ? (["writing", "speaking"] as const).filter((k) => !weekSent.has(k)) : [];
+  if (missing.length > 0) {
+    const k = missing[0];
+    plan.push({ id: "weekly", slot: "This week", title: `${k === "writing" ? "Write" : "Say"}: ${GENRE_NAME[tasks[k].genre]}`, detail: missing.length === 2 ? "Your teacher marks it. The speaking one is waiting too." : "Your teacher marks it. Last one this week.", minutes: 10, onClick: scrollTo("wk-title") });
+  } else if (step && lab) plan.push(lab);
+
+  const minutes = plan.reduce((n, p) => n + p.minutes, 0);
 
   return (
     <section className="goal" aria-labelledby="goal-title" style={{ ["--fill" as string]: band.fill, ["--tint" as string]: band.tint }}>
@@ -116,13 +158,14 @@ export function GoalCard({ start, es, onFixMistakes }: { start: number; es: bool
       <div className="goal-plan">
         <h3>Today's plan <span className="muted">· about {minutes} minutes</span>{progress.stats.streak > 1 && <span className="pill goal-streak"><Icon name="flame" size={14} /> {progress.stats.streak}-day streak</span>}</h3>
         <ol>
-          {plan.slice(0, 4).map((p) => (
-            <li key={p.id}>
-              {p.href
-                ? <a href={p.href} className="goal-task"><strong>{p.title}</strong><span>{p.detail}</span><small>{p.minutes} min</small></a>
-                : <button type="button" className="goal-task" onClick={p.onClick}><strong>{p.title}</strong><span>{p.detail}</span><small>{p.minutes} min</small></button>}
-            </li>
-          ))}
+          {plan.map((p) => {
+            const inner = <><strong><span className="goal-slot">{p.slot}</span>{p.title}</strong><span>{p.detail}</span><small>{p.done ? <><Icon name="check" size={14} /> Done</> : `${p.minutes} min`}</small></>;
+            return (
+              <li key={p.id} className={p.done ? "is-done" : undefined}>
+                {p.href ? <a href={p.href} className="goal-task">{inner}</a> : <button type="button" className="goal-task" onClick={p.onClick}>{inner}</button>}
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>

@@ -278,3 +278,7 @@
 .wr-card textarea { font: inherit; width: 100%; min-height: 90px; padding: 0.7rem 0.9rem; border-radius: 12px; border: 1px solid var(--line); box-sizing: border-box; }
 .wk-feedback .tn-body > .btn { justify-self: start; width: auto; }
 .wk-feedback .tn-body { display: grid; gap: var(--s-2); }
+/* Today's plan: each task says which part of the mix it is. */
+.goal-slot { display: inline-block; margin-right: var(--s-2); padding: 1px 8px; border-radius: 999px; background: var(--tint, #eef3fb); color: var(--ink); font: 700 0.75rem / 1.6 var(--font-body); vertical-align: 2px; }
+.goal-plan li.is-done .goal-task::before { content: "\2713"; background: #1f7a4d; }
+.goal-plan li.is-done .goal-task small { color: #1f7a4d; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
