@@ -31,6 +31,40 @@ type Spec = [Genre, string, string];
 type Band = { minWords: number; seconds: number; writing: Spec[]; speaking: Spec[] };
 
 const B: Record<BandId, Band> = {
+  "Pre-A1": { minWords: 12, seconds: 20,
+    writing: [
+      ["description", "Write about you: your name, your age and your favourite colour.", "Write about your bag. What is in it? What colour is it?"],
+      ["description", "Write about your family. Who is in it? How old are they?", "Write about your pet or an animal you like. What colour is it? Is it big or small?"],
+      ["description", "Write about your classroom. What can you see?", "Write about your favourite food and drink."],
+      ["message", "Write a message to a new friend: 'Hi! My name is …'", "Write a birthday card for a friend."],
+      ["description", "Write about your room. What is in it?", "Write about your favourite toy, game or ball."],
+      ["description", "Write five things you like and one thing you don't like.", "Write about your clothes today. What colour are they?"],
+    ],
+    speaking: [
+      ["talk", "Say hello. Say your name, your age and where you live.", "Say hello. Say your name and your favourite colour."],
+      ["talk", "Talk about your family. Who is in it?", "Count to twenty, then say your phone number slowly."],
+      ["talk", "Talk about your bag or desk. What is in it?", "Talk about your favourite animal. What colour is it?"],
+      ["talk", "Say the alphabet, then spell your name and your teacher's name.", "Say the days of the week. Which day do you like?"],
+      ["talk", "Talk about food: what do you like? What don't you like?", "Talk about your room: what is in it?"],
+      ["talk", "Talk about your best friend: name, age, and what they like.", "Talk about your clothes today."],
+    ] },
+  A1: { minWords: 20, seconds: 25,
+    writing: [
+      ["message", "Write a message to a new friend. Say your name, age, family and what you like.", "Write a message to a new classmate. Say where you live and what you like doing."],
+      ["description", "Write about your house. How many rooms are there? What is in your room?", "Write about your school. What can you see? What is your favourite subject?"],
+      ["description", "Write about your day: when you get up, go to school and go to bed.", "Write about your weekend: what do you do on Saturday and Sunday?"],
+      ["description", "Write about a person in your family. What does he or she look like?", "Write about your favourite animal. What can it do?"],
+      ["message", "Write to a friend. Invite them to play football or a game. Say the day and time.", "Write a thank-you message to a friend for a present."],
+      ["description", "Write about your town. What is there? What can you do?", "Write about the weather today and what you are wearing."],
+    ],
+    speaking: [
+      ["talk", "Introduce yourself: name, age, family and what you like.", "Talk about your best friend: what he or she looks like and likes."],
+      ["talk", "Talk about your day: what time you get up and what you do.", "Talk about your school day and your favourite subject."],
+      ["talk", "Talk about your house and your room.", "Talk about your favourite place in your town."],
+      ["talk", "Talk about what you can and can't do.", "Talk about your favourite food and drink."],
+      ["talk", "Talk about your pet or an animal you like.", "Talk about your favourite sport or game."],
+      ["talk", "Talk about the weather today and your clothes.", "Talk about your weekend."],
+    ] },
   "A1+": { minWords: 30, seconds: 30,
     writing: [
       ["message", "Write a message to a new friend. Say your name, age, where you live and what you like.", "Write a message to a new classmate. Tell them about your family and your pets."],

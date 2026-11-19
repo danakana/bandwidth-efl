@@ -18,7 +18,7 @@ export function TeacherNotes({ es }: { es: boolean }) {
       .not("teacher_feedback", "is", null).not("node_id", "is", null).is("attempt_id", null)
       .order("reviewed_at", { ascending: false }).limit(20)
       .then(({ data }) => {
-        if (live) setNotes(((data as Submission[]) ?? []).filter((s) => !s.node_id!.includes(":")));
+        if (live) setNotes(((data as Submission[]) ?? []).filter((s) => !!s.node_id && !s.node_id.includes(":")));
       });
     return () => { live = false; };
   }, []);

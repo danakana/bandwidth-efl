@@ -1,6 +1,7 @@
 import type { BandId } from "../bands";
 import { NODES } from "../curriculum";
 import type { NodeProgress } from "../../lib/progressApi";
+import { A1_GATE, A1_MIDPOINT, BEGINNER_ASSESSMENT_CLIPS, PA1_GATE, PA1_MIDPOINT } from "./beginner";
 import { A1P_GATE, A1P_MIDPOINT } from "./a1p";
 import { A2_GATE, A2_MIDPOINT } from "./a2";
 import { A2P_GATE, A2P_MIDPOINT } from "./a2p";
@@ -11,8 +12,9 @@ import { B2P_GATE, B2P_MIDPOINT } from "./b2p";
 import { C1_GATE, C1_MIDPOINT } from "./c1";
 import { C2_GATE, C2_MIDPOINT } from "./c2";
 import { READY_SHARE, type BandAssessment } from "./types";
+import { registerClips } from "../practice/clips";
 
-const ALL: BandAssessment[] = [A1P_MIDPOINT, A1P_GATE, A2_MIDPOINT, A2_GATE, A2P_MIDPOINT, A2P_GATE, B1_MIDPOINT, B1_GATE, B1P_MIDPOINT, B1P_GATE, B2_MIDPOINT, B2_GATE, B2P_MIDPOINT, B2P_GATE, C1_MIDPOINT, C1_GATE, C2_MIDPOINT, C2_GATE];
+const ALL: BandAssessment[] = [PA1_MIDPOINT, PA1_GATE, A1_MIDPOINT, A1_GATE, A1P_MIDPOINT, A1P_GATE, A2_MIDPOINT, A2_GATE, A2P_MIDPOINT, A2P_GATE, B1_MIDPOINT, B1_GATE, B1P_MIDPOINT, B1P_GATE, B2_MIDPOINT, B2_GATE, B2P_MIDPOINT, B2P_GATE, C1_MIDPOINT, C1_GATE, C2_MIDPOINT, C2_GATE];
 
 export const assessmentFor = (band: BandId, kind: "midpoint" | "gate") => ALL.find((a) => a.band === band && a.kind === kind);
 
@@ -28,3 +30,6 @@ export function readiness(band: BandId, kind: "midpoint" | "gate", nodes: Record
 /** Bogotá calendar day, matching the server's one-try-per-day rule. */
 export const bogotaDay = (d: Date | string) =>
   new Date(d).toLocaleDateString("en-CA", { timeZone: "America/Bogota" });
+
+// Device-voice fallback for check audio that hasn't been recorded yet.
+registerClips(BEGINNER_ASSESSMENT_CLIPS);

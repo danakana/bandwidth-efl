@@ -6,12 +6,12 @@ import { hrefFor } from "../../lib/route";
 export type BandStatus = "review" | "current" | "locked";
 export const statusFor = (i: number, start: number): BandStatus => (i < start ? "review" : i === start ? "current" : "locked");
 
-// Zigzag positions for the nine stops, as a % of the map width.
-const XS = [50, 70, 80, 66, 46, 28, 20, 34, 52];
+// Zigzag positions for the eleven stops, as a % of the map width.
+const XS = [50, 68, 80, 70, 50, 30, 20, 30, 50, 68, 56];
 const ROW = 150;
 const TOP = 80;
 
-/** The nine bands as a winding path. The student's band glows; higher bands wait behind a Gate. */
+/** The eleven bands as a winding path. The student's band glows; higher bands wait behind a Gate. */
 export function BandMap({ start }: { start: number }) {
   const h = TOP * 2 + ROW * (BANDS.length - 1);
   const pts = BANDS.map((_, i) => ({ x: XS[i], y: TOP + i * ROW }));
@@ -25,7 +25,7 @@ export function BandMap({ start }: { start: number }) {
     <section className="bmap" aria-labelledby="bmap-title">
       <div className="bmap-head">
         <h2 id="bmap-title">Your map</h2>
-        <p className="muted">Nine bands from A1+ to C2. Master your band's skills and pass its Gate to open the next one.</p>
+        <p className="muted">Eleven bands from Pre-A1 to C2. Master your band's skills and pass its Gate to open the next one.</p>
       </div>
       <div className="bmap-field" style={{ height: h }}>
         <svg className="bmap-path" viewBox={`0 0 100 ${h}`} preserveAspectRatio="none" aria-hidden="true">

@@ -1,3 +1,11 @@
+import { PA1_GRAMMAR } from "./pa1-grammar";
+import { PA1_WORDS } from "./pa1-words";
+import { PA1_COMMUNICATE } from "./pa1-communicate";
+import { PA1_ERRORS, PA1_SOUNDS } from "./pa1-sounds-errors";
+import { A1_GRAMMAR } from "./a1-grammar";
+import { A1_WORDS } from "./a1-words";
+import { A1_COMMUNICATE } from "./a1-communicate";
+import { A1_ERRORS, A1_SOUNDS } from "./a1-sounds-errors";
 import { A1P_GRAMMAR } from "./a1p-grammar";
 import { A1P_WORDS } from "./a1p-words";
 import { A1P_COMMUNICATE } from "./a1p-communicate";
@@ -40,7 +48,58 @@ import { shuffle } from "../../lib/answers";
 import type { BandId } from "../bands";
 import type { TreeId } from "../curriculum";
 
+// Every clip's script, so the player can fall back to the device voice when a recording is missing.
+import { A1P_COMMUNICATE_CLIPS } from "./a1p-communicate";
+import { A1P_GRAMMAR_CLIPS } from "./a1p-grammar";
+import { A1P_SOUNDS_ERRORS_CLIPS } from "./a1p-sounds-errors";
+import { A1P_WORDS_CLIPS } from "./a1p-words";
+import { A2_COMMUNICATE_CLIPS } from "./a2-communicate";
+import { A2_GRAMMAR_CLIPS } from "./a2-grammar";
+import { A2_SOUNDS_ERRORS_CLIPS } from "./a2-sounds-errors";
+import { A2_WORDS_CLIPS } from "./a2-words";
+import { A2P_COMMUNICATE_CLIPS } from "./a2p-communicate";
+import { A2P_GRAMMAR_CLIPS } from "./a2p-grammar";
+import { A2P_SOUNDS_ERRORS_CLIPS } from "./a2p-sounds-errors";
+import { A2P_WORDS_CLIPS } from "./a2p-words";
+import { B1_COMMUNICATE_CLIPS } from "./b1-communicate";
+import { B1_GRAMMAR_CLIPS } from "./b1-grammar";
+import { B1_SOUNDS_ERRORS_CLIPS } from "./b1-sounds-errors";
+import { B1_WORDS_CLIPS } from "./b1-words";
+import { B1P_COMMUNICATE_CLIPS } from "./b1p-communicate";
+import { B1P_GRAMMAR_CLIPS } from "./b1p-grammar";
+import { B1P_SOUNDS_ERRORS_CLIPS } from "./b1p-sounds-errors";
+import { B1P_WORDS_CLIPS } from "./b1p-words";
+import { B2_COMMUNICATE_CLIPS } from "./b2-communicate";
+import { B2_GRAMMAR_CLIPS } from "./b2-grammar";
+import { B2_SOUNDS_ERRORS_CLIPS } from "./b2-sounds-errors";
+import { B2_WORDS_CLIPS } from "./b2-words";
+import { B2P_COMMUNICATE_CLIPS } from "./b2p-communicate";
+import { B2P_EXTRA_CLIPS } from "./b2p-extra";
+import { B2P_GRAMMAR_CLIPS } from "./b2p-grammar";
+import { B2P_SOUNDS_ERRORS_CLIPS } from "./b2p-sounds-errors";
+import { B2P_WORDS_CLIPS } from "./b2p-words";
+import { C1_COMMUNICATE_CLIPS } from "./c1-communicate";
+import { C1_GRAMMAR_CLIPS } from "./c1-grammar";
+import { C1_SOUNDS_ERRORS_CLIPS } from "./c1-sounds-errors";
+import { C1_WORDS_CLIPS } from "./c1-words";
+import { C2_COMMUNICATE_CLIPS } from "./c2-communicate";
+import { C2_GRAMMAR_CLIPS } from "./c2-grammar";
+import { C2_SOUNDS_ERRORS_CLIPS } from "./c2-sounds-errors";
+import { C2_WORDS_CLIPS } from "./c2-words";
+import { PA1_GRAMMAR_CLIPS } from "./pa1-grammar";
+import { PA1_WORDS_CLIPS } from "./pa1-words";
+import { PA1_COMMUNICATE_CLIPS } from "./pa1-communicate";
+import { PA1_SOUNDS_ERRORS_CLIPS } from "./pa1-sounds-errors";
+import { A1_GRAMMAR_CLIPS } from "./a1-grammar";
+import { A1_WORDS_CLIPS } from "./a1-words";
+import { A1_COMMUNICATE_CLIPS } from "./a1-communicate";
+import { A1_SOUNDS_ERRORS_CLIPS } from "./a1-sounds-errors";
+import { registerClips } from "./clips";
+for (const list of [A1_GRAMMAR_CLIPS, A1_WORDS_CLIPS, A1_COMMUNICATE_CLIPS, A1_SOUNDS_ERRORS_CLIPS, PA1_GRAMMAR_CLIPS, PA1_WORDS_CLIPS, PA1_COMMUNICATE_CLIPS, PA1_SOUNDS_ERRORS_CLIPS, A1P_COMMUNICATE_CLIPS, A1P_GRAMMAR_CLIPS, A1P_SOUNDS_ERRORS_CLIPS, A1P_WORDS_CLIPS, A2_COMMUNICATE_CLIPS, A2_GRAMMAR_CLIPS, A2_SOUNDS_ERRORS_CLIPS, A2_WORDS_CLIPS, A2P_COMMUNICATE_CLIPS, A2P_GRAMMAR_CLIPS, A2P_SOUNDS_ERRORS_CLIPS, A2P_WORDS_CLIPS, B1_COMMUNICATE_CLIPS, B1_GRAMMAR_CLIPS, B1_SOUNDS_ERRORS_CLIPS, B1_WORDS_CLIPS, B1P_COMMUNICATE_CLIPS, B1P_GRAMMAR_CLIPS, B1P_SOUNDS_ERRORS_CLIPS, B1P_WORDS_CLIPS, B2_COMMUNICATE_CLIPS, B2_GRAMMAR_CLIPS, B2_SOUNDS_ERRORS_CLIPS, B2_WORDS_CLIPS, B2P_COMMUNICATE_CLIPS, B2P_EXTRA_CLIPS, B2P_GRAMMAR_CLIPS, B2P_SOUNDS_ERRORS_CLIPS, B2P_WORDS_CLIPS, C1_COMMUNICATE_CLIPS, C1_GRAMMAR_CLIPS, C1_SOUNDS_ERRORS_CLIPS, C1_WORDS_CLIPS, C2_COMMUNICATE_CLIPS, C2_GRAMMAR_CLIPS, C2_SOUNDS_ERRORS_CLIPS, C2_WORDS_CLIPS]) registerClips(list);
+
 const ALL: NodePractice[] = [
+  ...PA1_GRAMMAR, ...PA1_WORDS, ...PA1_COMMUNICATE, ...PA1_SOUNDS, ...PA1_ERRORS,
+  ...A1_GRAMMAR, ...A1_WORDS, ...A1_COMMUNICATE, ...A1_SOUNDS, ...A1_ERRORS,
   ...A1P_GRAMMAR, ...A1P_WORDS, ...A1P_COMMUNICATE, ...A1P_SOUNDS, ...A1P_ERRORS,
   ...A2_GRAMMAR, ...A2_WORDS, ...A2_COMMUNICATE, ...A2_SOUNDS, ...A2_ERRORS,
   ...A2P_GRAMMAR, ...A2P_WORDS, ...A2P_COMMUNICATE, ...A2P_SOUNDS, ...A2P_ERRORS,
@@ -66,6 +125,48 @@ export const itemByKey = (key: string) => BY_KEY.get(key);
 export type Checkpoint = { id: string; band: BandId; tree: TreeId; title: string; story: string; nodeIds: string[]; afterIndex: number };
 
 export const CHECKPOINTS: Checkpoint[] = [
+  { id: "a1-grammar-1", band: "A1", tree: "grammar", title: "Boss 1: The New Neighbour", afterIndex: 3,
+    story: "A new family moves in next door. Ask questions, say whose things are whose, describe the street and what everyone can do.",
+    nodeIds: ["a1.be-questions-and-negatives", "a1.my-your-his-her", "a1.there-is-a-there-are-two", "a1.can-for-ability"] },
+  { id: "a1-grammar-2", band: "A1", tree: "grammar", title: "Boss 2: The Pen Pal Letter", afterIndex: 6,
+    story: "Write back to a pen pal in Canada: your routines, what your family has and lots of questions about their life.",
+    nodeIds: ["a1.present-simple-i-you-we-they", "a1.have-and-has", "a1.what-where-who-how-many"] },
+  { id: "a1-words-1", band: "A1", tree: "words", title: "Boss 1: The Busy Week", afterIndex: 2,
+    story: "Plan a busy week: times, days, the weather and where everything is in the house.",
+    nodeIds: ["a1.numbers-to-100-and-the-time", "a1.days-months-and-weather", "a1.house-and-rooms"] },
+  { id: "a1-words-2", band: "A1", tree: "words", title: "Boss 2: Sports Day", afterIndex: 5,
+    story: "It's sports day at school: subjects are cancelled, everyone needs the right clothes and every team plays something different.",
+    nodeIds: ["a1.school-subjects-and-the-school-day", "a1.clothes", "a1.sports-and-hobbies"] },
+  { id: "a1-communicate-1", band: "A1", tree: "communicate", title: "Boss: The Summer Camp", afterIndex: 2,
+    story: "Sign up for a summer camp, make friends by talking about favourites, then order lunch at the camp café.",
+    nodeIds: ["a1.give-personal-information", "a1.talk-about-favourites", "a1.ordering-food-and-drink"] },
+  { id: "a1-sounds-1", band: "A1", tree: "sounds", title: "Boss: The Radio Quiz", afterIndex: 2,
+    story: "You're on a radio quiz. Every number, every b and v, every last sound has to be clear or you lose points!",
+    nodeIds: ["a1.thirteen-or-thirty", "a1.b-and-v-sounds", "a1.final-consonants"] },
+  { id: "a1-errors-1", band: "A1", tree: "errors", title: "Boss: The Interview", afterIndex: 2,
+    story: "Your cousin writes an interview for the school magazine. Fix the he and she mix-ups, the extra 'the' and the questions without do.",
+    nodeIds: ["a1.he-for-men-she-for-women", "a1.no-the-for-things-in-general", "a1.questions-with-do"] },
+  { id: "pa1-grammar-1", band: "Pre-A1", tree: "grammar", title: "Boss 1: The Show and Tell", afterIndex: 3,
+    story: "It's your turn at the front of the class. Say who you are and show your things: a red pen, an apple, two books.",
+    nodeIds: ["pa1.i-am-you-are-he-she-it-is", "pa1.this-is-what-is-this", "pa1.a-an-and-plurals", "pa1.adjective-before-noun"] },
+  { id: "pa1-grammar-2", band: "Pre-A1", tree: "grammar", title: "Boss 2: The Lost Ball", afterIndex: 6,
+    story: "Your little cousin visits. Talk about what you like and what you have, and help find a lost ball.",
+    nodeIds: ["pa1.i-like-i-don-t-like", "pa1.i-have-a", "pa1.in-on-under"] },
+  { id: "pa1-words-1", band: "Pre-A1", tree: "words", title: "Boss 1: The First Day", afterIndex: 2,
+    story: "First day of English class: spell your name, count the students and name the colours on the wall.",
+    nodeIds: ["pa1.the-alphabet-and-spelling", "pa1.numbers-1-to-20", "pa1.colours-and-shapes"] },
+  { id: "pa1-words-2", band: "Pre-A1", tree: "words", title: "Boss 2: The Farm Trip", afterIndex: 5,
+    story: "A school trip to a farm with your family: follow the teacher, count the animals and choose your lunch.",
+    nodeIds: ["pa1.classroom-things-and-instructions", "pa1.family-and-the-body", "pa1.animals-and-food"] },
+  { id: "pa1-communicate-1", band: "Pre-A1", tree: "communicate", title: "Boss: The New Teacher", afterIndex: 2,
+    story: "A new English teacher arrives. Say hello, answer how you are, and ask for help when you don't understand.",
+    nodeIds: ["pa1.hello-goodbye-and-my-name", "pa1.how-are-you", "pa1.classroom-language"] },
+  { id: "pa1-sounds-1", band: "Pre-A1", tree: "sounds", title: "Boss: The Spelling Phone Call", afterIndex: 2,
+    story: "You call a friend and spell names, say thank you and talk about a happy horse. Every sound counts!",
+    nodeIds: ["pa1.english-letter-names", "pa1.the-h-sound", "pa1.the-th-sound"] },
+  { id: "pa1-errors-1", band: "Pre-A1", tree: "errors", title: "Boss: The Birthday Card", afterIndex: 2,
+    story: "Your friend's birthday card has mistakes. Fix the capitals, the colours and the ages before you give it.",
+    nodeIds: ["pa1.capital-i", "pa1.colours-don-t-change", "pa1.age-with-be"] },
   { id: "a1p-grammar-1", band: "A1+", tree: "grammar", title: "Boss 1: The New Classmate", afterIndex: 3,
     story: "A new student sits next to you. Tell them who you are, what you do every day, what you have and what you can do.",
     nodeIds: ["a1p.verb-be-am-is-are-all-forms", "a1p.present-simple-for-routines-and-facts", "a1p.have-have-got-for-possession", "a1p.can-can-t-for-ability-and-permission"] },

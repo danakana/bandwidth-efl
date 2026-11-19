@@ -10,6 +10,34 @@ export type Head = { head: string; partners: string[] };
 export type CollocationGroup = { name: string; heads: Head[] };
 
 export const COLLOCATIONS: Record<BandId, CollocationGroup[]> = {
+  "Pre-A1": [
+    { name: "Colours and things", heads: [
+      { head: "a red", partners: ["apple", "car", "ball", "bag"] },
+      { head: "a big", partners: ["dog", "house", "tree", "box"] },
+      { head: "a small", partners: ["cat", "book", "bird", "room"] },
+      { head: "a happy", partners: ["girl", "boy", "baby", "family"] },
+    ] },
+    { name: "In the classroom", heads: [
+      { head: "open", partners: ["your book", "the door", "the window", "your bag"] },
+      { head: "close", partners: ["your book", "the door", "your eyes", "the window"] },
+      { head: "sit", partners: ["down", "here", "on the chair", "next to me"] },
+      { head: "listen", partners: ["to me", "to the song", "and repeat", "to the teacher"] },
+    ] },
+  ],
+  A1: [
+    { name: "Daily verbs", heads: [
+      { head: "have", partners: ["breakfast", "lunch", "dinner", "a shower"] },
+      { head: "play", partners: ["football", "games", "the piano", "outside"] },
+      { head: "go", partners: ["to school", "to bed", "home", "to the park"] },
+      { head: "watch", partners: ["TV", "a film", "videos", "a match"] },
+    ] },
+    { name: "Home and school", heads: [
+      { head: "do", partners: ["homework", "sport", "the dishes", "a test"] },
+      { head: "brush", partners: ["your teeth", "your hair", "the dog"] },
+      { head: "get", partners: ["up", "dressed", "home", "a bus"] },
+      { head: "make", partners: ["your bed", "a cake", "friends", "a sandwich"] },
+    ] },
+  ],
   "A1+": [
     { name: "Everyday verbs", heads: [
       { head: "have", partners: ["breakfast", "a shower", "a party", "fun", "a rest"] },

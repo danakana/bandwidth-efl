@@ -16,7 +16,7 @@ export async function loadRetention(studentId?: string): Promise<RetentionRow[]>
 
 export const isDue = (r: RetentionRow) => !r.done_at && new Date(r.due_at) <= new Date();
 
-const PREFIX: Record<string, string> = { "A1+": "a1p.", A2: "a2.", "A2+": "a2p.", B1: "b1.", "B1+": "b1p.", B2: "b2.", "B2+": "b2p.", C1: "c1.", C2: "c2." };
+const PREFIX: Record<string, string> = { "Pre-A1": "pa1.", A1: "a1.", "A1+": "a1p.", A2: "a2.", "A2+": "a2p.", B1: "b1.", "B1+": "b1p.", B2: "b2.", "B2+": "b2p.", C1: "c1.", C2: "c2." };
 
 /**
  * Twelve questions, one per skill where possible, drawn from the band's practice (Understand, Use, Fix it, Judge),

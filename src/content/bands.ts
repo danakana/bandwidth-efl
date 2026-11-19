@@ -1,8 +1,8 @@
 /**
- * The nine Bandwidth bands. Colours map to the Stack logo:
- * A1 green, A2 yellow, B1 orange, B2 pink, C1 cerulean, C2 deep blue.
+ * The eleven Bandwidth bands. Colours map to the Stack logo:
+ * Pre-A1 mint, A1 green, A2 yellow, B1 orange, B2 pink, C1 cerulean, C2 deep blue.
  */
-export type BandId = "A1+" | "A2" | "A2+" | "B1" | "B1+" | "B2" | "B2+" | "C1" | "C2";
+export type BandId = "Pre-A1" | "A1" | "A1+" | "A2" | "A2+" | "B1" | "B1+" | "B2" | "B2+" | "C1" | "C2";
 
 export type Band = {
   id: BandId;
@@ -14,6 +14,8 @@ export type Band = {
 };
 
 export const BANDS: Band[] = [
+  { id: "Pre-A1", fill: "var(--band-pa1)", tint: "var(--tint-pa1)", onFill: "var(--ink)", canDo: "Say hello, spell your name, count, and name colours, animals and things in your classroom." },
+  { id: "A1", fill: "var(--band-a1)", tint: "var(--tint-a1)", onFill: "var(--ink)", canDo: "Talk about yourself, your family and your day in short, simple sentences." },
   { id: "A1+", fill: "var(--band-a1)", tint: "var(--tint-a1)", onFill: "var(--ink)", canDo: "Introduce yourself, talk about your day and understand short messages." },
   { id: "A2", fill: "var(--band-a2)", tint: "var(--tint-a2)", onFill: "var(--ink)", canDo: "Tell people what you did, make plans and handle everyday situations." },
   { id: "A2+", fill: "var(--band-a2)", tint: "var(--tint-a2)", onFill: "var(--ink)", canDo: "Share opinions, tell a story in order and keep a conversation going." },

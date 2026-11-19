@@ -15,6 +15,7 @@
   --cerulean-ink: #176796; /* text-safe cerulean: 5.1:1 or better on every tint we use (WCAG AA) */
 
   /* Bands (fill colours) */
+  --band-pa1: #6fd3c1;
   --band-a1: #8bd77b;
   --band-a2: #ffd95c;
   --band-b1: #ff914d;
@@ -23,6 +24,7 @@
   --band-c2: #173b63;
 
   /* Band tints (soft surfaces) */
+  --tint-pa1: #dcf5f0;
   --tint-a1: #e3f6de;
   --tint-a2: #fff4cc;
   --tint-b1: #ffe6d6;

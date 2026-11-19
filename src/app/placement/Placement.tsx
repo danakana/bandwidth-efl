@@ -21,8 +21,9 @@ const PARTS: { id: Stage; label: string }[] = [
   { id: "speaking", label: "Speaking" },
 ];
 
-const READING_LEVELS: BandIndex[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-const LISTENING_LEVELS: BandIndex[] = [0, 1, 3, 5, 7];
+const READING_LEVELS: BandIndex[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// No Pre-A1 or A1 clips yet: a student who misses the A1+ clips is placed by reading.
+const LISTENING_LEVELS: BandIndex[] = [2, 3, 5, 7, 9];
 
 /**
  * Which band the writing and speaking prompts aim at.
@@ -32,7 +33,7 @@ const LISTENING_LEVELS: BandIndex[] = [0, 1, 3, 5, 7];
  */
 function productionBand(reading: BandIndex | null, listening: BandIndex | null): BandIndex {
   const measured = [reading, listening].filter((b): b is BandIndex => b !== null);
-  return measured.length ? (Math.min(...measured) as BandIndex) : 3;
+  return measured.length ? (Math.min(...measured) as BandIndex) : 5;
 }
 
 export function Placement({ onExit, onFinished, mode = "placement" }: { onExit: () => void; onFinished: () => void; mode?: "placement" | "check" }) {
@@ -115,14 +116,14 @@ export function Placement({ onExit, onFinished, mode = "placement" }: { onExit: 
             {stage === "reading" && (
               <ChoiceSection
                 kind="reading" es={es} pool={READING_ITEMS}
-                staircase={startStaircase(READING_LEVELS, 3, 9)}
+                staircase={startStaircase(READING_LEVELS, 5, 10)}
                 onDone={(s) => finishChoice("reading", s)}
               />
             )}
             {stage === "listening" && (
               <ChoiceSection
                 kind="listening" es={es} pool={LISTENING_ITEMS}
-                staircase={startStaircase(LISTENING_LEVELS, reading ?? 3, 6)}
+                staircase={startStaircase(LISTENING_LEVELS, reading ?? 5, 6)}
                 onDone={(s) => finishChoice("listening", s)}
               />
             )}

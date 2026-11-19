@@ -6,6 +6,7 @@ import { C_LEVEL_STORIES } from "./c-levels";
 import { A_MORE_STORIES } from "./a-more";
 import { B_MORE_STORIES } from "./b-more";
 import { C_MORE_STORIES } from "./c-more";
+import { BEGINNER_STORIES } from "./beginner";
 import { B1_EXTRA } from "./b1-extra";
 import { B1P_EXTRA } from "./b1p-extra";
 import { B2_EXTRA } from "./b2-extra";
@@ -28,7 +29,7 @@ const balance = (s: Story): Story => ({
   }),
 });
 
-export const LIBRARY: Story[] = [...A_LEVEL_STORIES, ...A_MORE_STORIES, ...B_LEVEL_STORIES, ...B_MORE_STORIES, ...B1_EXTRA, ...B1P_EXTRA, ...B2_EXTRA, ...B2P_EXTRA, ...C_LEVEL_STORIES, ...C_MORE_STORIES].map(balance);
+export const LIBRARY: Story[] = [...BEGINNER_STORIES, ...A_LEVEL_STORIES, ...A_MORE_STORIES, ...B_LEVEL_STORIES, ...B_MORE_STORIES, ...B1_EXTRA, ...B1P_EXTRA, ...B2_EXTRA, ...B2P_EXTRA, ...C_LEVEL_STORIES, ...C_MORE_STORIES].map(balance);
 export const storyById = (id: string) => LIBRARY.find((s) => s.id === id);
 export const storiesFor = (band: BandId) => LIBRARY.filter((s) => s.band === band);
 export const wordsIn = (s: Story) => s.text.split(/\s+/).filter(Boolean).length;
