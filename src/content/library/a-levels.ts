@@ -53,14 +53,14 @@ Every giraffe has a different pattern of spots, like a human fingerprint. No two
   },
   {
     id: "a2-walls", band: "A2", universe: "arts", kind: "story",
-    title: "The girl who painted walls", blurb: "In Medellín, a teenager uses colour to change her neighbourhood.",
-    text: `Valeria grew up in Comuna 13, a neighbourhood on a hill in Medellín. When she was a child, many people were afraid to visit it. The streets were grey and some of the houses were broken.
+    title: "The girl who painted walls", blurb: "In Cape Town, a teenager uses colour to change her neighbourhood.",
+    text: `Amara grew up in Woodstock, an old neighbourhood in Cape Town, in South Africa. When she was a child, many people were afraid to visit it. The streets were grey and some of the houses were broken.
 
-When Valeria was fourteen, a group of young artists started painting the walls of the neighbourhood. They painted big, colourful pictures of birds, faces and flowers. Valeria watched them every afternoon after school. One day, an artist gave her a can of paint and said, "Do you want to try?"
+When Amara was fourteen, a group of young artists started painting the walls of the neighbourhood. They painted big, colourful pictures of birds, faces and flowers. Amara watched them every afternoon after school. One day, an artist gave her a can of paint and said, "Do you want to try?"
 
 At first, her pictures were not very good. But she practised every weekend, and slowly she got better. She painted her grandmother's face on the wall of a shop, with a big smile and yellow butterflies.
 
-Today, thousands of tourists visit Comuna 13 every year to see the street art. Valeria is twenty now, and she works as a guide. She tells visitors the story of her neighbourhood. "The walls are not just pretty," she says. "They show our history and our hope."`,
+Today, thousands of tourists visit Woodstock every year to see the street art. Amara is twenty now, and she works as a guide. She tells visitors the story of her neighbourhood. "The walls are not just pretty," she says. "They show our history and our hope."`,
     gloss: [
       { word: "neighbourhood", means: "the area of a town where people live", es: "barrio" },
       { word: "afraid", means: "feeling that something bad can happen", es: "con miedo" },
@@ -69,9 +69,9 @@ Today, thousands of tourists visit Comuna 13 every year to see the street art. V
       { word: "hope", means: "the feeling that good things can happen", es: "esperanza" },
     ],
     questions: [
-      { q: "What was Comuna 13 like when Valeria was a child?", options: ["Full of tourists who came to see the art", "Grey, and many people were afraid to go there", "Full of colourful walls and street art"], answer: 1, why: "\"Many people were afraid to visit it. The streets were grey.\"" },
-      { q: "How did Valeria start painting?", options: ["An artist gave her paint and asked her to try.", "She studied art at a university in Medellín.", "Her grandmother taught her to paint faces."], answer: 0, why: "\"An artist gave her a can of paint and said, 'Do you want to try?'\"" },
-      { q: "What does Valeria do now?", options: ["She sells paint to young artists.", "She works in a shop in the neighbourhood.", "She is a guide for tourists."], answer: 2, why: "\"She works as a guide.\"" },
+      { q: "What was Woodstock like when Amara was a child?", options: ["Full of tourists who came to see the art", "Grey, and many people were afraid to go there", "Full of colourful walls and street art"], answer: 1, why: "\"Many people were afraid to visit it. The streets were grey.\"" },
+      { q: "How did Amara start painting?", options: ["An artist gave her paint and asked her to try.", "She studied art at a university in Cape Town.", "Her grandmother taught her to paint faces."], answer: 0, why: "\"An artist gave her a can of paint and said, 'Do you want to try?'\"" },
+      { q: "What does Amara do now?", options: ["She sells paint to young artists.", "She works in a shop in the neighbourhood.", "She is a guide for tourists."], answer: 2, why: "\"She works as a guide.\"" },
     ],
   },
   {

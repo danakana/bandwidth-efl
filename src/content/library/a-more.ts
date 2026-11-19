@@ -54,13 +54,13 @@ Most octopuses live for only one or two years. But in that short life, they lear
   {
     id: "a1p-new-school", band: "A1+", universe: "words", kind: "story",
     title: "The new girl", blurb: "Sara's first day at a school in a new city.",
-    text: `Hi! I'm Sara. I'm fourteen. Last month my family moved from Cali to Bogotá because my dad has a new job.
+    text: `Hi! I'm Sara. I'm fourteen. Last month my family moved from Miami to Chicago because my dad has a new job.
 
 My first day at my new school was difficult. I didn't know anybody. In the morning, I sat alone in the classroom. At break, I ate my lunch alone too.
 
-Then a girl came to my table. "Hi, I'm Juliana. Do you like football?" she asked. "Yes, I love it!" I said. "Great! We play every day at break. Come with us!"
+Then a girl came to my table. "Hi, I'm Jasmine. Do you like football?" she asked. "Yes, I love it!" I said. "Great! We play every day at break. Come with us!"
 
-Now I play football with Juliana and her friends every day. Bogotá is cold, and I miss the sun in Cali. But I'm happy at my new school.`,
+Now I play football with Jasmine and her friends every day. Chicago is cold, and I miss the sun in Miami. But I'm happy at my new school.`,
     gloss: [
       { word: "moved", means: "went to live in a different place", es: "se mudó" },
       { word: "alone", means: "with nobody", es: "solo, sola" },
@@ -68,9 +68,9 @@ Now I play football with Juliana and her friends every day. Bogotá is cold, and
       { word: "miss", means: "feel sad because something is not with you now", es: "extrañar" },
     ],
     questions: [
-      { q: "Why did Sara's family move to Bogotá?", options: ["Her dad has a new job there.", "Sara wanted a new school.", "They didn't like the sun in Cali."], answer: 0, why: "\"My family moved… because my dad has a new job.\"" },
-      { q: "Who did Sara eat lunch with on her first day?", options: ["With Juliana.", "With nobody.", "With her football team."], answer: 1, why: "\"At break, I ate my lunch alone too.\"" },
-      { q: "What does Sara miss about Cali?", options: ["Her old school.", "Playing football.", "The sun."], answer: 2, why: "\"Bogotá is cold, and I miss the sun in Cali.\"" },
+      { q: "Why did Sara's family move to Chicago?", options: ["Her dad has a new job there.", "Sara wanted a new school.", "They didn't like the sun in Miami."], answer: 0, why: "\"My family moved… because my dad has a new job.\"" },
+      { q: "Who did Sara eat lunch with on her first day?", options: ["With Jasmine.", "With nobody.", "With her football team."], answer: 1, why: "\"At break, I ate my lunch alone too.\"" },
+      { q: "What does Sara miss about Miami?", options: ["Her old school.", "Playing football.", "The sun."], answer: 2, why: "\"Chicago is cold, and I miss the sun in Miami.\"" },
     ],
   },
   {

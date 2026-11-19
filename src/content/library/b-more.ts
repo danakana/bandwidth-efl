@@ -57,7 +57,7 @@ For shoppers, it seems like a good deal. You can buy a T-shirt for less than the
 
 The environmental cost continues after we buy. Because the clothes are cheap and quickly go out of style, people wear them only a few times before throwing them away. In the Atacama Desert in Chile, there are now enormous piles of unwanted clothes, many of them almost new.
 
-So what can we do? Experts suggest some simple ideas: buy fewer clothes but of better quality, look after them so they last longer, swap clothes with friends and buy second-hand. Some young Colombians have started small businesses selling used clothes online. As one of them says, "The most sustainable T-shirt is the one you already have."`,
+So what can we do? Experts suggest some simple ideas: buy fewer clothes but of better quality, look after them so they last longer, swap clothes with friends and buy second-hand. Around the world, some young people have started small businesses selling used clothes online. As one of them says, "The most sustainable T-shirt is the one you already have."`,
     gloss: [
       { word: "trends", means: "what is popular or fashionable at a particular time" },
       { word: "a good deal", means: "something you buy at a good price" },
@@ -68,7 +68,7 @@ So what can we do? Experts suggest some simple ideas: buy fewer clothes but of b
     questions: [
       { q: "What does the writer compare the water for one T-shirt to?", options: ["The water in a desert in Chile.", "What a person drinks in two years.", "The water used for a sandwich."], answer: 1, why: "\"More than 2,500 litres, about what one person drinks in two years.\"" },
       { q: "Why do people throw fast-fashion clothes away so quickly?", options: ["They are cheap and soon stop being fashionable.", "Shops ask customers to return them for recycling.", "They are usually too big or too small."], answer: 0, why: "\"Because the clothes are cheap and quickly go out of style.\"" },
-      { q: "What is the main purpose of the text?", options: ["To advertise a second-hand clothes business.", "To explain how cotton is grown and turned into clothes in Colombia.", "To show the hidden costs of cheap clothes and suggest changes."], answer: 2, why: "It describes the human and environmental costs, then suggests \"simple ideas\" to change." },
+      { q: "What is the main purpose of the text?", options: ["To advertise a second-hand clothes business.", "To explain how cotton is grown and turned into clothes in Asia.", "To show the hidden costs of cheap clothes and suggest changes."], answer: 2, why: "It describes the human and environmental costs, then suggests \"simple ideas\" to change." },
     ],
   },
   {
@@ -144,7 +144,7 @@ The woman offered a huge amount of money, more than Esteban made in three months
   {
     id: "b1p-misinfo", band: "B1+", universe: "screens", kind: "article",
     title: "Before you share it", blurb: "Four quick checks that stop false news spreading.",
-    text: `A message arrives in your family group: a photo of a flooded street with the words "Bogotá right now!! Share before they delete it!" Your aunt has already forwarded it to three other groups. Is it true?
+    text: `A message arrives in your family group: a photo of a flooded street with the words "London right now!! Share before they delete it!" Your aunt has already forwarded it to three other groups. Is it true?
 
 False or misleading information spreads quickly online because it's designed to make us feel something strongly: fear, anger or surprise. When we feel strong emotions, we're more likely to share without checking. Studies of social media have found that false news can travel further and faster than true news, partly because it's often more shocking.
 
@@ -192,7 +192,7 @@ The tradition has continued. In 2019, Egan Bernal, who grew up in Zipaquirá, be
   {
     id: "b2-gig", band: "B2", universe: "futures", kind: "article",
     title: "Your boss is an app", blurb: "Delivery apps promise freedom. Their riders aren't so sure.",
-    text: `Walk through any Colombian city at lunchtime and you'll see them: riders on motorbikes and bicycles with large square backpacks, weaving through traffic to deliver food. They are part of the so-called gig economy, in which people work short, individual jobs, or "gigs", usually arranged through an app rather than a traditional employer.
+    text: `Walk through almost any big city at lunchtime, from Madrid to Mexico City, and you'll see them: riders on motorbikes and bicycles with large square backpacks, weaving through traffic to deliver food. They are part of the so-called gig economy, in which people work short, individual jobs, or "gigs", usually arranged through an app rather than a traditional employer.
 
 The companies behind these apps present the arrangement as a win for everyone. Customers get convenience, restaurants reach more people, and riders get flexibility: they can log in whenever they like, work as much or as little as they want and be, in the companies' words, "their own boss". For students or people who need extra income around other commitments, this freedom can be genuinely valuable.
 
