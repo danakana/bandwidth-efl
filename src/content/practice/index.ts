@@ -2,6 +2,10 @@ import { PA1_GRAMMAR } from "./pa1-grammar";
 import { PA1_WORDS } from "./pa1-words";
 import { PA1_COMMUNICATE } from "./pa1-communicate";
 import { PA1_ERRORS, PA1_SOUNDS } from "./pa1-sounds-errors";
+import { A1_GRAMMAR } from "./a1-grammar";
+import { A1_WORDS } from "./a1-words";
+import { A1_COMMUNICATE } from "./a1-communicate";
+import { A1_ERRORS, A1_SOUNDS } from "./a1-sounds-errors";
 import { A1P_GRAMMAR } from "./a1p-grammar";
 import { A1P_WORDS } from "./a1p-words";
 import { A1P_COMMUNICATE } from "./a1p-communicate";
@@ -86,11 +90,16 @@ import { PA1_GRAMMAR_CLIPS } from "./pa1-grammar";
 import { PA1_WORDS_CLIPS } from "./pa1-words";
 import { PA1_COMMUNICATE_CLIPS } from "./pa1-communicate";
 import { PA1_SOUNDS_ERRORS_CLIPS } from "./pa1-sounds-errors";
+import { A1_GRAMMAR_CLIPS } from "./a1-grammar";
+import { A1_WORDS_CLIPS } from "./a1-words";
+import { A1_COMMUNICATE_CLIPS } from "./a1-communicate";
+import { A1_SOUNDS_ERRORS_CLIPS } from "./a1-sounds-errors";
 import { registerClips } from "./clips";
-for (const list of [PA1_GRAMMAR_CLIPS, PA1_WORDS_CLIPS, PA1_COMMUNICATE_CLIPS, PA1_SOUNDS_ERRORS_CLIPS, A1P_COMMUNICATE_CLIPS, A1P_GRAMMAR_CLIPS, A1P_SOUNDS_ERRORS_CLIPS, A1P_WORDS_CLIPS, A2_COMMUNICATE_CLIPS, A2_GRAMMAR_CLIPS, A2_SOUNDS_ERRORS_CLIPS, A2_WORDS_CLIPS, A2P_COMMUNICATE_CLIPS, A2P_GRAMMAR_CLIPS, A2P_SOUNDS_ERRORS_CLIPS, A2P_WORDS_CLIPS, B1_COMMUNICATE_CLIPS, B1_GRAMMAR_CLIPS, B1_SOUNDS_ERRORS_CLIPS, B1_WORDS_CLIPS, B1P_COMMUNICATE_CLIPS, B1P_GRAMMAR_CLIPS, B1P_SOUNDS_ERRORS_CLIPS, B1P_WORDS_CLIPS, B2_COMMUNICATE_CLIPS, B2_GRAMMAR_CLIPS, B2_SOUNDS_ERRORS_CLIPS, B2_WORDS_CLIPS, B2P_COMMUNICATE_CLIPS, B2P_EXTRA_CLIPS, B2P_GRAMMAR_CLIPS, B2P_SOUNDS_ERRORS_CLIPS, B2P_WORDS_CLIPS, C1_COMMUNICATE_CLIPS, C1_GRAMMAR_CLIPS, C1_SOUNDS_ERRORS_CLIPS, C1_WORDS_CLIPS, C2_COMMUNICATE_CLIPS, C2_GRAMMAR_CLIPS, C2_SOUNDS_ERRORS_CLIPS, C2_WORDS_CLIPS]) registerClips(list);
+for (const list of [A1_GRAMMAR_CLIPS, A1_WORDS_CLIPS, A1_COMMUNICATE_CLIPS, A1_SOUNDS_ERRORS_CLIPS, PA1_GRAMMAR_CLIPS, PA1_WORDS_CLIPS, PA1_COMMUNICATE_CLIPS, PA1_SOUNDS_ERRORS_CLIPS, A1P_COMMUNICATE_CLIPS, A1P_GRAMMAR_CLIPS, A1P_SOUNDS_ERRORS_CLIPS, A1P_WORDS_CLIPS, A2_COMMUNICATE_CLIPS, A2_GRAMMAR_CLIPS, A2_SOUNDS_ERRORS_CLIPS, A2_WORDS_CLIPS, A2P_COMMUNICATE_CLIPS, A2P_GRAMMAR_CLIPS, A2P_SOUNDS_ERRORS_CLIPS, A2P_WORDS_CLIPS, B1_COMMUNICATE_CLIPS, B1_GRAMMAR_CLIPS, B1_SOUNDS_ERRORS_CLIPS, B1_WORDS_CLIPS, B1P_COMMUNICATE_CLIPS, B1P_GRAMMAR_CLIPS, B1P_SOUNDS_ERRORS_CLIPS, B1P_WORDS_CLIPS, B2_COMMUNICATE_CLIPS, B2_GRAMMAR_CLIPS, B2_SOUNDS_ERRORS_CLIPS, B2_WORDS_CLIPS, B2P_COMMUNICATE_CLIPS, B2P_EXTRA_CLIPS, B2P_GRAMMAR_CLIPS, B2P_SOUNDS_ERRORS_CLIPS, B2P_WORDS_CLIPS, C1_COMMUNICATE_CLIPS, C1_GRAMMAR_CLIPS, C1_SOUNDS_ERRORS_CLIPS, C1_WORDS_CLIPS, C2_COMMUNICATE_CLIPS, C2_GRAMMAR_CLIPS, C2_SOUNDS_ERRORS_CLIPS, C2_WORDS_CLIPS]) registerClips(list);
 
 const ALL: NodePractice[] = [
   ...PA1_GRAMMAR, ...PA1_WORDS, ...PA1_COMMUNICATE, ...PA1_SOUNDS, ...PA1_ERRORS,
+  ...A1_GRAMMAR, ...A1_WORDS, ...A1_COMMUNICATE, ...A1_SOUNDS, ...A1_ERRORS,
   ...A1P_GRAMMAR, ...A1P_WORDS, ...A1P_COMMUNICATE, ...A1P_SOUNDS, ...A1P_ERRORS,
   ...A2_GRAMMAR, ...A2_WORDS, ...A2_COMMUNICATE, ...A2_SOUNDS, ...A2_ERRORS,
   ...A2P_GRAMMAR, ...A2P_WORDS, ...A2P_COMMUNICATE, ...A2P_SOUNDS, ...A2P_ERRORS,
@@ -116,6 +125,27 @@ export const itemByKey = (key: string) => BY_KEY.get(key);
 export type Checkpoint = { id: string; band: BandId; tree: TreeId; title: string; story: string; nodeIds: string[]; afterIndex: number };
 
 export const CHECKPOINTS: Checkpoint[] = [
+  { id: "a1-grammar-1", band: "A1", tree: "grammar", title: "Boss 1: The New Neighbour", afterIndex: 3,
+    story: "A new family moves in next door. Ask questions, say whose things are whose, describe the street and what everyone can do.",
+    nodeIds: ["a1.be-questions-and-negatives", "a1.my-your-his-her", "a1.there-is-a-there-are-two", "a1.can-for-ability"] },
+  { id: "a1-grammar-2", band: "A1", tree: "grammar", title: "Boss 2: The Pen Pal Letter", afterIndex: 6,
+    story: "Write back to a pen pal in Canada: your routines, what your family has and lots of questions about their life.",
+    nodeIds: ["a1.present-simple-i-you-we-they", "a1.have-and-has", "a1.what-where-who-how-many"] },
+  { id: "a1-words-1", band: "A1", tree: "words", title: "Boss 1: The Busy Week", afterIndex: 2,
+    story: "Plan a busy week: times, days, the weather and where everything is in the house.",
+    nodeIds: ["a1.numbers-to-100-and-the-time", "a1.days-months-and-weather", "a1.house-and-rooms"] },
+  { id: "a1-words-2", band: "A1", tree: "words", title: "Boss 2: Sports Day", afterIndex: 5,
+    story: "It's sports day at school: subjects are cancelled, everyone needs the right clothes and every team plays something different.",
+    nodeIds: ["a1.school-subjects-and-the-school-day", "a1.clothes", "a1.sports-and-hobbies"] },
+  { id: "a1-communicate-1", band: "A1", tree: "communicate", title: "Boss: The Summer Camp", afterIndex: 2,
+    story: "Sign up for a summer camp, make friends by talking about favourites, then order lunch at the camp café.",
+    nodeIds: ["a1.give-personal-information", "a1.talk-about-favourites", "a1.ordering-food-and-drink"] },
+  { id: "a1-sounds-1", band: "A1", tree: "sounds", title: "Boss: The Radio Quiz", afterIndex: 2,
+    story: "You're on a radio quiz. Every number, every b and v, every last sound has to be clear or you lose points!",
+    nodeIds: ["a1.thirteen-or-thirty", "a1.b-and-v-sounds", "a1.final-consonants"] },
+  { id: "a1-errors-1", band: "A1", tree: "errors", title: "Boss: The Interview", afterIndex: 2,
+    story: "Your cousin writes an interview for the school magazine. Fix the he and she mix-ups, the extra 'the' and the questions without do.",
+    nodeIds: ["a1.he-for-men-she-for-women", "a1.no-the-for-things-in-general", "a1.questions-with-do"] },
   { id: "pa1-grammar-1", band: "Pre-A1", tree: "grammar", title: "Boss 1: The Show and Tell", afterIndex: 3,
     story: "It's your turn at the front of the class. Say who you are and show your things: a red pen, an apple, two books.",
     nodeIds: ["pa1.i-am-you-are-he-she-it-is", "pa1.this-is-what-is-this", "pa1.a-an-and-plurals", "pa1.adjective-before-noun"] },
