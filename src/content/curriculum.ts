@@ -7,6 +7,186 @@ export type BandTopics = { mix: string; core: string[]; universe: string[] };
 
 export const NODES: CurriculumNode[] = [
  {
+  "id": "pa1.i-am-you-are-he-she-it-is",
+  "band": "Pre-A1",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "I am, you are, he / she / it is",
+  "example": "I'm Lucy. He is my brother. It's my cat.",
+  "note": "He for boys, she for girls, it for things and animals."
+ },
+{
+  "id": "pa1.this-is-what-is-this",
+  "band": "Pre-A1",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "This is … / What is this? It's a …",
+  "example": "What's this? It's a pencil. This is my bag."
+ },
+{
+  "id": "pa1.a-an-and-plurals",
+  "band": "Pre-A1",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "a / an and plurals with -s",
+  "example": "a cat, an apple, two cats, three boxes"
+ },
+{
+  "id": "pa1.adjective-before-noun",
+  "band": "Pre-A1",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "Colour and size words before the thing",
+  "example": "a red car, a big dog",
+  "note": "Not 'a car red'."
+ },
+{
+  "id": "pa1.i-like-i-don-t-like",
+  "band": "Pre-A1",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "I like / I don't like",
+  "example": "I like pizza. I don't like milk. Do you like dogs?"
+ },
+{
+  "id": "pa1.i-have-a",
+  "band": "Pre-A1",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "I have … / I don't have …",
+  "example": "I have two sisters. I don't have a dog."
+ },
+{
+  "id": "pa1.in-on-under",
+  "band": "Pre-A1",
+  "tree": "grammar",
+  "area": "Grammar",
+  "title": "Where is it? in / on / under",
+  "example": "The ball is under the bed."
+ },
+{
+  "id": "pa1.the-alphabet-and-spelling",
+  "band": "Pre-A1",
+  "tree": "words",
+  "area": "Vocabulary",
+  "title": "The alphabet and spelling your name",
+  "example": "My name is Kate: K-A-T-E."
+ },
+{
+  "id": "pa1.numbers-1-to-20",
+  "band": "Pre-A1",
+  "tree": "words",
+  "area": "Vocabulary",
+  "title": "Numbers 1 to 20",
+  "example": "I'm twelve. Page fifteen."
+ },
+{
+  "id": "pa1.colours-and-shapes",
+  "band": "Pre-A1",
+  "tree": "words",
+  "area": "Vocabulary",
+  "title": "Colours and shapes",
+  "example": "a yellow star, a blue square"
+ },
+{
+  "id": "pa1.classroom-things-and-instructions",
+  "band": "Pre-A1",
+  "tree": "words",
+  "area": "Vocabulary",
+  "title": "Classroom things and instructions",
+  "example": "Open your book. Take a pencil and a ruler."
+ },
+{
+  "id": "pa1.family-and-the-body",
+  "band": "Pre-A1",
+  "tree": "words",
+  "area": "Vocabulary",
+  "title": "Family and the body",
+  "example": "my grandpa has white hair and big ears"
+ },
+{
+  "id": "pa1.animals-and-food",
+  "band": "Pre-A1",
+  "tree": "words",
+  "area": "Vocabulary",
+  "title": "Animals and food",
+  "example": "The rabbit eats carrots. I like rice."
+ },
+{
+  "id": "pa1.hello-goodbye-and-my-name",
+  "band": "Pre-A1",
+  "tree": "communicate",
+  "area": "Functions",
+  "title": "Hello, goodbye and your name",
+  "example": "Hi! I'm Mia. Nice to meet you. Bye!"
+ },
+{
+  "id": "pa1.how-are-you",
+  "band": "Pre-A1",
+  "tree": "communicate",
+  "area": "Functions",
+  "title": "How are you? Good morning",
+  "example": "How are you? I'm fine, thanks. And you?"
+ },
+{
+  "id": "pa1.classroom-language",
+  "band": "Pre-A1",
+  "tree": "communicate",
+  "area": "Functions",
+  "title": "Classroom language: ask for help",
+  "example": "Can you repeat, please? How do you say 'lápiz' in English?"
+ },
+{
+  "id": "pa1.english-letter-names",
+  "band": "Pre-A1",
+  "tree": "sounds",
+  "area": "Pronunciation",
+  "title": "Letter names: A, E, I are not like Spanish",
+  "example": "A (ei), E (ii), I (ai)"
+ },
+{
+  "id": "pa1.the-h-sound",
+  "band": "Pre-A1",
+  "tree": "sounds",
+  "area": "Pronunciation",
+  "title": "Say the h: hello, happy, house",
+  "example": "He has a hat on his head.",
+  "note": "In Spanish h is silent; in English you hear it."
+ },
+{
+  "id": "pa1.the-th-sound",
+  "band": "Pre-A1",
+  "tree": "sounds",
+  "area": "Pronunciation",
+  "title": "th: three, this, thank you",
+  "example": "This is my brother. He is three.",
+  "note": "three, not tree."
+ },
+{
+  "id": "pa1.capital-i",
+  "band": "Pre-A1",
+  "tree": "errors",
+  "area": "Common errors (Spanish speakers)",
+  "title": "Write I with a capital letter",
+  "example": "Today I am happy. (not 'today i am happy')"
+ },
+{
+  "id": "pa1.colours-don-t-change",
+  "band": "Pre-A1",
+  "tree": "errors",
+  "area": "Common errors (Spanish speakers)",
+  "title": "Colours don't take -s",
+  "example": "two red balls (not 'reds balls')"
+ },
+{
+  "id": "pa1.age-with-be",
+  "band": "Pre-A1",
+  "tree": "errors",
+  "area": "Common errors (Spanish speakers)",
+  "title": "Age with be, not have",
+  "example": "I'm ten. (not 'I have ten')"
+ },
+ {
   "id": "a1p.verb-be-am-is-are-all-forms",
   "band": "A1+",
   "tree": "grammar",
@@ -1918,6 +2098,16 @@ export const NODES: CurriculumNode[] = [
 ];
 
 export const BAND_TOPICS: Record<BandId, BandTopics> = {
+ "Pre-A1": {
+  "mix": "80% / 20%",
+  "core": ["Hello and goodbye", "the alphabet and spelling", "numbers 1-20", "colours", "classroom things", "my family", "animals", "food I like", "my body", "toys and games"],
+  "universe": ["Screens & Play: game words", "Arts & Making: colours and shapes", "Science & Numbers: counting and animals", "Words: English all around me"]
+ },
+ "A1": {
+  "mix": "75% / 25%",
+  "core": ["About me", "my family and friends", "my house", "my school day", "numbers to 100 and the time", "days and months", "food and drinks", "animals", "sports and hobbies", "clothes and weather"],
+  "universe": ["Screens & Play: my favourite game", "Arts & Making: drawing and music", "Science & Numbers: amazing animals", "Futures: jobs I like"]
+ },
  "A1+": {
   "mix": "70% / 30%",
   "core": [

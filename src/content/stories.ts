@@ -186,5 +186,5 @@ const C: Story[] = [
     endCareful: "You return the manuscript to the attic. Years later, you tell the story to your own children, in your own words." },
 ];
 
-const TIER: Record<BandId, Story[]> = { "A1+": A, A2: A, "A2+": A, B1: B, "B1+": B, B2: B, "B2+": C, C1: C, C2: C };
+const TIER: Record<BandId, Story[]> = { "Pre-A1": A, A1: A, "A1+": A, A2: A, "A2+": A, B1: B, "B1+": B, B2: B, "B2+": C, C1: C, C2: C };
 export const storiesFor = (band: BandId) => TIER[band];

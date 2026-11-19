@@ -3,31 +3,58 @@ import { motion } from "motion/react";
 import type { Item } from "../../content/practice/types";
 import { matches, normalise, overlap, shuffle } from "../../lib/answers";
 import { LISTENING_BASE } from "../../lib/placementApi";
+import { clipScript } from "../../content/practice/clips";
 
 /** Score for one item: 1 right, 0.5 right with a hint or half right, 0 wrong. */
 export type Verdict = { score: number; correct: string };
 
 /* ---------- Audio ---------- */
+/** Reads a clip's script with the device's own voice, for clips that have no recording yet. */
+function speakScript(text: string, slow: boolean, onEnd: () => void): boolean {
+  const s = typeof window !== "undefined" ? window.speechSynthesis : undefined;
+  if (!s) return false;
+  s.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const en = s.getVoices().filter((v) => v.lang.toLowerCase().startsWith("en"));
+  if (en.length) u.voice = en[0];
+  u.lang = u.voice?.lang ?? "en-US";
+  u.rate = slow ? 0.7 : 0.9;
+  u.onend = onEnd; u.onerror = onEnd;
+  s.speak(u);
+  return true;
+}
+
 export function Clip({ src }: { src: string }) {
   const a = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
   const [slow, setSlow] = useState(false);
   const [failed, setFailed] = useState(false);
-  function play() {
-    const el = a.current; if (!el) return;
-    el.playbackRate = slow ? 0.75 : 1; el.currentTime = 0;
-    el.play().then(() => setPlaying(true)).catch(() => setFailed(true));
+  const wanted = useRef(false);
+  const script = clipScript(src);
+  useEffect(() => () => { if (script) window.speechSynthesis?.cancel(); }, [script]);
+  function fallback() {
+    wanted.current = false;
+    setFailed(true);
+    if (script && speakScript(script, slow, () => setPlaying(false))) setPlaying(true);
   }
+  function play() {
+    if (failed) { fallback(); return; }
+    const el = a.current; if (!el) return;
+    wanted.current = true;
+    el.playbackRate = slow ? 0.75 : 1; el.currentTime = 0;
+    el.play().then(() => { wanted.current = false; setPlaying(true); }).catch(fallback);
+  }
+  const deviceVoice = failed && !!script;
   return (
     <div className="px-clip">
-      <audio ref={a} src={LISTENING_BASE + src} preload="auto" onEnded={() => setPlaying(false)} onError={() => setFailed(true)} />
+      <audio ref={a} src={LISTENING_BASE + src} preload="auto" onEnded={() => setPlaying(false)} onError={() => (wanted.current ? fallback() : setFailed(true))} />
       <button type="button" className="px-play" onClick={play} aria-label={playing ? "Playing" : "Play the audio"}>
         {playing ? <span className="pt-bars" aria-hidden="true"><span /><span /><span /><span /></span>
           : <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>}
       </button>
       <div className="px-clip-text">
-        <strong>{failed ? "Audio didn't load" : "Listen"}</strong>
-        <span className="pt-ai">AI voice</span>
+        <strong>{failed && !script ? "Audio didn't load" : "Listen"}</strong>
+        <span className="pt-ai">{deviceVoice ? "Device voice" : "AI voice"}</span>
       </div>
       <label className="px-slow"><input type="checkbox" checked={slow} onChange={(e) => setSlow(e.target.checked)} /> Slower</label>
     </div>
