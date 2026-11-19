@@ -4,11 +4,12 @@ import { A_VOCAB } from "./a-levels";
 import { B_VOCAB } from "./b-levels";
 import { C_VOCAB } from "./c-levels";
 import { EXAM_VOCAB } from "./exam";
+import { BEGINNER_VOCAB } from "./beginner";
 
 export type { VocabSet, VocabWord } from "./types";
 
 /** Every band's core words: 9 bands × 6 sets × 10 words. */
-export const VOCAB: VocabSet[] = [...A_VOCAB, ...B_VOCAB, ...C_VOCAB];
+export const VOCAB: VocabSet[] = [...BEGINNER_VOCAB, ...A_VOCAB, ...B_VOCAB, ...C_VOCAB];
 
 /** Exams & essays: extra sets for IELTS, TOEFL and academic writing (C1–C2). */
 export const EXAM_SETS: VocabSet[] = EXAM_VOCAB;

@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { BANDS } from "../content/bands";
 
 /**
- * The nine bands as stacked stripes (echoing the Stack logo).
+ * The eleven bands as stacked stripes (echoing the Stack logo).
  * Stripes grow in when the ladder scrolls into view; choosing one
  * reveals what a student can do at that band.
  */

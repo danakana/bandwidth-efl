@@ -82,7 +82,7 @@ export function Landing() {
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
                 <p className="hero-lede">
-                  Find your level, explore what you're curious about and play your way from A1+ to C2. Free for students.
+                  Find your level, explore what you're curious about and play your way from Pre-A1 to C2. Free for students.
                 </p>
                 <div className="hero-ctas">
                   <a href="#join" className="btn btn-light">Join with a class code</a>
@@ -134,10 +134,10 @@ export function Landing() {
         <section id="bands" className="section section-tint">
           <div className="page split">
             <div className="split-copy">
-              <h2 className="section-title">Nine bands, four skills</h2>
+              <h2 className="section-title">Eleven bands, four skills</h2>
               <p>
-                Bandwidth follows the CEFR, the international scale for language levels, split into nine bands from A1+
-                to C2. Each band has its own colour, from green to deep blue.
+                Bandwidth follows the CEFR, the international scale for language levels, split into eleven bands from Pre-A1
+                to C2. Each band has its own colour, from mint to deep blue.
               </p>
               <p>
                 Your reading, writing, listening and speaking move separately. You might read at B2 and speak at B1, and
@@ -289,7 +289,7 @@ export function Landing() {
       <footer className="footer">
         <div className="page footer-inner">
           <Logo size={28} />
-          <p>Free English for students, from A1+ to C2.</p>
+          <p>Free English for students, from Pre-A1 to C2.</p>
         </div>
       </footer>
     </>
