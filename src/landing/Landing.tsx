@@ -11,6 +11,7 @@ import { BloomLadder } from "./BloomLadder";
 import { Icon, type IconName } from "../components/Icon";
 import { CORE, EXAMS, FAQ, SKILLS, TEACHER } from "../content/landing";
 import "./landing.css";
+import { Credit } from "../components/Credit";
 
 const NAV = [
   { href: "#how", label: "How it works" },
@@ -290,6 +291,7 @@ export function Landing() {
         <div className="page footer-inner">
           <Logo size={28} />
           <p>Free English for students, from Pre-A1 to C2.</p>
+          <Credit />
         </div>
       </footer>
     </>

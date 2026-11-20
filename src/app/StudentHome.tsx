@@ -26,6 +26,7 @@ import { WeeklyCard } from "./WeeklyCard";
 import "./placement/placement.css";
 import "./map/map.css";
 import { useSpanish } from "../lib/spanish";
+import { Credit } from "../components/Credit";
 
 const STRIPES = [
   { w: 60, c: "var(--white)" }, { w: 60, c: "var(--band-c1)" }, { w: 120, c: "var(--band-b2)" },
@@ -140,6 +141,7 @@ export function StudentHome() {
             </>
           )}
         </section>
+        <Credit />
       </main>
     </div>
   );

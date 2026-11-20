@@ -20,6 +20,7 @@ import { ExamOverview } from "./exams/ExamOverview";
 import "./exams/exams.css";
 import type { AssessmentRow } from "../lib/progressApi";
 import { OwnerPanel } from "./OwnerPanel";
+import { Credit } from "../components/Credit";
 
 type Student = Pick<Profile, "id" | "username" | "display_name" | "class_id" | "onboarded_at"> & { created_at: string };
 
@@ -240,6 +241,7 @@ export function TeacherHome() {
           </div>
           <BandMap start={previewStart} />
         </section>
+        <Credit />
       </main>
     </div>
   );

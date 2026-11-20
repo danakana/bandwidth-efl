@@ -83,3 +83,7 @@
   :root .app-signout { padding: 6px 10px; font-size: 0.85rem; }
   :root .app-header .es-toggle { padding: 6px 8px; min-height: 36px; gap: 0; }
 }
+
+/* Authorship credit: small and quiet, on every main page. */
+:root .credit { margin: var(--s-6) 0 var(--s-3); font-size: 0.75rem; color: var(--ink-muted, #6a7c93); letter-spacing: 0.02em; }
+:root .footer .credit { margin: 0; flex-basis: 100%; }

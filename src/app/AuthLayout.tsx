@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Logo } from "../components/Logo";
 import { SignalField } from "../landing/SignalField";
 import "./app.css";
+import { Credit } from "../components/Credit";
 
 /** Split layout for join and login: form on the left, signal field on the right. */
 export function AuthLayout({ title, intro, children }: { title: string; intro: ReactNode; children: ReactNode }) {
@@ -16,6 +17,7 @@ export function AuthLayout({ title, intro, children }: { title: string; intro: R
           <div className="auth-intro">{intro}</div>
           {children}
         </div>
+        <Credit />
       </main>
       <div className="auth-art" aria-hidden="true">
         <SignalField className="auth-field" anchor={0.55} />
