@@ -19,13 +19,13 @@ export function Login() {
     e.preventDefault();
     setError("");
     setNotice("");
+    if (mode === "teacher-new" && !name.trim()) { setError("Write your name so the owner knows who you are."); return; }
     if (!id.trim() || !password) {
       setError(mode === "student" ? "Write your username and password." : "Write your email and password.");
       return;
     }
     setBusy(true);
     if (mode === "teacher-new") {
-      if (!name.trim()) { setBusy(false); setError("Write your name so the owner knows who you are."); return; }
       // This creates a request, not a teacher account: the site owner approves it in the app.
       const { data, error: err } = await supabase.auth.signUp({
         email: id.trim(), password,
