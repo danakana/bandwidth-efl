@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import type { BandAssessment, TestPart } from "../../content/assessments/types";
 import { badgeInfo, savePractice, submitAssessment, type AssessmentOutcome } from "../../lib/progressApi";
 import { useAuth } from "../../lib/auth";
+import { SpanishToggle, isBeginner, useSpanish } from "../../lib/spanish";
 import { Icon } from "../../components/Icon";
 import { BANDS } from "../../content/bands";
 import { Clip, ItemView } from "../practice/Items";
@@ -68,7 +69,7 @@ export function AssessmentPlayer({ test, preview, onClose }: { test: BandAssessm
   const label = `${test.title}${preview ? " · preview" : ""}`;
 
   return createPortal(
-    <div className="pt px as" role="dialog" aria-modal="true" aria-label={label}>
+    <div className="pt px as" role="dialog" aria-modal="true" aria-label={label} data-beginner={isBeginner(test.band) || undefined}>
       <header className="px-head">
         <button type="button" className="px-close" aria-label={phase === "result" ? "Done" : "Leave the test"}
           onClick={() => (step >= 0 ? setLeaving(true) : onClose(phase === "result"))}>
@@ -80,6 +81,7 @@ export function AssessmentPlayer({ test, preview, onClose }: { test: BandAssessm
             {TESTING.map((p, i) => <li key={p} className={i < step ? "is-done" : i === step ? "is-now" : ""}>{PART_NAMES[p]}</li>)}
           </ol>
         )}
+        <SpanishToggle className="px-es-toggle" />
       </header>
       {leaving && (
         <div className="as-leave" role="alertdialog" aria-labelledby="as-leave-t">
@@ -99,12 +101,14 @@ export function AssessmentPlayer({ test, preview, onClose }: { test: BandAssessm
             {phase === "writing" && (
               <>
                 <p className="pt-kicker">Part 3 · Writing</p>
+                <EsNote text="Escribe en inglés sobre el tema. Revisa las palabras mínimas y los puntos de la lista antes de entregar." />
                 <CreateStep key="w" task={test.writing} only="write" exam submitLabel="Hand in my writing" onSubmit={(r) => hand("writing", r)} />
               </>
             )}
             {phase === "speaking" && (
               <>
                 <p className="pt-kicker">Part 4 · Speaking</p>
+                <EsNote text="Habla en inglés sobre el tema. Graba tu voz; puedes escucharte antes de entregar." />
                 <CreateStep key="s" task={test.speaking} only="speak" exam submitLabel="Hand in and finish" onSubmit={(r) => hand("speaking", r)} />
               </>
             )}
@@ -132,6 +136,12 @@ export function AssessmentPlayer({ test, preview, onClose }: { test: BandAssessm
 const nextBand = (band: string) => BANDS[BANDS.findIndex((b) => b.id === band) + 1]?.id ?? "the next band";
 /** C2 is the top band: its Gate completes the course instead of opening a band. */
 const isTop = (band: string) => BANDS[BANDS.length - 1]?.id === band;
+
+/** A Spanish instruction, shown only when Español is on. */
+function EsNote({ text }: { text: string }) {
+  const [es] = useSpanish();
+  return es ? <p className="px-es-note" lang="es">{text}</p> : null;
+}
 
 const PART_NAMES: Record<string, string> = { reading: "Reading", listening: "Listening", writing: "Writing", speaking: "Speaking" };
 
@@ -191,6 +201,7 @@ function Parts({ parts, kind, onDone }: { parts: TestPart[]; kind: "reading" | "
       <div className="as-grid">
         <div className="as-source">
           <p className="pt-kicker">{kind === "reading" ? "Text" : "Recording"} {p + 1} of {parts.length}</p>
+          <EsNote text={kind === "reading" ? "Lee el texto. Luego elige la respuesta correcta." : "Escucha la grabación las veces que quieras. Luego elige la respuesta correcta."} />
           <h2>{part.title}</h2>
           {part.text && <div className="as-passage" tabIndex={0} aria-label={`Text: ${part.title}`}>{part.text.split(/\n\s*\n/).map((para, i) => <p key={i}>{para}</p>)}</div>}
           {part.audio && (

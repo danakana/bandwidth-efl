@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Art } from "../arcade/GameArt";
 import { supabase } from "../../lib/supabase";
-import { useAuth } from "../../lib/auth";
 import { useProgress } from "../../lib/progress";
 import { BANDS, type BandId } from "../../content/bands";
 import { EXAM_SETS, setById, setsFor, siblingsOf, gapped, formIn, type VocabSet, type VocabWord } from "../../content/vocab";
@@ -9,6 +8,7 @@ import { loadWords, saveWord, type MyWord } from "../../lib/wordsApi";
 import { say } from "../exams/ExamAudio";
 import { Icon } from "../../components/Icon";
 import "./words.css";
+import { useSpanish } from "../../lib/spanish";
 
 type Result = { set_id: string; correct: number; total: number; passed: boolean };
 const POS: Record<VocabWord["pos"], string> = { noun: "noun", verb: "verb", adj: "adjective", adv: "adverb", phrase: "phrase" };
@@ -18,8 +18,7 @@ const POS: Record<VocabWord["pos"], string> = { noun: "noun", verb: "verb", adj:
  * Learn a set (meaning, example, sound), practise it three ways, then the words join My words for spaced review.
  */
 export function WordLab({ start }: { start: number }) {
-  const { profile } = useAuth();
-  const es = !!profile?.spanish_help;
+  const [es] = useSpanish();
   // A band id, or "exam" for the Exams & essays sets.
   const [band, setBand] = useState<BandId | "exam">(BANDS[start].id);
   const [results, setResults] = useState<Result[]>([]);

@@ -8,6 +8,7 @@ import { NODES } from "../../content/curriculum";
 import { shuffle } from "../../lib/answers";
 import { badgeInfo, recordMilestone, recordStep, savePractice, type StepOutcome } from "../../lib/progressApi";
 import { useAuth } from "../../lib/auth";
+import { SpanishToggle, isBeginner, useSpanish } from "../../lib/spanish";
 import { Icon } from "../../components/Icon";
 import { Session } from "./Session";
 import { CreateStep } from "./CreateStep";
@@ -32,6 +33,7 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
   const title = target.kind === "milestone" ? target.checkpoint.title : target.kind === "review" ? "Fix your mistakes"
     : NODES.find((n) => n.id === target.practice.nodeId)?.title ?? "";
   const stepIdx = target.kind === "step" ? target.step - 1 : -1;
+  const band = target.kind === "milestone" ? target.checkpoint.band : target.kind === "step" ? NODES.find((n) => n.id === target.practice.nodeId)?.band : undefined;
   const label = target.kind === "milestone" ? "Checkpoint" : target.kind === "review" ? "Review" : target.step === 7 ? "Skill check" : `Step ${target.step} · ${STEP_NAMES[stepIdx]}`;
 
   const items = useMemo(() => {
@@ -78,12 +80,13 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
 
   // Rendered over the whole app as a modal dialog, so screen readers treat it as one focused task.
   return createPortal(
-    <div className="pt px" role="dialog" aria-modal="true" aria-label={`${label}: ${title}`}>
+    <div className="pt px" role="dialog" aria-modal="true" aria-label={`${label}: ${title}`} data-beginner={isBeginner(band) || undefined}>
       <header className="px-head">
         <button type="button" className="px-close" onClick={() => onClose(phase === "result")} aria-label={phase === "result" ? "Done, back to the skill" : "Leave practice"}>
           <Icon name="x" size={22} />
         </button>
         <p className="px-head-title"><span>{label}</span>{title}</p>
+        <SpanishToggle className="px-es-toggle" />
       </header>
       <div className="pt-main">
         <AnimatePresence mode="wait">
@@ -95,7 +98,7 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
                   catch { setPhase("error"); return; }
                   await finish(1, 1);
                 }} />
-              : <Session items={items} label={label} onDone={(s, t) => void finish(s, t)} onItem={(item, v) => { answers.current.push({ item, ok: v.score === 1 }); }} />)}
+              : <Session items={items} label={label} esRule={target.kind === "step" ? target.practice.es : undefined} onDone={(s, t) => void finish(s, t)} onItem={(item, v) => { answers.current.push({ item, ok: v.score === 1 }); }} />)}
             {phase === "saving" && <div className="pt-center"><h2>Saving…</h2></div>}
             {phase === "error" && (
               <div className="pt-center">
@@ -120,6 +123,7 @@ export function PracticePlayer({ target, onClose }: { target: PlayTarget; onClos
 }
 
 function Intro({ target, label, onStart }: { target: PlayTarget; label: string; onStart: () => void }) {
+  const [es] = useSpanish();
   const [open, setOpen] = useState(target.kind === "step" && target.step === 1);
   if (target.kind === "review") {
     return (
@@ -151,19 +155,14 @@ function Intro({ target, label, onStart }: { target: PlayTarget; label: string; 
       <p className="pt-kicker">{label}{s <= 6 ? ` · ${STEP_BLOOM[s - 1]}` : ""}</p>
       <h1>{s === 7 ? "Is it still there?" : STEP_BLURB[s - 1]}</h1>
       {s === 7 && <p className="pt-lede">A short mixed check on a different day. This is how a skill becomes Secure, then Mastered.</p>}
-      <button type="button" className="px-rule-toggle" aria-expanded={open} onClick={() => setOpen(!open)}>
-        {open ? "Hide the rule" : "Review the rule"}
+      <button type="button" className="px-rule-toggle" aria-expanded={open || es} onClick={() => setOpen(!open)}>
+        {open || es ? "Hide the rule" : "Review the rule"}
       </button>
-      {open && (
+      {(open || es) && (
         <div className="px-rule">
           <p>{p.explain}</p>
           <ul>{p.pattern.map((x) => <li key={x}>{x}</li>)}</ul>
-          {p.es && (
-            <details className="px-es">
-              <summary>En español</summary>
-              <p lang="es">{p.es}</p>
-            </details>
-          )}
+          {p.es && es && <p className="px-es-note" lang="es"><strong>En español:</strong> {p.es}</p>}
         </div>
       )}
       <p className="muted">You need 80% to pass. No lives, no timer: mistakes are how you learn.</p>

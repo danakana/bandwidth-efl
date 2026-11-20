@@ -3,12 +3,14 @@ import { AnimatePresence, motion } from "motion/react";
 import type { Item } from "../../content/practice/types";
 import { ItemView, type Verdict } from "./Items";
 import { Icon } from "../../components/Icon";
+import { useSpanish } from "../../lib/spanish";
 
 /** Runs a list of items one at a time with instant feedback, then reports the score. */
-export function Session({ items, label, onDone, onItem }: { items: Item[]; label: string; onDone: (score: number, total: number) => void; onItem?: (item: Item, v: Verdict) => void }) {
+export function Session({ items, label, onDone, onItem, esRule }: { items: Item[]; label: string; onDone: (score: number, total: number) => void; onItem?: (item: Item, v: Verdict) => void; esRule?: string }) {
   const [i, setI] = useState(0);
   const [score, setScore] = useState(0);
   const [verdict, setVerdict] = useState<Verdict | null>(null);
+  const [es] = useSpanish();
   const item = items[i];
   const last = i === items.length - 1;
 
@@ -27,6 +29,8 @@ export function Session({ items, label, onDone, onItem }: { items: Item[]; label
       <AnimatePresence mode="wait">
         <motion.div key={i} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2 }}>
           <ItemView item={item} onAnswer={(v) => { setVerdict(v); setScore((s) => s + v.score); onItem?.(item, v); }} />
+          {/* Before answering, only the skill's rule: item notes would give the answer away. */}
+          {es && !verdict && esRule && <p className="px-es-hint" lang="es"><strong>Recuerda:</strong> {esRule}</p>}
         </motion.div>
       </AnimatePresence>
       <AnimatePresence>
@@ -41,7 +45,7 @@ export function Session({ items, label, onDone, onItem }: { items: Item[]; label
               <strong>{verdict.score === 1 ? PRAISE[i % PRAISE.length] : verdict.score > 0 ? "Almost: half a point." : "Not quite."}</strong>
               {verdict.score < 1 && <p className="px-answer">Answer: <span>{verdict.correct}</span></p>}
               <p className="px-why">{item.why}</p>
-              {verdict.score < 1 && item.es && <p className="px-es-gloss" lang="es">{item.es}</p>}
+              {(verdict.score < 1 || es) && item.es && <p className="px-es-gloss" lang="es">{item.es}</p>}
             </div>
             <button type="button" className="btn btn-primary" onClick={next} autoFocus>{last ? "See results" : "Continue"}</button>
           </motion.div>

@@ -41,3 +41,45 @@
 /* ---------- Primary buttons: the same soft 3D press as the games ---------- */
 :root .btn-primary { box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.22), 0 8px 16px -10px rgba(10, 24, 52, 0.7); }
 :root .btn-primary:active:not(:disabled) { box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.22), 0 3px 6px -4px rgba(10, 24, 52, 0.7); }
+
+/* ---------- Spanish help: one Español switch shows or hides every Spanish note ---------- */
+:root .es-toggle {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 14px 6px 10px;
+  border: 2px solid var(--line, #d6e0ee); border-radius: 999px; background: var(--paper, #fff); color: var(--ink);
+  font: 700 0.9rem/1 var(--font-body); cursor: pointer; transition: background .15s, border-color .15s;
+}
+:root .es-toggle-dot { width: 22px; height: 14px; border-radius: 999px; background: #c9d5e5; position: relative; transition: background .15s; }
+:root .es-toggle-dot::after { content: ""; position: absolute; top: 2px; left: 2px; width: 10px; height: 10px; border-radius: 50%; background: #fff; transition: transform .15s; }
+:root .es-toggle.is-on { border-color: #f2b632; background: #fff6dc; }
+:root .es-toggle.is-on .es-toggle-dot { background: #e0a21a; }
+:root .es-toggle.is-on .es-toggle-dot::after { transform: translateX(8px); }
+:root .es-toggle:focus-visible { box-shadow: var(--focus); outline: none; }
+:root .es-toggle-dark { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.35); color: #fff; }
+:root .es-toggle-dark.is-on { background: #fff6dc; color: var(--ink); border-color: #f2b632; }
+:root .px-head .px-es-toggle { margin-left: auto; }
+:root .px-es-note, :root .px-es-hint {
+  margin: var(--s-3) 0; padding: 10px 14px; border-radius: 12px; background: #fff6dc; color: #5a4300;
+  border-left: 4px solid #e0a21a; font-size: 1.05rem; line-height: 1.5;
+}
+@media (max-width: 560px) { :root .app-header .es-toggle span:not(.es-toggle-dot):not(.visually-hidden) { display: none; } }
+
+/* ---------- Pre-A1 and A1: bigger, calmer type ---------- */
+[data-beginner] .pt-stem { font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem) !important; line-height: 1.3; }
+[data-beginner] .pt-option { min-height: 72px; }
+[data-beginner] .pt-option > span:last-child { font-size: 1.4rem; }
+[data-beginner] .as-passage, [data-beginner] .lib-text { font-size: 1.45rem; line-height: 1.75; }
+[data-beginner] .as-passage p { max-width: 40ch; }
+[data-beginner] .px-context, [data-beginner] .px-why, [data-beginner] .px-answer { font-size: 1.25rem; }
+[data-beginner] input[type="text"], [data-beginner] textarea { font-size: 1.35rem; }
+[data-beginner] .px-es-note, [data-beginner] .px-es-hint, [data-beginner] .px-es-gloss { font-size: 1.2rem; }
+[data-beginner] .px-rule p, [data-beginner] .px-rule li { font-size: 1.2rem; }
+:root .px-head { min-width: 0; }
+:root .px-head-title { min-width: 0; overflow: hidden; }
+:root .px-head-title > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+:root .px-head .es-toggle { flex-shrink: 0; }
+@media (max-width: 420px) { :root .px-head .es-toggle { padding: 6px 10px 6px 8px; font-size: 0.85rem; } }
+@media (max-width: 430px) {
+  :root .app-header-right { gap: 6px; }
+  :root .app-signout { padding: 6px 10px; font-size: 0.85rem; }
+  :root .app-header .es-toggle { padding: 6px 8px; min-height: 36px; gap: 0; }
+}

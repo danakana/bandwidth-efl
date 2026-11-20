@@ -11,6 +11,7 @@ import {
 } from "../../lib/placementApi";
 import { Logo } from "../../components/Logo";
 import "./placement.css";
+import { useSpanish } from "../../lib/spanish";
 
 type Stage = "intro" | "reading" | "listening" | "writing" | "speaking" | "finishing";
 
@@ -37,8 +38,8 @@ function productionBand(reading: BandIndex | null, listening: BandIndex | null):
 }
 
 export function Placement({ onExit, onFinished, mode = "placement" }: { onExit: () => void; onFinished: () => void; mode?: "placement" | "check" }) {
-  const { profile, session } = useAuth();
-  const es = !!profile?.spanish_help;
+  const { session } = useAuth();
+  const [es] = useSpanish();
   const [stage, setStage] = useState<Stage>("intro");
   const [attempt, setAttempt] = useState<Attempt | null>(null);
   const [reading, setReading] = useState<BandIndex | null>(null);

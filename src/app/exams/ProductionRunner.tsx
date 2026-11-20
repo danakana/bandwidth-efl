@@ -13,6 +13,7 @@ import { Scene } from "./Scenes";
 import { say } from "./ExamAudio";
 import { makeRecogniser } from "../practice/Items";
 import { SPEAKING_MODELS, WRITING_MODELS } from "../../content/exams/models";
+import { useSpanish } from "../../lib/spanish";
 
 export type ProductionRun =
   | { kind: "writing"; exam: ProductionExam; test: boolean; title: string; set: WritingSet & { charts?: Partial<Record<number, ChartId>> }; parts: number[]; minutes?: number }
@@ -66,8 +67,8 @@ function Shell({ title, onClose, closeLabel, timer, children }: { title: string;
 /* ---------- Writing ---------- */
 
 function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writing" }>; onClose: () => void }) {
-  const { session, profile } = useAuth();
-  const es = !!profile?.spanish_help;
+  const { session } = useAuth();
+  const [es] = useSpanish();
   const parts = run.set.parts.filter((p) => run.parts.includes(p.part));
   const [phase, setPhase] = useState<"intro" | "play" | "sent">("intro");
   const [i, setI] = useState(0);
@@ -253,8 +254,8 @@ function Writing({ run, onClose }: { run: Extract<ProductionRun, { kind: "writin
 type Step = "reading" | "prep" | "answer";
 
 function Speaking({ run, onClose }: { run: Extract<ProductionRun, { kind: "speaking" }>; onClose: () => void }) {
-  const { session, profile } = useAuth();
-  const es = !!profile?.spanish_help;
+  const { session } = useAuth();
+  const [es] = useSpanish();
   const parts = run.set.parts.filter((p) => run.parts.includes(p.part));
   const canRecord = typeof window !== "undefined" && "MediaRecorder" in window && !!navigator.mediaDevices;
   const [phase, setPhase] = useState<"intro" | "run" | "review" | "sent">("intro");

@@ -1,15 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useAuth } from "../../lib/auth";
 import { EndScreen, GameShell, sfx, type Learnt } from "./GameKit";
 import { buildRain, rainShape, starsFrom, type LevelBand } from "./levels";
+import { useSpanish } from "../../lib/spanish";
 
 /**
  * Word Rain: words fall towards the city. Read the clue (a meaning or a sentence with a gap)
  * and tap the right word before it lands. Wrong taps and missed words cost a life.
  */
 export function WordRain({ band, level, onClose, onLevel }: { band: LevelBand; level: number; onClose: (changed: boolean) => void; onLevel: (n: number) => void }) {
-  const { profile } = useAuth();
-  const es = !!profile?.spanish_help;
+  const [es] = useSpanish();
   const [seed, setSeed] = useState(0);
   const waves = useMemo(() => buildRain(band, level), [band, level, seed]); // eslint-disable-line react-hooks/exhaustive-deps
   const { fall } = rainShape(level);

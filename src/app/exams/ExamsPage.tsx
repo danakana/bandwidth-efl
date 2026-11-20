@@ -1,7 +1,6 @@
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { Art } from "../arcade/GameArt";
 import { supabase } from "../../lib/supabase";
-import { useAuth } from "../../lib/auth";
 import { useProgress } from "../../lib/progress";
 import { Icon } from "../../components/Icon";
 import { ICFES, ICFES_BANK, ICFES_MOCKS, countQ } from "../../content/exams/icfes";
@@ -14,6 +13,7 @@ import { IELTS_SPEAKING, IELTS_S_PARTS, IELTS_WRITING, IELTS_W_PARTS } from "../
 import { ExamRunner, type ExamRun } from "./ExamRunner";
 import { ProductionRunner, type ProductionRun } from "./ProductionRunner";
 import "./exams.css";
+import { useSpanish } from "../../lib/spanish";
 
 type Row = { exam: "icfes" | "aptis" | "ielts" | "toefl"; mode: "part" | "section"; ref: string; score: number; total: number; by_part: Record<string, [number, number]>; created_at: string };
 type Which = "icfes" | "aptis" | "ielts" | "toefl";
@@ -38,9 +38,8 @@ function suggestIn(acc: (number | null)[]) {
 
 /** Exam prep: ICFES Saber 11 and Aptis General, each with part trainers and full practice tests. */
 export function ExamsPage() {
-  const { profile } = useAuth();
   const progress = useProgress();
-  const es = !!profile?.spanish_help;
+  const [es] = useSpanish();
   const [rows, setRows] = useState<Row[]>([]);
   const [run, setRun] = useState<ExamRun | null>(null);
   const [prod, setProd] = useState<ProductionRun | null>(null);

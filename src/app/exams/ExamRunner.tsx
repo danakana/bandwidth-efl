@@ -1,12 +1,12 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { supabase } from "../../lib/supabase";
-import { useAuth } from "../../lib/auth";
 import { Icon } from "../../components/Icon";
 import { countQ } from "../../content/exams/icfes";
 import { ieltsBand } from "../../content/exams/ielts";
 import type { AudioClip, BuildBlock, ExamBlock, ExamConfig, ExamQ, FillBlock, MatchBlock, OrderBlock, PartInfo, TextBlock, WordsBlock } from "../../content/exams/types";
 import { toeflBand } from "../../content/exams/toefl";
 import { ExamAudio, Transcript } from "./ExamAudio";
+import { useSpanish } from "../../lib/spanish";
 
 const L = "ABCDEFGHIJ";
 export type ExamRun = { exam: ExamConfig; mode: "part" | "section"; ref: string; title: string; blocks: ExamBlock[]; minutes?: number };
@@ -54,8 +54,7 @@ const clipsOf = (b: ExamBlock): AudioClip[] => [...("audio" in b && b.audio ? b.
 
 /** Plays exam blocks. Part practice shows answers after each block; a full test shows them only at the end. */
 export function ExamRunner({ run, onClose }: { run: ExamRun; onClose: (changed: boolean) => void }) {
-  const { profile } = useAuth();
-  const es = !!profile?.spanish_help;
+  const [es] = useSpanish();
   const mock = run.mode === "section";
   const exam = run.exam;
   const partOf = (n: number) => exam.parts.find((p) => p.part === n)!;

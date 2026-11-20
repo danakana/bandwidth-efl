@@ -6,6 +6,7 @@ import { Icon } from "../components/Icon";
 import { COLORS, TITLES } from "../content/shop";
 import { useAppRoute } from "../lib/route";
 import { useRolling } from "../lib/motion";
+import { SpanishToggle } from "../lib/spanish";
 import { useEffect, useRef, useState } from "react";
 
 export function AppHeader() {
@@ -33,6 +34,7 @@ export function AppHeader() {
             <span className="app-user-name">{profile?.display_name}{st && <small>{TITLES[st.title] ?? "Learner"}</small>}</span>
             {profile?.role === "teacher" && <span className="role-tag">Teacher</span>}
           </span>
+          {profile?.role === "student" && <SpanishToggle className="es-toggle-dark" />}
           <button type="button" className="btn btn-outline-light app-signout" onClick={() => void signOut()}>Log out</button>
         </div>
       </div>

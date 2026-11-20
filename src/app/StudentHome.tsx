@@ -25,6 +25,7 @@ import { RetentionCard } from "./RetentionCard";
 import { WeeklyCard } from "./WeeklyCard";
 import "./placement/placement.css";
 import "./map/map.css";
+import { useSpanish } from "../lib/spanish";
 
 const STRIPES = [
   { w: 60, c: "var(--white)" }, { w: 60, c: "var(--band-c1)" }, { w: 120, c: "var(--band-b2)" },
@@ -34,7 +35,7 @@ const STRIPES = [
 /** Student home: placement first; after it, the band map, bands and skill trees. */
 export function StudentHome() {
   const { profile } = useAuth();
-  const es = !!profile?.spanish_help;
+  const [es] = useSpanish();
   const route = useAppRoute();
   const progress = useProgress();
   const mine = UNIVERSE_LIST.filter((u) => profile?.universes.includes(u.id));

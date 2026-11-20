@@ -10,6 +10,7 @@ import { ExamAudio } from "../exams/ExamAudio";
 import { Icon } from "../../components/Icon";
 import { saveWord, sentenceWith } from "../../lib/wordsApi";
 import "./library.css";
+import { isBeginner, useSpanish } from "../../lib/spanish";
 
 type Read = { story_id: string; correct: number; total: number; created_at: string };
 const L = "ABC";
@@ -20,7 +21,7 @@ const L = "ABC";
  */
 export function LibraryPage({ start }: { start: number }) {
   const { profile } = useAuth();
-  const es = !!profile?.spanish_help;
+  const [es] = useSpanish();
   const [reads, setReads] = useState<Read[]>([]);
   // A link like #app/library/b1-stories opens that text straight away (used by today's plan).
   const [open, setOpen] = useState<Story | null>(() => storyById(window.location.hash.split("/")[2] ?? "") ?? null);
@@ -111,7 +112,7 @@ function StoryView({ story, es, onClose }: { story: Story; es: boolean; onClose:
   }
 
   return (
-    <article className="lib-story" aria-labelledby="story-title">
+    <article className="lib-story" aria-labelledby="story-title" data-beginner={isBeginner(story.band) || undefined}>
       <button type="button" className="btn btn-ghost btn-sm" onClick={() => onClose(checked)}><Icon name="x" size={16} /> Back to the shelf</button>
       <p className="pt-kicker">{story.band} · {minutesFor(story)} min · {story.kind === "story" ? "Story" : "Article"}</p>
       <h1 id="story-title">{story.title}</h1>

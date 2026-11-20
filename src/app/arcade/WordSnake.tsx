@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useAuth } from "../../lib/auth";
 import { EndScreen, GameShell, sfx, type Learnt } from "./GameKit";
 import { buildSnake, snakeShape, starsFrom, type LevelBand } from "./levels";
+import { useSpanish } from "../../lib/spanish";
 
 /**
  * Word Snake: read the clue and spell the word by eating its letters in order.
@@ -37,8 +37,7 @@ function placeFood(word: string, typed: number, snake: P[]): Food[] {
 const startSnake = (): P[] => [{ x: 3, y: 6 }, { x: 2, y: 6 }, { x: 1, y: 6 }];
 
 export function WordSnake({ band, level, onClose, onLevel }: { band: LevelBand; level: number; onClose: (changed: boolean) => void; onLevel: (n: number) => void }) {
-  const { profile } = useAuth();
-  const es = !!profile?.spanish_help;
+  const [es] = useSpanish();
   const [seed, setSeed] = useState(0);
   const words = useMemo(() => buildSnake(band, level), [band, level, seed]); // eslint-disable-line react-hooks/exhaustive-deps
   const { tick } = snakeShape(level);
