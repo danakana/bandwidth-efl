@@ -9,6 +9,8 @@ export function Login() {
   const [mode, setMode] = useState<Mode>("student");
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [school, setSchool] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
@@ -23,11 +25,16 @@ export function Login() {
     }
     setBusy(true);
     if (mode === "teacher-new") {
-      const { data, error: err } = await supabase.auth.signUp({ email: id.trim(), password });
+      if (!name.trim()) { setBusy(false); setError("Write your name so the owner knows who you are."); return; }
+      // This creates a request, not a teacher account: the site owner approves it in the app.
+      const { data, error: err } = await supabase.auth.signUp({
+        email: id.trim(), password,
+        options: { data: { teacher_request: "true", display_name: name.trim().slice(0, 30), school: school.trim().slice(0, 80) } },
+      });
       setBusy(false);
       if (err) { setError(err.message); return; }
       if (data.session) { window.location.hash = "app"; return; }
-      setNotice("Check your inbox and confirm your email, then log in here.");
+      setNotice("Request sent. Confirm your email, then log in here to see when the owner has approved you.");
       setMode("teacher");
       return;
     }
@@ -50,14 +57,20 @@ export function Login() {
   const isStudent = mode === "student";
   return (
     <AuthLayout
-      title={isStudent ? "Welcome back" : mode === "teacher" ? "Teacher login" : "Create your teacher account"}
-      intro={<p>{isStudent ? "Log in with the username you chose." : "Teachers log in with their email."}</p>}
+      title={isStudent ? "Welcome back" : mode === "teacher" ? "Teacher login" : "Ask for a teacher account"}
+      intro={<p>{isStudent ? "Log in with the username you chose." : mode === "teacher" ? "Teachers log in with their email." : "The Bandwidth owner checks every teacher request. You can use your account once it's approved."}</p>}
     >
       <div className="mode-switch" role="group" aria-label="Who is logging in">
         <button type="button" aria-pressed={isStudent} onClick={() => { setMode("student"); setError(""); }}>Student</button>
         <button type="button" aria-pressed={!isStudent} onClick={() => { setMode("teacher"); setError(""); }}>Teacher</button>
       </div>
       <form className="auth-form" onSubmit={submit} noValidate>
+        {mode === "teacher-new" && (
+          <>
+            <Field id="req-name" label="Your name" value={name} onChange={setName} autoComplete="name" maxLength={30} />
+            <Field id="req-school" label="School (optional)" value={school} onChange={setSchool} autoComplete="organization" maxLength={80} />
+          </>
+        )}
         {isStudent ? (
           <Field id="login-user" label="Username" value={id} onChange={setId} autoComplete="username" autoCapitalize="none" maxLength={20} />
         ) : (
@@ -68,13 +81,13 @@ export function Login() {
         {error && <p className="form-error" role="alert">{error}</p>}
         {notice && <p className="form-notice" role="status">{notice}</p>}
         <button type="submit" className="btn btn-primary auth-submit" disabled={busy}>
-          {busy ? "One moment…" : mode === "teacher-new" ? "Create teacher account" : "Log in"}
+          {busy ? "One moment…" : mode === "teacher-new" ? "Send my request" : "Log in"}
         </button>
       </form>
       {isStudent ? (
         <p className="auth-switch">New here? <a href="#join">Join with a class code</a></p>
       ) : mode === "teacher" ? (
-        <p className="auth-switch">First time? <button type="button" className="link-btn" onClick={() => setMode("teacher-new")}>Create your teacher account</button></p>
+        <p className="auth-switch">New teacher? <button type="button" className="link-btn" onClick={() => setMode("teacher-new")}>Ask for a teacher account</button></p>
       ) : (
         <p className="auth-switch">Already have one? <button type="button" className="link-btn" onClick={() => setMode("teacher")}>Log in</button></p>
       )}

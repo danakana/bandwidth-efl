@@ -14,7 +14,8 @@ export const studentEmail = (username: string) => `${username.trim().toLowerCase
 
 export type Profile = {
   id: string;
-  role: "student" | "teacher";
+  role: "student" | "teacher" | "teacher_off";
+  is_owner?: boolean;
   username: string | null;
   display_name: string | null;
   class_id: string | null;

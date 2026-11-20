@@ -19,12 +19,13 @@ import { IcfesOverview } from "./exams/IcfesOverview";
 import { ExamOverview } from "./exams/ExamOverview";
 import "./exams/exams.css";
 import type { AssessmentRow } from "../lib/progressApi";
+import { OwnerPanel } from "./OwnerPanel";
 
 type Student = Pick<Profile, "id" | "username" | "display_name" | "class_id" | "onboarded_at"> & { created_at: string };
 
 /** Teacher view: create classes, share codes, see who has joined. */
 export function TeacherHome() {
-  const { session } = useAuth();
+  const { session, profile } = useAuth();
   const [classes, setClasses] = useState<ClassRow[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   const [name, setName] = useState("");
@@ -133,6 +134,7 @@ export function TeacherHome() {
           {pending > 0 && <p className="pill" role="status">{pending} placement {pending === 1 ? "piece" : "pieces"} to review</p>}
           {gates.length > 0 && <p className="pill" role="status">{gates.length} {gates.length === 1 ? "Gate" : "Gates"} waiting for you to confirm</p>}
         </section>
+        {profile?.is_owner && <OwnerPanel />}
 
         <GateReviews items={gates} subs={subs}
           nameOf={(id) => { const st = students.find((x) => x.id === id); return st?.display_name ?? st?.username ?? "Student"; }}

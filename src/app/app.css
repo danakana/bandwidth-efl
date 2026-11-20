@@ -282,3 +282,14 @@
 .goal-slot { display: inline-block; margin-right: var(--s-2); padding: 1px 8px; border-radius: 999px; background: var(--tint, #eef3fb); color: var(--ink); font: 700 0.75rem / 1.6 var(--font-body); vertical-align: 2px; }
 .goal-plan li.is-done .goal-task::before { content: "\2713"; background: #1f7a4d; }
 .goal-plan li.is-done .goal-task small { color: #1f7a4d; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+/* Owner panel: teacher requests and approved teachers. */
+.owner-list { list-style: none; margin: 0 0 var(--s-5); padding: 0; display: grid; gap: var(--s-2); }
+.owner-row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); flex-wrap: wrap; padding: var(--s-3) var(--s-4); border-radius: 16px; background: var(--paper, #fff); box-shadow: var(--g-lift-sm); }
+.owner-row > div:first-child { display: grid; gap: 2px; min-width: 0; }
+.owner-row strong { display: flex; align-items: center; gap: var(--s-2); flex-wrap: wrap; }
+.owner-row span, .owner-row small { overflow-wrap: anywhere; }
+.owner-row.is-pending { outline: 2px solid var(--band-b1, #f6c445); }
+.owner-row.is-off { opacity: 0.7; }
+.owner-actions { display: flex; gap: var(--s-2); }
+.tr-status { max-width: 40rem; }
+.tr-status .btn { margin-top: var(--s-3); }
