@@ -22,8 +22,13 @@ export type FixItem = { kind: "fix"; prompt: string; parts: string[]; wrong: num
 /** Say a sentence aloud. Speech recognition checks it; typing is the fallback. */
 export type SayItem = { kind: "say"; prompt: string; target: string; why: string };
 
-/** Lower bands (A1+ to A2+) may add a short Spanish gloss, shown only after a wrong answer. */
-export type Item = (ChoiceItem | TypeItem | TransformItem | OrderItem | FixItem | SayItem) & { es?: string };
+/**
+ * Lower bands may add Spanish:
+ * - `es`: a short gloss on the answer, shown only after answering.
+ * - `esTask`: the task itself in Spanish (the situation and what to do). Shown before answering when
+ *   Español is on, so it must never contain or point to the English answer.
+ */
+export type Item = (ChoiceItem | TypeItem | TransformItem | OrderItem | FixItem | SayItem) & { es?: string; esTask?: string };
 
 /** Step 6: an original piece of writing or speech that must use the skill. */
 export type CreateTask = {

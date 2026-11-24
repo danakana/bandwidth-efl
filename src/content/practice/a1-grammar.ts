@@ -66,10 +66,10 @@ const beQ: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write five questions for a new classmate with Are you …? and Is your …? (20 words or more). Answer two of them." },
-      { universe: "screens", text: "Write a quiz about a game or a film (20 words or more). Use Is it …? Are they …? and short answers." },
+      { text: "Write three questions for a new classmate with Are you …? and Is your …? (15 words or more). Answer one of them." },
+      { universe: "screens", text: "Write a quiz about a game or a film (15 words or more). Use Is it …? Are they …? and short answers." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "Questions with be (Are you …? Is he …?)", pattern: "\\b(am|is|are)\\s+(I|you|he|she|it|we|they|your|my|the)\\b[^.?!]*\\?", min: 3 },
       { label: "A negative (isn't, aren't, I'm not)", pattern: "\\b(isn't|aren't|not)\\b", min: 1 },
@@ -114,7 +114,7 @@ const possessives: NodePractice = {
       ord("What is her name?", "What is + her + name?"),
     ],
     [
-      ctx("You show a photo of your uncle's house.", "Best sentence:", ["This is my uncle and his house.", "This is my uncle and her house.", "This is my uncle and he house."], 0, "uncle → his."),
+      ctx("A photo of your uncle's house.", "Best sentence:", ["This is his house.", "This is her house.", "This is he house."], 0, "uncle → his."),
       ctx("You find a pink pencil case. It belongs to Lucía.", "Best sentence:", ["It's her pencil case.", "It's his pencil case.", "It's she pencil case."], 0, "Lucía → her."),
       ch("Which is correct?", ["Their house is big.", "There house is big.", "They house is big."], 0, "their = belonging to them."),
       ch("Which is correct?", ["Is this your pen?", "Is this you pen?", "Is this yours pen?"], 0, "your + pen."),
@@ -123,10 +123,10 @@ const possessives: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write about three people in your family and one thing each of them has (20 words or more). Use my, his, her and our." },
-      { universe: "screens", text: "Describe three characters from a game or series and their things (20 words or more). Use his, her and their." },
+      { text: "Write about two people in your family and one thing each of them has (15 words or more). Use my, his, her and our." },
+      { universe: "screens", text: "Describe three characters from a game or series and their things (15 words or more). Use his, her and their." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "his or her", pattern: "\\b(his|her)\\b", min: 2 },
       { label: "my, your, our or their", pattern: "\\b(my|your|our|their)\\b", min: 1 },
@@ -180,10 +180,10 @@ const thereIs: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Describe your town or neighbourhood (20 words or more). Use there is, there are and one negative." },
-      { universe: "screens", text: "Describe a level in a game (20 words or more). Use there is, there are and one negative." },
+      { text: "Describe your town or neighbourhood (15 words or more). Use there is, there are and one negative." },
+      { universe: "screens", text: "Describe a level in a game (15 words or more). Use there is, there are and one negative." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "There is / there's", pattern: "\\bthere is\\b|\\bthere's\\b", min: 1 },
       { label: "There are", pattern: "\\bthere are\\b", min: 1 },
@@ -202,7 +202,7 @@ const can: NodePractice = {
   steps: [
     [
       heard(X("04", "notice"), "What can the speaker do?", ["Swim and ride a bike", "Play the piano", "Dance"], 0, "'I can swim and I can ride a bike.'"),
-      heard(X("04", "notice"), "What can't the speaker do?", ["Play the piano", "Swim", "Cook"], 0, "'I can't play the piano.'"),
+      heard(X("04", "notice"), "What can't the speaker do?", ["Play the piano", "Ride a bike", "Cook"], 0, "'I can't play the piano.'"),
       heard(X("04", "notice"), "Who can sing very well?", ["The sister", "The speaker", "The friend"], 0, "'My sister can sing very well.'"),
       ch("I ___ swim.", ["can", "cans", "can to"], 0, "I can swim."),
       ch("She ___ play the guitar.", ["can", "cans", "can to"], 0, "She can (no -s)."),
@@ -238,10 +238,10 @@ const can: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write what you and your family can and can't do (20 words or more)." },
-      { universe: "science", text: "Write about three animals: what they can and can't do (20 words or more)." },
+      { text: "Write what you and your family can and can't do (15 words or more)." },
+      { universe: "science", text: "Write about three animals: what they can and can't do (15 words or more)." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "can + verb", pattern: "\\bcan\\s+(?!not\\b|'t)\\w+", min: 2 },
       { label: "can't or cannot", pattern: "\\bcan't\\b|\\bcannot\\b", min: 1 },
@@ -269,14 +269,14 @@ const presentSimple: NodePractice = {
       ch("___ you play an instrument?", ["Do", "Are", "Is"], 0, "Do you …?"),
       ch("Do you like rice? Yes, I ___.", ["do", "like", "am"], 0, "Yes, I do."),
       ch("They ___ TV in the evening.", ["watch", "watches", "watching"], 0, "They watch."),
-      ch("Which is a daily routine?", ["I brush my teeth every morning.", "I am in Spain now.", "I can swim."], 0, "Routine → present simple."),
+      ch("Which is a daily routine?", ["I brush my teeth every day.", "I am in Spain right now.", "I can swim very well."], 0, "Routine → present simple."),
     ],
     [
       gap("I", "my homework after school.", ["do"], "I do my homework."),
       gap("We don't", "on Sundays.", ["study", "work", "go to school"], "don't + verb."),
       tr("Make it a question.", "You walk to school.", ["Do you walk to school?"], "Do + you + verb?"),
       dict(X("05", "dict"), ["We play football at break"]),
-      say("I get up at seven and I go to school at half past seven.", "Your own morning."),
+      say("I get up at seven. I go to school at eight.", "Your own morning."),
     ],
     [
       es(fix(["I", "no", "eat meat."], 1, ["don't"], "I don't eat."), "Usa don't, no 'no'."),
@@ -295,10 +295,10 @@ const presentSimple: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write about a normal day for you and your family (20 words or more). Use I, we and one negative (don't)." },
-      { universe: "screens", text: "Write about you and your friends' free time (20 words or more): what do you play, watch and do? Use one negative." },
+      { text: "Write about a normal day for you and your family (15 words or more). Use I, we and one negative (don't)." },
+      { universe: "screens", text: "Write about you and your friends' free time (15 words or more): what do you play, watch and do? Use one negative." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "I or we + a verb", pattern: "\\b(I|we|they|you)\\s+(get|go|have|play|walk|watch|do|eat|drink|live|like|read|study|sleep|listen|take|make|brush|ride|swim|visit|help|clean|cook|come|see|talk|use|work|wake|start|finish)\\b", min: 3 },
       { label: "don't", pattern: "\\bdon't\\b|\\bdo not\\b", min: 1 },
@@ -352,10 +352,10 @@ const haveHas: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write about what people in your family have (20 words or more). Use have and has." },
-      { universe: "science", text: "Describe three animals and what they have: legs, wings, tails (20 words or more). Use have and has." },
+      { text: "Write about what people in your family have (15 words or more). Use have and has." },
+      { universe: "science", text: "Describe three animals and what they have: legs, wings, tails (15 words or more). Use have and has." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "have", pattern: "\\bhave\\b", min: 1 },
       { label: "has", pattern: "\\bhas\\b", min: 2 },
@@ -409,10 +409,10 @@ const questions: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write six questions to interview a new classmate (20 words or more). Use what, where, who, when, how old and how many." },
-      { universe: "screens", text: "Write six questions for your favourite YouTuber or game creator (20 words or more)." },
+      { text: "Write four questions to interview a new classmate (15 words or more). Use what, where, how old and how many." },
+      { universe: "screens", text: "Write four questions for your favourite YouTuber or game creator (15 words or more)." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "Different question words", pattern: "\\b(what|where|who|when|how old|how many)\\b", min: 4 },
       { label: "Question marks", pattern: "\\?", min: 4 },

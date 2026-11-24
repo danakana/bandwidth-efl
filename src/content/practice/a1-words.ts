@@ -55,7 +55,7 @@ const numbersTime: NodePractice = {
     ],
     [
       ctx("A tourist asks: 'What time is it, please?' It's 2:30.", "Best answer:", ["It's half past two.", "It's two and half.", "Are two thirty."], 0, "half past two (or two thirty)."),
-      ctx("You tell a friend the match is at 4:15.", "Best sentence:", ["The match is at quarter past four.", "The match is in quarter four.", "The match is at four and quarter."], 0, "quarter past four."),
+      ctx("The match: 4:15", "Best sentence:", ["It's at quarter past four.", "It's in quarter four.", "It's at four and quarter."], 0, "quarter past four."),
       ch("Your grandma is 80. She is ___.", ["eighty", "eighteen", "eigthy"], 0, "80 = eighty."),
       ch("Which is correct?", ["at seven o'clock", "in seven o'clock", "on seven o'clock"], 0, "at + time."),
       say("My phone number is three one five, four two six …", "Say a number one digit at a time."),
@@ -63,10 +63,10 @@ const numbersTime: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write your school timetable for one day with times (20 words or more): School starts at …, Break is at …" },
-      { universe: "science", text: "Write five facts with big numbers (20 words or more): how many days, legs, students, kilometres …" },
+      { text: "Write your school timetable for one day with times (15 words or more): School starts at …, Break is at …" },
+      { universe: "science", text: "Write five facts with big numbers (15 words or more): how many days, legs, students, kilometres …" },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "Times (o'clock, half past, quarter past, at 7:30)", pattern: "o'clock|half past|quarter (past|to)|\\bat\\s+\\d{1,2}(:\\d{2})?", min: 2 },
     ],
@@ -119,10 +119,10 @@ const daysWeather: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write your week (20 words or more): what do you do on Monday, Wednesday and Saturday? What's the weather like?" },
-      { universe: "science", text: "Write a weather report for three days (20 words or more): On Monday it's sunny …" },
+      { text: "Write your week (15 words or more): what do you do on Monday, Wednesday and Saturday? What's the weather like?" },
+      { universe: "science", text: "Write a weather report for three days (15 words or more): On Monday it's sunny …" },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "Days with on", pattern: "\\bon (monday|tuesday|wednesday|thursday|friday|saturday|sunday)s?\\b", min: 2 },
       { label: "Weather words", pattern: "\\b(sunny|rainy|cloudy|windy|hot|cold|warm|snowy|raining)\\b", min: 1 },
@@ -140,7 +140,7 @@ const house: NodePractice = {
   steps: [
     [
       heard(X("03", "notice"), "What is in the living room?", ["A sofa and a TV", "A bed and a lamp", "A fridge"], 0, "'There's a sofa and a TV.'"),
-      heard(X("03", "notice"), "Where is the kitchen?", ["Next to the living room", "Upstairs", "In the garden"], 0, "'The kitchen is next to the living room.'"),
+      heard(X("03", "notice"), "Where is the kitchen?", ["Next to the living room", "Upstairs, next to the bathroom", "In the garden"], 0, "'The kitchen is next to the living room.'"),
       heard(X("03", "notice"), "How many bedrooms are upstairs?", ["Two", "One", "Three"], 0, "'two bedrooms and a bathroom'"),
       ch("You cook in the ___.", ["kitchen", "bedroom", "bathroom"], 0, "Cook → kitchen."),
       ch("You sleep in the ___.", ["bedroom", "kitchen", "garden"], 0, "Sleep → bedroom."),
@@ -167,19 +167,19 @@ const house: NodePractice = {
       ord("The bathroom is next to my bedroom.", "The bathroom + is next to + my bedroom."),
     ],
     [
-      ctx("A visitor asks: 'Where's the bathroom, please?'", "Best answer:", ["It's upstairs, next to my bedroom.", "It's a bathroom.", "Yes, it is."], 0, "Give the place."),
+      ctx("A visitor asks: 'Where's the bathroom, please?'", "Best answer:", ["It's upstairs.", "It's a bathroom.", "Yes, it is."], 0, "Give the place."),
       ctx("You describe your favourite room. You read and sleep there.", "Best sentence:", ["My favourite room is my bedroom.", "My favourite room is the kitchen.", "My favourite room is the fridge."], 0, "Read and sleep → bedroom."),
       ch("Which is NOT a room?", ["sofa", "kitchen", "bathroom"], 0, "A sofa is furniture."),
-      ch("Which is correct?", ["between the bed and the desk", "between of the bed and the desk", "between the bed or the desk"], 0, "between A and B."),
+      ch("Which is correct?", ["between the bed and the desk", "between of the bed and desk", "between the bed or the desk"], 0, "between A and B."),
       say("In my house there's a small kitchen and a big living room.", "Describe your house."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Describe your house or flat (20 words or more). What rooms are there? What's in your bedroom?" },
-      { universe: "arts", text: "Design your dream house (20 words or more). What rooms and things are there?" },
+      { text: "Describe your house or flat (15 words or more). What rooms are there? What's in your bedroom?" },
+      { universe: "arts", text: "Design your dream house (15 words or more). What rooms and things are there?" },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "Rooms", pattern: "\\b(living room|kitchen|bedrooms?|bathrooms?|dining room|garden)\\b", min: 3 },
       { label: "Place words (next to, between, upstairs …)", pattern: "\\b(next to|between|upstairs|downstairs|in front of|behind)\\b", min: 1 },
@@ -196,7 +196,7 @@ const school: NodePractice = {
   es: "PE = educación física. Los idiomas llevan mayúscula: English, Spanish.",
   steps: [
     [
-      heard(X("04", "notice"), "What subjects are on Mondays?", ["Maths, English and science", "Art and music", "PE and history"], 0, "'On Mondays I have maths, English and science.'"),
+      heard(X("04", "notice"), "What subjects are on Mondays?", ["Maths, English and science", "Art, music and history", "PE and history"], 0, "'On Mondays I have maths, English and science.'"),
       heard(X("04", "notice"), "What is the favourite subject?", ["Art", "History", "Science"], 0, "'My favourite subject is art.'"),
       heard(X("04", "notice"), "When do they have PE?", ["On Wednesdays", "On Mondays", "Every day"], 0, "'We have PE on Wednesdays.'"),
       ch("You learn about numbers in ___.", ["maths", "art", "history"], 0, "Numbers → maths."),
@@ -225,18 +225,18 @@ const school: NodePractice = {
     ],
     [
       ctx("A new student asks: 'What's your favourite subject?'", "Best answer:", ["My favourite subject is science.", "My favourite is the science subject.", "Yes, science."], 0, "My favourite subject is …"),
-      ctx("You have music twice a week, on Tuesday and Thursday.", "Best sentence:", ["I have music on Tuesdays and Thursdays.", "I have music in Tuesday and Thursday.", "I have the music on Tuesday."], 0, "on Tuesdays and Thursdays."),
+      ctx("Music: Tuesday and Thursday.", "Best sentence:", ["I have music on Tuesdays.", "I have music in Tuesdays.", "I have the music on Tuesday."], 0, "on Tuesdays and Thursdays."),
       ch("Which is a subject?", ["geography", "breakfast", "garden"], 0, "geography."),
-      ch("Which is correct?", ["We don't have school on Sundays.", "We don't have the school in Sundays.", "We not have school on Sundays."], 0, "don't have + on Sundays."),
+      ch("Which is correct?", ["We don't have school on Sundays.", "We don't have school in Sundays.", "We not have school on Sundays."], 0, "don't have + on Sundays."),
       say("I love PE, but I don't like maths.", "Your favourite and least favourite."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write about your school week (20 words or more): your subjects, your favourite and why." },
-      { universe: "futures", text: "Invent a new school subject (20 words or more). What is it? When do you have it? Why is it good?" },
+      { text: "Write about your school week (15 words or more): your subjects, your favourite and why." },
+      { universe: "futures", text: "Invent a new school subject (15 words or more). What is it? When do you have it? Why is it good?" },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "Subjects", pattern: "\\b(maths|math|English|science|history|geography|art|music|PE|IT|Spanish)\\b", min: 3 },
       { label: "favourite", pattern: "\\bfavou?rite\\b", min: 1 },
@@ -281,7 +281,7 @@ const clothes: NodePractice = {
       ord("My new trainers are green.", "My new trainers + are + green."),
     ],
     [
-      ctx("Your friend asks about your school uniform. It's a white shirt and grey trousers.", "Best answer:", ["I wear a white shirt and grey trousers.", "I wear a shirt white and trousers grey.", "I wear white shirt and grey trouser."], 0, "Colour first; trousers is plural."),
+      ctx("Your uniform: a white shirt and grey trousers.", "Best answer:", ["I wear grey trousers.", "I wear trousers grey.", "I wear grey trouser."], 0, "Colour first; trousers is plural."),
       ctx("It's raining and cold.", "Best advice:", ["Wear a jacket!", "Wear shorts!", "Wear a swimsuit!"], 0, "Cold and rain → jacket."),
       ch("Which is correct?", ["These shoes are nice.", "This shoes is nice.", "These shoe are nice."], 0, "shoes → these … are."),
       ch("Which is NOT clothes?", ["a sofa", "a skirt", "a jumper"], 0, "A sofa is furniture."),
@@ -290,10 +290,10 @@ const clothes: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write what you and two friends are wearing today (20 words or more)." },
-      { universe: "arts", text: "Design clothes for a game character (20 words or more). What are they wearing? What colours?" },
+      { text: "Write what you and two friends are wearing today (15 words or more)." },
+      { universe: "arts", text: "Design clothes for a game character (15 words or more). What are they wearing? What colours?" },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "Clothes words", pattern: "\\b(t-shirts?|shirts?|jumpers?|jackets?|jeans|trousers|shorts|skirts?|dress(es)?|shoes|trainers|socks|hats?|caps?|coats?|uniform)\\b", min: 3 },
       { label: "wearing", pattern: "\\bwearing\\b", min: 1 },
@@ -338,7 +338,7 @@ const sports: NodePractice = {
       ord("In my free time I draw and read.", "In my free time + I draw + and read."),
     ],
     [
-      ctx("A friend asks: 'What do you do in your free time?'", "Best answer:", ["I play basketball and I read comics.", "I am free time.", "Yes, I do free time."], 0, "Say your hobbies."),
+      ctx("A friend asks: 'What do you do in your free time?'", "Best answer:", ["I play basketball.", "I am free time.", "Yes, I do free time."], 0, "Say your hobbies."),
       ctx("You want to invite a friend to the pool.", "Best sentence:", ["Do you want to go swimming?", "Do you want to play swimming?", "Do you want to do swimming?"], 0, "go swimming."),
       ch("Which is correct?", ["He does karate.", "He plays karate.", "He goes karate."], 0, "do karate."),
       ch("Which is correct?", ["They play video games.", "They do video games.", "They go video games."], 0, "play video games."),
@@ -347,10 +347,10 @@ const sports: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write about your sports and hobbies (20 words or more). Use play, go and do, and say when." },
-      { universe: "screens", text: "Write about your free time online and offline (20 words or more). Use play, go and do." },
+      { text: "Write about your sports and hobbies (15 words or more). Use play, go and do, and say when." },
+      { universe: "screens", text: "Write about your free time online and offline (15 words or more). Use play, go and do." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "play + sport, game or instrument", pattern: "\\bplay(s|ing)?\\s+(the\\s+)?\\w+", min: 1 },
       { label: "go + -ing", pattern: "\\bgo(es)?\\s+\\w+ing\\b", min: 1 },

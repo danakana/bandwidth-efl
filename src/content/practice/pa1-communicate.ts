@@ -1,15 +1,15 @@
 /* Pre-A1 Communicate. Five steps per skill. Original content for Bandwidth EFL. For teacher review. */
 import type { NodePractice } from "./types";
-import { ch, ctx, dict, es, fix, gap, heard, ord, say, tr } from "./helpers";
+import { ch, ctx, dict, es, est, fix, gap, heard, ord, say, tr } from "./helpers";
 
 const X = (n: string, k: string) => `p/pa1c-${n}-${k}.mp3`;
 
 export const PA1_COMMUNICATE_CLIPS: { file: string; script: string; voice: string }[] = [
   { file: X("01", "notice"), voice: "QW1sSL71Pw5oHbFDen25", script: "Hi! I'm Mia. What's your name? I'm Sam. Nice to meet you, Sam. Nice to meet you too. Bye, Mia! Goodbye! See you tomorrow." },
   { file: X("01", "dict"), voice: "bIHbv24MWmeRgasZH58o", script: "Nice to meet you." },
-  { file: X("02", "notice"), voice: "9hb1f7xQcMLB90qbYSY3", script: "Good morning, Mr Brown. Good morning, Leo. How are you? I'm fine, thank you. And you? I'm very well, thanks. Hi, Ana! How are you? I'm OK. I'm a bit tired." },
+  { file: X("02", "notice"), voice: "9hb1f7xQcMLB90qbYSY3", script: "Good morning, Mr Brown. Good morning, Leo. How are you? I'm fine, thank you. And you? I'm very well. Hi, Ana! How are you? I'm tired." },
   { file: X("02", "dict"), voice: "ideEOMYLgcyF9rr94ycz", script: "I'm fine, thank you. And you?" },
-  { file: X("03", "notice"), voice: "cgSgspJ2msm6clMCkdW9", script: "Excuse me, Miss. Can I go to the bathroom, please? Yes, you can. Miss, I don't understand. Can you repeat, please? Of course. How do you say 'lápiz' in English? Pencil." },
+  { file: X("03", "notice"), voice: "cgSgspJ2msm6clMCkdW9", script: "Miss, can I go to the bathroom, please? Yes, you can. Miss, can you repeat, please? Yes. How do you say lápiz in English? Pencil." },
   { file: X("03", "dict"), voice: "MAy1fRIg5hTqbhiwOUyh", script: "Can you repeat, please?" },
 ];
 
@@ -28,15 +28,15 @@ const hello: NodePractice = {
     ],
     [
       ch("'What's your name?' means:", ["¿Cómo te llamas?", "¿Cómo estás?", "¿Cuántos años tienes?"], 0, "What's your name? = ¿Cómo te llamas?"),
-      es(ch("You meet a new person. You say:", ["Nice to meet you.", "Good night.", "See you."], 0, "First time → Nice to meet you."), "Nice to meet you = mucho gusto."),
-      ch("Someone says 'Nice to meet you.' You answer:", ["Nice to meet you too.", "Yes, I am.", "Bye, too."], 0, "Nice to meet you too."),
+      es(est(ch("A new person. You say:", ["Nice to meet you.", "Good night, Mum.", "See you on Monday."], 0, "First time → Nice to meet you."), "Conoces a una persona nueva. ¿Qué dices?"), "Nice to meet you = mucho gusto."),
+      est(ch("'Nice to meet you.' You say:", ["Nice to meet you too.", "Yes, I am too.", "Good night to you too."], 0, "Nice to meet you too."), "Alguien te dice mucho gusto. ¿Qué respondes?"),
       ch("Which is correct?", ["My name is Leo.", "My name Leo.", "Me name is Leo."], 0, "My name is …"),
-      ch("You leave school. You say:", ["See you tomorrow!", "Nice to meet you!", "Good morning!"], 0, "Leaving → See you tomorrow!"),
+      est(ch("You go home. You say:", ["See you tomorrow!", "Nice to meet you!", "Good morning!"], 0, "Leaving → See you tomorrow!"), "Sales del colegio. ¿Qué dices?"),
     ],
     [
       gap("What's your", "?", ["name"], "What's your name?"),
       gap("Nice to", "you.", ["meet"], "Nice to meet you."),
-      tr("Say it another way.", "My name is Sam.", ["I'm Sam", "I am Sam"], "My name is Sam = I'm Sam."),
+      est(tr("Write it short.", "My name is Sam.", ["I'm Sam", "I am Sam"], "My name is Sam = I'm Sam."), "Escríbelo de otra forma, más corta."),
       dict(X("01", "dict"), ["Nice to meet you"]),
       say("Hi! I'm … What's your name?", "Say your own name."),
     ],
@@ -48,19 +48,19 @@ const hello: NodePractice = {
       ord("Nice to meet you too.", "Nice to meet you + too."),
     ],
     [
-      ctx("A new student sits next to you.", "Best first sentence:", ["Hi! I'm Lucas. What's your name?", "Bye! I'm Lucas.", "Good night! Your name?"], 0, "Hello + your name + question."),
-      ctx("Your friend says: 'Hi! I'm Eva. Nice to meet you.'", "Best answer:", ["Nice to meet you too, Eva.", "Yes, Eva.", "Goodbye, Eva."], 0, "Nice to meet you too."),
-      ctx("School ends. You go home.", "Best sentence:", ["Bye! See you tomorrow!", "Hello! Nice to meet you!", "Good morning!"], 0, "Leaving → Bye!"),
-      ch("Which is NOT a greeting?", ["Thank you.", "Hello.", "Good morning."], 0, "Thank you is not a greeting."),
+      est(ctx("A new student.", "Best first sentence:", ["Hi! I'm Lucas.", "Bye! I'm Lucas.", "Good night, Lucas."], 0, "Hello + your name."), "Llega un estudiante nuevo. Elige la mejor primera frase."),
+      est(ctx("'Hi! I'm Eva. Nice to meet you.'", "Best answer:", ["Nice to meet you too.", "Yes, I'm Eva too.", "Goodbye, see you."], 0, "Nice to meet you too."), "Eva te saluda. Elige la mejor respuesta."),
+      est(ctx("School ends.", "Best sentence:", ["Bye! See you!", "Hello! Nice to meet you!", "Good morning!"], 0, "Leaving → Bye!"), "Termina el colegio. Te vas a casa."),
+      est(ch("Which is NOT hello?", ["Thank you.", "Hello.", "Good morning."], 0, "Thank you is not a greeting."), "¿Cuál NO es un saludo?"),
       say("Hi! I'm Lucas. Nice to meet you.", "Smile and say it."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write a short conversation between you and a new friend (8 words or more). Say hello, names and goodbye." },
-      { universe: "screens", text: "Write a chat message to a new player in a game (8 words or more). Say hello and your name." },
+      { text: "Write a short chat with a new friend (6 words or more). Say hello and your name." },
+      { universe: "screens", text: "Write a message to a new player in a game (6 words or more). Say hello and your name." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "A greeting (hi, hello)", pattern: "\\b(hi|hello|good morning|good afternoon)\\b", min: 1 },
       { label: "Your name (I'm …, my name is …)", pattern: "\\bI'm\\b|\\bI am\\b|\\bmy name is\\b", min: 1 },
@@ -79,16 +79,16 @@ const howAreYou: NodePractice = {
     [
       heard(X("02", "notice"), "Who is Mr Brown talking to?", ["Leo", "Ana", "Sam"], 0, "'Good morning, Leo.'"),
       heard(X("02", "notice"), "How is Mr Brown?", ["Very well", "Tired", "Sad"], 0, "'I'm very well, thanks.'"),
-      heard(X("02", "notice"), "How is Ana?", ["A bit tired", "Very well", "Happy"], 0, "'I'm OK. I'm a bit tired.'"),
+      heard(X("02", "notice"), "How is Ana?", ["Tired", "Very well", "Happy"], 0, "'I'm tired.'"),
       ch("How ___ you?", ["are", "is", "am"], 0, "How are you?"),
       ch("I'm fine, ___.", ["thanks", "please", "sorry"], 0, "I'm fine, thanks."),
     ],
     [
-      ch("It is 8 a.m. You say:", ["Good morning.", "Good evening.", "Good night."], 0, "Morning → before 12."),
-      ch("It is 3 p.m. You say:", ["Good afternoon.", "Good morning.", "Good night."], 0, "After 12 → good afternoon."),
-      es(ch("'Good night' is for:", ["going to bed", "saying hello at 7 a.m.", "meeting someone new"], 0, "Good night = when you go to bed or leave at night."), "Good night se usa para despedirse en la noche."),
-      ch("Someone asks 'How are you?' Polite answer:", ["I'm fine, thanks. And you?", "Yes, I am.", "I'm twelve."], 0, "Answer and ask back."),
-      ch("You want to sleep. You are ___.", ["tired", "happy", "fine"], 0, "tired = cansado."),
+      ch("8:00 a.m.", ["Good morning.", "Good evening.", "Good night."], 0, "Morning → before 12."),
+      ch("3:00 p.m.", ["Good afternoon.", "Good morning.", "Good night."], 0, "After 12 → good afternoon."),
+      es(est(ch("Good night!", ["bed", "school", "lunch"], 0, "Good night = when you go to bed or leave at night."), "¿Cuándo dices Good night?"), "Good night se usa para despedirse en la noche."),
+      est(ch("'How are you?'", ["I'm fine, thanks.", "Yes, I am.", "I'm twelve years old."], 0, "Answer with how you feel."), "Te preguntan cómo estás. Elige la mejor respuesta."),
+      est(ch("Sleep! I'm ___.", ["tired", "happy", "fine"], 0, "tired = cansado."), "Quieres dormir. ¿Cómo estás?"),
     ],
     [
       gap("How", "you?", ["are"], "How are you?"),
@@ -100,24 +100,24 @@ const howAreYou: NodePractice = {
     [
       fix(["How", "is", "you?"], 1, ["are"], "How are you?"),
       es(fix(["I", "fine,", "thanks."], 1, ["am fine,", "'m fine,"], "I'm fine."), "Falta am: I'm fine."),
-      fix(["Good", "night!", "Have a nice day at school!"], 1, ["morning!"], "In the morning: Good morning."),
+      fix(["Good", "night!", "See you at school!"], 1, ["morning!", "morning"], "In the morning: Good morning."),
       ord("How are you today?", "How + are + you + today?"),
       ord("I am very well, thanks.", "I am + very well + thanks."),
     ],
     [
-      ctx("Your teacher says: 'Good morning! How are you?'", "Best answer:", ["Good morning! I'm fine, thank you.", "Good night! I'm fine.", "Yes, good."], 0, "Greet back and answer."),
-      ctx("Your friend looks sad.", "Best question:", ["Are you OK?", "Are you twelve?", "What's this?"], 0, "Are you OK?"),
-      ctx("You go to bed.", "You say to your family:", ["Good night!", "Good afternoon!", "Good morning!"], 0, "Bed → good night."),
-      ch("Which answer is friendly?", ["I'm great, thanks! And you?", "Fine.", "Why?"], 0, "Answer and ask back."),
+      est(ctx("'Good morning! How are you?'", "Best answer:", ["I'm fine, thank you.", "Good night! I'm fine.", "Yes, I am good."], 0, "Answer how you are."), "Tu profesora te saluda en la mañana. Elige la mejor respuesta."),
+      est(ctx("Your friend is sad.", "Best question:", ["Are you OK?", "Are you twelve?", "What's this?"], 0, "Are you OK?"), "Tu amigo está triste. Elige la mejor pregunta."),
+      est(ctx("Bed time.", "You say:", ["Good night!", "Good afternoon!", "Good morning!"], 0, "Bed → good night."), "Te vas a dormir. ¿Qué le dices a tu familia?"),
+      est(ch("Which is friendly?", ["Great! And you?", "Fine. Go away.", "Why? What is it?"], 0, "Answer and ask back."), "¿Cuál respuesta es amable?"),
       say("I'm OK, thanks. And you?", "Ask back with a smile."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write a short conversation with your teacher in the morning (8 words or more). Use good morning and how are you." },
-      { universe: "arts", text: "Write how three people in a picture feel (8 words or more): happy, sad, tired, fine." },
+      { text: "Write a short chat with your teacher (6 words or more). Use good morning and how are you." },
+      { universe: "arts", text: "Write how two people in a picture feel (6 words or more): happy, sad, tired, fine." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "How are you", pattern: "\\bhow are you\\b", min: 1 },
       { label: "A feeling (fine, OK, happy, tired …)", pattern: "\\b(fine|ok|okay|well|great|happy|sad|tired|good)\\b", min: 1 },
@@ -129,30 +129,30 @@ const howAreYou: NodePractice = {
 
 const classroom: NodePractice = {
   nodeId: "pa1.classroom-language",
-  explain: "Ask for help in class in English: Can I go to the bathroom, please? I don't understand. Can you repeat, please? How do you say 'lápiz' in English? What does 'pencil' mean? Can I have a pen, please?",
+  explain: "Ask for help in English class: Can I go to the bathroom, please? I don't understand. Can you repeat, please? How do you say lápiz in English? Can I have a pen, please?",
   pattern: ["Can I go to the bathroom, please?", "I don't understand.", "Can you repeat, please?", "How do you say … in English?", "What does … mean?"],
   es: "Estas frases te ayudan en todas tus clases de inglés. Usa please (por favor) y thank you (gracias).",
   steps: [
     [
       heard(X("03", "notice"), "Where does the student want to go?", ["To the bathroom", "Home", "To the board"], 0, "'Can I go to the bathroom, please?'"),
-      heard(X("03", "notice"), "What does the student ask the teacher to do?", ["Repeat", "Write", "Sit down"], 0, "'Can you repeat, please?'"),
+      heard(X("03", "notice"), "Can you ___, please?", ["repeat", "write", "sit down"], 0, "'Can you repeat, please?'"),
       heard(X("03", "notice"), "'Lápiz' in English is …", ["pencil", "pen", "paper"], 0, "'Pencil.'"),
-      ch("You don't know a word. You say:", ["I don't understand.", "I'm fine.", "Nice to meet you."], 0, "I don't understand."),
-      ch("Polite word:", ["please", "bye", "hello"], 0, "please = por favor."),
+      est(ch("A new word? You say:", ["I don't understand.", "I'm fine.", "Nice to meet you too."], 0, "I don't understand."), "No entiendes una palabra. ¿Qué dices?"),
+      est(ch("Can I go, ___?", ["please", "goodbye", "hello"], 0, "please = por favor."), "Completa la frase con la palabra amable."),
     ],
     [
-      ch("'Can you repeat, please?' means:", ["¿Puede repetir, por favor?", "¿Puedo ir al baño?", "No entiendo."], 0, "repeat = repetir."),
-      ch("You want the English word for 'ventana'. You ask:", ["How do you say 'ventana' in English?", "What is your ventana?", "Can I ventana?"], 0, "How do you say … in English?"),
-      ch("You want to know the meaning of 'ruler'. You ask:", ["What does 'ruler' mean?", "How are you, ruler?", "Ruler is what?"], 0, "What does … mean?"),
-      es(ch("Which is polite?", ["Can I have a pen, please?", "Give me pen.", "Pen!"], 0, "Can I have …, please?"), "Pide con Can I have … please?"),
-      ch("The teacher gives you a pencil. You say:", ["Thank you!", "Please!", "Sorry!"], 0, "Thank you."),
+      ch("'Can you repeat, please?' means:", ["¿Puede repetir, por favor?", "¿Puedo ir al baño, por favor?", "No entiendo."], 0, "repeat = repetir."),
+      est(ch("Ventana in English?", ["How do you say ventana?", "What is your ventana?", "Can I ventana, please?"], 0, "How do you say … in English?"), "Quieres saber cómo se dice ventana en inglés. ¿Qué preguntas?"),
+      est(ch("Ruler? You ask:", ["What does ruler mean?", "How are you, ruler?", "Ruler is what?"], 0, "What does … mean?"), "No sabes qué significa ruler. ¿Qué preguntas?"),
+      es(est(ch("Which is polite?", ["A pen, please.", "Give me a pen now.", "Pen now!"], 0, "Ask with please."), "¿Cuál es amable?"), "Pide con please."),
+      est(ch("Here's a pencil. You say:", ["Thank you!", "Please!", "I'm sorry!"], 0, "Thank you."), "La profesora te da un lápiz. ¿Qué dices?"),
     ],
     [
       gap("Can I go to the bathroom,", "?", ["please"], "… please?"),
       gap("I don't", ".", ["understand"], "I don't understand."),
       tr("Make it polite.", "Repeat!", ["Can you repeat, please?", "Can you repeat please?", "Repeat, please"], "Can you repeat, please?"),
       dict(X("03", "dict"), ["Can you repeat, please?", "Can you repeat please"]),
-      say("Excuse me, can I go to the bathroom, please?", "Polite and clear."),
+      say("Can I go to the bathroom, please?", "Polite and clear."),
     ],
     [
       es(fix(["I", "no", "understand."], 1, ["don't"], "I don't understand."), "No entiendo = I don't understand."),
@@ -162,19 +162,19 @@ const classroom: NodePractice = {
       ord("How do you say 'casa' in English?", "How do you say + 'casa' + in English?"),
     ],
     [
-      ctx("The teacher speaks very fast. You don't understand.", "Best sentence:", ["Sorry, can you repeat, please?", "Bye, teacher.", "I'm fine, thanks."], 0, "Ask politely to repeat."),
-      ctx("You need a pencil.", "Best sentence:", ["Can I have a pencil, please?", "I want pencil now.", "Pencil me."], 0, "Can I have …, please?"),
-      ctx("You want the English word for 'perro'.", "Best question:", ["How do you say 'perro' in English?", "What is perro you?", "Perro, English?"], 0, "How do you say … in English?"),
-      ch("Which is the most polite?", ["Excuse me, Miss. Can I ask a question?", "Hey you! Question!", "Miss, answer me."], 0, "Excuse me + can I …?"),
-      say("I don't understand. Can you repeat, please?", "Use this in every class."),
+      est(ctx("The teacher is very fast.", "Best sentence:", ["Can you repeat, please?", "Bye, teacher.", "I'm fine, thanks. And you?"], 0, "Ask politely to repeat."), "La profesora habla muy rápido. No entiendes."),
+      est(ctx("You need a pencil.", "Best sentence:", ["A pencil, please.", "I want pencil now.", "Pencil me now."], 0, "Ask with please."), "Necesitas un lápiz. Elige la mejor frase."),
+      est(ctx("Perro in English?", "Best question:", ["How do you say perro?", "What is perro you?", "Perro is what in English?"], 0, "How do you say … in English?"), "Quieres saber cómo se dice perro en inglés."),
+      est(ch("Which is polite?", ["Excuse me, Miss.", "Hey you!", "Miss, answer me!"], 0, "Excuse me = polite."), "¿Cuál es la forma amable de llamar a la profesora?"),
+      say("Can you repeat, please?", "Use this in every class."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write four questions you can ask in your English class (8 words or more)." },
-      { universe: "screens", text: "Write a message to a game helper: you don't understand something. Ask politely (8 words or more)." },
+      { text: "Write two questions for your English class (6 words or more). Use please." },
+      { universe: "screens", text: "Write to a game helper. You don't understand. Ask with please (6 words or more)." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "please", pattern: "\\bplease\\b", min: 1 },
       { label: "A classroom question (Can I …? Can you …? How do you say …?)", pattern: "\\bcan (I|you)\\b|\\bhow do you say\\b|\\bwhat does\\b", min: 2 },

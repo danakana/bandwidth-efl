@@ -10,7 +10,7 @@ export const A1_SOUNDS_ERRORS_CLIPS: { file: string; script: string; voice: stri
   { file: S("01", "dict"), voice: "QW1sSL71Pw5oHbFDen25", script: "My cousin is eighteen." },
   { file: S("02", "notice"), voice: "bIHbv24MWmeRgasZH58o", script: "This is a very big van. A berry is a small fruit. I have a vest and a best friend. Victor visits Bob every evening." },
   { file: S("02", "dict"), voice: "9hb1f7xQcMLB90qbYSY3", script: "This is a very big van." },
-  { file: S("03", "notice"), voice: "tPDVQaZ6fdDCUmYpHyYd", script: "My cat is black. My dog is big. I like my bed. The book is red. I want a hot drink and a cold milk." },
+  { file: S("03", "notice"), voice: "tPDVQaZ6fdDCUmYpHyYd", script: "My cat is black. My dog is big. I like my bed. The book is red. I want a hot drink and some cold milk." },
   { file: S("03", "dict"), voice: "cgSgspJ2msm6clMCkdW9", script: "The book is red." },
   { file: E("01", "notice"), voice: "MAy1fRIg5hTqbhiwOUyh", script: "This is my mum. She is a doctor. This is my dad. He is a cook. And this is our dog. It is very lazy!" },
   { file: E("01", "dict"), voice: "3f6pec3wODJsjTqtcNI2", script: "This is my dad. He is a cook." },
@@ -38,7 +38,7 @@ const teenTy: NodePractice = {
       ch("FIF-ty is …", ["50", "15", "5"], 0, "FIF-ty = 50."),
       ch("nine-TEEN is …", ["19", "90", "9"], 0, "nine-TEEN = 19."),
       ch("Which pair is easy to confuse?", ["14 and 40", "14 and 41", "4 and 44"], 0, "fourteen / forty."),
-      ch("To check a number, you can say:", ["Is that one-three or three-zero?", "Repeat louder!", "What?"], 0, "Say the digits to check."),
+      ch("To check a number, you can say:", ["Is that one-three?", "Repeat it louder now!", "What? What number?"], 0, "Say the digits to check."),
     ],
     [
       gap("13 = thir", "", ["teen"], "thirteen."),
@@ -56,7 +56,7 @@ const teenTy: NodePractice = {
     ],
     [
       ctx("Someone says 'It's at four FIFty.'", "What time is it?", ["4:50", "4:15", "5:40"], 0, "FIF-ty = 50."),
-      ctx("You aren't sure if you heard 13 or 30.", "Best question:", ["Sorry, is that one-three or three-zero?", "What number you say?", "Thirteen thirty?"], 0, "Check with digits."),
+      ctx("You aren't sure if you heard 13 or 30.", "Best question:", ["Sorry, is that one-three?", "What number you say?", "Thirteen or thirty, what?"], 0, "Check with digits."),
       ch("Which word has stress at the START?", ["ninety", "nineteen", "fourteen"], 0, "NINE-ty."),
       ch("Which word has stress at the END?", ["seventeen", "seventy", "sixty"], 0, "seven-TEEN."),
       say("I'm thirteen. My dad is forty.", "Hear the difference."),
@@ -64,10 +64,10 @@ const teenTy: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write ages and times with -teen and -ty numbers (20 words or more). Then read them aloud with the right stress." },
-      { universe: "science", text: "Write five facts with -teen and -ty numbers (20 words or more): temperatures, ages, distances." },
+      { text: "Write ages and times with -teen and -ty numbers (15 words or more). Then read them aloud with the right stress." },
+      { universe: "science", text: "Write five facts with -teen and -ty numbers (15 words or more): temperatures, ages, distances." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "-teen numbers", pattern: "\\b(thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen)\\b", min: 1 },
       { label: "-ty numbers", pattern: "\\b(twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\\b", min: 1 },
@@ -121,10 +121,10 @@ const bv: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write a silly sentence with many b and v words (20 words or more). Then say it slowly, then fast." },
-      { universe: "arts", text: "Write about a very beautiful picture (20 words or more). Use very, big, best, blue, violet." },
+      { text: "Write a silly sentence with many b and v words (15 words or more). Then say it slowly, then fast." },
+      { universe: "arts", text: "Write about a very beautiful picture (15 words or more). Use very, big, best, blue, violet." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "v words", pattern: "\\bv\\w+", min: 3 },
       { label: "b words", pattern: "\\bb\\w+", min: 3 },
@@ -143,16 +143,16 @@ const finalSounds: NodePractice = {
     [
       heard(S("03", "notice"), "What colour is the cat?", ["Black", "Red", "Big"], 0, "'My cat is black.'"),
       heard(S("03", "notice"), "What colour is the book?", ["Red", "Black", "Big"], 0, "'The book is red.'"),
-      heard(S("03", "notice"), "What does the speaker want?", ["A hot drink and a cold milk", "A big bed", "A red book"], 0, "'I want a hot drink and a cold milk.'"),
+      heard(S("03", "notice"), "What does the speaker want?", ["A hot drink and some milk", "A big bed and a book", "A red book"], 0, "'I want a hot drink and some cold milk.'"),
       ch("Which word ends with a consonant sound?", ["cat", "taco", "pizza"], 0, "ca-T."),
       ch("'bed' and 'bet' are …", ["different words", "the same word", "both colours"], 0, "The last sound changes the word."),
     ],
     [
-      es(ch("Which is the best way to say 'book'?", ["boo-K (short k at the end)", "boo-ke", "boo"], 0, "Say the k, no extra vowel."), "No agregues una 'e' al final."),
+      es(ch("Which is the best way to say 'book'?", ["book (short k)", "boo-ke (extra e)", "boo (no k)"], 0, "Say the k, no extra vowel."), "No agregues una 'e' al final."),
       ch("'cap' and 'cat' are different because of …", ["the last sound", "the first sound", "the vowel"], 0, "p vs t at the end."),
       ch("Which word ends in a /d/ sound?", ["red", "rat", "rag"], 0, "re-D."),
       ch("Which word ends in a /g/ sound?", ["big", "bit", "bin"], 0, "bi-G."),
-      ch("If you drop the last sound of 'milk', it sounds like …", ["mill", "milky", "mile"], 0, "milk - k ≈ mill."),
+      ch("milk - k ≈", ["mill", "milky", "mile"], 0, "milk - k ≈ mill."),
     ],
     [
       gap("My dog is", ". (grande)", ["big"], "big."),
@@ -178,10 +178,10 @@ const finalSounds: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write about your room or your pet (20 words or more) using words that end in t, d, k or g. Say them clearly." },
-      { universe: "science", text: "Write about animals (20 words or more): cat, dog, duck, frog, bat. Say every last sound." },
+      { text: "Write about your room or your pet (15 words or more) using words that end in t, d, k or g. Say them clearly." },
+      { universe: "science", text: "Write about animals (15 words or more): cat, dog, duck, frog, bat. Say every last sound." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "Words ending in t, d, k or g", pattern: "\\b\\w+[tdkg]\\b", min: 6 },
     ],
@@ -227,19 +227,19 @@ const heShe: NodePractice = {
       ord("This is my brother. He is ten.", "brother → he."),
     ],
     [
-      ctx("You introduce your mum to your teacher.", "Best sentences:", ["This is my mum. She's a nurse.", "This is my mum. He's a nurse.", "This is my mum. Is a nurse."], 0, "mum → she."),
-      ctx("You talk about your cousin Daniel.", "Best sentence:", ["Daniel is my cousin. He lives in Cali.", "Daniel is my cousin. She lives in Cali.", "Daniel is my cousin. Lives in Cali."], 0, "Daniel → he."),
+      ctx("This is my mum.", "Best next sentence:", ["She's a nurse.", "He's a nurse.", "Is a nurse."], 0, "mum → she."),
+      ctx("Daniel is my cousin.", "Best next sentence:", ["He lives in Cali.", "She lives in Cali.", "Lives in Cali."], 0, "Daniel → he."),
       ch("Which is correct?", ["My grandma and her dog.", "My grandma and his dog.", "My grandma and he dog."], 0, "grandma → her."),
-      ch("Which is correct?", ["My friend Julia is funny. She's my best friend.", "My friend Julia is funny. He's my best friend.", "My friend Julia is funny. Is my best friend."], 0, "Julia → she."),
+      ch("Which is correct?", ["Julia is funny. She's my friend.", "Julia is funny. He's my friend.", "Julia is funny. Is my friend."], 0, "Julia → she."),
       say("My sister is a dancer. She dances every day.", "she for your sister."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write about two women and two men in your family (20 words or more). Use she, he, her and his." },
-      { universe: "screens", text: "Describe two characters from a series (20 words or more), a woman and a man. Use she, he, her and his." },
+      { text: "Write about two women and two men in your family (15 words or more). Use she, he, her and his." },
+      { universe: "screens", text: "Describe two characters from a series (15 words or more), a woman and a man. Use she, he, her and his." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "she", pattern: "\\bshe\\b|\\bshe's\\b", min: 1 },
       { label: "he", pattern: "\\bhe\\b|\\bhe's\\b", min: 1 },
@@ -251,21 +251,21 @@ const heShe: NodePractice = {
 
 const noThe: NodePractice = {
   nodeId: "a1.no-the-for-things-in-general",
-  explain: "In Spanish we say 'Me gusta el fútbol' and 'Los perros son amigables'. In English, don't use 'the' for things in general: I like football. Dogs are friendly. Music is fun. Use 'the' for a specific thing: The music in this café is loud.",
+  explain: "In Spanish: Me gusta el fútbol. In English, no the for things in general: I like football. Dogs are friendly. Use the for one specific thing: The music in this café is loud.",
   pattern: ["I like football. (not 'the football')", "Dogs are friendly. (all dogs)", "Music is my favourite thing.", "The music in this café is loud. (this music)"],
   es: "Cuando hablas en general, sin 'the': I like music. Con 'the' hablas de algo específico.",
   steps: [
     [
       heard(E("02", "notice"), "What sport does the speaker like?", ["Football", "Tennis", "Basketball"], 0, "'I like football.'"),
       heard(E("02", "notice"), "What are friendly?", ["Dogs", "Cats", "Cafés"], 0, "'Dogs are friendly.'"),
-      heard(E("02", "notice"), "What is too loud?", ["The music in the café", "The dogs", "Football"], 0, "'The music in this café is too loud!'"),
+      heard(E("02", "notice"), "What is too loud?", ["The music in the café", "The dogs in the park", "Football"], 0, "'The music in this café is too loud!'"),
       es(ch("Which is correct?", ["I like football.", "I like the football.", "I like a football."], 0, "In general: no the."), "Me gusta el fútbol = I like football."),
-      ch("Which is correct?", ["Cats are cute.", "The cats are cute (all cats in the world).", "A cats are cute."], 0, "All cats → no the."),
+      ch("Which is correct?", ["Cats are cute.", "The cats is cute.", "A cats are cute."], 0, "All cats → no the."),
     ],
     [
       ch("Which is correct?", ["I love music.", "I love the music.", "I love musics."], 0, "Music in general → no the."),
       es(ch("Which is correct?", ["Apples are healthy.", "The apples are healthy (all apples).", "Apple are healthy."], 0, "In general → no the."), "Las manzanas en general = apples."),
-      ch("Which talks about a specific thing?", ["The pizza in this restaurant is great.", "Pizza is great.", "I like pizza."], 0, "This restaurant → the."),
+      ch("The ___ in this café is great.", ["pizza", "pizzas are", "a pizzas"], 0, "This café → the pizza."),
       ch("Which is correct?", ["English is easy for me.", "The English is easy for me.", "An English is easy."], 0, "Languages → no the."),
       ch("Which is correct?", ["I play basketball.", "I play the basketball.", "I play a basketball."], 0, "Sports → no the."),
     ],
@@ -284,19 +284,19 @@ const noThe: NodePractice = {
       ord("The music in this shop is loud.", "This shop → the."),
     ],
     [
-      ctx("You tell a new friend about your hobbies.", "Best sentence:", ["I love football and video games.", "I love the football and the video games.", "I love a football."], 0, "In general → no the."),
+      ctx("Your hobbies.", "Best sentence:", ["I love football.", "I love the football.", "I love a football."], 0, "In general → no the."),
       ctx("You are at a café. The cake is delicious.", "Best sentence:", ["The cake is delicious!", "Cake is delicious!", "A cake delicious!"], 0, "This cake → the."),
-      ch("Which is correct?", ["People are friendly here.", "The people are friendly (all people everywhere).", "People is friendly."], 0, "People in general."),
+      ch("Which is correct?", ["People are friendly.", "The people is friendly.", "People is friendly."], 0, "People in general."),
       ch("Which is correct?", ["Do you like music?", "Do you like the music?", "Do you like musics?"], 0, "In general."),
       say("I like dogs, but I don't like spiders.", "No the in general."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write about five things you like or don't like in general (20 words or more): sports, food, animals, music. No 'the'!" },
-      { universe: "science", text: "Write five facts about animals in general (20 words or more): Cats sleep a lot …" },
+      { text: "Write about three things you like or don't like in general (15 words or more): sports, food, animals, music. No 'the'!" },
+      { universe: "science", text: "Write five facts about animals in general (15 words or more): Cats sleep a lot …" },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "like / love / don't like + thing", pattern: "\\b(like|love|hate)\\s+(?!the\\b)\\w+", min: 3 },
     ],
@@ -349,10 +349,10 @@ const doQuestions: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write six questions with do for a new friend (20 words or more), and answer two of them." },
-      { universe: "screens", text: "Write six questions with do for a gamer (20 words or more): Do you play …? What games do you …?" },
+      { text: "Write four questions with do for a new friend (15 words or more), and answer one of them." },
+      { universe: "screens", text: "Write four questions with do for a gamer (15 words or more): Do you play …? What games do you …?" },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "Questions with do", pattern: "\\bdo\\s+(you|they|we|your|I)\\b[^?]*\\?", min: 4 },
     ],

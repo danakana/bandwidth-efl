@@ -5,7 +5,7 @@ import { ch, ctx, dict, es, fix, gap, heard, ord, say, tr } from "./helpers";
 const X = (n: string, k: string) => `p/a1c-${n}-${k}.mp3`;
 
 export const A1_COMMUNICATE_CLIPS: { file: string; script: string; voice: string }[] = [
-  { file: X("01", "notice"), voice: "cgSgspJ2msm6clMCkdW9", script: "Welcome to the sports club! What's your name? Daniel Soto. How do you spell your surname? S, O, T, O. How old are you? I'm twelve. Where do you live? In Pine Street. What's your phone number? It's three one two, five five five, eight four." },
+  { file: X("01", "notice"), voice: "cgSgspJ2msm6clMCkdW9", script: "Welcome to the sports club! What's your name? Daniel Soto. How do you spell Soto? S, O, T, O. How old are you? I'm twelve. Where do you live? In Pine Street." },
   { file: X("01", "dict"), voice: "9hb1f7xQcMLB90qbYSY3", script: "Where do you live? In Pine Street." },
   { file: X("02", "notice"), voice: "QW1sSL71Pw5oHbFDen25", script: "What's your favourite food? My favourite food is pasta. What about you? I love tacos. And what's your favourite singer? I really like Shakira. Me too!" },
   { file: X("02", "dict"), voice: "tPDVQaZ6fdDCUmYpHyYd", script: "My favourite food is pasta." },
@@ -49,7 +49,7 @@ const personalInfo: NodePractice = {
     ],
     [
       ctx("At a club, the receptionist asks: 'How do you spell your surname?' Your surname is Gil.", "Best answer:", ["G-I-L.", "Gil is.", "Yes, Gil."], 0, "Spell it with letters."),
-      ctx("Someone asks your email. It's luis.p@mail.com.", "How do you say it?", ["luis dot p at mail dot com", "luis point p arroba mail point com", "luis p mail com"], 0, "dot and at."),
+      ctx("Your email: luis@mail.com", "How do you say it?", ["luis at mail dot com", "luis arroba mail point com", "luis mail com"], 0, "dot and at."),
       ctx("You want to know where your new friend lives.", "Best question:", ["Where do you live?", "Where are you live?", "Where you live?"], 0, "Where do you live?"),
       ch("Which is personal information?", ["your address", "your favourite colour", "the weather"], 0, "Your address."),
       say("My phone number is three one two, five five five …", "Say a number one digit at a time."),
@@ -57,10 +57,10 @@ const personalInfo: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Write a short form about you (20 words or more): name, surname, age, where you live, school and an invented email." },
-      { universe: "screens", text: "Create a player profile for a game (20 words or more): name, age, city, team and an invented email." },
+      { text: "Write a short form about you (15 words or more): name, surname, age, where you live, school and an invented email." },
+      { universe: "screens", text: "Create a player profile for a game (15 words or more): name, age, city, team and an invented email." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "Name or surname", pattern: "\\b(name|surname)\\b", min: 1 },
       { label: "Where you live (I live in …)", pattern: "\\blive\\s+(in|at|on)\\b", min: 1 },
@@ -108,16 +108,16 @@ const favourites: NodePractice = {
       ctx("Your friend says: 'My favourite food is pizza.' You love pizza too.", "Best answer:", ["Me too!", "Me neither.", "Yes, it is."], 0, "Me too!"),
       ctx("Your friend says: 'I love winter.' You prefer summer.", "Best polite answer:", ["Really? I prefer summer.", "No, winter is terrible.", "Me too."], 0, "Really? I prefer …"),
       ctx("You want to know your friend's favourite YouTuber.", "Best question:", ["Who's your favourite YouTuber?", "What's your favourite YouTuber is?", "Who your favourite YouTuber?"], 0, "Who's your favourite …?"),
-      ch("Which is correct?", ["My favourite subjects are art and music.", "My favourite subject are art and music.", "My favourites subject is art."], 0, "Two subjects → subjects are."),
+      ch("Which is correct?", ["My favourite subjects are art and music.", "My favourite subject are art and music.", "My favourites subjects is art and music."], 0, "Two subjects → subjects are."),
       say("What's your favourite food? Really? Me too!", "A short chat."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write about five of your favourite things (20 words or more): food, colour, singer, sport, day." },
-      { universe: "screens", text: "Write a short chat with a friend about favourite games and series (20 words or more). Use Me too! or I prefer …" },
+      { text: "Write about three of your favourite things (15 words or more): food, colour, singer, sport, day." },
+      { universe: "screens", text: "Write a short chat with a friend about favourite games and series (15 words or more). Use Me too! or I prefer …" },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "favourite", pattern: "\\bfavou?rite\\b", min: 3 },
     ],
@@ -140,10 +140,10 @@ const cafe: NodePractice = {
       ch("How ___ is it?", ["much", "many", "old"], 0, "How much is it?"),
     ],
     [
-      es(ch("Which is more polite?", ["I'd like a water, please.", "I want water.", "Give me water."], 0, "I'd like … please."), "I'd like es más educado que I want."),
-      ch("The waiter says 'Anything else?' You don't want more. You say:", ["No, thank you.", "Yes, please.", "Here you are."], 0, "No, thank you."),
+      es(ch("Which is more polite?", ["I'd like water, please.", "I want water now.", "Give me water."], 0, "I'd like … please."), "I'd like es más educado que I want."),
+      ctx("'Anything else?' (You don't want more.)", "Best answer:", ["No, thank you.", "Yes, please.", "Here you are."], 0, "No, thank you."),
       ch("You give money to the person. You say:", ["Here you are.", "How much is it?", "Can I help you?"], 0, "Here you are."),
-      ch("'Can I help you?' is said by …", ["the person working in the shop", "the customer", "a friend at school"], 0, "The shop assistant."),
+      ch("'Can I help you?' is said by …", ["the shop worker", "the customer", "a friend at school"], 0, "The shop assistant."),
       ch("Which question asks the price?", ["How much is it?", "How many is it?", "What price you?"], 0, "How much is it?"),
     ],
     [
@@ -161,19 +161,19 @@ const cafe: NodePractice = {
       ord("How much is the water?", "How much + is + the water?"),
     ],
     [
-      ctx("At the school café, you want an apple.", "Best sentence:", ["Can I have an apple, please?", "Give me apple.", "I want an apple now."], 0, "Can I have …, please?"),
+      ctx("At the school café, you want an apple.", "Best sentence:", ["Can I have an apple, please?", "Give me an apple now.", "I want an apple now, OK?"], 0, "Can I have …, please?"),
       ctx("You don't know the price of the cake.", "Best question:", ["How much is the cake?", "How many is the cake?", "What cost cake?"], 0, "How much is …?"),
       ctx("The cashier gives you your change.", "Best sentence:", ["Thank you!", "Here you are.", "Can I help you?"], 0, "Thank you!"),
-      ch("Which is a full, polite order?", ["Hi! I'd like a lemonade, please.", "Lemonade.", "You, lemonade."], 0, "Hi + I'd like … please."),
+      ch("Which is a full, polite order?", ["I'd like a lemonade, please.", "Lemonade. Now.", "You! Give me lemonade."], 0, "Hi + I'd like … please."),
       say("Hi! I'd like a hot chocolate, please. How much is it?", "Order at a café."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write a conversation in a café (20 words or more) between you and the person working there. Order two things and ask the price." },
-      { universe: "screens", text: "Write a conversation in a game shop (20 words or more). Ask for two items and the price." },
+      { text: "Write a conversation in a café (15 words or more) between you and the person working there. Order two things and ask the price." },
+      { universe: "screens", text: "Write a conversation in a game shop (15 words or more). Ask for two items and the price." },
     ],
-    minWords: 20,
+    minWords: 15,
     checks: [
       { label: "A polite order (Can I have … / I'd like …)", pattern: "\\bcan I have\\b|\\bI'd like\\b|\\bI would like\\b", min: 1 },
       { label: "please", pattern: "\\bplease\\b", min: 1 },

@@ -1,7 +1,7 @@
 /* Pre-A1 Grammar. Five steps per skill. Original content for Bandwidth EFL. For teacher review.
    First band: very short sentences, lots of listening, Spanish notes (es) after a wrong answer. */
 import type { NodePractice } from "./types";
-import { ch, ctx, dict, es, fix, gap, heard, ord, say, tr } from "./helpers";
+import { ch, ctx, dict, es, est, fix, gap, heard, ord, say, tr } from "./helpers";
 
 const X = (n: string, k: string) => `p/pa1g-${n}-${k}.mp3`;
 
@@ -39,8 +39,8 @@ const be: NodePractice = {
       es(ch("Tom is a boy. ___ is ten.", ["He", "She", "It"], 0, "A boy → he."), "Para un niño: he."),
       es(ch("Sara is a girl. ___ is nine.", ["She", "He", "It"], 0, "A girl → she."), "Para una niña: she."),
       ch("This is my pencil. ___ is red.", ["It", "He", "She"], 0, "A thing → it."),
-      ch("What is the short form of 'I am'?", ["I'm", "Im", "I'am"], 0, "I am → I'm."),
-      ch("What is the short form of 'she is'?", ["she's", "shes", "she'is"], 0, "she is → she's."),
+      est(ch("I am = ___", ["I'm", "Im", "I'am"], 0, "I am → I'm."), "Elige la forma corta de I am."),
+      est(ch("she is = ___", ["she's", "shes", "she'is"], 0, "she is → she's."), "Elige la forma corta de she is."),
     ],
     [
       gap("I", "twelve.", ["am", "'m"], "I → am."),
@@ -57,19 +57,19 @@ const be: NodePractice = {
       ord("I am ten.", "I + am + age."),
     ],
     [
-      ctx("A new friend asks: 'What's your name?'", "Best answer:", ["I'm Leo.", "I Leo.", "Is Leo."], 0, "I'm + your name."),
-      ctx("You show a photo of your sister.", "Best sentence:", ["She is my sister.", "He is my sister.", "It is my sister."], 0, "A sister → she."),
-      ctx("You show your dog.", "Best sentence:", ["It is my dog.", "She my dog.", "I am my dog."], 0, "An animal → it."),
+      est(ctx("'What's your name?'", "Best answer:", ["I'm Leo.", "I Leo.", "Is Leo."], 0, "I'm + your name."), "Un amigo nuevo te pregunta tu nombre. Elige la mejor respuesta."),
+      est(ctx("A photo of your sister.", "Best sentence:", ["She is my sister.", "He is my sister.", "It is my sister."], 0, "A sister → she."), "Muestras una foto de tu hermana. Elige la mejor frase."),
+      est(ctx("Your dog.", "Best sentence:", ["It is my dog.", "She my dog.", "I am my dog."], 0, "An animal → it."), "Muestras tu perro. Elige la mejor frase."),
       ch("Which is correct?", ["You are nice.", "You is nice.", "You am nice."], 0, "you → are."),
       say("This is my friend. She is ten.", "Point and say it."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write about you and one person in your family (8 words or more). Use I am and he is or she is." },
-      { universe: "screens", text: "Write about you and your favourite game character (8 words or more). Use I am and he is, she is or it is." },
+      { text: "Write about you and one person in your family (6 words or more). Use I am and he is or she is." },
+      { universe: "screens", text: "Write about you and a game character (6 words or more). Use I am and he is or she is." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "I am or I'm", pattern: "\\bI am\\b|\\bI'm\\b", min: 1 },
       { label: "He is, she is or it is", pattern: "\\b(he|she|it) is\\b|\\b(he|she|it)'s\\b", min: 1 },
@@ -93,16 +93,16 @@ const thisIs: NodePractice = {
       ch("It ___ a book.", ["is", "am", "are"], 0, "It is."),
     ],
     [
-      ch("What is the short form of 'what is'?", ["what's", "whats", "what'is"], 0, "what is → what's."),
+      est(ch("what is = ___", ["what's", "whats", "what'is"], 0, "what is → what's."), "Elige la forma corta de what is."),
       es(ch("Which answer is correct?", ["It's a pen.", "Is a pen.", "A pen is."], 0, "Say 'It's a …'."), "No olvides It: It's a pen."),
-      ch("The ball is far away. You ask:", ["What is that?", "What is this?", "What this is?"], 0, "Far away → that."),
-      ch("The pencil is in your hand. You say:", ["This is my pencil.", "That is my pencil.", "It my pencil."], 0, "Near you → this."),
+      est(ch("The ball is far. You ask:", ["What is that?", "What is this?", "What this is?"], 0, "Far away → that."), "El balón está lejos. ¿Qué preguntas?"),
+      est(ch("A pencil in your hand:", ["This is my pencil.", "That is my pencil.", "It my pencil."], 0, "Near you → this."), "Tienes un lápiz en la mano. ¿Qué dices?"),
       ch("Which question is correct?", ["What's this?", "What this?", "This is what?"], 0, "What's this?"),
     ],
     [
       gap("What", "this?", ["is", "'s"], "What is this?"),
       gap("", "a chair.", ["It's", "It is"], "It's a chair."),
-      tr("Write it with a short form.", "It is a book.", ["It's a book"], "it is → it's."),
+      est(tr("Write it short.", "It is a book.", ["It's a book"], "it is → it's."), "Escríbelo con la forma corta."),
       dict(X("02", "dict"), ["What is this? It is a pencil", "What's this? It's a pencil", "What is this? It's a pencil"]),
       say("What's this? It's a pen.", "Up at the end of the question, down at the end of the answer."),
     ],
@@ -114,19 +114,19 @@ const thisIs: NodePractice = {
       ord("It is my book.", "It + is + my + book."),
     ],
     [
-      ctx("Your friend shows you a new thing and asks: 'What's this?'", "Best answer:", ["It's a phone.", "Is phone.", "Phone is."], 0, "It's a + thing."),
-      ctx("You see something far away.", "Best question:", ["What's that?", "What's this?", "What that?"], 0, "Far → that."),
-      ctx("You show your bag to a new friend.", "Best sentence:", ["This is my bag.", "Is my bag.", "This my bag is."], 0, "This is + my + thing."),
+      est(ctx("'What's this?'", "Best answer:", ["It's a phone.", "Is phone.", "Phone is."], 0, "It's a + thing."), "Tu amigo te muestra un teléfono y pregunta qué es. Elige la mejor respuesta."),
+      est(ctx("A thing far away.", "Best question:", ["What's that?", "What's this?", "What that?"], 0, "Far → that."), "Ves algo lejos. Elige la mejor pregunta."),
+      est(ctx("Your bag.", "Best sentence:", ["This is my bag.", "Is my bag.", "This my bag is."], 0, "This is + my + thing."), "Muestras tu maleta a un amigo. Elige la mejor frase."),
       ch("Which is correct?", ["It's an apple.", "It's a apple.", "Is an apple."], 0, "It's an apple."),
       say("This is my bag. It's blue.", "Show your bag and say it."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Look at your desk. Write about three things (8 words or more). Use This is … and It's …" },
-      { universe: "arts", text: "Draw three things, then write about them (8 words or more). Use This is … and It's …" },
+      { text: "Look at your desk. Write about two things (6 words or more). Use This is … and It's …" },
+      { universe: "arts", text: "Draw two things. Write about them (6 words or more). Use This is … and It's …" },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "This is …", pattern: "\\bthis is\\b", min: 1 },
       { label: "It is or It's", pattern: "\\bit is\\b|\\bit's\\b", min: 1 },
@@ -180,10 +180,10 @@ const aAn: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "What is in your bag? Write a list (8 words or more). Use a, an and some plurals." },
-      { universe: "science", text: "Count animals in a picture or outside. Write what you see (8 words or more). Use a, an and plurals." },
+      { text: "What is in your bag? Write a list (6 words or more). Use a, an and two or three things." },
+      { universe: "science", text: "Look at animals in a picture. Write what you see (6 words or more). Use a, an and two or three." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "a or an", pattern: "\\b(a|an)\\b", min: 2 },
       { label: "A plural (two cats, three pens …)", pattern: "\\b(two|three|four|five|six|seven|eight|nine|ten|\\d+)\\s+\\w+s\\b", min: 1 },
@@ -228,8 +228,8 @@ const adjective: NodePractice = {
       ord("She has a small dog.", "a + small + dog."),
     ],
     [
-      ctx("You describe your new bike. It is blue.", "Best sentence:", ["I have a blue bike.", "I have a bike blue.", "I have a blues bike."], 0, "a + blue + bike."),
-      ctx("Your friend has two black shoes.", "Best sentence:", ["She has two black shoes.", "She has two blacks shoes.", "She has two shoes black."], 0, "black never changes."),
+      est(ctx("Your bike is blue.", "Best sentence:", ["I have a blue bike.", "I have a bike blue.", "I have a blues bike."], 0, "a + blue + bike."), "Tu bicicleta es azul. Elige la mejor frase."),
+      est(ctx("Her shoes are black.", "Best sentence:", ["She has two black shoes.", "She has two blacks shoes.", "She has two shoes black."], 0, "black never changes."), "Los zapatos de tu amiga son negros. Elige la mejor frase."),
       ch("Which is correct?", ["The sky is blue.", "The sky blue is.", "The sky is a blue."], 0, "The sky is blue."),
       ch("Which is correct?", ["a big red ball", "a ball big red", "a red ball big"], 0, "Size and colour go before ball."),
       say("I have a big green bag.", "Describe your bag."),
@@ -237,10 +237,10 @@ const adjective: NodePractice = {
   ],
   create: {
     prompts: [
-      { text: "Describe three things in your room (8 words or more). Put a colour or size word before each thing." },
-      { universe: "arts", text: "Describe a picture you like (8 words or more). Use colour words before the things." },
+      { text: "Write about two things in your room (6 words or more). Put a colour or big or small before each thing." },
+      { universe: "arts", text: "Write about a picture (6 words or more). Put colour words before the things." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "A colour or size word before a thing", pattern: "\\b(a|an|my|two|three)\\s+(big|small|red|blue|green|yellow|black|white|brown|pink|orange|purple|grey|gray)\\s+\\w+", min: 2 },
     ],
@@ -284,19 +284,19 @@ const like: NodePractice = {
       ord("I don't like spiders.", "I + don't + like + …"),
     ],
     [
-      ctx("Your friend asks: 'Do you like music?' You love music.", "Best answer:", ["Yes, I do!", "Yes, I like.", "Yes, I am."], 0, "Yes, I do."),
-      ctx("You don't like cold water.", "Best sentence:", ["I don't like cold water.", "I no like cold water.", "I not like cold water."], 0, "I don't like …"),
-      ctx("You want to know about your friend's pet.", "Best question:", ["Do you like cats?", "You like cats?", "Like you cats?"], 0, "Do you like …?"),
+      est(ctx("'Do you like music?' (You like music.)", "Best answer:", ["Yes, I do!", "Yes, I like.", "Yes, I am."], 0, "Yes, I do."), "Te preguntan si te gusta la música. Te gusta mucho. Elige la mejor respuesta."),
+      est(ctx("Cold water? No!", "Best sentence:", ["I don't like cold water.", "I no like cold water.", "I not like cold water."], 0, "I don't like …"), "No te gusta el agua fría. Elige la mejor frase."),
+      est(ctx("Ask your friend about cats.", "Best question:", ["Do you like cats?", "You like cats?", "Like you cats?"], 0, "Do you like …?"), "Quieres saber si a tu amigo le gustan los gatos. Elige la mejor pregunta."),
       ch("Which is correct?", ["No, I don't.", "No, I not.", "No, I no."], 0, "No, I don't."),
       say("Do you like football? Yes, I do!", "Ask and answer."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write three things you like and two things you don't like (8 words or more)." },
-      { universe: "screens", text: "Write about games, videos and music: what you like and what you don't like (8 words or more)." },
+      { text: "Write two things you like and one thing you don't like (6 words or more)." },
+      { universe: "screens", text: "Games, videos, music: write what you like and don't like (6 words or more)." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "I like", pattern: "\\bI like\\b", min: 2 },
       { label: "I don't like", pattern: "\\bI (don't|do not) like\\b", min: 1 },
@@ -323,7 +323,7 @@ const have: NodePractice = {
       ch("Which is correct?", ["I have two brothers.", "I am two brothers.", "I have two brother."], 0, "I have + two + brothers."),
       es(ch("Which is correct?", ["I don't have a phone.", "I no have a phone.", "I not have a phone."], 0, "I don't have."), "No tengo = I don't have."),
       ch("___ you have a pet?", ["Do", "Are", "Have"], 0, "Do you have …?"),
-      ch("Do you have a pet? Yes, I ___.", ["do", "have", "am"], 0, "Yes, I do."),
+      ch("A pet? Yes, I ___.", ["do", "have", "am"], 0, "Yes, I do."),
       ch("Which is correct?", ["I have a red pen.", "I have a pen red.", "I red have a pen."], 0, "a + red + pen."),
     ],
     [
@@ -341,19 +341,19 @@ const have: NodePractice = {
       ord("Do you have a bike?", "Do + you + have + …?"),
     ],
     [
-      ctx("Your new friend asks: 'Do you have brothers?' You have one.", "Best answer:", ["Yes, I have one brother.", "Yes, I am one brother.", "Yes, I have one brothers."], 0, "I have one brother."),
-      ctx("You don't have a phone.", "Best sentence:", ["I don't have a phone.", "I no have phone.", "I haven't phone."], 0, "I don't have a phone."),
+      est(ctx("'Do you have a brother?'", "Best answer:", ["Yes, I have one.", "Yes, I am one.", "Yes, I has one."], 0, "I have one."), "Te preguntan si tienes un hermano. Tienes uno. Elige la mejor respuesta."),
+      est(ctx("A phone? No.", "Best sentence:", ["I don't have a phone.", "I no have a phone.", "I not have a phone."], 0, "I don't have a phone."), "No tienes teléfono. Elige la mejor frase."),
       ch("Which question is correct?", ["Do you have a pet?", "You have a pet?", "Have you a pet?"], 0, "Do you have …?"),
       ch("Which is correct?", ["I have three cats.", "I have three cat.", "I have a three cats."], 0, "three → cats."),
-      say("Do you have a pet? Yes, I do. I have a dog.", "Ask and answer."),
+      say("Do you have a pet? Yes, I do.", "Ask and answer."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write about your family and pets (8 words or more). Use I have and I don't have." },
-      { universe: "screens", text: "Write about the things you have for games and school (8 words or more). Use I have and I don't have." },
+      { text: "Write about your family and pets (6 words or more). Use I have and I don't have." },
+      { universe: "screens", text: "Write about your school things (6 words or more). Use I have and I don't have." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "I have", pattern: "\\bI have\\b", min: 1 },
       { label: "I don't have", pattern: "\\bI (don't|do not) have\\b", min: 1 },
@@ -378,9 +378,9 @@ const place: NodePractice = {
     ],
     [
       ch("The milk is ___ the fridge. (inside)", ["in", "on", "under"], 0, "Inside → in."),
-      ch("___ is my bag? It's on the chair.", ["Where", "What", "Who"], 0, "Where for place."),
-      es(ch("The book is on the desk. Where is the book?", ["On top of the desk", "Inside the desk", "Below the desk"], 0, "on = on top."), "on = encima."),
-      ch("The cat is under the table. Where is the cat?", ["Below the table", "On the table", "In the table"], 0, "under = below."),
+      ch("___ is my bag? On the chair.", ["Where", "What", "Who"], 0, "Where for place."),
+      es(est(ch("The book is on the desk.", ["on top", "inside", "below"], 0, "on = on top."), "¿Dónde está el libro?"), "on = encima."),
+      est(ch("The cat is under the table.", ["below", "on top", "inside"], 0, "under = below."), "¿Dónde está el gato?"),
       ch("Which is correct?", ["Where is my phone?", "Where my phone is?", "Where is phone my?"], 0, "Where is + my + thing?"),
     ],
     [
@@ -398,19 +398,19 @@ const place: NodePractice = {
       ord("Where is the cat?", "Where + is + the cat?"),
     ],
     [
-      ctx("Mum asks: 'Where is your pencil?' It is inside your bag.", "Best answer:", ["It's in my bag.", "It's on my bag.", "It's under my bag."], 0, "Inside → in."),
-      ctx("Your friend can't find the ball. It is below the car.", "Best answer:", ["It's under the car.", "It's in the car.", "It's on the car."], 0, "Below → under."),
-      ctx("You put your book on top of the desk.", "Best sentence:", ["My book is on the desk.", "My book is in the desk.", "My book is under the desk."], 0, "On top → on."),
+      est(ctx("'Where is your pencil?' (in your bag)", "Best answer:", ["It's in my bag.", "It's on my bag.", "It's under my bag."], 0, "Inside → in."), "Tu mamá pregunta dónde está tu lápiz. Está dentro de tu maleta."),
+      est(ctx("'Where is the ball?' (under the car)", "Best answer:", ["It's under the car.", "It's in the car.", "It's on the car."], 0, "Below → under."), "Tu amigo busca el balón. Está debajo del carro."),
+      est(ctx("Your book: on top of the desk.", "Best sentence:", ["It's on the desk.", "It's in the desk.", "It's under the desk."], 0, "On top → on."), "Tu libro está encima del escritorio. Elige la mejor frase."),
       ch("Which question is correct?", ["Where are my shoes?", "Where is my shoes?", "Where my shoes?"], 0, "shoes (plural) → are."),
       say("The cat is under the bed.", "Say it clearly: un-der."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write where four things are in your room (8 words or more). Use in, on and under." },
-      { universe: "screens", text: "Hide a treasure in a game level. Write where things are (8 words or more). Use in, on and under." },
+      { text: "Write where three things are in your room (6 words or more). Use in, on and under." },
+      { universe: "screens", text: "Hide a treasure in a game. Write where things are (6 words or more). Use in, on and under." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "in, on or under", pattern: "\\b(in|on|under)\\s+(the|my|a)\\b", min: 3 },
     ],

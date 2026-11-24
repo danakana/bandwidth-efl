@@ -4,6 +4,7 @@ import type { Item } from "../../content/practice/types";
 import { ItemView, type Verdict } from "./Items";
 import { Icon } from "../../components/Icon";
 import { useSpanish } from "../../lib/spanish";
+import { ES_PROMPTS } from "../../content/practice/helpers";
 
 /** Runs a list of items one at a time with instant feedback, then reports the score. */
 export function Session({ items, label, onDone, onItem, esRule }: { items: Item[]; label: string; onDone: (score: number, total: number) => void; onItem?: (item: Item, v: Verdict) => void; esRule?: string }) {
@@ -12,6 +13,8 @@ export function Session({ items, label, onDone, onItem, esRule }: { items: Item[
   const [verdict, setVerdict] = useState<Verdict | null>(null);
   const [es] = useSpanish();
   const item = items[i];
+  // The task in Spanish: the item's own version, or the stock translation of its instruction.
+  const esTask = item.esTask ?? ES_PROMPTS[item.prompt];
   const last = i === items.length - 1;
 
   function next() {
@@ -29,7 +32,8 @@ export function Session({ items, label, onDone, onItem, esRule }: { items: Item[
       <AnimatePresence mode="wait">
         <motion.div key={i} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2 }}>
           <ItemView item={item} onAnswer={(v) => { setVerdict(v); setScore((s) => s + v.score); onItem?.(item, v); }} />
-          {/* Before answering, only the skill's rule: item notes would give the answer away. */}
+          {/* Before answering: the task and the skill's rule only. Item notes would give the answer away. */}
+          {es && !verdict && esTask && <p className="px-es-hint" lang="es"><strong>Tarea:</strong> {esTask}</p>}
           {es && !verdict && esRule && <p className="px-es-hint" lang="es"><strong>Recuerda:</strong> {esRule}</p>}
         </motion.div>
       </AnimatePresence>

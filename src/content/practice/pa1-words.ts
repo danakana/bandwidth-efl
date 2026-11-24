@@ -1,6 +1,6 @@
 /* Pre-A1 Words. Five steps per skill. Original content for Bandwidth EFL. For teacher review. */
 import type { NodePractice } from "./types";
-import { ch, ctx, dict, es, fix, gap, heard, ord, say, tr } from "./helpers";
+import { ch, ctx, dict, es, est, fix, gap, heard, ord, say, tr } from "./helpers";
 
 const X = (n: string, k: string) => `p/pa1w-${n}-${k}.mp3`;
 
@@ -13,7 +13,7 @@ export const PA1_WORDS_CLIPS: { file: string; script: string; voice: string }[] 
   { file: X("03", "dict"), voice: "63T2Z5X6a8FKjTpmpqjH", script: "The star is yellow." },
   { file: X("04", "notice"), voice: "8DvnqWWA3WWXixOm7zQI", script: "Good morning, class. Sit down, please. Open your books. Take a pencil and a ruler. Listen and repeat. Close your books. Stand up!" },
   { file: X("04", "dict"), voice: "QW1sSL71Pw5oHbFDen25", script: "Take a pencil and a ruler." },
-  { file: X("05", "notice"), voice: "bIHbv24MWmeRgasZH58o", script: "This is my family. This is my mum and this is my dad. This is my grandpa. He has white hair and big ears. My baby sister has small hands and big eyes." },
+  { file: X("05", "notice"), voice: "bIHbv24MWmeRgasZH58o", script: "This is my mum and this is my dad. This is my grandpa. He has white hair and big ears. My baby sister has small hands." },
   { file: X("05", "dict"), voice: "9hb1f7xQcMLB90qbYSY3", script: "This is my mum and this is my dad." },
   { file: X("06", "notice"), voice: "cgSgspJ2msm6clMCkdW9", script: "At the farm there is a horse, a cow and three chickens. The dog eats meat. The rabbit eats carrots. For lunch I have rice, chicken and an orange juice." },
   { file: X("06", "dict"), voice: "tPDVQaZ6fdDCUmYpHyYd", script: "The rabbit eats carrots." },
@@ -21,7 +21,7 @@ export const PA1_WORDS_CLIPS: { file: string; script: string; voice: string }[] 
 
 const alphabet: NodePractice = {
   nodeId: "pa1.the-alphabet-and-spelling",
-  explain: "Learn the names of the English letters so you can spell your name. Some letters sound very different from Spanish: A (ei), E (ii), I (ai), G (yii), J (yei), H (eich), R (ar), Y (uai). Ask 'How do you spell it?'",
+  explain: "Learn the English letters. Then you can spell your name. Some letters are very different from Spanish: A (ei), E (ii), I (ai), J (yei), H (eich), Y (uai). Ask: How do you spell it?",
   pattern: ["A B C D E F G", "H I J K L M N", "O P Q R S T U", "V W X Y Z", "How do you spell it? K-A-T-E."],
   es: "Ojo: la A se dice /ei/, la E se dice /i/, la I se dice /ai/. Son diferentes al español.",
   steps: [
@@ -30,21 +30,21 @@ const alphabet: NodePractice = {
       heard(X("01", "notice"), "What is her friend's name?", ["Ben", "Ben's", "Pen"], 0, "'B, E, N. Ben.'"),
       ch("Which letter comes after A?", ["B", "C", "D"], 0, "A, B, C …"),
       ch("Which letter comes after X?", ["Y", "Z", "W"], 0, "… X, Y, Z."),
-      ch("How do you ask about spelling?", ["How do you spell it?", "How you spell?", "What spell?"], 0, "How do you spell it?"),
+      est(ch("Which question is correct?", ["How do you spell it?", "How you spell it?", "What you spell it?"], 0, "How do you spell it?"), "¿Cómo preguntas por las letras de una palabra?"),
     ],
     [
-      es(ch("The letter E sounds like:", ["ii (as in 'see')", "e (as in Spanish 'mesa')", "ai (as in 'my')"], 0, "E = /iː/."), "La E en inglés suena como 'i'."),
-      es(ch("The letter I sounds like:", ["ai (as in 'my')", "ii (as in 'see')", "e (as in 'pen')"], 0, "I = /aɪ/."), "La I en inglés suena como 'ai'."),
-      es(ch("The letter A sounds like:", ["ei (as in 'day')", "a (as in Spanish 'casa')", "ii (as in 'see')"], 0, "A = /eɪ/."), "La A en inglés suena como 'ei'."),
-      ch("How many letters are in the English alphabet?", ["26", "27", "24"], 0, "26 letters: no ñ."),
-      ch("Which letter is a vowel?", ["O", "P", "T"], 0, "A, E, I, O, U are vowels."),
+      es(est(ch("E =", ["ii", "e", "ai"], 0, "E sounds like ii, as in see."), "¿Cómo suena la letra E en inglés?"), "La E en inglés suena como 'i'."),
+      es(est(ch("I =", ["ai", "ii", "e"], 0, "I sounds like ai, as in my."), "¿Cómo suena la letra I en inglés?"), "La I en inglés suena como 'ai'."),
+      es(est(ch("A =", ["ei", "a", "ii"], 0, "A sounds like ei, as in day."), "¿Cómo suena la letra A en inglés?"), "La A en inglés suena como 'ei'."),
+      est(ch("How many letters? A to Z", ["26", "27", "24"], 0, "26 letters: no ñ."), "¿Cuántas letras tiene el alfabeto inglés?"),
+      est(ch("A, E, I, ___, U", ["O", "P", "T"], 0, "A, E, I, O, U are vowels."), "Completa las vocales."),
     ],
     [
       gap("A, B, C, D,", ", F", ["E", "e"], "A B C D E F."),
       gap("X, Y,", "", ["Z", "z"], "X Y Z."),
       tr("Write the name.", "M-A-R-Y", ["Mary"], "M-A-R-Y = Mary."),
       dict(X("01", "dict"), ["My name is Ben. B, E, N", "My name is Ben B E N", "My name is Ben. BEN", "My name is Ben"]),
-      say("My name is … How do you spell it?", "Say your name, then spell it."),
+      say("My name is … (spell it)", "Say your name, then spell it."),
     ],
     [
       fix(["A, B, C,", "F,", "E"], 1, ["D,", "D"], "A, B, C, D, E."),
@@ -54,19 +54,19 @@ const alphabet: NodePractice = {
       ord("My name is Pablo.", "My name + is + Pablo."),
     ],
     [
-      ctx("Your teacher asks: 'How do you spell your name?' Your name is Ana.", "Best answer:", ["A-N-A.", "Ana is.", "Yes, I do."], 0, "Say the letters: A-N-A."),
-      ctx("You don't know how to write a word.", "Best question:", ["How do you spell it?", "What is it spell?", "Spell how?"], 0, "How do you spell it?"),
-      ch("Which name starts with the letter J?", ["James", "Gina", "Henry"], 0, "J → James."),
-      ch("Which name starts with the letter G?", ["Grace", "James", "Kevin"], 0, "G → Grace."),
+      est(ctx("'How do you spell your name?' (Ana)", "Best answer:", ["A-N-A.", "Ana is.", "Yes, I do."], 0, "Say the letters: A-N-A."), "Te llamas Ana. La profesora pregunta cómo se escribe tu nombre."),
+      est(ctx("A new word. How do you write it?", "Best question:", ["How do you spell it?", "What is it spell?", "How it spell you?"], 0, "How do you spell it?"), "No sabes cómo se escribe una palabra. Elige la mejor pregunta."),
+      ch("Which name starts with J?", ["James", "Gina", "Henry"], 0, "J → James."),
+      ch("Which name starts with G?", ["Grace", "James", "Kevin"], 0, "G → Grace."),
       say("A, E, I, O, U", "The five vowels in English."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write your name and the names of two friends, and spell them with dashes (8 words or more). Example: My name is Kate: K-A-T-E." },
-      { universe: "screens", text: "Write the names of three games or apps you know and spell them with dashes (8 words or more)." },
+      { text: "Write your name and a friend's name. Spell them (6 words or more). Example: My name is Kate: K-A-T-E." },
+      { universe: "screens", text: "Write the names of two games or apps. Spell them (6 words or more)." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "A spelled word (K-A-T-E)", pattern: "\\b[A-Za-z](-[A-Za-z]){2,}\\b", min: 2 },
     ],
@@ -100,7 +100,7 @@ const numbers: NodePractice = {
       gap("I am", "years old. (10)", ["ten"], "10 = ten."),
       tr("Write the number in words.", "14", ["fourteen"], "14 = fourteen."),
       dict(X("02", "dict"), ["There are twenty students in my class", "There are 20 students in my class"]),
-      say("one, two, three, four, five, six, seven, eight, nine, ten", "Count clearly."),
+      say("one, two, three, four, five", "Count clearly."),
     ],
     [
       fix(["I am", "twelf", "years old."], 1, ["twelve"], "12 = twelve."),
@@ -110,19 +110,19 @@ const numbers: NodePractice = {
       ord("Open your books at page ten.", "Open your books + at page + ten."),
     ],
     [
-      ctx("Someone asks: 'How old are you?' You are 11.", "Best answer:", ["I'm eleven.", "I have eleven.", "I'm eleven years."], 0, "I'm eleven (or I'm eleven years old)."),
-      ctx("You have 2 dogs and 1 cat.", "How many pets?", ["three", "two", "four"], 0, "2 + 1 = 3."),
+      est(ctx("'How old are you?' (11)", "Best answer:", ["I'm eleven.", "I have eleven.", "I'm eleven years."], 0, "I'm eleven (or I'm eleven years old)."), "Te preguntan tu edad. Tienes 11 años."),
+      est(ctx("2 dogs + 1 cat", "How many pets?", ["three", "two", "four"], 0, "2 + 1 = 3."), "Tienes 2 perros y 1 gato. ¿Cuántas mascotas?"),
       ch("Which is correct?", ["two cats", "two cat", "twos cats"], 0, "two + cats."),
-      ch("Which is bigger?", ["nineteen", "nine", "eleven"], 0, "19 is the biggest."),
+      ch("Which is 19?", ["nineteen", "nine", "ninety"], 0, "19 = nineteen."),
       say("I'm thirteen. My sister is sixteen.", "Stress the -teen: thir-TEEN."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write numbers about you (8 words or more): your age, how many people in your family, how many pets." },
-      { universe: "science", text: "Count things in your classroom and write the numbers in words (8 words or more)." },
+      { text: "Write numbers about you (6 words or more): your age, your family, your pets." },
+      { universe: "science", text: "Count things in your classroom. Write the numbers in words (6 words or more)." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "Numbers written in words", pattern: "\\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)\\b", min: 3 },
     ],
@@ -147,9 +147,9 @@ const colours: NodePractice = {
     [
       ch("A banana is ___.", ["yellow", "red", "blue"], 0, "Bananas are yellow."),
       ch("Snow is ___.", ["white", "black", "orange"], 0, "Snow is white."),
-      ch("Which shape has three sides?", ["a triangle", "a square", "a circle"], 0, "tri = three."),
-      ch("Which shape has four sides the same?", ["a square", "a triangle", "a star"], 0, "A square has four equal sides."),
-      ch("red + white =", ["pink", "purple", "brown"], 0, "Red and white make pink."),
+      est(ch("3 sides =", ["a triangle", "a square", "a circle"], 0, "tri = three."), "¿Qué figura tiene 3 lados?"),
+      est(ch("4 sides =", ["a square", "a triangle", "a star"], 0, "A square has four sides."), "¿Qué figura tiene 4 lados iguales?"),
+      ch("A strawberry is ___.", ["red", "blue", "grey"], 0, "Strawberries are red."),
     ],
     [
       gap("What", "is it? It's green.", ["colour", "color"], "What colour is it?"),
@@ -166,19 +166,19 @@ const colours: NodePractice = {
       ord("I like the red heart.", "the + red + heart."),
     ],
     [
-      ctx("Your friend asks: 'What colour is your bike?' It is black.", "Best answer:", ["It's black.", "Is black.", "It black."], 0, "It's + colour."),
-      ctx("You want to know the colour of your friend's phone.", "Best question:", ["What colour is your phone?", "What is colour your phone?", "Colour your phone?"], 0, "What colour is …?"),
-      ch("Which is correct?", ["a big blue circle", "a circle blue big", "a blue big circle circle"], 0, "Size, colour, thing."),
+      est(ctx("'What colour is your bike?' (black)", "Best answer:", ["It's black.", "Is black.", "It black."], 0, "It's + colour."), "Te preguntan el color de tu bicicleta. Es negra."),
+      est(ctx("Your friend's phone: what colour?", "Best question:", ["What colour is your phone?", "What is colour your phone?", "What colour your phone is?"], 0, "What colour is …?"), "Quieres saber el color del teléfono de tu amigo."),
+      ch("Which is correct?", ["a blue circle", "a circle blue", "blue a circle"], 0, "Colour, then thing."),
       ch("Which is a shape?", ["triangle", "purple", "orange juice"], 0, "triangle is a shape."),
       say("It's a small purple star.", "Describe a shape."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Describe a flag or a picture: what colours and shapes can you see? (8 words or more)" },
-      { universe: "arts", text: "Plan a drawing with shapes and colours. Write what you will draw (8 words or more)." },
+      { text: "Look at a flag or a picture. Write the colours and shapes (6 words or more)." },
+      { universe: "arts", text: "Draw shapes and colours. Write what you draw (6 words or more)." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "Colour words", pattern: "\\b(red|blue|yellow|green|orange|purple|pink|black|white|brown|grey|gray)\\b", min: 3 },
       { label: "A shape", pattern: "\\b(circle|square|triangle|star|heart|rectangle)s?\\b", min: 1 },
@@ -196,22 +196,22 @@ const classroom: NodePractice = {
   steps: [
     [
       heard(X("04", "notice"), "What does the teacher say first?", ["Sit down", "Stand up", "Close your books"], 0, "'Sit down, please.'"),
-      heard(X("04", "notice"), "What do the students take?", ["A pencil and a ruler", "A pen and a book", "A bag and a chair"], 0, "'Take a pencil and a ruler.'"),
+      heard(X("04", "notice"), "Take a …", ["pencil and ruler", "pen and book", "bag and chair"], 0, "'Take a pencil and a ruler.'"),
       heard(X("04", "notice"), "What is the last instruction?", ["Stand up!", "Open your books.", "Listen and repeat."], 0, "'Stand up!'"),
       ch("You write with a ___.", ["pencil", "chair", "window"], 0, "You write with a pencil."),
       ch("You sit on a ___.", ["chair", "book", "ruler"], 0, "You sit on a chair."),
     ],
     [
-      ch("The opposite of 'open' is:", ["close", "sit", "look"], 0, "open ↔ close."),
-      ch("The opposite of 'sit down' is:", ["stand up", "look up", "close down"], 0, "sit down ↔ stand up."),
-      es(ch("You make a mistake with your pencil. You use an ___.", ["eraser", "ruler", "board"], 0, "An eraser removes pencil."), "eraser = borrador."),
+      est(ch("open ↔ ___", ["close", "sit", "look"], 0, "open ↔ close."), "¿Cuál es lo contrario de open?"),
+      est(ch("sit down ↔ ___", ["stand up", "look up", "close up"], 0, "sit down ↔ stand up."), "¿Cuál es lo contrario de sit down?"),
+      es(est(ch("A mistake? Use an ___.", ["eraser", "ruler", "board"], 0, "An eraser removes pencil."), "Te equivocas con el lápiz. ¿Qué usas?"), "eraser = borrador."),
       ch("The teacher writes on the ___.", ["board", "door", "floor"], 0, "The teacher writes on the board."),
-      ch("You draw a straight line with a ___.", ["ruler", "bag", "chair"], 0, "A ruler makes straight lines."),
+      est(ch("A straight line: use a ___.", ["ruler", "bag", "chair"], 0, "A ruler makes straight lines."), "¿Con qué haces una línea recta?"),
     ],
     [
       gap("", "your books, please.", ["Open", "Close"], "Open or close your books."),
       gap("Listen and", ".", ["repeat"], "Listen and repeat."),
-      tr("Write the opposite.", "Stand up.", ["Sit down", "Sit down please"], "stand up ↔ sit down."),
+      est(tr("Write the opposite.", "Stand up.", ["Sit down", "Sit down please"], "stand up ↔ sit down."), "Escribe lo contrario."),
       dict(X("04", "dict"), ["Take a pencil and a ruler"]),
       say("Open your books, please.", "Say it like a teacher."),
     ],
@@ -223,19 +223,19 @@ const classroom: NodePractice = {
       ord("I have a pen and a ruler.", "I have + a pen + and a ruler."),
     ],
     [
-      ctx("The teacher wants you to look at the board.", "What does she say?", ["Look at the board.", "Look the board.", "See board."], 0, "Look at the board."),
-      ctx("Your friend needs a pencil.", "Best sentence:", ["Here's a pencil.", "Here pencil is.", "Pencil here have."], 0, "Here's a pencil."),
+      est(ctx("The teacher points to the board.", "What does she say?", ["Look at the board.", "Look the board.", "See board."], 0, "Look at the board."), "La profesora quiere que mires el tablero. ¿Qué dice?"),
+      est(ctx("Your friend needs a pencil.", "Best sentence:", ["Here's a pencil.", "Here pencil is.", "Pencil here have."], 0, "Here's a pencil."), "Tu amigo necesita un lápiz. Le das uno."),
       ch("Which is in a classroom?", ["a desk", "a bed", "a fridge"], 0, "A desk is in a classroom."),
-      ch("Which is an instruction?", ["Stand up.", "A ruler.", "Blue."], 0, "Instructions start with a verb."),
+      est(ch("The teacher says:", ["Stand up.", "A ruler.", "Blue."], 0, "Instructions start with a verb."), "¿Cuál es una instrucción de la profesora?"),
       say("Stand up. Sit down. Open your book.", "Do the actions as you say them."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write what is in your classroom (8 words or more)." },
-      { universe: "screens", text: "You are the teacher in a game. Write five instructions for the students (8 words or more)." },
+      { text: "Write what is in your classroom (6 words or more)." },
+      { universe: "screens", text: "You are the teacher in a game. Write three instructions (6 words or more)." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "Classroom words", pattern: "\\b(books?|pencils?|pens?|rulers?|erasers?|bags?|desks?|chairs?|board|window|door)\\b", min: 3 },
     ],
@@ -254,12 +254,12 @@ const family: NodePractice = {
       heard(X("05", "notice"), "Who has white hair?", ["The grandpa", "The dad", "The baby"], 0, "'My grandpa. He has white hair.'"),
       heard(X("05", "notice"), "What does the grandpa have?", ["Big ears", "Small hands", "Big eyes"], 0, "'He has white hair and big ears.'"),
       heard(X("05", "notice"), "Who has small hands?", ["The baby sister", "The mum", "The grandpa"], 0, "'My baby sister has small hands.'"),
-      ch("Your mum's mum is your ___.", ["grandma", "sister", "aunt"], 0, "Your mum's mum = grandma."),
+      est(ch("Mum's mum = ___", ["grandma", "sister", "aunt"], 0, "Your mum's mum = grandma."), "La mamá de tu mamá es tu…"),
       ch("You see with your ___.", ["eyes", "ears", "feet"], 0, "eyes → see."),
     ],
     [
       ch("You hear with your ___.", ["ears", "nose", "hands"], 0, "ears → hear."),
-      ch("Your dad's son is your ___.", ["brother", "sister", "grandpa"], 0, "A son of your dad = your brother."),
+      ch("A boy in my family: my ___.", ["brother", "sister", "grandma"], 0, "A boy → brother."),
       es(ch("one foot, two ___", ["feet", "foots", "feets"], 0, "foot → feet."), "foot → feet (plural especial)."),
       es(ch("She has long ___.", ["hair", "hairs", "a hair"], 0, "hair has no -s."), "hair va sin -s."),
       ch("You walk with your ___.", ["legs", "ears", "eyes"], 0, "You walk with your legs."),
@@ -269,29 +269,29 @@ const family: NodePractice = {
       gap("I have two eyes, two ears and one", ".", ["nose", "mouth", "head"], "One nose, one mouth, one head."),
       tr("Make it plural.", "one hand", ["two hands"], "hand → hands."),
       dict(X("05", "dict"), ["This is my mum and this is my dad"]),
-      say("Touch your head. Touch your nose. Touch your ears.", "Point to each part."),
+      say("Touch your head. Touch your nose.", "Point to each part."),
     ],
     [
       fix(["My", "grandmum", "is seventy."], 1, ["grandma", "grandmother"], "grandma or grandmother."),
       es(fix(["He has", "black hairs."], 1, ["black hair."], "hair (no -s)."), "hair sin -s."),
-      fix(["I have ten", "foots."], 1, ["toes."], "You have ten toes; two feet."),
+      fix(["I have two", "foots."], 1, ["feet.", "feet"], "one foot, two feet."),
       ord("This is my baby sister.", "This is + my + baby sister."),
       ord("My grandpa has white hair.", "My grandpa + has + white hair."),
     ],
     [
-      ctx("You show a photo of your mum's father.", "Best sentence:", ["This is my grandpa.", "This is my brother.", "This is my uncle."], 0, "Mum's dad = grandpa."),
-      ctx("You describe a friend with brown eyes.", "Best sentence:", ["She has brown eyes.", "She has eyes brown.", "She is brown eyes."], 0, "has + brown + eyes."),
+      est(ctx("A photo of your mum's dad.", "Best sentence:", ["This is my grandpa.", "This is my brother.", "This is my uncle."], 0, "Mum's dad = grandpa."), "Muestras una foto del papá de tu mamá."),
+      est(ctx("Her eyes are brown.", "Best sentence:", ["She has brown eyes.", "She has eyes brown.", "She is brown eyes."], 0, "has + brown + eyes."), "Tu amiga tiene ojos cafés. Elige la mejor frase."),
       ch("Which is a body word?", ["arm", "aunt", "apple"], 0, "arm is part of the body."),
       ch("Which is a family word?", ["sister", "nose", "ruler"], 0, "sister is family."),
-      say("I have a mum, a dad and a little brother.", "Say your own family."),
+      say("I have a mum and a dad.", "Say your own family."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write about your family (8 words or more). Who is in it? Describe one person's hair or eyes." },
-      { universe: "arts", text: "Draw a monster and describe its body (8 words or more): how many eyes, arms and legs?" },
+      { text: "Write about your family (6 words or more). Who is in it? Write about hair or eyes." },
+      { universe: "arts", text: "Draw a monster. Write about its body (6 words or more): eyes, arms, legs." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "Family or body words", pattern: "\\b(mum|mom|dad|brother|sister|grandma|grandpa|baby|head|eyes?|ears?|nose|mouth|hair|hands?|arms?|legs?|feet|foot)\\b", min: 3 },
     ],
@@ -325,7 +325,7 @@ const animalsFood: NodePractice = {
       gap("I drink", "every day.", ["water", "milk", "juice"], "A drink fits."),
       tr("Make it plural.", "one horse", ["two horses"], "horse → horses."),
       dict(X("06", "dict"), ["The rabbit eats carrots"]),
-      say("I like apples and bananas. I don't like eggs.", "Say what you like."),
+      say("I like apples. I don't like eggs.", "Say what you like."),
     ],
     [
       fix(["A", "cow", "can fly."], 1, ["bird"], "Birds fly; cows don't."),
@@ -335,19 +335,19 @@ const animalsFood: NodePractice = {
       ord("I have rice and chicken for lunch.", "I have + rice and chicken + for lunch."),
     ],
     [
-      ctx("You are thirsty.", "Best sentence:", ["Can I have some water, please?", "Can I have some bread, please?", "Can I have a cat, please?"], 0, "Thirsty → water."),
-      ctx("Your friend asks: 'What's your favourite animal?'", "Best answer:", ["My favourite animal is the lion.", "My favourite is lion animal.", "Is the lion."], 0, "My favourite animal is …"),
-      ch("Which is NOT food?", ["a horse", "an egg", "bread"], 0, "A horse is an animal, not food here."),
+      est(ctx("You want a drink.", "Best sentence:", ["Water, please.", "Bread, please.", "A cat, please."], 0, "A drink → water."), "Tienes sed. Elige la mejor frase."),
+      est(ctx("'What's your favourite animal?'", "Best answer:", ["I love lions.", "I lions love.", "Is the lion."], 0, "I love + animals."), "Te preguntan tu animal favorito. Elige la mejor respuesta."),
+      est(ch("Which is an animal?", ["a horse", "an egg", "bread"], 0, "A horse is an animal."), "¿Cuál es un animal?"),
       ch("Which animal says 'woof'?", ["a dog", "a cat", "a bird"], 0, "Dogs say woof."),
-      say("My favourite animal is the monkey. It eats bananas.", "Say your favourite animal."),
+      say("I like monkeys. They eat bananas.", "Say your favourite animal."),
     ],
   ],
   create: {
     prompts: [
-      { text: "Write about animals and food you like (8 words or more)." },
-      { universe: "science", text: "Choose two animals. Write what they eat (8 words or more)." },
+      { text: "Write about animals and food you like (6 words or more)." },
+      { universe: "science", text: "Choose two animals. Write what they eat (6 words or more)." },
     ],
-    minWords: 8,
+    minWords: 6,
     checks: [
       { label: "Animal words", pattern: "\\b(cats?|dogs?|birds?|fish|horses?|cows?|chickens?|rabbits?|lions?|monkeys?|elephants?)\\b", min: 1 },
       { label: "Food or drink words", pattern: "\\b(apples?|bananas?|oranges?|rice|bread|eggs?|milk|water|juice|meat|carrots?|chicken|pizza)\\b", min: 2 },
