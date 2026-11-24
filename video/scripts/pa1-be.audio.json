@@ -1,0 +1,17 @@
+{
+  "voice": "Mira (rdEyNni8e60Jlx1RsV9N)",
+  "model": "eleven_multilingual_v2",
+  "flow_id": "GgQSfRlXr4dZ19PWZAwl",
+  "parts": [
+    { "part": 1,  "name": "mini-scene",       "session": "Pp3GVZauZI9WykWVeES3", "generation": "ShEqx1p3R9FDNk7erq5U" },
+    { "part": 2,  "name": "second-scene",     "session": "MgOgjbXffArdWU6VNpbV", "generation": "v36xompDw4zmRZYX6KvL" },
+    { "part": 3,  "name": "rule",             "session": "mT0ZNspM5GkQ6Quhv1SR", "generation": "VnWNK0ECXioGyHE0hB0O" },
+    { "part": 4,  "name": "examples",         "session": "Dxj5wfQKqwxKM6Tzs8ha", "generation": "NPy8pGGC9pyrYA8StdWw" },
+    { "part": 5,  "name": "short-forms",      "session": "QclNjfXRDugqZlcnensw", "generation": "9HusahYqQMRq70HQajfS" },
+    { "part": 6,  "name": "say-it-with-me",   "session": "mRkuylxLSRpzZBODQ85u", "generation": "eRlI4fkQqYGHEvuNSiWM" },
+    { "part": 7,  "name": "spanish-mistake",  "session": "s8Tjtib25h3t9FQdApiP", "generation": "X88pGl9fw1z5ICzk6dir" },
+    { "part": 8,  "name": "level-up-word",    "session": "y7ITuZSCXIRFTyAoMByz", "generation": "ULN3lEaWEpZpNmOaNvdc" },
+    { "part": 9,  "name": "your-turn",        "session": "JuMA47T0ySd26u3iP03G", "generation": "1WygRLtEYAZbcDJUvkRv" },
+    { "part": 10, "name": "recap-catchphrase","session": "fAte8ZdP5EiJEJ7yk89x", "generation": "ZBklJT9Ez8Vw2aga4rjB" }
+  ]
+}
