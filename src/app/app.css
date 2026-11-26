@@ -293,3 +293,10 @@
 .owner-actions { display: flex; gap: var(--s-2); }
 .tr-status { max-width: 40rem; }
 .tr-status .btn { margin-top: var(--s-3); }
+
+/* Video narration review page (#listen-video-1) */
+.vp-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-4); }
+.vp-item { display: grid; gap: var(--s-2); padding-bottom: var(--s-4); border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); }
+.vp-title { font-size: var(--step-1); margin: 0; }
+.vp-text { margin: 0; color: var(--ink-soft); }
+.vp-audio { width: 100%; }

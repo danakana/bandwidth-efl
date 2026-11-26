@@ -5,13 +5,15 @@ import { Landing } from "./landing/Landing";
 import { Join } from "./pages/Join";
 import { Login } from "./pages/Login";
 import { AppGate } from "./app/AppGate";
+import { VideoPreview } from "./pages/VideoPreview";
 
-type View = "landing" | "join" | "login" | "app";
+type View = "landing" | "join" | "login" | "app" | "listen";
 
 /** Plain-hash routing: #join, #login and #app (plus #app/...); anything else is the landing page. */
 function readView(): View {
   const h = window.location.hash.replace("#", "");
   if (h === "app" || h.startsWith("app/")) return "app";
+  if (h === "listen-video-1") return "listen";
   return h === "join" || h === "login" ? h : "landing";
 }
 
@@ -38,6 +40,7 @@ export default function App() {
       <AuthProvider>
         {view === "join" && <Join />}
         {view === "login" && <Login />}
+        {view === "listen" && <VideoPreview />}
         {view === "app" && <AppGate />}
         {view === "landing" && <Landing />}
       </AuthProvider>
