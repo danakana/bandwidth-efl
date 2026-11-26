@@ -3,17 +3,17 @@ import { LISTENING_BASE } from "../lib/placementApi";
 
 /** The same video scene drawn in four styles, so the owner can choose one. Open at #video-styles. */
 const STYLES = [
-  { letter: "1", name: "Risograph print", file: "v/style-riso.png", note: "Printed with three inks (red, teal, yellow) on warm paper, with grain. Simple faces. Looks like a print by an editorial illustrator." },
-  { letter: "2", name: "Cut paper", file: "v/style-paper.png", note: "Shapes cut from coloured paper with soft shadows. Handmade, warm and friendly." },
-  { letter: "3", name: "Clear-line comic", file: "v/style-ligne.png", note: "Clean, even black outlines and flat, softened colours, like a classic European comic. Very readable." },
-  { letter: "B", name: "Flat illustration (from before)", file: "v/style-flat.png", note: "The one you liked best before, for comparison." },
+  { letter: "C", name: "Cartoon series (new)", file: "v/style-cartoon.png", note: "A 2D TV-cartoon look for teens: bold outlines, flat colours, a different body shape for every character, a funny real moment. The parrot mascot is watching from the gate." },
+  { letter: "M", name: "Mascot ideas", file: "v/mascots.png", note: "Left: a parrot with headphones (parrots repeat what they hear, like language learners, and Colombia has more bird species than any country). Middle: a capybara (chigüiro) with a radio backpack. Right: a hummingbird with signal-wave wings." },
+  { letter: "1", name: "Risograph print", file: "v/style-riso.png", note: "Earlier option, for comparison." },
+  { letter: "3", name: "Clear-line comic", file: "v/style-ligne.png", note: "Earlier option, for comparison." },
 ];
 
 export function StylePicker() {
   return (
     <AuthLayout
       title="Choose a style"
-      intro={<p>New styles that look made by a person: a real moment, softened colours, simple faces. Tell Claude the number you like, or mix them ("1, but with the lines of 3").</p>}
+      intro={<p>The cartoon direction and three mascot ideas. Tell Claude what you think of C and which mascot (left, middle or right) you like.</p>}
     >
       <ol className="sp-list">
         {STYLES.map((s) => (
