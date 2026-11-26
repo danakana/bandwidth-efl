@@ -3,17 +3,17 @@ import { LISTENING_BASE } from "../lib/placementApi";
 
 /** The same video scene drawn in four styles, so the owner can choose one. Open at #video-styles. */
 const STYLES = [
-  { letter: "A", name: "Soft 3D", file: "v/vid1-gate.png", note: "Rounded, clay-like, like an animated film. Polished, but the most \"AI\" looking." },
-  { letter: "B", name: "Flat illustration", file: "v/style-flat.png", note: "Simple shapes and a small set of colours, like a well-designed learning app. Clean and calm." },
-  { letter: "C", name: "Storybook", file: "v/style-storybook.png", note: "Hand-painted look with brush and pencil texture, like a picture book. Warm and human." },
-  { letter: "D", name: "Comic", file: "v/style-comic.png", note: "Bold outlines and bright flat colours, like a cartoon series for teens. Energetic." },
+  { letter: "1", name: "Risograph print", file: "v/style-riso.png", note: "Printed with three inks (red, teal, yellow) on warm paper, with grain. Simple faces. Looks like a print by an editorial illustrator." },
+  { letter: "2", name: "Cut paper", file: "v/style-paper.png", note: "Shapes cut from coloured paper with soft shadows. Handmade, warm and friendly." },
+  { letter: "3", name: "Clear-line comic", file: "v/style-ligne.png", note: "Clean, even black outlines and flat, softened colours, like a classic European comic. Very readable." },
+  { letter: "B", name: "Flat illustration (from before)", file: "v/style-flat.png", note: "The one you liked best before, for comparison." },
 ];
 
 export function StylePicker() {
   return (
     <AuthLayout
       title="Choose a style"
-      intro={<p>The same scene from video 1 in four styles. Tell Claude the letter you like, or mix them ("B, but with the colours of D").</p>}
+      intro={<p>New styles that look made by a person: a real moment, softened colours, simple faces. Tell Claude the number you like, or mix them ("1, but with the lines of 3").</p>}
     >
       <ol className="sp-list">
         {STYLES.map((s) => (
