@@ -300,3 +300,14 @@
 .vp-title { font-size: var(--step-1); margin: 0; }
 .vp-text { margin: 0; color: var(--ink-soft); }
 .vp-audio { width: 100%; }
+
+/* Style chooser page (#video-styles): wider than the form column so pictures are big */
+.auth-body:has(.sp-list) { width: min(100%, 980px); }
+.sp-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-6); }
+.sp-item { display: grid; gap: var(--s-2); }
+.sp-title { font-size: var(--step-1); margin: 0; display: flex; align-items: center; gap: var(--s-2); }
+.sp-letter { display: inline-grid; place-items: center; width: 2em; height: 2em; border-radius: 50%; background: var(--ink); color: var(--bg, #fff); font-size: 0.8em; }
+.sp-img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 14px; background: color-mix(in srgb, currentColor 8%, transparent); }
+.sp-note { margin: 0; color: var(--ink-soft); }
+.auth:has(.sp-list) { grid-template-columns: 1fr; }
+.auth:has(.sp-list) .auth-art { display: none; }
