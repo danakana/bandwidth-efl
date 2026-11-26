@@ -8,8 +8,9 @@ import { AppGate } from "./app/AppGate";
 import { VideoPreview } from "./pages/VideoPreview";
 import { StylePicker } from "./pages/StylePicker";
 import { WatchVideo } from "./pages/WatchVideo";
+import { AnimTest } from "./pages/AnimTest";
 
-type View = "landing" | "join" | "login" | "app" | "listen" | "styles" | "watch";
+type View = "landing" | "join" | "login" | "app" | "listen" | "styles" | "watch" | "anim";
 
 /** Plain-hash routing: #join, #login and #app (plus #app/...); anything else is the landing page. */
 function readView(): View {
@@ -18,6 +19,7 @@ function readView(): View {
   if (h === "listen-video-1") return "listen";
   if (h === "video-styles") return "styles";
   if (h === "watch-video-1") return "watch";
+  if (h === "anim-test") return "anim";
   return h === "join" || h === "login" ? h : "landing";
 }
 
@@ -47,6 +49,7 @@ export default function App() {
         {view === "listen" && <VideoPreview />}
         {view === "styles" && <StylePicker />}
         {view === "watch" && <WatchVideo />}
+        {view === "anim" && <AnimTest />}
         {view === "app" && <AppGate />}
         {view === "landing" && <Landing />}
       </AuthProvider>
