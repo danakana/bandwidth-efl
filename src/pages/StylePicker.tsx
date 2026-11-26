@@ -3,17 +3,18 @@ import { LISTENING_BASE } from "../lib/placementApi";
 
 /** The same video scene drawn in four styles, so the owner can choose one. Open at #video-styles. */
 const STYLES = [
-  { letter: "C", name: "Cartoon series (new)", file: "v/style-cartoon.png", note: "A 2D TV-cartoon look for teens: bold outlines, flat colours, a different body shape for every character, a funny real moment. The parrot mascot is watching from the gate." },
-  { letter: "M", name: "Mascot ideas", file: "v/mascots.png", note: "Left: a parrot with headphones (parrots repeat what they hear, like language learners, and Colombia has more bird species than any country). Middle: a capybara (chigüiro) with a radio backpack. Right: a hummingbird with signal-wave wings." },
-  { letter: "1", name: "Risograph print", file: "v/style-riso.png", note: "Earlier option, for comparison." },
-  { letter: "3", name: "Clear-line comic", file: "v/style-ligne.png", note: "Earlier option, for comparison." },
+  { letter: "C1", name: "Cartoon: bold outlines", file: "v/style-cartoon.png", note: "Thick clean outlines, flat colours, big exaggerated shapes. Loud and energetic." },
+  { letter: "C2", name: "Cartoon: retro graphic", file: "v/cartoon-retro.png", note: "Characters built from simple shapes (triangles, rectangles, circles), thin lines, a retro colour set. Stylish and witty." },
+  { letter: "C3", name: "Cartoon: soft, no outlines", file: "v/cartoon-soft.png", note: "Rounded shapes with no black lines, warm colours. Cosy and friendly." },
+  { letter: "C4", name: "Cartoon: hand-drawn ink", file: "v/cartoon-sketchy.png", note: "Loose, wobbly ink lines and watercolour fills on paper. Quirky, funny and clearly hand-made." },
+  { letter: "M", name: "Bird mascots", file: "v/mascots-birds.png", note: "Left to right: toucan with headphones, motmot (barranquero) whose two tail feathers look like antennas, macaw with a walkie-talkie, round owl with glasses and headphones." },
 ];
 
 export function StylePicker() {
   return (
     <AuthLayout
       title="Choose a style"
-      intro={<p>The cartoon direction and three mascot ideas. Tell Claude what you think of C and which mascot (left, middle or right) you like.</p>}
+      intro={<p>Four cartoon styles and four bird mascots. Tell Claude which style (C1 to C4) and which bird (1 to 4, left to right), or mix them.</p>}
     >
       <ol className="sp-list">
         {STYLES.map((s) => (
